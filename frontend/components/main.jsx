@@ -57,6 +57,7 @@ export default class Main extends React.Component {
       { to: "/puzzle9", key: 9, open: false },
       { to: "/puzzle10", key: 10, open: false },
     ];
+
     return (
       <Table>
         {
