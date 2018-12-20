@@ -17,7 +17,7 @@ class Puzzle2 extends React.Component {
     var input = document.getElementById('puzzleAnswer').value
     console.log(input)
 
-    serverresponse = socket.send('submit', {puzzle2:input})
+    serverresponse = this.props.send('submit', {puzzle2:input})
     
 
     if (serverresponse === 'correct') {
