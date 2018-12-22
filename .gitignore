@@ -3,3 +3,5 @@ bundle.js
 bundle.js.map
 
 .git/
+*.swp
+*.pyc
