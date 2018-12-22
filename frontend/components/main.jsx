@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { green, red, xsSpacing } from '../constants';
 
 const tableSize = 200;
 const lockSize = 20;
+const middleLockSize = 30;
 
 const Table = styled.div`
   position: relative;
@@ -13,22 +15,40 @@ const Table = styled.div`
   height: ${tableSize}px;
 `;
 
-const Lock = styled(FontAwesomeIcon).attrs({
-  icon: props => (props.open ? faUnlock : faLock),
-})`
-  width: ${lockSize}px;
-  height: ${lockSize}px;
-  transform: rotate(${props => -props.rotation}deg);
-  color: ${props => props.open ? 'green' : 'red'};
+const LockContainer = styled.div`
+  padding: ${xsSpacing}px;
 `;
 
-const LockContainer = styled.div`
+const Lock = styled(FontAwesomeIcon).attrs(props => ({
+  icon: props.open ? faUnlock : faLock,
+}))`
+  font-size: ${lockSize}px;
+  transform: rotate(${props => -props.rotate}deg);
+  color: ${props => props.open ? green : red};
+`;
+
+const MiddleLock = styled(FontAwesomeIcon).attrs(props => ({
+  icon: props.open ? faUnlock : faLock,
+}))`
+  font-size: ${middleLockSize}px;
+  color: ${red};
+`;
+
+const MiddleLink = styled(Link)`
   position: absolute;
-  width: 100%;
-  top: ${tableSize / 2};
-  left: 0;
+  top: ${(tableSize / 2) - (middleLockSize / 2) - (xsSpacing / 2)}px;
+  left: ${(tableSize / 2) - (middleLockSize / 2) - (xsSpacing / 2)}px;
+  pointer-events: ${props => props.allOpened ? 'auto' : 'none'};
+`;
+
+const Container = styled.div`
+  position: absolute;
+  width: 50%;
+  top: ${(tableSize / 2) - (lockSize / 2)}px;
+  right: 0;
   text-align: right;
   transform: rotate(${props => props.rotation}deg);
+  transform-origin: left;
 `;
 
 const Content = styled.div`
@@ -39,8 +59,9 @@ const Content = styled.div`
 `;
 
 const Line = styled.div`
-  border: 1px solid ${props => props.open ? 'green' : 'red'};
-  width: ${(tableSize / 2) - lockSize};
+  border: 1px solid ${props => props.open ? green : red};
+  width: ${(tableSize / 2) - lockSize - (xsSpacing * 2) - (middleLockSize / 2) - (xsSpacing * 2)}px;
+  pointer-events: none;
 `;
 
 export default class Main extends React.Component {
@@ -58,23 +79,33 @@ export default class Main extends React.Component {
       { to: "/puzzle10", key: 10, open: false },
     ];
 
+// SAM - testing github's merging conflicts (will come back to delete this)
+//    const allOpened = items.every(i => i.open);
+    
     return (
       <Table>
         {
           items.map((item, index) => {
             const rotation = index * (360 / items.length);
             return (
-              <LockContainer key={item.key} rotation={rotation}>
+              <Container key={item.key} rotation={rotation}>
                 <Content>
                   <Line open={item.open} />
                   <Link to={item.to}>
-                    <Lock open={item.open} rotation={rotation} />
+                    <LockContainer>
+                      <Lock open={item.open} rotate={rotation} />
+                    </LockContainer>
                   </Link>
                 </Content>
-              </LockContainer>
+              </Container>
             );
           })
         }
+        <MiddleLink to={"/main"} allOpened={allOpened}>
+          <LockContainer>
+            <MiddleLock />
+          </LockContainer>
+        </MiddleLink>
       </Table>
     );
   }
