@@ -17,21 +17,18 @@ class Puzzle2 extends React.Component {
     var input = document.getElementById('puzzleAnswer').value
     console.log(input)
 
-    serverresponse = this.props.send('submit', {puzzle2:input})
-    
-
-    if (serverresponse === 'correct') {
-      this.setState({
-      puzzlesolved : this.state.puzzlesolved = 'yes'
-       });
-      console.log('answer is correct')
-
-      this.props.history.push('/main')
-      
-  } else {
-    var input = document.getElementById('puzzleAnswer')
-    console.log('answer is wrong')
-  }
+    sendresponse = this.props.send('submit', {puzzle2:input})
+ // socketIO listen for the response and run a function to log response
+    var serverresponse = socket.on('submit_response', function(response) {
+      console.log(response.answer) 
+      if (response.answer == 'correct') {
+	console.log('response is correct')
+	this.props.historty.push('/main')
+      } else {
+	var input = document.getElementbyID('puzzleAnswer').value
+	console.log('answer is wrong')
+     };
+    });
 
   render() {
 
