@@ -23,7 +23,7 @@ class Puzzle2 extends React.Component {
       console.log(response.answer) 
       if (response.answer == 'correct') {
 	console.log('response is correct')
-	this.props.historty.push('/main')
+	this.props.history.push('/main')
       } else {
 	var input = document.getElementbyID('puzzleAnswer').value
 	console.log('answer is wrong')
