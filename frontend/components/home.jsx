@@ -20,8 +20,10 @@ class Home extends React.Component {
   }
 
   setTable(tableNumber) {
-    const { cookies } = this.props;
-    cookies.set("table", tableNumber);
+    return () => {
+      const { cookies } = this.props;
+      cookies.set("table", tableNumber);
+    }
   }
 
   render() {
@@ -39,12 +41,12 @@ class Home extends React.Component {
         <p>Before you embark on the hunt...Sheldon come up with a blurb</p>
         <h2>Click on your table number</h2>
         <div id="table">
-          <TableNumber onClick={() => this.setTable(1)}>1</TableNumber>
-          <TableNumber onClick={() => this.setTable(2)}>2</TableNumber>
-          <TableNumber onClick={() => this.setTable(3)}>3</TableNumber>
-          <TableNumber onClick={() => this.setTable(4)}>4</TableNumber>
-          <TableNumber onClick={() => this.setTable(5)}>5</TableNumber>
-          <TableNumber onClick={() => this.setTable(6)}>6</TableNumber>
+          <TableNumber onClick={this.setTable(1)}>1</TableNumber>
+          <TableNumber onClick={this.setTable(2)}>2</TableNumber>
+          <TableNumber onClick={this.setTable(3)}>3</TableNumber>
+          <TableNumber onClick={this.setTable(4)}>4</TableNumber>
+          <TableNumber onClick={this.setTable(5)}>5</TableNumber>
+          <TableNumber onClick={this.setTable(6)}>6</TableNumber>
         </div>
       </section>
     );
