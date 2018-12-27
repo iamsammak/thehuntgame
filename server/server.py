@@ -8,10 +8,12 @@ from flask import Flask, render_template, jsonify, request
 sio = socketio.Server()
 app = Flask(__name__)
 
+# { sid -> table number }
 clients = {}
+# { table number -> { puzzle number -> { solved } } }
 game_state = {}
 answers = {
-  '1': 'see o double you',
+  1: 'see o double you',
 }
 
 @sio.on('connect')
@@ -24,19 +26,25 @@ def join(sid, data):
   table = data['table']
   clients[sid] = table
   sio.enter_room(sid, table)
-  # TODO: do we need to broadcast when someone joins?
+  if table in game_state:
+    pass
+    # TODO: broadcast when someone joins
+  else:
+    game_state[table] = dict([(key, {'solved': False}) for key in answers])
+    sio.emit('game_state_update', game_state[table], room=table)
+  print game_state
 
 @sio.on('submit')
 def submit(sid, data):
   print("answer", data)
   puzzle, answer = [data.get(key) for key in ['puzzle', 'answer']]
   # TODO: error gracefully if no puzzle or answer
-  correct = answer == answers.get(puzzle)
+  correct = answer == answers.get(int(puzzle))
 
   if correct:
     table = clients[sid]
     # TODO: update game_state
-    sio.emit('game_state_update', game_state, room=table)
+    sio.emit('game_state_update', game_state[table], room=table)
 
   response = {
     'correct': correct,

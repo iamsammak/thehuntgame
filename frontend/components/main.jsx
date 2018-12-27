@@ -66,17 +66,19 @@ const Line = styled.div`
 
 export default class Main extends React.Component {
   render() {
+    const { gameState } = this.props;
+    
     const items = [
-      { to: "/puzzle1", key: 1, open: false },
-      { to: "/puzzle2", key: 2, open: false },
-      { to: "/puzzle3", key: 3, open: true },
-      { to: "/puzzle4", key: 4, open: false },
-      { to: "/puzzle5", key: 5, open: false },
-      { to: "/puzzle6", key: 6, open: false },
-      { to: "/puzzle7", key: 7, open: true },
-      { to: "/puzzle8", key: 8, open: false },
-      { to: "/puzzle9", key: 9, open: false },
-      { to: "/puzzle10", key: 10, open: false },
+      { to: "/puzzle1", key: 1, open: gameState[1] && gameState[1].solved },
+      { to: "/puzzle2", key: 2, open: gameState[2] && gameState[2].solved },
+      { to: "/puzzle3", key: 3, open: gameState[3] && gameState[3].solved },
+      { to: "/puzzle4", key: 4, open: gameState[4] && gameState[4].solved },
+      { to: "/puzzle5", key: 5, open: gameState[5] && gameState[5].solved },
+      { to: "/puzzle6", key: 6, open: gameState[6] && gameState[6].solved },
+      { to: "/puzzle7", key: 7, open: gameState[7] && gameState[7].solved },
+      { to: "/puzzle8", key: 8, open: gameState[8] && gameState[8].solved },
+      { to: "/puzzle9", key: 9, open: gameState[9] && gameState[9].solved },
+      { to: "/puzzle10", key: 10, open: gameState[10] && gameState[10].solved },
     ];
 
     const allOpened = items.every(i => i.open);
