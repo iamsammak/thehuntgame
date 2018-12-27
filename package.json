@@ -19,6 +19,7 @@
     "babel-loader": "^8.0.4",
     "lodash": "^4.17.11",
     "react": "^16.6.3",
+    "react-cookie": "^3.0.8",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",

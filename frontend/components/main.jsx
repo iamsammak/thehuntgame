@@ -79,8 +79,7 @@ export default class Main extends React.Component {
       { to: "/puzzle10", key: 10, open: false },
     ];
 
-// SAM - testing github's merging conflicts (will come back to delete this)
-//    const allOpened = items.every(i => i.open);
+    const allOpened = items.every(i => i.open);
     
     return (
       <Table>

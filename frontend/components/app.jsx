@@ -5,7 +5,6 @@ import io from 'socket.io-client';
 import Nav from './nav';
 
 import Home from './home';
-import Lobby from './lobby';
 import Main from './main';
 import Puzzle from './puzzle';
 import Puzzle1 from './puzzle1';
@@ -42,8 +41,7 @@ export default class App extends React.Component {
         <h1 id="temp-header">Welcome to The Hunt v2</h1>
         <hr />
         <div id="puzzle-container">
-          <Route path="/home" component={Home}></Route>
-          <Route path="/lobby" component={Lobby} />
+          <Route path="/home" component={() => <Home {...this.state} />}></Route>
 	        <Route path="/main" component={() => <Main {...this.state} />} />
           <Route path="/puzzle1" component={() => <Puzzle {...this.state} component={Puzzle1} />} />
           <Route path="/puzzle2" component={() => <Puzzle {...this.state} component={Puzzle2} />} />
