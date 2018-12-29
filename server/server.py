@@ -24,6 +24,7 @@ def join(sid, data):
   table = data['table']
   clients[sid] = table
   sio.enter_room(sid, table)
+  # TODO: do we need to broadcast when someone joins?
 
 @sio.on('submit')
 def submit(sid, data):
