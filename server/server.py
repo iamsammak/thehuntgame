@@ -1,12 +1,13 @@
 #!/usr/bin/env python2
 
+import os
 import socketio
 import eventlet
 import eventlet.wsgi
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, send_from_directory
 
 sio = socketio.Server()
-app = Flask(__name__)
+flask_app = Flask(__name__)
 
 # { sid -> table number }
 clients = {}
@@ -15,6 +16,16 @@ game_state = {}
 answers = {
   1: 'see o double you',
 }
+
+@flask_app.route('/')
+def index():
+  root_dir = os.getcwd()
+  return send_from_directory(root_dir, 'thehunt.html')
+
+@flask_app.route('/<directory>/<filename>')
+def static_files(directory, filename):
+  root_dir = os.getcwd()
+  return send_from_directory(os.path.join(root_dir, directory), filename)
 
 @sio.on('connect')
 def connect(sid, environ):
@@ -58,5 +69,5 @@ def disconnect(sid):
     clients.pop(sid)
 
 if __name__ == '__main__':
-  app = socketio.WSGIApp(sio, app)
+  app = socketio.WSGIApp(sio, flask_app)
   eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
