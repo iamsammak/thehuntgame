@@ -27,6 +27,8 @@ const Nav = () => (
     <NavLink to='/puzzle3' >Puzzle 3</NavLink>
     <br/>
     <NavLink to='/puzzle4' >Puzzle 4</NavLink>
+    <br/>
+    <NavLink to='/puzzle5' >Puzzle 5</NavLink>
   </div>
 )
 

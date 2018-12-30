@@ -11,6 +11,7 @@ import Puzzle1 from './puzzle1';
 import Puzzle2 from './puzzle2';
 import Puzzle3 from './puzzle3';
 import Puzzle4 from './puzzle4';
+import Puzzle5 from './puzzle5';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -47,7 +48,7 @@ export default class App extends React.Component {
           <Route path="/puzzle2" component={() => <Puzzle {...this.state} component={Puzzle2} />} />
           <Route path="/puzzle3" component={() => <Puzzle {...this.state} component={Puzzle3} />} />
           <Route path="/puzzle4" component={() => <Puzzle {...this.state} component={Puzzle4} />} />
-
+          <Route path="/puzzle5" component={() => <Puzzle {...this.state} component={Puzzle5} />} />
         </div>
         <hr />
         <h5>Testing Below</h5>
