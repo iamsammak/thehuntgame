@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Link, NavLink, IndexRoute } from 'react-router-dom';
+import { withCookies } from 'react-cookie';
 import io from 'socket.io-client';
 
 import Nav from './nav';
@@ -13,9 +14,10 @@ import Puzzle3 from './puzzle3';
 import Puzzle4 from './puzzle4';
 import Puzzle5 from './puzzle5';
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
+    const { cookies } = props;
     // TODO: update URL
     const socket = io('http://localhost:8000');
 
@@ -27,7 +29,20 @@ export default class App extends React.Component {
       gameState: {},
       socket: socket,
       send: this.send.bind(this),
+      join: this.join.bind(this),
     };
+
+    const table = cookies.get('table');
+    if (table) {
+      this.join(table);
+    }
+  }
+
+  join(tableNumber) {
+    const { socket } = this.state;
+
+    console.log(`joining table ${tableNumber}`);
+    socket.emit('join', { table: tableNumber });
   }
 
   send(eventName, data) {
@@ -57,3 +72,5 @@ export default class App extends React.Component {
     );
   }
 };
+
+export default withCookies(App);

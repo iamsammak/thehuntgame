@@ -12,13 +12,6 @@ const TableNumber = styled.button`
 `;
 
 class Home extends React.Component {
-  join(tableNumber) {
-    const { socket } = this.props;
-
-    console.log(`joining table ${tableNumber}`);
-    socket.emit('join', { table: tableNumber });
-  }
-
   setTable(tableNumber) {
     return () => {
       const { cookies } = this.props;
@@ -27,12 +20,12 @@ class Home extends React.Component {
   }
 
   render() {
-    const { cookies } = this.props;
+    const { cookies, join } = this.props;
 
     const table = cookies.get("table");
 
     if (table) {
-      this.join(table);
+      join(table);
       return <Redirect to="/main" />
     }
 
