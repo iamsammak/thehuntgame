@@ -6,7 +6,7 @@ import { Route, Redirect } from 'react-router-dom';
 class Puzzle2 extends React.Component {
   constructor(props) {
     super(props);
- // socketIO listen for the response and run a function to log response
+ // socketIO listen for the response and run a function to log response 
     const { socket } = this.props;
     socket.on('submit_response', function(response) {
       console.log(response.answer) 
