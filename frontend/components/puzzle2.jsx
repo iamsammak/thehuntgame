@@ -6,27 +6,24 @@ import { Route, Redirect } from 'react-router-dom';
 class Puzzle2 extends React.Component {
  constructor(props) {
     super(props);
-   // socketIO listen for the response and run a function to log response 
-      const { socket } = this.props;
-      socket.on('submit_response', function(response) {
-      console.log(response.answer) 
-        if (response.answer == 'correct') {
-	        console.log('response is correct')
-	        this.setState({puzzlesolved : 'yes'})
-        } else if (response.answer === 'incorrect') {
-	         console.log('answer is wrong')
-	         this.setState({wronganswer: 'yes'})
-           };
-        });
-     
+    
     this.state = {
       puzzlesolved: 'no',
       blankanswer: 'no',
       wronganswer: 'no'
     }
+ };
+   submitanswer() {
+      console.log(document.getElementById('puzzleAnswer').value)
+      var userinput = document.getElementById('puzzleAnswer').value;
+      console.log(userinput)
+      this.props.send('submit', {1: userinput})
+      console.log('answer was submitted')
+  }
+
+
   render() {
-    console.log(this.state)
-    return (
+   return (
       <div>
         <h1>Puzzle Two</h1>
         <form id="puzzle2-form">
