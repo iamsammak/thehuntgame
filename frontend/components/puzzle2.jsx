@@ -14,10 +14,8 @@ class Puzzle2 extends React.Component {
     }
  };
    submitanswer() {
-      console.log(document.getElementById('puzzleAnswer').value)
       var userinput = document.getElementById('puzzleAnswer').value;
-      console.log(userinput)
-      this.props.send('submit', {1: userinput})
+      this.props.send('submit', {puzzle: '1', answer: userinput})
       console.log('answer was submitted')
   }
 

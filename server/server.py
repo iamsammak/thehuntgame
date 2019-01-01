@@ -60,8 +60,8 @@ def join(sid, data):
 @sio.on('submit')
 def submit(sid, data):
   print("answer", data)
-#  puzzle, answer = [data.get(key) for key in ['puzzle', 'answer']]
-  puzzle,answer = data.items()[0]
+  puzzle, answer = [data.get(key) for key in ['puzzle', 'answer']]
+#  puzzle,answer = data.items()[0]
   print(puzzle,answer)
   # TODO: error gracefully if no puzzle or answer
   correct = answer == ANSWERS.get(int(puzzle))
