@@ -5,7 +5,7 @@ TODO: fill out
 
 # Prod Setup (one time)
 __This assumes a clean Ubuntu box__
-1. Install system packages: `python2.7`, `pip`, `virtualenv`, `npm`. `git` should already be installed.
+1. Install system packages: `python2.7`, `pip`, `virtualenv`, `npm`, `nginx`. `git` should already be installed.
 ```
 sudo apt update
 sudo apt upgrade
@@ -13,6 +13,7 @@ sudo apt install python-pip # installs python2.7
 pip install --user virtualenv
 pip install --user virtualenvwrapper
 sudo apt install npm
+sudo apt install nginx
 ```
 2. Set up the virtualenv
 ```
@@ -28,6 +29,10 @@ workon thehuntgame
 ```
 cd ~
 git clone https://github.com/iamsammak/thehuntgame.git
+```
+4. Set up nginx configs. Make sure SSL certs are set up.
+```
+sudo rm /etc/nginx/sites-enabled/default
 ```
 
 # Deployment

@@ -13,6 +13,11 @@ cd $PROJECT_DIR >> $DEPLOY_LOG 2>&1
 STEP="GIT_PULL"; echo "Running git pull..."
 git pull origin master >> $DEPLOY_LOG 2>&1
 
+STEP="NGINX"; echo "Updating nginx config..."
+sudo cp server/nginx_config /etc/nginx/sites-available/thehuntgame
+sudo ln -s /etc/nginx/sites-available/thehuntgame /etc/nginx/sites-enabled/thehuntgame
+sudo systemctl restart nginx
+
 STEP="NPM_INSTALL"; echo "Setting up javascript dependencies..."
 # progress bar doesn't show up in the redirected output
 npm install

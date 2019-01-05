@@ -1,0 +1,19 @@
+server {
+  # TODO: redirect 80 to 443
+  listen 80 default_server;
+
+  gzip off;
+
+  # TODO: move everything into frontend so people don't have access to other files
+  root /home/huntmaster/thehuntgame;
+  index thehunt.html;
+
+  location / {
+    try_files $uri $uri/ @server;
+  }
+
+  location @server {
+    proxy_pass http://localhost:8000$request_uri;
+  }
+}
+
