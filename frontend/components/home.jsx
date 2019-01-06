@@ -1,6 +1,6 @@
 import React from 'react';
-import { withCookies } from 'react-cookie'
-import { Route, Redirect } from 'react-router-dom';
+import { withCookies } from 'react-cookie';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 const TableNumber = styled.button`
@@ -16,7 +16,7 @@ class Home extends React.Component {
     return () => {
       const { cookies } = this.props;
       cookies.set("table", tableNumber);
-    }
+    };
   }
 
   render() {
@@ -26,7 +26,7 @@ class Home extends React.Component {
 
     if (table) {
       join(table);
-      return <Redirect to="/main" />
+      return <Redirect to="/main" />;
     }
 
     return (
@@ -44,6 +44,6 @@ class Home extends React.Component {
       </section>
     );
   }
-};
+}
 
 export default withCookies(Home);

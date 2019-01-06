@@ -8,15 +8,15 @@ class Puzzle5 extends React.Component {
       this.setState({
         switchIndex: data.switch_index,
         total: data.total,
-       });
+      });
     });
-    
+
     props.send('puzzle5_join', {});
 
     this.state = {
       total: 0,
       switchIndex: null,
-    }
+    };
   }
 
   render() {
@@ -40,6 +40,6 @@ class Puzzle5 extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default Puzzle5;

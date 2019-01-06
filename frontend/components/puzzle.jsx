@@ -7,23 +7,20 @@ export default class Puzzle extends React.Component {
     const { socket } = props;
     socket.on('submit_response', (data) => {
       this.setState({ correct: data.correct });
-  
-      });
+    });
 
     this.state = {
       correct: null
-    }
+    };
   }
 
   render() {
     const { component: Component } = this.props;
     const { correct } = this.state;
 
-    if (correct=== true) {
-       return <Redirect to="/main" />;
-    } else {
-       return <Component correct = { this.state.correct }  {...this.props} />
+    if (correct === true) {
+      return <Redirect to="/main" />;
     }
-    return <Component {...this.props} />;
+    return <Component correct = { this.state.correct } {...this.props} />;
   }
 }

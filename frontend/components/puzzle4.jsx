@@ -8,7 +8,7 @@ class Puzzle4 extends React.Component {
         <h1>Puzzle Four</h1>
         <div className="riddle">
           <p>Some riddle pertaining to the pictures below</p>
-          <p>make the correct selections are you'll best this foe</p>
+          <p>make the correct selections are you&apos;ll best this foe</p>
         </div>
         <br/>
         <div className="image-keypad-container">
@@ -26,6 +26,6 @@ class Puzzle4 extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default Puzzle4;

@@ -4,7 +4,6 @@ import React from 'react';
 
 class Puzzle3 extends React.Component {
   render() {
-
     return (
       <div>
         <h1>Puzzle Three</h1>
@@ -13,7 +12,7 @@ class Puzzle3 extends React.Component {
             What belongs to you but other people use it more than you?
           </p>
           <p>
-            <input type="text" name="puzzleAnswer" autocomplete="off" placeholder="Type here" />
+            <input type="text" name="puzzleAnswer" autoComplete="off" placeholder="Type here" />
           </p>
 
           <div>
@@ -24,6 +23,6 @@ class Puzzle3 extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default Puzzle3;
