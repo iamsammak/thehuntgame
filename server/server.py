@@ -22,8 +22,8 @@ INITIAL_GAME_STATE_FOR_TABLE = {
   5: {'solved': False, 'segments': {}, 'total_segments': 0},
 }
 ANSWERS = {
-  1: 'see o double you',
-  2: '',
+  1: 'getaway',
+  2: 'see o double you',
   3: '',
   4: '',
   5: '',

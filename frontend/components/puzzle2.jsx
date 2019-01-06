@@ -12,7 +12,7 @@ import styled from 'styled-components'
  
 
 class Puzzle2 extends React.Component {
-constructor(props) {
+  constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
@@ -22,7 +22,7 @@ constructor(props) {
 
    submitanswer() {
       var userinput = this.state.value  
-      this.props.send('submit', {puzzle: '1', answer: userinput})
+      this.props.send('submit', {puzzle: '2', answer: userinput})
       console.log('answer was submitted')
 }
  
@@ -31,10 +31,9 @@ constructor(props) {
   }
 
   
-render() {
-  
-return ( 
-
+  render() {
+    const { value } = this.state;
+  return ( 
      <div>
         <h1>Puzzle Two</h1>
         <form id="puzzle2-form">

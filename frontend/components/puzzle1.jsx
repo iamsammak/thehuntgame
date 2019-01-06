@@ -1,6 +1,15 @@
 import React from 'react';
+import styled from 'styled-components'
 
 // Answer: getaway (caesar ciphered)
+
+
+ //style component for incorrect answers
+   const AnswerAwareInput = styled.input`
+    border-color: ${props => props.correct === false ? 'red' : '#f8f8f8t'};
+    text-color: ${props => props.correct === false ? 'red' : 'black'};
+  `;
+
 
 class Puzzle1 extends React.Component {
   constructor(props) {
@@ -8,38 +17,40 @@ class Puzzle1 extends React.Component {
     this.state = {
       value: "",
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e) {
-    this.setState({value: e.target.value});
+  handleChange(event) {
+    this.setState({value: event.target.value});
   }
-
-  handleSubmit() {
-    const { value } = this.state;
-    const { send } = this.props;
-
-    send("submit", { puzzle: "1", answer: value });
-  }
-
+     submitanswer() {
+      var userinput = this.state.value
+      this.props.send('submit', {puzzle: '1', answer: userinput})
+      console.log('answer was submitted')
+}
   render() {
     const { value } = this.state;
 
     return (
       <div>
         <h1>Puzzle One</h1>
-        <form id="puzzle1-form" onSubmit={this.handleSubmit}>
+        <form id="puzzle1-form">
           <div id="cipher-container">
           </div>
           <p>
-            <input type="text" value={value} onChange={this.handleChange} autoComplete="off" placeholder="Type here" />
+            <AnswerAwareInput
+               type="text"
+               autocomplete="off"
+               placeholder="Type here"
+               correct={this.props.correct}
+               value= {this.state.value}
+               onChange={this.handleChange}
+            />
           </p>
-
           <div>
-            <button type="submit">submit</button>
+            <button type="submit" onClick={() =>this.submitanswer()}>submit</button>
           </div>
-        </form>
+       </form>
       </div>
     );
   }
