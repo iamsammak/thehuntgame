@@ -3,7 +3,8 @@
 PROJECT_DIR=/home/huntmaster/thehuntgame
 VENV=/home/huntmaster/.virtualenvs/thehuntgame
 DEPLOY_LOG=/home/huntmaster/deploy_log
-SERVER_LOG=/home/huntmatser/server_log
+SERVER_LOG=/home/huntmaster/server_log
+SERVER_PIDFILE=/home/huntmaster/server.pid
 
 set -e
 trap 'echo "Error at step $STEP, see $DEPLOY_LOG for details."' ERR
@@ -29,7 +30,15 @@ STEP="VENV"; echo "Activating virtualenv..."
 STEP="PIP_INSTALL"; echo "Setting up python dependencies..."
 pip install -r server/requirements.txt >> $DEPLOY_LOG 2>&1 
 STEP="SERVER_START"; echo "Starting server..."
-# TODO: kill existing instance
+if [ -f $SERVER_PIDFILE ]; then
+  echo "Killing existing server"
+  # TODO: check that this is a python server to make sure another process hasn't claimed this PID
+  kill -2 `cat $SERVER_PIDFILE`
+fi
+echo "Starting server at `date -u`" >> $SERVER_LOG
 python server/server.py >> $SERVER_LOG 2>&1 &
+SERVER_PID=$!
+echo $SERVER_PID > $SERVER_PIDFILE
+echo "Server started in process $SERVER_PID"
 
 echo "Done!"
