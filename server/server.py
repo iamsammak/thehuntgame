@@ -29,15 +29,17 @@ ANSWERS = {
   5: '',
 }
 
+### Only for development use ###
 @flask_app.route('/')
 def index():
   root_dir = os.getcwd()
-  return send_from_directory(root_dir, 'thehunt.html')
+  return send_from_directory(os.path.join(root_dir, 'frontend'), 'thehunt.html')
 
-@flask_app.route('/<directory>/<filename>')
+@flask_app.route('/frontend/<directory>/<filename>')
 def static_files(directory, filename):
   root_dir = os.getcwd()
-  return send_from_directory(os.path.join(root_dir, directory), filename)
+  return send_from_directory(os.path.join(root_dir, 'frontend', directory), filename)
+### Only for development use ###
 
 @sio.on('connect')
 def connect(sid, environ):

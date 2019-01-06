@@ -5,7 +5,7 @@ server {
   gzip off;
 
   # TODO: move everything into frontend so people don't have access to other files
-  root /home/huntmaster/thehuntgame;
+  root /home/huntmaster/thehuntgame/frontend;
   index thehunt.html;
 
   location / {
