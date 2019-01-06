@@ -19,7 +19,7 @@ class App extends React.Component {
     super(props);
     const { cookies } = props;
     // TODO: update URL
-    const socket = io('http://localhost:8000');
+    const socket = io(SOCKET_URL);
 
     socket.on('game_state_update', (data) => {
       this.setState({ gameState: data });
