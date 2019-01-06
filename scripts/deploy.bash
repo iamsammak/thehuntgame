@@ -16,7 +16,7 @@ git pull origin master >> $DEPLOY_LOG 2>&1
 
 STEP="NGINX"; echo "Updating nginx config..."
 sudo cp server/nginx_config /etc/nginx/sites-available/thehuntgame
-sudo ln -s /etc/nginx/sites-available/thehuntgame /etc/nginx/sites-enabled/thehuntgame
+sudo ln -sf /etc/nginx/sites-available/thehuntgame /etc/nginx/sites-enabled/thehuntgame
 sudo systemctl restart nginx
 
 STEP="NPM_INSTALL"; echo "Setting up javascript dependencies..."
