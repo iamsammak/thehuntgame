@@ -5,7 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack --mode=development --watch"
+    "webpack": "webpack --mode=development --watch",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production"
   },
   "author": "Andy, Sam, Sheldon",
   "license": "ISC",
@@ -31,6 +33,7 @@
   },
   "devDependencies": {
     "css-loader": "^2.0.0",
+    "dotenv": "^6.2.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "node-sass": "^4.10.0",
     "sass-loader": "^7.1.0",
