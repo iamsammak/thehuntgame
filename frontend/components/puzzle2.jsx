@@ -2,38 +2,36 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components'
 
+ // Answer: See o double yo
  
-   //if statement for incorrect answers
+ //style component for incorrect answers
    const AnswerAwareInput = styled.input`
-    border-color: ${props => props.incorrectanswer ? 'red' : '#f8f8f8t'};
-    text-color: ${props => props.incorrectanswer ? 'red' : 'black'};
+    border-color: ${props => props.correct === false ? 'red' : '#f8f8f8t'};
+    text-color: ${props => props.correct === false ? 'red' : 'black'};
   `;
  
-// Answer: See o double you
+
 class Puzzle2 extends React.Component {
 constructor(props) {
     super(props);
-    
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
-      puzzlesolved: 'no',
-      blankanswer: 'no',
-      wronganswer: 'no'
+      value : ''
     }
  };
+
    submitanswer() {
-      var userinput = document.getElementById('puzzleAnswer').value;
-      if (userinput) {
+      var userinput = this.state.value  
       this.props.send('submit', {puzzle: '1', answer: userinput})
       console.log('answer was submitted')
-  } else {
-    this.setState({blankanswer : 'yes'})
-    console.log('there was a blank answer')
-    this.props.send('submit', {puzzle: '1', answer: userinput})
-  }
 }
+ 
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
   
 render() {
-  console.log(this.props)
   
 return ( 
 
@@ -44,10 +42,11 @@ return (
           <p>
             <AnswerAwareInput 
                type="text"
-               id="puzzleAnswer"
                autocomplete="off"
                placeholder="Type here"
-               incorrectanswer={this.props.incorrectanswer}
+               correct={this.props.correct}
+               value= {this.state.value}
+               onChange={this.handleChange}
             />
           </p>
           <div>
