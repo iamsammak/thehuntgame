@@ -1,15 +1,9 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components'
-
+import { AnswerAwareInput } from './puzzle.jsx';
+ 
  // Answer: See o double yo
- 
- //style component for incorrect answers
-   const AnswerAwareInput = styled.input`
-    border-color: ${props => props.correct === false ? 'red' : '#f8f8f8t'};
-    text-color: ${props => props.correct === false ? 'red' : 'black'};
-  `;
- 
 
 class Puzzle2 extends React.Component {
   constructor(props) {
@@ -32,7 +26,8 @@ class Puzzle2 extends React.Component {
 
   
   render() {
-    const { value } = this.state;
+    const { value } = this.state
+    console.log(this.props);
   return ( 
      <div>
         <h1>Puzzle Two</h1>
@@ -46,7 +41,7 @@ class Puzzle2 extends React.Component {
                correct={this.props.correct}
                value= {this.state.value}
                onChange={this.handleChange}
-            />
+              />
           </p>
           <div>
             <button type="submit" onClick={() =>this.submitanswer()}>submit</button>

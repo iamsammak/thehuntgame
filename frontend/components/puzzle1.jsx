@@ -1,16 +1,8 @@
 import React from 'react';
 import styled from 'styled-components'
+import { AnswerAwareInput } from './puzzle.jsx'
 
 // Answer: getaway (caesar ciphered)
-
-
- //style component for incorrect answers
-   const AnswerAwareInput = styled.input`
-    border-color: ${props => props.correct === false ? 'red' : '#f8f8f8t'};
-    text-color: ${props => props.correct === false ? 'red' : 'black'};
-  `;
-
-
 class Puzzle1 extends React.Component {
   constructor(props) {
     super(props);
