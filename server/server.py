@@ -35,10 +35,10 @@ def index():
   root_dir = os.getcwd()
   return send_from_directory(os.path.join(root_dir, 'frontend'), 'thehunt.html')
 
-@flask_app.route('/frontend/<directory>/<filename>')
-def static_files(directory, filename):
+@flask_app.route('/<path:path>')
+def static_files(path):
   root_dir = os.getcwd()
-  return send_from_directory(os.path.join(root_dir, 'frontend', directory), filename)
+  return send_from_directory(os.path.join(root_dir, 'frontend'), path)
 ### Only for development use ###
 
 @sio.on('connect')
