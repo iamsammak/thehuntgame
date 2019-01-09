@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PuzzleHeader from './puzzleHeader';
+
 // Answer: getaway (caesar ciphered)
 
 class Puzzle1 extends React.Component {
@@ -28,7 +30,7 @@ class Puzzle1 extends React.Component {
 
     return (
       <div>
-        <h1>Puzzle One</h1>
+        <PuzzleHeader title="Puzzle One" />
         <form id="puzzle1-form" onSubmit={this.handleSubmit}>
           <div id="cipher-container">
           </div>

@@ -3,6 +3,8 @@ import { withCookies } from 'react-cookie';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
+import WelcomeHeader from './welcomeHeader';
+
 const TableNumber = styled.button`
   padding: 5px;
   margin: 5px;
@@ -30,7 +32,8 @@ class Home extends React.Component {
     }
 
     return (
-      <section className="home-container">
+      <div>
+        <WelcomeHeader />
         <p>Before you embark on the hunt...Sheldon come up with a blurb</p>
         <h2>Click on your table number</h2>
         <div id="table">
@@ -41,7 +44,7 @@ class Home extends React.Component {
           <TableNumber onClick={this.setTable(5)}>5</TableNumber>
           <TableNumber onClick={this.setTable(6)}>6</TableNumber>
         </div>
-      </section>
+      </div>
     );
   }
 }

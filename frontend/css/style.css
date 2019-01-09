@@ -3,11 +3,6 @@
   font-weight: 300;
 }
 
-#temp-header {
-  font-size: 1.6em;
-  margin: 25% 0 1.5em 0;
-}
-
 body {
   padding-left: calc(50% - 190px);
   padding-right: calc(50% - 190px);

@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import PuzzleHeader from './puzzleHeader';
+
 // Answer: See o double yo
 
 //style component for incorrect answers
@@ -30,7 +32,7 @@ class Puzzle2 extends React.Component {
   render() {
     return (
       <div>
-        <h1>Puzzle Two</h1>
+        <PuzzleHeader title="Puzzle Two" />
         <form id="puzzle2-form">
           <p>Can you write cow in 13 letters?</p>
           <p>

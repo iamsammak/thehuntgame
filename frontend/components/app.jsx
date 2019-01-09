@@ -52,8 +52,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1 id="temp-header">Welcome to The Hunt v2</h1>
-        <hr />
         <div id="puzzle-container">
           <Route path="/home" component={() => <Home {...this.state} />}></Route>
           <Route path="/main" component={() => <Main {...this.state} />} />

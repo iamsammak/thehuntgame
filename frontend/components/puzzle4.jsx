@@ -1,11 +1,13 @@
 import React from 'react';
 
+import PuzzleHeader from './puzzleHeader';
+
 class Puzzle4 extends React.Component {
   render() {
 
     return (
       <div>
-        <h1>Puzzle Four</h1>
+        <PuzzleHeader title="Puzzle Four" />
         <div className="riddle">
           <p>Some riddle pertaining to the pictures below</p>
           <p>make the correct selections are you&apos;ll best this foe</p>

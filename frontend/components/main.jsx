@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { green, red, xsSpacing } from '../constants';
+import WelcomeHeader from './welcomeHeader';
 
 const tableSize = 200;
 const lockSize = 20;
@@ -84,30 +86,33 @@ export default class Main extends React.Component {
     const allOpened = items.every(i => i.open);
 
     return (
-      <Table>
-        {
-          items.map((item, index) => {
-            const rotation = index * (360 / items.length);
-            return (
-              <Container key={item.key} rotation={rotation}>
-                <Content>
-                  <Line open={item.open} />
-                  <Link to={item.to}>
-                    <LockContainer>
-                      <Lock open={item.open} rotate={rotation} />
-                    </LockContainer>
-                  </Link>
-                </Content>
-              </Container>
-            );
-          })
-        }
-        <MiddleLink to={"/main"} allOpened={allOpened}>
-          <LockContainer>
-            <MiddleLock />
-          </LockContainer>
-        </MiddleLink>
-      </Table>
+      <div>
+        <WelcomeHeader />
+        <Table>
+          {
+            items.map((item, index) => {
+              const rotation = index * (360 / items.length);
+              return (
+                <Container key={item.key} rotation={rotation}>
+                  <Content>
+                    <Line open={item.open} />
+                    <Link to={item.to}>
+                      <LockContainer>
+                        <Lock open={item.open} rotate={rotation} />
+                      </LockContainer>
+                    </Link>
+                  </Content>
+                </Container>
+              );
+            })
+          }
+          <MiddleLink to={"/main"} allOpened={allOpened}>
+            <LockContainer>
+              <MiddleLock />
+            </LockContainer>
+          </MiddleLink>
+        </Table>
+      </div>
     );
   }
 }

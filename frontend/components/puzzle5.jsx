@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PuzzleHeader from './puzzleHeader';
+
 class Puzzle5 extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +37,7 @@ class Puzzle5 extends React.Component {
 
     return (
       <div>
-        <h1>Puzzle Five</h1>
+        <PuzzleHeader title="Puzzle Five" />
         {switches}
       </div>
     );
