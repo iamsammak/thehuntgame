@@ -32,3 +32,4 @@ export default class Puzzle extends React.Component {
 
   }
 }
+}

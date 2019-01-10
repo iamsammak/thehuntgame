@@ -30,8 +30,7 @@ class Puzzle2 extends React.Component {
     console.log(this.props);
   return ( 
      <div>
-        <h1>Puzzle Two</h1>
-        <form id="puzzle2-form">
+        <PuzzleHeader title="Puzzle Two" />       
           <p>Can you write cow in 13 letters?</p>
           <p>
             <AnswerAwareInput 
@@ -46,8 +45,6 @@ class Puzzle2 extends React.Component {
           <div>
             <button type="submit" onClick={() =>this.submitanswer()}>submit</button>
           </div>
-        </form>
-
       </div>
     );
   }

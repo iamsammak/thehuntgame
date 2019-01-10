@@ -43,7 +43,6 @@ class Puzzle1 extends React.Component {
           <div>
             <button type="submit" onClick={() =>this.submitanswer()}>submit</button>
           </div>
-       </form>
       </div>
     );
   }
