@@ -14,12 +14,11 @@ export default class Puzzle extends React.Component {
     const { socket } = props;
     socket.on('submit_response', (data) => {
       this.setState({ correct: data.correct });
-  
-      });
+    });
 
     this.state = {
       correct: null
-    }
+    };
   }
 
   render() {
@@ -30,7 +29,6 @@ export default class Puzzle extends React.Component {
        return <Redirect to="/main" />;
     } else {
        return <Component correct = { this.state.correct } {...this.props} />
-    }
-    return <Component {...this.props} />;
+
   }
 }

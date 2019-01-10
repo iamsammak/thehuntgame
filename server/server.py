@@ -35,10 +35,10 @@ def index():
   root_dir = os.getcwd()
   return send_from_directory(os.path.join(root_dir, 'frontend'), 'thehunt.html')
 
-@flask_app.route('/frontend/<directory>/<filename>')
-def static_files(directory, filename):
+@flask_app.route('/<path:path>')
+def static_files(path):
   root_dir = os.getcwd()
-  return send_from_directory(os.path.join(root_dir, 'frontend', directory), filename)
+  return send_from_directory(os.path.join(root_dir, 'frontend'), path)
 ### Only for development use ###
 
 @sio.on('connect')
@@ -61,17 +61,14 @@ def join(sid, data):
 
 @sio.on('submit')
 def submit(sid, data):
-  print("answer", data)
+  print("answer", sid, data)
   puzzle, answer = [data.get(key) for key in ['puzzle', 'answer']]
-#  puzzle,answer = data.items()[0]
-  print(puzzle,answer)
   # TODO: error gracefully if no puzzle or answer
   correct = answer == ANSWERS.get(int(puzzle))
 
   if correct:
-    print('correct answer was made')
     table = CLIENTS[sid]
-    # TODO: update game_state
+    GAME_STATE[table][int(puzzle)]['solved'] = True
     sio.emit('game_state_update', GAME_STATE[table], room=table)
 
   response = {

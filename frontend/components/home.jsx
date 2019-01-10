@@ -1,7 +1,9 @@
 import React from 'react';
-import { withCookies } from 'react-cookie'
-import { Route, Redirect } from 'react-router-dom';
+import { withCookies } from 'react-cookie';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+
+import WelcomeHeader from './welcomeHeader';
 
 const TableNumber = styled.button`
   padding: 5px;
@@ -16,7 +18,7 @@ class Home extends React.Component {
     return () => {
       const { cookies } = this.props;
       cookies.set("table", tableNumber);
-    }
+    };
   }
 
   render() {
@@ -26,11 +28,12 @@ class Home extends React.Component {
 
     if (table) {
       join(table);
-      return <Redirect to="/main" />
+      return <Redirect to="/main" />;
     }
 
     return (
-      <section className="home-container">
+      <div>
+        <WelcomeHeader />
         <p>Before you embark on the hunt...Sheldon come up with a blurb</p>
         <h2>Click on your table number</h2>
         <div id="table">
@@ -41,9 +44,9 @@ class Home extends React.Component {
           <TableNumber onClick={this.setTable(5)}>5</TableNumber>
           <TableNumber onClick={this.setTable(6)}>6</TableNumber>
         </div>
-      </section>
+      </div>
     );
   }
-};
+}
 
 export default withCookies(Home);

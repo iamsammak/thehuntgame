@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link, NavLink, IndexRoute } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import io from 'socket.io-client';
 
@@ -41,12 +41,10 @@ class App extends React.Component {
   join(tableNumber) {
     const { socket } = this.state;
 
-    console.log(`joining table ${tableNumber}`);
     socket.emit('join', { table: tableNumber });
   }
 
   send(eventName, data) {
-    console.log(data);
     const { socket } = this.state;
     socket.emit(eventName, data);
   }
@@ -54,11 +52,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1 id="temp-header">Welcome to The Hunt v2</h1>
-        <hr />
         <div id="puzzle-container">
           <Route path="/home" component={() => <Home {...this.state} />}></Route>
-	        <Route path="/main" component={() => <Main {...this.state} />} />
+          <Route path="/main" component={() => <Main {...this.state} />} />
           <Route path="/puzzle1" component={() => <Puzzle {...this.state} component={Puzzle1} />} />
           <Route path="/puzzle2" component={() => <Puzzle {...this.state} component={Puzzle2} />} />
           <Route path="/puzzle3" component={() => <Puzzle {...this.state} component={Puzzle3} />} />
@@ -71,6 +67,6 @@ class App extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default withCookies(App);

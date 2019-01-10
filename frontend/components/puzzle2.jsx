@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components'
-import { AnswerAwareInput } from './puzzle.jsx';
- 
+import { AnswerAwareInput } from './puzzle.jsx'; 
+import PuzzleHeader from './puzzleHeader';
  // Answer: See o double yo
 
 class Puzzle2 extends React.Component {
@@ -11,8 +11,8 @@ class Puzzle2 extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       value : ''
-    }
- };
+    };
+  }
 
    submitanswer() {
       var userinput = this.state.value  
@@ -42,7 +42,7 @@ class Puzzle2 extends React.Component {
                value= {this.state.value}
                onChange={this.handleChange}
               />
-          </p>
+         </p>
           <div>
             <button type="submit" onClick={() =>this.submitanswer()}>submit</button>
           </div>
@@ -51,6 +51,6 @@ class Puzzle2 extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default Puzzle2;

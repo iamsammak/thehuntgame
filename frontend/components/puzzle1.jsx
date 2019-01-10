@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components'
 import { AnswerAwareInput } from './puzzle.jsx'
 
+import PuzzleHeader from './puzzleHeader';
+
 // Answer: getaway (caesar ciphered)
 class Puzzle1 extends React.Component {
   constructor(props) {
@@ -25,8 +27,7 @@ class Puzzle1 extends React.Component {
 
     return (
       <div>
-        <h1>Puzzle One</h1>
-        <form id="puzzle1-form">
+        <PuzzleHeader title="Puzzle One" />
           <div id="cipher-container">
           </div>
           <p>

@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { green, red, xsSpacing } from '../constants';
+import WelcomeHeader from './welcomeHeader';
 
 const tableSize = 200;
 const lockSize = 20;
@@ -24,7 +26,7 @@ const Lock = styled(FontAwesomeIcon).attrs(props => ({
 }))`
   font-size: ${lockSize}px;
   transform: rotate(${props => -props.rotate}deg);
-  color: ${props => props.open ? green : red};
+  color: ${props => (props.open ? green : red)};
 `;
 
 const MiddleLock = styled(FontAwesomeIcon).attrs(props => ({
@@ -38,7 +40,7 @@ const MiddleLink = styled(Link)`
   position: absolute;
   top: ${(tableSize / 2) - (middleLockSize / 2) - (xsSpacing / 2)}px;
   left: ${(tableSize / 2) - (middleLockSize / 2) - (xsSpacing / 2)}px;
-  pointer-events: ${props => props.allOpened ? 'auto' : 'none'};
+  pointer-events: ${props => (props.allOpened ? 'auto' : 'none')};
 `;
 
 const Container = styled.div`
@@ -59,7 +61,7 @@ const Content = styled.div`
 `;
 
 const Line = styled.div`
-  border: 1px solid ${props => props.open ? green : red};
+  border: 1px solid ${props => (props.open ? green : red)};
   width: ${(tableSize / 2) - lockSize - (xsSpacing * 2) - (middleLockSize / 2) - (xsSpacing * 2)}px;
   pointer-events: none;
 `;
@@ -67,7 +69,7 @@ const Line = styled.div`
 export default class Main extends React.Component {
   render() {
     const { gameState } = this.props;
-    
+
     const items = [
       { to: "/puzzle1", key: 1, open: gameState[1] && gameState[1].solved },
       { to: "/puzzle2", key: 2, open: gameState[2] && gameState[2].solved },
@@ -82,32 +84,35 @@ export default class Main extends React.Component {
     ];
 
     const allOpened = items.every(i => i.open);
-    
+
     return (
-      <Table>
-        {
-          items.map((item, index) => {
-            const rotation = index * (360 / items.length);
-            return (
-              <Container key={item.key} rotation={rotation}>
-                <Content>
-                  <Line open={item.open} />
-                  <Link to={item.to}>
-                    <LockContainer>
-                      <Lock open={item.open} rotate={rotation} />
-                    </LockContainer>
-                  </Link>
-                </Content>
-              </Container>
-            );
-          })
-        }
-        <MiddleLink to={"/main"} allOpened={allOpened}>
-          <LockContainer>
-            <MiddleLock />
-          </LockContainer>
-        </MiddleLink>
-      </Table>
+      <div>
+        <WelcomeHeader />
+        <Table>
+          {
+            items.map((item, index) => {
+              const rotation = index * (360 / items.length);
+              return (
+                <Container key={item.key} rotation={rotation}>
+                  <Content>
+                    <Line open={item.open} />
+                    <Link to={item.to}>
+                      <LockContainer>
+                        <Lock open={item.open} rotate={rotation} />
+                      </LockContainer>
+                    </Link>
+                  </Content>
+                </Container>
+              );
+            })
+          }
+          <MiddleLink to={"/main"} allOpened={allOpened}>
+            <LockContainer>
+              <MiddleLock />
+            </LockContainer>
+          </MiddleLink>
+        </Table>
+      </div>
     );
   }
 }
