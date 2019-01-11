@@ -7,9 +7,9 @@ import styled from 'styled-components'
     border-color: ${props => props.correct === false ? 'red' : '#f8f8f8t'};
     text-color: ${props => props.correct === false ? 'red' : 'black'};
   `;
-   export const AnswerAwareDiv = styled.div`
-    border-color: ${props => props.correct === false ? 'red' : '#f8f8f8t'};
-    text-color: ${props => props.correct === false ? 'red' : 'black'};
+   export const AnswerAwarePara = styled.p`
+    display:inline-block;
+    color: ${props => props.correct === false ? 'red' : 'black'};
   `;
  
 export default class Puzzle extends React.Component {

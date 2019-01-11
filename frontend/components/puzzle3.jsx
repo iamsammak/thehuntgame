@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components'
 import PuzzleHeader from './puzzleHeader';
+import { AnswerAwarePara } from './puzzle.jsx';
 
 // Answer: Your name
-
+// Answer: [5,4,3,2,1]
 class Puzzle3 extends React.Component {
  constructor(props) {
     super(props);
@@ -34,13 +35,15 @@ class Puzzle3 extends React.Component {
   }
 
   handleClear() {
-    this.setState({combo:[]})
+    this.setState({combo:[], correct: null})
     console.log('things were cleared')
   }
 
   render() {
     const pw = this.state.combo
-    console.log(pw)  
+    console.log(pw)
+    console.log('below is the props')  
+    console.log(this.props)
   return (
       <div>
         <PuzzleHeader title="Puzzle Three" />
@@ -48,8 +51,12 @@ class Puzzle3 extends React.Component {
           <p>Some riddle pertaining to the pictures below</p>
           <p>make the correct selections are you&apos;ll best this foe</p>
         </div>
+        <div>
+          These are the inputs --->( {pw.map(pw => <AnswerAwarePara correct={this.props.correct}> {pw} </AnswerAwarePara>)})
+        </div>
+
         <br/>
-        <AnswerAwareDiv>
+        <div className="image-keypad-container">
           <button id="keypad-1" className="keypad-image" onClick={()=> this.handleClick(1)}>1</button>
           <button id="keypad-2" className="keypad-image" onClick={()=> this.handleClick(2)}>2</button>
           <button id="keypad-3" className="keypad-image" onClick={()=> this.handleClick(3)}>3</button>
@@ -62,9 +69,9 @@ class Puzzle3 extends React.Component {
           <button id="keypad-Clear" className="keypad-image"onClick={()=> this.handleClear()}>clear</button>
           <button id="keypad-0" className="keypad-image"onClick={()=> this.handleClick(0)}>0</button>
           <button id="keypad-Enter" className="keypad-image" onClick={()=> this.submitanswer()}>Enter</button>
-        </AnswerAwareDiv>
+        </div>
         <br/>
-        <p>I am a place to add text</p>
+        <p>I am a place to add text ( {this.state.combo})</p>
       </div>
     );
   }
