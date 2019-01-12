@@ -3,57 +3,52 @@ import styled from 'styled-components';
 
 import PuzzleHeader from './puzzleHeader';
 
-const Button = styled.button`
-background-color: ${props => props.click ? '#FFA000' : '#baffc9'};
-`;
-
-class ButtonContainer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: this.props.value,
-      click: false
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(event) {
-    this.setState(state => ({ click: !state.click}));
-  }
-
-  render() {
-    return (
-      <Button
-        className="keypad-image"
-        click={this.state.click}
-        onClick={this.handleClick}
-        >{this.state.value}</Button>
-    );
-  }
-}
+import {
+  KeypadContainer, Button,
+  OneButton, TwoButton, ThreeButton, FourButton, FiveButton,
+  SixButton, SevenButton, EightButton, NineButton,
+  ButtonContainer
+} from './buttonContants'
 
 class Puzzle4 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      button: ""
+      value: this.props.value,
+      one: false,
+      two: false,
+      three: false,
+      four: false,
+      five: false,
+      six: false,
+      seven: false,
+      eight: false,
+      nine: false,
+      zero: false
     };
 
-    this.testClick = this.testClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.clearValue = this.clearValue.bind(this);
   }
 
-  testClick(event) {
-    var newValue = this.state.button + " " + event.target.value
-    this.setState({
-      button: newValue
-    });
+  handleClick(event) {
+    console.log(event.target.value);
+    let buttonName = event.target.value;
+    this.setState(state => ({ [buttonName]: !state[buttonName]}));
   }
 
   clearValue(event) {
     this.setState({
-      button: ""
+      one: false,
+      two: false,
+      three: false,
+      four: false,
+      five: false,
+      six: false,
+      seven: false,
+      eight: false,
+      nine: false,
+      zero: false
     });
   }
 
@@ -69,21 +64,20 @@ class Puzzle4 extends React.Component {
         </div>
         <h3>{this.state.button}</h3>
         <br/>
-        <div className="image-keypad-container">
-          <button id="keypad-1" className="keypad-image" onClick={this.testClick} value="1">1</button>
+        <KeypadContainer>
+          <OneButton one={this.state.one} onClick={this.handleClick} value="one">1</OneButton>
+          <TwoButton two={this.state.two} onClick={this.handleClick} value="two">2</TwoButton>
+          <ThreeButton three={this.state.three} onClick={this.handleClick} value="three">3</ThreeButton>
+          <FourButton four={this.state.four} onClick={this.handleClick} value="four">4</FourButton>
+          <FiveButton five={this.state.five} onClick={this.handleClick} value="five">5</FiveButton>
+          <SixButton six={this.state.six} onClick={this.handleClick} value="six">6</SixButton>
+          <SevenButton seven={this.state.seven} onClick={this.handleClick} value="seven">7</SevenButton>
+          <EightButton eight={this.state.eight} onClick={this.handleClick} value="eight">8</EightButton>
+          <NineButton nine={this.state.nine} onClick={this.handleClick} value="nine">9</NineButton>
 
-          <ButtonContainer value={name} />
-
-          <button id="keypad-2" className="keypad-image" onClick={this.testClick} value="2">2</button>
-          <button id="keypad-3" className="keypad-image" onClick={this.testClick} value="3">3</button>
-          <button id="keypad-4" className="keypad-image" onClick={this.testClick} value="4">4</button>
-          <button id="keypad-5" className="keypad-image">5</button>
-          <button id="keypad-6" className="keypad-image">6</button>
-          <button id="keypad-7" className="keypad-image">7</button>
-          <button id="keypad-8" className="keypad-image">8</button>
-          <button id="keypad-9" className="keypad-image">9</button>
-          <button id="keypad-0" className="keypad-image" onClick={this.clearValue} >0</button>
-        </div>
+          <ButtonContainer value={name} onClick={this.handleClick}></ButtonContainer>
+          <Button onClick={this.clearValue} >Clear</Button>
+        </KeypadContainer>
       </div>
     );
   }
