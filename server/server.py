@@ -28,7 +28,7 @@ ANSWERS = {
   4: '',
   5: '',
 }
-PUZZLE5_CHOICES = ['poo', 'glass-cheers', 'angry', 'horse', 'anchor', 'carrot', 'cloud-rain', 'glasses', 'seedling']
+PUZZLE5_CHOICES = ['poo', 'glass-cheers', 'angry', 'horse', 'anchor', 'carrot', 'cloud-rain', 'glasses', 'seedling', 'chess-pawn', 'cookie-bite', 'gas-pump', 'infinity', 'ghost', 'dice-five', 'gem', 'puzzle-piece', 'toilet', 'pencil-alt', 'moon']
 PUZZLE5_COLORS = [ '#000000', '#009933', '#ff4d4d', '#bb54c9']
 
 def send_game_state(table):
