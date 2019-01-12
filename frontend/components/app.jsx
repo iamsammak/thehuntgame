@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
+import { ToastContainer, toast } from 'react-toastify';
 import io from 'socket.io-client';
 
 import Nav from './nav';
@@ -23,6 +24,18 @@ class App extends React.Component {
 
     socket.on('game_state_update', (data) => {
       this.setState({ gameState: data });
+    });
+
+    socket.on('player_joined', () => {
+      toast('Someone has joined your table!', {
+        type: 'info',
+      });
+    });
+
+    socket.on('player_left', () => {
+      toast('Someone has left your table!', {
+        type: 'error',
+      });
     });
 
     this.state = {
@@ -64,6 +77,12 @@ class App extends React.Component {
         <hr />
         <h5>Testing Below</h5>
         <Nav />
+        <ToastContainer
+          position={toast.POSITION.TOP_RIGHT}
+          autoClose={2000}
+          hideProgressBar
+          closeOnClick
+        />
       </div>
     );
   }
