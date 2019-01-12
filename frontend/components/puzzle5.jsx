@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { mdSpacing } from '../constants';
+import { smSpacing, mdSpacing, lgSpacing } from '../constants';
 import { MdSpacing } from '../wrappers';
 
 import PuzzleHeader from './puzzleHeader';
@@ -15,6 +15,14 @@ const Container = styled.div`
 const PanelContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  width: 100%
+`;
+
+const PanelItem = styled.div`
+  border: 1px solid black;
+  border-radius: ${lgSpacing}px;
+  padding: ${smSpacing}px;
 `;
 
 const YourSwitchContainer = styled.button`
@@ -55,7 +63,11 @@ class Puzzle5 extends React.Component {
 
       const panel = switches.map((swtch) => {
         const [icon, color] = swtch;
-        return <FontAwesomeIcon key={icon} icon={icon} color={color} size="lg" />;
+        return (
+          <PanelItem key={icon}>
+            <FontAwesomeIcon icon={icon} color={color} size="lg" />
+          </PanelItem>
+        );
       });
 
       let yourSwitch;
