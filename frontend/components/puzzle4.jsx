@@ -10,8 +10,7 @@ class Puzzle4 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: [false, false, false, false, false, false, false, false, false],
-      hello: ""
+      value: [false, false, false, false, false, false, false, false, false]
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -23,21 +22,18 @@ class Puzzle4 extends React.Component {
     let buttonNum = parseInt(event.target.value) - 1;
     let value = this.state.value;
     value[buttonNum] = !value[buttonNum]
-    console.log(value);
 
+    this.props.send('submit', { puzzle: '4', answer: value });
+    console.log(value);
     this.setState({ value: value })
   }
 
   clearValue(event) {
     this.setState({
-      value: [false, false, false, false, false, false, false, false, false],
-      hello: ""
+      value: [false, false, false, false, false, false, false, false, false]
     });
   }
 
-  componentDidUpdate() {
-
-  }
 
   render() {
     let name = "Sam";
@@ -49,7 +45,6 @@ class Puzzle4 extends React.Component {
           <p>Some riddle pertaining to the pictures below</p>
           <p>make the correct selections are you&apos;ll best this foe</p>
         </div>
-        <h3>{this.state.hello}</h3>
         <br/>
         <KeypadContainer>
 
