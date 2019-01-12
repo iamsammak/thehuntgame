@@ -25,7 +25,7 @@ ANSWERS = {
   1: 'see o double you',
   2: '',
   3: '',
-  4: '',
+  4: [false, false, true, true, false, false, false, false, true],
   5: '',
 }
 

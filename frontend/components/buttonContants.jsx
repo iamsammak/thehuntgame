@@ -17,42 +17,6 @@ export const Button = styled.button`
   background-color: ${props => props.click ? '#1995AD' : '#A1D6E2'};
 `;
 
-export const OneButton = styled(Button)`
-  background-color: ${props => props.one ? '#1995AD' : '#A1D6E2'};
-`;
-
-export const TwoButton = styled(Button)`
-  background-color: ${props => props.two ? '#1995AD' : '#A1D6E2'};
-`;
-
-export const ThreeButton = styled(Button)`
-  background-color: ${props => props.three ? '#1995AD' : '#A1D6E2'};
-`;
-
-export const FourButton = styled(Button)`
-  background-color: ${props => props.four ? '#1995AD' : '#A1D6E2'};
-`;
-
-export const FiveButton = styled(Button)`
-  background-color: ${props => props.five ? '#1995AD' : '#A1D6E2'};
-`;
-
-export const SixButton = styled(Button)`
-  background-color: ${props => props.six ? '#1995AD' : '#A1D6E2'};
-`;
-
-export const SevenButton = styled(Button)`
-  background-color: ${props => props.seven ? '#1995AD' : '#A1D6E2'};
-`;
-
-export const EightButton = styled(Button)`
-  background-color: ${props => props.eight ? '#1995AD' : '#A1D6E2'};
-`;
-
-export const NineButton = styled(Button)`
-  background-color: ${props => props.nine ? '#1995AD' : '#A1D6E2'};
-`;
-
 export class ButtonContainer extends React.Component {
   constructor(props) {
     super(props);
