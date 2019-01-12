@@ -1,50 +1,53 @@
 import React from 'react';
-import styled from 'styled-components'
 import PuzzleHeader from './puzzleHeader';
 import { AnswerAwarePara } from './puzzle.jsx';
 
 // Answer: Your name
 // Answer: [5,4,3,2,1]
 class Puzzle3 extends React.Component {
- constructor(props) {
+  constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-
     this.state = {
-      combo : []
+      combo : ['','','','','']
     };
   }
 
 
   handleClick(input) {
-    var temparray = this.state.combo
-    if (temparray.length > 4){
-      console.log('more than 5')
+    var temparray = this.state.combo;
+    if (temparray.length === 0) {
+      temparray.push(input)
+      this.setState({combo: temparray})
     } else {
-      var newarray = temparray.push(input)
-      this.setState({combo: temparray});
-
-    };
+      for (var i = 0; i<= temparray.length; i++) {
+        if (!temparray[i] || temparray[i]  === '') {
+         temparray.splice(i,1,input);
+         this.setState({ combo: temparray });
+         break
+        };
+      };
+  }
 }
-
   submitanswer() {
-    var userinput = this.state.combo
-    this.props.send('submit', {puzzle: '3', answer: userinput})
-    console.log('answer was submitted')
+    var userinput = this.state.combo;
+    this.props.send('submit', { puzzle: '3', answer: userinput });
 
   }
 
   handleClear() {
-    this.setState({combo:[], correct: null})
-    console.log('things were cleared')
+    this.setState({ combo:['','','','',''] });
+    this.props.reset()
   }
 
+  defaultpara() {
+  var comboarray = this.state.combo
+}
+
   render() {
-    const pw = this.state.combo
-    console.log(pw)
-    console.log('below is the props')  
+    const pw = this.state.combo;
     console.log(this.props)
-  return (
+    return (
       <div>
         <PuzzleHeader title="Puzzle Three" />
         <div className="riddle">
@@ -52,7 +55,8 @@ class Puzzle3 extends React.Component {
           <p>make the correct selections are you&apos;ll best this foe</p>
         </div>
         <div>
-          These are the inputs --->( {pw.map(pw => <AnswerAwarePara correct={this.props.correct}> {pw} </AnswerAwarePara>)})
+          <br/>
+           These are the inputs --->( {pw.map(pw => <AnswerAwarePara  correct={this.props.correct}> {pw} </AnswerAwarePara>)})
         </div>
 
         <br/>
