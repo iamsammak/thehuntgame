@@ -25,7 +25,7 @@ ANSWERS = {
   1: 'getaway',
   2: 'see o double you',
   3: '',
-  4: '',
+  4: [False, False, True, True, False, False, False, False, True],
   5: '',
 }
 PUZZLE5_CHOICES = ['poo', 'glass-cheers', 'angry', 'horse', 'anchor', 'carrot', 'cloud-rain', 'glasses', 'seedling', 'chess-pawn', 'cookie-bite', 'gas-pump', 'infinity', 'ghost', 'dice-five', 'gem', 'puzzle-piece', 'toilet', 'pencil-alt', 'moon']
