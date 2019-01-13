@@ -33,6 +33,7 @@
         "react/jsx-indent": ["error", 2]
     },
     "globals": {
-        "document": false
+        "document": false,
+        "SOCKET_URL": false
     }
 }

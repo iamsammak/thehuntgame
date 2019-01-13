@@ -5,13 +5,16 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint \"frontend/**\"",
+    "lint": "eslint \"frontend/**/**.jsx\"",
     "webpack": "webpack --mode=development --watch",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production"
   },
   "author": "Andy, Sam, Sheldon",
   "license": "ISC",
+  "dependenciesNotes": {
+    "react-toastify": "3.4.3 is the latest version to use styled-components, v4+ goes back to css and we would have to use css-loader"
+  },
   "dependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
@@ -26,6 +29,7 @@
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
+    "react-toastify": "^3.4.3",
     "redux": "^4.0.1",
     "socket.io-client": "^2.2.0",
     "styled-components": "^4.1.2",

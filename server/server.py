@@ -19,15 +19,20 @@ INITIAL_GAME_STATE_FOR_TABLE = {
   2: {'solved': False},
   3: {'solved': False},
   4: {'solved': False},
-  5: {'solved': False, 'segments': {}, 'total_segments': 0},
+  5: {'solved': False, 'segments': {}, 'switches': []},
 }
 ANSWERS = {
   1: 'getaway',
   2: 'see o double you',
   3: [5,4,3,2,1],
-  4: '',
+  4: [False, False, True, True, False, False, False, False, True],
   5: '',
 }
+PUZZLE5_CHOICES = ['poo', 'glass-cheers', 'angry', 'horse', 'anchor', 'carrot', 'cloud-rain', 'glasses', 'seedling', 'chess-pawn', 'cookie-bite', 'gas-pump', 'infinity', 'ghost', 'dice-five', 'gem', 'puzzle-piece', 'toilet', 'pencil-alt', 'moon']
+PUZZLE5_COLORS = [ '#000000', '#009933', '#ff4d4d', '#bb54c9']
+
+def send_game_state(table):
+  sio.emit('game_state_update', GAME_STATE[table], room=table)
 
 ### Only for development use ###
 @flask_app.route('/')
@@ -39,6 +44,10 @@ def index():
 def static_files(path):
   root_dir = os.getcwd()
   return send_from_directory(os.path.join(root_dir, 'frontend'), path)
+
+@flask_app.route('/admin')
+def admin():
+  return jsonify({ 'game_state': GAME_STATE, 'clients': CLIENTS })
 ### Only for development use ###
 
 @sio.on('connect')
@@ -52,11 +61,12 @@ def join(sid, data):
   CLIENTS[sid] = table
   sio.enter_room(sid, table)
   if table in GAME_STATE:
-    pass
-    # TODO: broadcast when someone joins
+    # broadcast that someone has joined to everyone except this person
+    sio.emit('player_joined', {}, room=table, skip_sid=sid)
   else:
+    # this is the first person to join this table
     GAME_STATE[table] = INITIAL_GAME_STATE_FOR_TABLE.copy()
-    sio.emit('game_state_update', GAME_STATE[table], room=table)
+    send_game_state(table)
   print GAME_STATE
 
 @sio.on('submit')
@@ -69,7 +79,7 @@ def submit(sid, data):
   if correct:
     table = CLIENTS[sid]
     GAME_STATE[table][int(puzzle)]['solved'] = True
-    sio.emit('game_state_update', GAME_STATE[table], room=table)
+    send_game_state(table)
 
   response = {
     'correct': correct,
@@ -83,6 +93,9 @@ def disconnect(sid):
     # Delete from our clients
     table = CLIENTS.pop(sid)
 
+    # broadcast that someone left
+    sio.emit('player_left', {}, room=table)
+
     # Puzzle 5 cleanup
     if sid in GAME_STATE[table][5]['segments']:
       del GAME_STATE[table][5]['segments'][sid]
@@ -94,32 +107,48 @@ def puzzle5_join(sid, data):
   puzzle5 = GAME_STATE[table][5]
 
   # This is the first person joining
-  if puzzle5['total_segments'] == 0:
+  if len(puzzle5['switches']) == 0:
     friends = [key for key in CLIENTS if CLIENTS[key] == table]
     random.shuffle(friends)
-    puzzle5['total_segments'] = len(friends)
+    puzzle5['switches'] = [[choice, PUZZLE5_COLORS[0]] for choice in random.sample(PUZZLE5_CHOICES, max(len(friends), 3))]
     for i in range(len(friends)):
       puzzle5['segments'][friends[i]] = i
 
   segments = puzzle5['segments']
   if sid in segments:
     # Return your assigned segment
-    switch_index = segments[sid]
+    index = segments[sid]
   else:
-    if len(segments.values()) == puzzle5['total_segments']:
+    if len(segments.values()) == len(puzzle5['switches']):
       # All indexes are taken, you are a spectator
-      switch_index = -1
+      index = -1
     else:
       # Pick an unused index
-      unused = set(range(puzzle5['total_segments'])) - set(segments.values())
-      switch_index = random.choice(list(unused))
+      unused = set(range(len(puzzle5['switches']))) - set(segments.values())
+      index = random.choice(list(unused))
       # Claim the index by setting it in segments
-      segments[sid] = switch_index
-  response = {
-    'switch_index': switch_index,
-    'total': puzzle5['total_segments'],
-  }
-  sio.emit('puzzle5_join_response', response, room=sid)
+      segments[sid] = index
+  sio.emit('puzzle5_join_response', { 'index': index }, room=sid)
+  send_game_state(table)
+
+@sio.on('puzzle5_toggle')
+def puzzle5_toggle(sid, data):
+  print('puzzle5_toggle', sid)
+  table = CLIENTS[sid]
+  puzzle5 = GAME_STATE[table][5]
+  if sid in puzzle5['segments']:
+    index = puzzle5['segments'][sid]
+    current_color = puzzle5['switches'][index][1]
+    if current_color in PUZZLE5_COLORS:
+      new_color = PUZZLE5_COLORS[(PUZZLE5_COLORS.index(current_color) + 1) % len(PUZZLE5_COLORS)]
+      puzzle5['switches'][index][1] = new_color
+      send_game_state(table)
+    else:
+      pass
+      # TODO: wat.
+  else:
+    # TODO: how is this user doing this?
+    pass
 
 if __name__ == '__main__':
   app = socketio.WSGIApp(sio, flask_app)

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
+import { ToastContainer, toast } from 'react-toastify';
 import io from 'socket.io-client';
 
 import Nav from './nav';
@@ -23,6 +24,18 @@ class App extends React.Component {
 
     socket.on('game_state_update', (data) => {
       this.setState({ gameState: data });
+    });
+
+    socket.on('player_joined', () => {
+      toast('Someone has joined your table!', {
+        type: 'info',
+      });
+    });
+
+    socket.on('player_left', () => {
+      toast('Someone has left your table!', {
+        type: 'error',
+      });
     });
 
     this.state = {
@@ -53,17 +66,23 @@ class App extends React.Component {
     return (
       <div>
         <div id="puzzle-container">
-          <Route path="/home" component={() => <Home {...this.state} />}></Route>
-          <Route path="/main" component={() => <Main {...this.state} />} />
-          <Route path="/puzzle1" component={() => <Puzzle {...this.state} component={Puzzle1} />} />
-          <Route path="/puzzle2" component={() => <Puzzle {...this.state} component={Puzzle2} />} />
-          <Route path="/puzzle3" component={() => <Puzzle {...this.state} component={Puzzle3} />} />
-          <Route path="/puzzle4" component={() => <Puzzle {...this.state} component={Puzzle4} />} />
-          <Route path="/puzzle5" component={() => <Puzzle {...this.state} component={Puzzle5} />} />
+          <Route path="/home" render={() => <Home {...this.state} />}></Route>
+          <Route path="/main" render={() => <Main {...this.state} />} />
+          <Route path="/puzzle1" render={() => <Puzzle {...this.state} component={Puzzle1} />} />
+          <Route path="/puzzle2" render={() => <Puzzle {...this.state} component={Puzzle2} />} />
+          <Route path="/puzzle3" render={() => <Puzzle {...this.state} component={Puzzle3} />} />
+          <Route path="/puzzle4" render={() => <Puzzle {...this.state} component={Puzzle4} />} />
+          <Route path="/puzzle5" render={() => <Puzzle {...this.state} component={Puzzle5} />} />
         </div>
         <hr />
         <h5>Testing Below</h5>
         <Nav />
+        <ToastContainer
+          position={toast.POSITION.TOP_RIGHT}
+          autoClose={2000}
+          hideProgressBar
+          closeOnClick
+        />
       </div>
     );
   }
