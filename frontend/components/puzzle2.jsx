@@ -1,15 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-
+import { Route, Redirect } from 'react-router-dom';
+import styled from 'styled-components'
+import { AnswerAwareInput } from './puzzle.jsx'; 
 import PuzzleHeader from './puzzleHeader';
-
-// Answer: See o double yo
-
-//style component for incorrect answers
-const AnswerAwareInput = styled.input`
-  border-color: ${props => (props.correct === false ? 'red' : '#f8f8f8t')};
-  text-color: ${props => (props.correct === false ? 'red' : 'black')};
-`;
+ // Answer: See o double yo
 
 class Puzzle2 extends React.Component {
   constructor(props) {
@@ -20,36 +14,37 @@ class Puzzle2 extends React.Component {
     };
   }
 
-  submitanswer() {
-    var userinput = this.state.value;
-    this.props.send('submit', { puzzle: '1', answer: userinput });
-  }
-
+   submitanswer() {
+      var userinput = this.state.value  
+      this.props.send('submit', {puzzle: '2', answer: userinput})
+      console.log('answer was submitted')
+}
+ 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({value: event.target.value});
   }
 
+  
   render() {
-    return (
-      <div>
-        <PuzzleHeader title="Puzzle Two" />
-        <form id="puzzle2-form">
+    const { value } = this.state
+    console.log(this.props);
+  return ( 
+     <div>
+        <PuzzleHeader title="Puzzle Two" />       
           <p>Can you write cow in 13 letters?</p>
           <p>
-            <AnswerAwareInput
-              type="text"
-              autocomplete="off"
-              placeholder="Type here"
-              correct={this.props.correct}
-              value= {this.state.value}
-              onChange={this.handleChange}
-            />
-          </p>
+            <AnswerAwareInput 
+               type="text"
+               autocomplete="off"
+               placeholder="Type here"
+               correct={this.props.correct}
+               value= {this.state.value}
+               onChange={this.handleChange}
+              />
+         </p>
           <div>
             <button type="submit" onClick={() =>this.submitanswer()}>submit</button>
           </div>
-        </form>
-
       </div>
     );
   }

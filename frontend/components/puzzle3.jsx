@@ -20,6 +20,13 @@ class Puzzle3 extends React.Component {
           <div>
             <button type="submit">submit</button>
           </div>
+          <div>
+            <button type="submit">submit</button>
+          </div>
+          <div>  
+            <button type="submit">submit</button>
+
+          </div>
         </form>
 
       </div>
