@@ -110,7 +110,7 @@ def puzzle5_join(sid, data):
   if len(puzzle5['switches']) == 0:
     friends = [key for key in CLIENTS if CLIENTS[key] == table]
     random.shuffle(friends)
-    puzzle5['switches'] = [[choice, PUZZLE5_COLORS[0]] for choice in random.sample(PUZZLE5_CHOICES, len(friends))]
+    puzzle5['switches'] = [[choice, PUZZLE5_COLORS[0]] for choice in random.sample(PUZZLE5_CHOICES, max(len(friends), 3))]
     for i in range(len(friends)):
       puzzle5['segments'][friends[i]] = i
 
