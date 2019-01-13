@@ -1,10 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import PuzzleHeader from './puzzleHeader';
 
 import {
-  KeypadContainer, Button, ButtonContainer } from './buttonContants'
+  KeypadContainer, Button, ButtonContainer } from './buttonContants';
 
 class Puzzle4 extends React.Component {
   constructor(props) {
@@ -18,17 +17,15 @@ class Puzzle4 extends React.Component {
   }
 
   handleClick(event) {
-    console.log(event.target.value);
     let buttonNum = parseInt(event.target.value) - 1;
     let value = this.state.value;
-    value[buttonNum] = !value[buttonNum]
+    value[buttonNum] = !value[buttonNum];
 
     this.props.send('submit', { puzzle: '4', answer: value });
-    console.log(value);
-    this.setState({ value: value })
+    this.setState({ value: value });
   }
 
-  clearValue(event) {
+  clearValue() {
     this.setState({
       value: [false, false, false, false, false, false, false, false, false]
     });

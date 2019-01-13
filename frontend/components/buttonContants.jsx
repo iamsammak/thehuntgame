@@ -28,8 +28,8 @@ export class ButtonContainer extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(event) {
-    this.setState(state => ({ click: !state.click}));
+  handleClick() {
+    this.setState(state => ({ click: !state.click }));
   }
 
   render() {
@@ -38,7 +38,7 @@ export class ButtonContainer extends React.Component {
         className="keypad-image"
         click={this.state.click}
         onClick={this.handleClick}
-        >{this.state.value}</Button>
+      >{this.state.value}</Button>
     );
   }
 }
