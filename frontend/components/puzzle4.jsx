@@ -3,7 +3,7 @@ import React from 'react';
 import PuzzleHeader from './puzzleHeader';
 
 import {
-  KeypadContainer, Button, ButtonContainer } from './buttonContants';
+  KeypadContainer, Button } from './buttonContants';
 
 class Puzzle4 extends React.Component {
   constructor(props) {
@@ -58,7 +58,6 @@ class Puzzle4 extends React.Component {
           <Button click={this.state.value[7]} onClick={this.handleClick(7)} >8</Button>
           <Button click={this.state.value[8]} onClick={this.handleClick(8)} >9</Button>
 
-          <ButtonContainer value={name} onClick={this.handleClick}></ButtonContainer>
           <Button onClick={this.clearValue} >Clear</Button>
         </KeypadContainer>
       </div>
