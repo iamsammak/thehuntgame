@@ -1,6 +1,6 @@
 import React from 'react';
 import PuzzleHeader from './puzzleHeader';
-import { AnswerAwarePara } from './puzzle.jsx';
+import { AnswerAwareDiv } from './puzzle.jsx';
 
 // Answer: Your name
 // Answer: [5,4,3,2,1]
@@ -17,18 +17,23 @@ class Puzzle3 extends React.Component {
   handleClick(input) {
     var temparray = this.state.combo;
     if (temparray.length === 0) {
-      temparray.push(input)
-      this.setState({combo: temparray})
+      temparray.push(input);
+      this.setState({ combo: temparray });
     } else {
-      for (var i = 0; i<= temparray.length; i++) {
-        if (!temparray[i] || temparray[i]  === '') {
-         temparray.splice(i,1,input);
-         this.setState({ combo: temparray });
-         break
-        };
-      };
+      var flag = 'full';
+      for (var i = 0; i <= temparray.length; i++) {
+        if ( temparray[i] === '') {
+          temparray.splice(i,1,input);
+          this.setState({ combo: temparray });
+          flag = 'good';
+          break;
+        }
+      }
+      if (flag === 'full') {
+        console.log('too many numbers');
+      }
+    }
   }
-}
   submitanswer() {
     var userinput = this.state.combo;
     this.props.send('submit', { puzzle: '3', answer: userinput });
@@ -37,16 +42,11 @@ class Puzzle3 extends React.Component {
 
   handleClear() {
     this.setState({ combo:['','','','',''] });
-    this.props.reset()
+    this.props.reset();
   }
-
-  defaultpara() {
-  var comboarray = this.state.combo
-}
 
   render() {
     const pw = this.state.combo;
-    console.log(this.props)
     return (
       <div>
         <PuzzleHeader title="Puzzle Three" />
@@ -55,11 +55,8 @@ class Puzzle3 extends React.Component {
           <p>make the correct selections are you&apos;ll best this foe</p>
         </div>
         <div>
-          <br/>
-           These are the inputs --->( {pw.map(pw => <AnswerAwarePara  correct={this.props.correct}> {pw} </AnswerAwarePara>)})
+          {pw.map(pw => <AnswerAwareDiv correct={this.props.correct}> {pw} </AnswerAwareDiv>)})
         </div>
-
-        <br/>
         <div className="image-keypad-container">
           <button id="keypad-1" className="keypad-image" onClick={()=> this.handleClick(1)}>1</button>
           <button id="keypad-2" className="keypad-image" onClick={()=> this.handleClick(2)}>2</button>
