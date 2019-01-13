@@ -16,10 +16,6 @@ class Puzzle3 extends React.Component {
 
   handleClick(input) {
     var temparray = this.state.combo;
-    if (temparray.length === 0) {
-      temparray.push(input);
-      this.setState({ combo: temparray });
-    } else {
       var flag = 'full';
       for (var i = 0; i <= temparray.length; i++) {
         if ( temparray[i] === '') {
@@ -33,7 +29,6 @@ class Puzzle3 extends React.Component {
         console.log('too many numbers');
       }
     }
-  }
   submitanswer() {
     var userinput = this.state.combo;
     this.props.send('submit', { puzzle: '3', answer: userinput });
