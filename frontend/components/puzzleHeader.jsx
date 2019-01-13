@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { black, smSpacing } from '../constants';
+import { black } from '../constants';
 
 const Header = styled.div`
   margin-top: 4em;
@@ -21,9 +20,9 @@ const BackIconContainer = styled.div`
   align-items: center;
 `;
 
-const BackIcon = styled(FontAwesomeIcon).attrs(props => ({
-  icon: faArrowLeft,
-}))`
+const BackIcon = styled(FontAwesomeIcon).attrs({
+  icon: 'arrow-left',
+})`
   flex: 1;
   font-size: 1.25em;
   color: ${black};

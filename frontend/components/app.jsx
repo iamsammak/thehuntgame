@@ -66,13 +66,13 @@ class App extends React.Component {
     return (
       <div>
         <div id="puzzle-container">
-          <Route path="/home" component={() => <Home {...this.state} />}></Route>
-          <Route path="/main" component={() => <Main {...this.state} />} />
-          <Route path="/puzzle1" component={() => <Puzzle {...this.state} component={Puzzle1} />} />
-          <Route path="/puzzle2" component={() => <Puzzle {...this.state} component={Puzzle2} />} />
-          <Route path="/puzzle3" component={() => <Puzzle {...this.state} component={Puzzle3} />} />
-          <Route path="/puzzle4" component={() => <Puzzle {...this.state} component={Puzzle4} />} />
-          <Route path="/puzzle5" component={() => <Puzzle {...this.state} component={Puzzle5} />} />
+          <Route path="/home" render={() => <Home {...this.state} />}></Route>
+          <Route path="/main" render={() => <Main {...this.state} />} />
+          <Route path="/puzzle1" render={() => <Puzzle {...this.state} component={Puzzle1} />} />
+          <Route path="/puzzle2" render={() => <Puzzle {...this.state} component={Puzzle2} />} />
+          <Route path="/puzzle3" render={() => <Puzzle {...this.state} component={Puzzle3} />} />
+          <Route path="/puzzle4" render={() => <Puzzle {...this.state} component={Puzzle4} />} />
+          <Route path="/puzzle5" render={() => <Puzzle {...this.state} component={Puzzle5} />} />
         </div>
         <hr />
         <h5>Testing Below</h5>

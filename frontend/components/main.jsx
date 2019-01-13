@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { green, red, xsSpacing } from '../constants';
@@ -22,7 +21,7 @@ const LockContainer = styled.div`
 `;
 
 const Lock = styled(FontAwesomeIcon).attrs(props => ({
-  icon: props.open ? faUnlock : faLock,
+  icon: props.open ? 'unlock' : 'lock',
 }))`
   font-size: ${lockSize}px;
   transform: rotate(${props => -props.rotate}deg);
@@ -30,7 +29,7 @@ const Lock = styled(FontAwesomeIcon).attrs(props => ({
 `;
 
 const MiddleLock = styled(FontAwesomeIcon).attrs(props => ({
-  icon: props.open ? faUnlock : faLock,
+  icon: props.open ? 'unlock' : 'lock',
 }))`
   font-size: ${middleLockSize}px;
   color: ${red};
