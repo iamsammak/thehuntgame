@@ -52,9 +52,10 @@ def join(sid, data):
   CLIENTS[sid] = table
   sio.enter_room(sid, table)
   if table in GAME_STATE:
-    pass
-    # TODO: broadcast when someone joins
+    # broadcast that someone has joined to everyone except this person
+    sio.emit('player_joined', {}, room=table, skip_sid=sid)
   else:
+    # this is the first person to join this table
     GAME_STATE[table] = INITIAL_GAME_STATE_FOR_TABLE.copy()
     sio.emit('game_state_update', GAME_STATE[table], room=table)
   print GAME_STATE
@@ -82,6 +83,9 @@ def disconnect(sid):
   if sid in CLIENTS:
     # Delete from our clients
     table = CLIENTS.pop(sid)
+
+    # broadcast that someone left
+    sio.emit('player_left', {}, room=table)
 
     # Puzzle 5 cleanup
     if sid in GAME_STATE[table][5]['segments']:
