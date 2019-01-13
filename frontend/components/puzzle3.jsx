@@ -2,25 +2,32 @@ import React from 'react';
 import PuzzleHeader from './puzzleHeader';
 import { AnswerAwareDiv } from './puzzle.jsx';
 
-// Answer: Your name
 // Answer: [5,4,3,2,1]
+
+const initial_combo = ['','','','',''];
 class Puzzle3 extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.handleClear = this.handleClear.bind(this);
+    this.submitAnswer = this.submitAnswer.bind(this);
     this.state = {
-      combo : ['','','','','']
+      combo : initial_combo
     };
   }
 
 
   handleClick(input) {
-    var temparray = this.state.combo;
+    return () => {
+      var temparray = this.state.combo;
       var flag = 'full';
       for (var i = 0; i <= temparray.length; i++) {
         if ( temparray[i] === '') {
-          temparray.splice(i,1,input);
-          this.setState({ combo: temparray });
+          this.setState(state => {
+            const combo = state.combo.slice();
+            combo.splice(i, 1, input);
+            return { combo };
+          });
           flag = 'good';
           break;
         }
@@ -28,15 +35,15 @@ class Puzzle3 extends React.Component {
       if (flag === 'full') {
         console.log('too many numbers');
       }
-    }
-  submitanswer() {
+    };
+  }
+  submitAnswer() {
     var userinput = this.state.combo;
     this.props.send('submit', { puzzle: '3', answer: userinput });
-
   }
 
   handleClear() {
-    this.setState({ combo:['','','','',''] });
+    this.setState({ combo:initial_combo });
     this.props.reset();
   }
 
@@ -50,21 +57,21 @@ class Puzzle3 extends React.Component {
           <p>make the correct selections are you&apos;ll best this foe</p>
         </div>
         <div>
-          {pw.map(pw => <AnswerAwareDiv correct={this.props.correct}> {pw} </AnswerAwareDiv>)})
+          {pw.map(pw => <AnswerAwareDiv correct={this.props.correct}> {pw} </AnswerAwareDiv>)}
         </div>
         <div className="image-keypad-container">
-          <button id="keypad-1" className="keypad-image" onClick={()=> this.handleClick(1)}>1</button>
-          <button id="keypad-2" className="keypad-image" onClick={()=> this.handleClick(2)}>2</button>
-          <button id="keypad-3" className="keypad-image" onClick={()=> this.handleClick(3)}>3</button>
-          <button id="keypad-4" className="keypad-image" onClick={()=> this.handleClick(4)}>4</button>
-          <button id="keypad-5" className="keypad-image" onClick={()=> this.handleClick(5)}>5</button>
-          <button id="keypad-6" className="keypad-image" onClick={()=> this.handleClick(6)}>6</button>
-          <button id="keypad-7" className="keypad-image" onClick={()=> this.handleClick(7)}>7</button>
-          <button id="keypad-8" className="keypad-image" onClick={()=> this.handleClick(8)}>8</button>
-          <button id="keypad-9" className="keypad-image" onClick={()=> this.handleClick(9)}>9</button>
-          <button id="keypad-Clear" className="keypad-image"onClick={()=> this.handleClear()}>clear</button>
-          <button id="keypad-0" className="keypad-image"onClick={()=> this.handleClick(0)}>0</button>
-          <button id="keypad-Enter" className="keypad-image" onClick={()=> this.submitanswer()}>Enter</button>
+          <button id="keypad-1" className="keypad-image" onClick={this.handleClick(1)}>1</button>
+          <button id="keypad-2" className="keypad-image" onClick={this.handleClick(2)}>2</button>
+          <button id="keypad-3" className="keypad-image" onClick={this.handleClick(3)}>3</button>
+          <button id="keypad-4" className="keypad-image" onClick={this.handleClick(4)}>4</button>
+          <button id="keypad-5" className="keypad-image" onClick={this.handleClick(5)}>5</button>
+          <button id="keypad-6" className="keypad-image" onClick={this.handleClick(6)}>6</button>
+          <button id="keypad-7" className="keypad-image" onClick={this.handleClick(7)}>7</button>
+          <button id="keypad-8" className="keypad-image" onClick={this.handleClick(8)}>8</button>
+          <button id="keypad-9" className="keypad-image" onClick={this.handleClick(9)}>9</button>
+          <button id="keypad-Clear" className="keypad-image"onClick={this.handleClear}>clear</button>
+          <button id="keypad-0" className="keypad-image"onClick={this.handleClick(0)}>0</button>
+          <button id="keypad-Enter" className="keypad-image" onClick={this.submitAnswer}>Enter</button>
         </div>
         <br/>
         <p>I am a place to add text ( {this.state.combo})</p>

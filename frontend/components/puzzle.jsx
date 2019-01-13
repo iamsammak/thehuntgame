@@ -21,13 +21,13 @@ export default class Puzzle extends React.Component {
   constructor(props) {
     super(props);
     const { socket } = props;
+    this.resetCorrect = this.resetCorrect.bind(this);
     socket.on('submit_response', (data) => {
       this.setState({ correct: data.correct });
     });
 
     this.state = {
       correct: null,
-      reset: this.resetCorrect.bind(this)
     };
   }
   resetCorrect() {
@@ -36,11 +36,11 @@ export default class Puzzle extends React.Component {
 
   render() {
     const { component: Component } = this.props;
-    const { correct,reset } = this.state;
+    const { correct } = this.state;
     if (correct === true) {
       return <Redirect to="/main" />;
     } else {
-      return <Component correct = { correct } reset = {reset} {...this.props} />;
+      return <Component correct = { correct } reset = {this.resetCorrect} {...this.props} />;
 
     }
   }

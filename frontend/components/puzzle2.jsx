@@ -12,7 +12,7 @@ class Puzzle2 extends React.Component {
     };
   }
 
-  submitanswer() {
+  submitAnswer() {
     var userinput = this.state.value;
     this.props.send('submit', { puzzle: '2', answer: userinput });
   }
@@ -40,7 +40,7 @@ class Puzzle2 extends React.Component {
           />
         </p>
         <div>
-          <button type="submit" onClick={() =>this.submitanswer()}>submit</button>
+          <button type="submit" onClick={() =>this.submitAnswer()}>submit</button>
         </div>
       </div>
     );

@@ -16,7 +16,7 @@ class Puzzle1 extends React.Component {
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
-  submitanswer() {
+  submitAnswer() {
     var userinput = this.state.value;
     this.props.send('submit', { puzzle: '1', answer: userinput });
   }
@@ -39,7 +39,7 @@ class Puzzle1 extends React.Component {
           />
         </p>
         <div>
-          <button type="submit" onClick={() =>this.submitanswer()}>submit</button>
+          <button type="submit" onClick={() =>this.submitAnswer()}>submit</button>
         </div>
       </div>
     );
