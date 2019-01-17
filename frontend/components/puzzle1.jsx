@@ -17,7 +17,7 @@ class Puzzle1 extends React.Component {
     this.setState({ value: event.target.value });
   }
   submitAnswer() {
-    var userinput = this.state.value;
+    var userinput = this.state.value.toLowerCase();
     this.props.send('submit', { puzzle: '1', answer: userinput });
   }
   render() {
