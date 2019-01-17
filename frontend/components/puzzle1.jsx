@@ -9,8 +9,15 @@ class Puzzle1 extends React.Component {
     super(props);
     this.state = {
       value: "",
+      cipher: "",
     };
     this.handleChange = this.handleChange.bind(this);
+    this.cipherPing = this.cipherPing.bind(this);
+
+    const { socket } = props;
+    socket.on('cipher_return', (data) => {
+      this.setState({ cipher: data });
+    });
   }
 
   handleChange(event) {
@@ -20,13 +27,19 @@ class Puzzle1 extends React.Component {
     var userinput = this.state.value;
     this.props.send('submit', { puzzle: '1', answer: userinput });
   }
+
+  cipherPing() {
+    this.props.ping('cipher_ping', { 'hello': 'hello' });
+  }
   render() {
     const { value } = this.state;
     const { correct } = this.props;
+    this.cipherPing();
     return (
       <div>
         <PuzzleHeader title="Puzzle One" />
         <div id="cipher-container">
+          {this.state.cipher}
         </div>
         <p>
           <AnswerAwareInput

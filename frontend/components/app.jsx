@@ -43,6 +43,7 @@ class App extends React.Component {
       socket: socket,
       send: this.send.bind(this),
       join: this.join.bind(this),
+      ping: this.ping.bind(this),
     };
 
     const table = cookies.get('table');
@@ -58,6 +59,11 @@ class App extends React.Component {
   }
 
   send(eventName, data) {
+    const { socket } = this.state;
+    socket.emit(eventName, data);
+  }
+
+  ping(eventName, data) {
     const { socket } = this.state;
     socket.emit(eventName, data);
   }

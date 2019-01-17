@@ -54,6 +54,28 @@ def admin():
 def connect(sid, environ):
   print("connect ", sid)
 
+@sio.on('cipher_ping')
+def cipherconnect(sid, environ):
+  table = int(CLIENTS[sid])
+  message = 'gateway'
+  cipher = encrypt(message,table)
+  sio.emit('cipher_return', cipher)
+
+
+def encrypt(message, shift):
+  alphabet = "abcdefghijklmnopqrstuvwxyz"
+  output = ''
+  for c in message:
+    index = alphabet.find(c)
+    if index < 0:
+      output += ' '
+    else:
+      new_index = (index + shift) % len(alphabet)
+      new_character = alphabet[new_index]
+      output += new_character
+  return output
+
+
 @sio.on('join')
 def join(sid, data):
   print("join", data, sid)
