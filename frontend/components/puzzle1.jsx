@@ -12,7 +12,7 @@ class Puzzle1 extends React.Component {
       cipher: "",
     };
     this.handleChange = this.handleChange.bind(this);
-    this.cipherPing = this.cipherPing.bind(this);
+    this.cipherPing();
 
     const { socket } = props;
     socket.on('cipher_return', (data) => {
@@ -34,7 +34,6 @@ class Puzzle1 extends React.Component {
   render() {
     const { value } = this.state;
     const { correct } = this.props;
-    this.cipherPing();
     return (
       <div>
         <PuzzleHeader title="Puzzle One" />
