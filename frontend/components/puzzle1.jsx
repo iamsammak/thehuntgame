@@ -17,8 +17,8 @@ class Puzzle1 extends React.Component {
     socket.on('cipher_return', (data) => {
       this.setState({ cipher: data });
     });
-     this.cipherPing();
- }
+    this.cipherPing();
+  }
 
   handleChange(event) {
     this.setState({ value: event.target.value });
@@ -32,9 +32,8 @@ class Puzzle1 extends React.Component {
     this.props.send('cipher_ping', {});
   }
   render() {
-    const { value } = this.state;
+    const { value, cipher } = this.state;
     const { correct } = this.props;
-    const { cipher } = this.state
     return (
       <div>
         <PuzzleHeader title="Puzzle One" />
