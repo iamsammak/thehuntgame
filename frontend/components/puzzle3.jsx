@@ -12,17 +12,17 @@ class Puzzle3 extends React.Component {
     this.handleClear = this.handleClear.bind(this);
     this.submitAnswer = this.submitAnswer.bind(this);
     this.state = {
-      combo : initial_combo
+      combo: initial_combo,
+      shake: false,
     };
   }
-
 
   handleClick(input) {
     return () => {
       var tempArray = this.state.combo;
       var flag = 'full';
       for (var i = 0; i <= tempArray.length; i++) {
-        if ( tempArray[i] === '') {
+        if (tempArray[i] === '') {
           this.setState(state => {
             const combo = state.combo.slice();
             combo.splice(i, 1, input);
@@ -33,10 +33,14 @@ class Puzzle3 extends React.Component {
         }
       }
       if (flag === 'full') {
-        console.log('too many numbers');
+        this.setState({ shake: true });
+        setTimeout(() => {
+          this.setState({ shake: false });
+        }, 500);
       }
     };
   }
+
   submitAnswer() {
     var userinput = this.state.combo;
     this.props.send('submit', { puzzle: '3', answer: userinput });
@@ -48,7 +52,7 @@ class Puzzle3 extends React.Component {
   }
 
   render() {
-    const pw = this.state.combo;
+    const { combo } = this.state;
     return (
       <div>
         <PuzzleHeader title="Puzzle Three" />
@@ -57,7 +61,15 @@ class Puzzle3 extends React.Component {
           <p>make the correct selections are you&apos;ll best this foe</p>
         </div>
         <div>
-          {pw.map(pw => <AnswerAwareDiv correct={this.props.correct}> {pw} </AnswerAwareDiv>)}
+          {
+            combo.map((pw, i) => {
+              return (
+                <AnswerAwareDiv key={`${i}${pw}`} shake={this.state.shake} correct={this.props.correct}>
+                  {pw}
+                </AnswerAwareDiv>
+              );
+            })
+          }
         </div>
         <div className="image-keypad-container">
           <button id="keypad-1" className="keypad-image" onClick={this.handleClick(1)}>1</button>
