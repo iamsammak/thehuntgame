@@ -25,3 +25,9 @@ export const XlSpacing = styled.div`
   width: ${xlSpacing};
   height: ${xlSpacing};
 `;
+
+export const Text = styled.div`
+  font-size: 16px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+`;

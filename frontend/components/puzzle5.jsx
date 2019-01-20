@@ -1,100 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { smSpacing, mdSpacing, lgSpacing } from '../constants';
-import { MdSpacing } from '../wrappers';
 
-import PuzzleHeader from './puzzleHeader';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const PanelContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%
-`;
-
-const PanelItem = styled.div`
-  border: 1px solid black;
-  border-radius: ${lgSpacing}px;
-  padding: ${smSpacing}px;
-`;
-
-const YourSwitchContainer = styled.button`
-  padding: ${mdSpacing};
-`;
+import Submit from './submit';
+import Puzzle5Clue from './puzzle5Clue';
 
 class Puzzle5 extends React.Component {
-  constructor(props) {
-    super(props);
-
-    const { send, socket } = props;
-    socket.on('puzzle5_join_response', (data) => {
-      this.setState({ index: data.index });
-    });
-
-    this.state = {
-      index: null,
-    };
-
-    send('puzzle5_join', {});
-
-    this.handleSwitch = this.handleSwitch.bind(this);
-  }
-
-  handleSwitch() {
-    const { send } = this.props;
-    send('puzzle5_toggle', {});
-  }
-
   render() {
-    const { gameState } = this.props;
-    const { index } = this.state;
-
-    if (gameState[5]) {
-      const {
-        switches,
-      } = gameState[5];
-
-      const panel = switches.map((swtch) => {
-        const [icon, color] = swtch;
-        return (
-          <PanelItem key={icon}>
-            <FontAwesomeIcon icon={icon} color={color} size="lg" />
-          </PanelItem>
-        );
-      });
-
-      let yourSwitch;
-      if (index !== null && switches[index]) {
-        const [icon, color] = switches[index];
-        yourSwitch = (
-          <YourSwitchContainer onClick={this.handleSwitch}>
-            <FontAwesomeIcon icon={icon} color={color} size="4x" />
-          </YourSwitchContainer>
-        );
-      }
-
-      return (
-        <div>
-          <PuzzleHeader title="Puzzle Five" />
-          <Container>
-            <PanelContainer>
-              {panel}
-            </PanelContainer>
-            <MdSpacing />
-            {yourSwitch}
-          </Container>
-        </div>
-      );
-    }
-
-    return null;
+    return (
+      <div>
+        <Puzzle5Clue src="images/puzzle5_clue1.jpg" />
+        <Submit {...this.props} />
+      </div>
+    );
   }
 }
 
