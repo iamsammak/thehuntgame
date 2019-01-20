@@ -5,6 +5,7 @@ import socketio
 import eventlet
 import eventlet.wsgi
 import random
+from string import ascii_lowercase as alphabet
 from flask import Flask, render_template, jsonify, request, send_from_directory
 
 sio = socketio.Server()
@@ -53,6 +54,27 @@ def admin():
 @sio.on('connect')
 def connect(sid, environ):
   print("connect ", sid)
+
+@sio.on('cipher_ping')
+def cipherconnect(sid, environ):
+  table = int(CLIENTS[sid])
+  message = ANSWERS[1]
+  cipher = encrypt(message,table)
+  sio.emit('cipher_return', cipher)
+
+
+def encrypt(message, shift):
+  output = ''
+  for c in message:
+    index = alphabet.find(c)
+    if index < 0:
+      output += ' '
+    else:
+      new_index = (index + shift) % len(alphabet)
+      new_character = alphabet[new_index]
+      output += new_character
+  return output
+
 
 @sio.on('join')
 def join(sid, data):
