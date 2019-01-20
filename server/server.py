@@ -88,7 +88,7 @@ def join(sid, data):
   else:
     # this is the first person to join this table
     GAME_STATE[table] = INITIAL_GAME_STATE_FOR_TABLE.copy()
-  send_game_state(table)
+  send_game_state(sid)
   print GAME_STATE
 
 @sio.on('submit')
