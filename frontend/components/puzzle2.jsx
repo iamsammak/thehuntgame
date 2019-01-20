@@ -13,7 +13,7 @@ class Puzzle2 extends React.Component {
   }
 
   submitAnswer() {
-    var userinput = this.state.value;
+    var userinput = this.state.value.toLowerCase();
     this.props.send('submit', { puzzle: '2', answer: userinput });
   }
 

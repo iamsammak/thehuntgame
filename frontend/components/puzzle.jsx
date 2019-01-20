@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
-//style component for incorrect answers
+//style component for incorrect answer s
 export const AnswerAwareInput = styled.input`
     border-color: ${props => (props.correct === false ? 'red' : '#f8f8f8t')};
     text-color: ${props => (props.correct === false ? 'red' : 'black')};

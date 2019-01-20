@@ -19,10 +19,10 @@ class Puzzle3 extends React.Component {
 
   handleClick(input) {
     return () => {
-      var temparray = this.state.combo;
+      var tempArray = this.state.combo;
       var flag = 'full';
-      for (var i = 0; i <= temparray.length; i++) {
-        if ( temparray[i] === '') {
+      for (var i = 0; i <= tempArray.length; i++) {
+        if ( tempArray[i] === '') {
           this.setState(state => {
             const combo = state.combo.slice();
             combo.splice(i, 1, input);
@@ -73,8 +73,6 @@ class Puzzle3 extends React.Component {
           <button id="keypad-0" className="keypad-image"onClick={this.handleClick(0)}>0</button>
           <button id="keypad-Enter" className="keypad-image" onClick={this.submitAnswer}>Enter</button>
         </div>
-        <br/>
-        <p>I am a place to add text ( {this.state.combo})</p>
       </div>
     );
   }
