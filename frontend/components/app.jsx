@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import io from 'socket.io-client';
@@ -66,7 +66,8 @@ class App extends React.Component {
     return (
       <div>
         <div id="puzzle-container">
-          <Route path="/home" render={() => <Home {...this.state} />}></Route>
+          <Route exact path="/" render={() => <Redirect to="/home" />} />
+          <Route path="/home" render={() => <Home {...this.state} />} />
           <Route path="/main" render={() => <Main {...this.state} />} />
           <Route path="/puzzle1" render={() => <Puzzle {...this.state} component={Puzzle1} />} />
           <Route path="/puzzle2" render={() => <Puzzle {...this.state} component={Puzzle2} />} />
