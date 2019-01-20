@@ -1,8 +1,9 @@
 import React from 'react';
+import styled from 'styled-components';
+import io from 'socket.io-client';
 import { Route, Redirect } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
-import io from 'socket.io-client';
 
 import Nav from './nav';
 
@@ -14,6 +15,12 @@ import Puzzle2 from './puzzle2';
 import Puzzle3 from './puzzle3';
 import Puzzle4 from './puzzle4';
 import Puzzle5 from './puzzle5';
+
+const AppContainer = styled.div`
+  max-width: 400px;
+  min-width: 400px;
+  text-align: center;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -64,8 +71,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <div id="puzzle-container">
+      <AppContainer>
+        <div>
           <Route exact path="/" render={() => <Redirect to="/home" />} />
           <Route path="/home" render={() => <Home {...this.state} />} />
           <Route path="/main" render={() => <Main {...this.state} />} />
@@ -84,7 +91,7 @@ class App extends React.Component {
           hideProgressBar
           closeOnClick
         />
-      </div>
+      </AppContainer>
     );
   }
 }

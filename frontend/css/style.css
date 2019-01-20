@@ -3,42 +3,6 @@
   font-weight: 300;
 }
 
-body {
-  padding-left: calc(50% - 190px);
-  padding-right: calc(50% - 190px);
-  display: block;
-  text-align: center;
-  text-align: -webkit-center;
-}
-
-/* startmenu */
-#table {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.table-number {
-  padding: 5px;
-  margin: 5px;
-  height: 100px;
-  width: 100px;
-  font-size: 30px;
-}
-
-/* lobby */
-.confirm-table-num {
-  margin: auto;
-  font-size: 150px;
-  color: #FFA000;
-}
-
-/* puzzle 1 */
-.caesar-cipher-code {
-  font-size: 50px;
-  color: #FFA000;
-}
-
 /* puzzle 4 */
 .image-keypad-container {
   display: flex;
@@ -53,13 +17,4 @@ body {
   height: 100px;
   width: 100px;
   font-size: 30px;
-  // re add this once I get rid of the default button css
-  // text-align: center;
-  // vertical-align: middle;
-  // line-height: 100px;
-}
-
-/* Testing */
-.green {
-  background-color: #baffc9;
 }

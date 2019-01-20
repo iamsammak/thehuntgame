@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Header = styled.div`
-  margin-top: 4em;
+  margin-top: 1em;
 `;
 
 const TitleContainer = styled.div`
