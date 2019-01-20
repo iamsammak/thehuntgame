@@ -71,14 +71,14 @@ class App extends React.Component {
           <Route exact path="/" render={() => <Redirect to="/home" />} />
           <Route path="/home" render={() => <Home {...this.state} />} />
           <Route path="/main" render={() => <Main {...this.state} />} />
-          <Route path="/person0" component={Person0} />
-          <Route path="/person1" component={Person1} />
-          <Route path="/person2" component={Person2} />
-          <Route path="/person3" component={Person3} />
-          <Route path="/person4" component={Person4} />
-          <Route path="/person5" component={Person5} />
-          <Route path="/person6" component={Person6} />
-          <Route path="/person7" component={Person7} />
+          <Route path="/person0" render={() => <Person0 {...this.state} />} />
+          <Route path="/person1" render={() => <Person1 {...this.state} />} />
+          <Route path="/person2" render={() => <Person2 {...this.state} />} />
+          <Route path="/person3" render={() => <Person3 {...this.state} />} />
+          <Route path="/person4" render={() => <Person4 {...this.state} />} />
+          <Route path="/person5" render={() => <Person5 {...this.state} />} />
+          <Route path="/person6" render={() => <Person6 {...this.state} />} />
+          <Route path="/person7" render={() => <Person7 {...this.state} />} />
         </div>
         <hr />
         <h5>Testing Below</h5>
