@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { green, red, xsSpacing } from '../constants';
+import { xsSpacing } from '../constants';
 import WelcomeHeader from './welcomeHeader';
 
 const tableSize = 300;
@@ -26,7 +25,7 @@ const Person = styled.img.attrs(props => ({
   height: ${lockSize}px;
   width: ${lockSize}px;
   border-radius: ${lockSize / 2}px;
-  transform: rotate(${props => props.rotate ? -props.rotate : 0}deg);
+  transform: rotate(${props => (props.rotate ? -props.rotate : 0)}deg);
 `;
 
 const MiddlePerson = styled(Person)`
@@ -66,8 +65,6 @@ const Line = styled.div`
 
 export default class Main extends React.Component {
   render() {
-    const { gameState } = this.props;
-
     const items = [
       { to: "/person1", key: 1, src: 'images/placeholder.jpg' },
       { to: "/person2", key: 2, src: 'images/placeholder.jpg' },
@@ -77,7 +74,7 @@ export default class Main extends React.Component {
       { to: "/person6", key: 6, src: 'images/placeholder.jpg' },
       { to: "/person7", key: 7, src: 'images/placeholder.jpg' },
     ];
-    const middlePerson = <MiddlePerson src='images/placeholder.jpg' />
+    const middlePerson = <MiddlePerson src='images/placeholder.jpg' />;
 
     return (
       <div>
