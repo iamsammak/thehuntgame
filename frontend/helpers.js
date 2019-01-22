@@ -15,5 +15,6 @@ export function getCurrentStage(gameState) {
     return 3;
   } else if (gameState[1] && gameState[1].solved) {
     return 2;
+  }
   return 1;
 }
