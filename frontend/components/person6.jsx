@@ -8,14 +8,14 @@ import Puzzle6 from './puzzle6';
 
 class Person6 extends React.Component {
   render() {
-    const { gameState } = this.props;
+    const { gameState, send } = this.props;
     const stage = getCurrentStage(gameState);
 
     let body = <EmptyBody />;
     if (stage === 5) {
       body = <Puzzle5Clue src="images/puzzle5_clue3.jpg" />;
     } else if (stage === 6) {
-      body = <Puzzle6 />;
+      body = <Puzzle6 send={send} />;
     }
 
     return (

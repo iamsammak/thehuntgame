@@ -22,92 +22,94 @@ const Cell = styled.div`
   width: 100px;
   display: flex;
   ${props => {
-    switch (props.move) {
-    case 'up':
+    switch (props.icon) {
+    case 'arrow-up':
+    case 'star':
       return 'align-items: flex-start; justify-content: center';
-    case 'down':
+    case 'arrow-down':
+    case 'gem':
       return 'align-items: flex-end; justify-content: center';
-    case 'left':
+    case 'arrow-left':
       return 'align-items: center; justify-content: flex-start;';
-    case 'right':
+    case 'arrow-right':
       return 'align-items: center; justify-content: flex-end;';
     }
   }}
 `;
 
 const Arrow = styled(FontAwesomeIcon).attrs(props => ({
-  icon: `arrow-${props.move}`,
+  icon: props.icon,
 }))`
   font-size: 32px;
-  cursor: pointer;
+  cursor: ${props => props.icon === 'star' ? 'auto' : 'pointer'};
 `;
 
 const maze = [
   [
-    { top: true, bottom: true, left: true, right: false, move: null },
-    { top: true, bottom: true, left: false, right: false, move: null },
-    { top: true, bottom: false, left: false, right: true, move: null },
-    { top: true, bottom: false, left: true, right: false, move: null },
-    { top: false, bottom: true, left: false, right: false, move: null },
-    { top: true, bottom: true, left: false, right: false, move: 'right' },
-    { top: true, bottom: true, left: false, right: false, move: 'left' },
-    { top: true, bottom: false, left: false, right: true, move: null },
-    { top: true, bottom: false, left: true, right: true, move: null },
+    { top: true, bottom: true, left: true, right: false, icon: null },
+    { top: true, bottom: true, left: false, right: false, icon: null },
+    { top: true, bottom: false, left: false, right: true, icon: null },
+    { top: true, bottom: false, left: true, right: false, icon: null },
+    { top: false, bottom: true, left: false, right: false, icon: 'star' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
+    { top: true, bottom: false, left: false, right: true, icon: null },
+    { top: true, bottom: false, left: true, right: true, icon: null },
   ],
   [
-    { top: true, bottom: false, left: true, right: false, move: null },
-    { top: true, bottom: false, left: false, right: true, move: null },
-    { top: false, bottom: true, left: true, right: false, move: 'right' },
-    { top: false, bottom: false, left: false, right: false, move: 'left' },
-    { top: true, bottom: false, left: false, right: true, move: null },
-    { top: true, bottom: false, left: true, right: false, move: 'right' },
-    { top: true, bottom: false, left: false, right: true, move: 'left' },
-    { top: false, bottom: true, left: true, right: false, move: null },
-    { top: false, bottom: false, left: false, right: true, move: null },
+    { top: true, bottom: false, left: true, right: false, icon: null },
+    { top: true, bottom: false, left: false, right: true, icon: null },
+    { top: false, bottom: true, left: true, right: false, icon: 'arrow-right' },
+    { top: false, bottom: false, left: false, right: false, icon: 'arrow-left' },
+    { top: true, bottom: false, left: false, right: true, icon: null },
+    { top: true, bottom: false, left: true, right: false, icon: 'arrow-right' },
+    { top: true, bottom: false, left: false, right: true, icon: 'arrow-left' },
+    { top: false, bottom: true, left: true, right: false, icon: null },
+    { top: false, bottom: false, left: false, right: true, icon: null },
   ],
   [
-    { top: false, bottom: false, left: true, right: true, move: 'down' },
-    { top: false, bottom: false, left: true, right: false, move: 'down' },
-    { top: true, bottom: true, left: false, right: true, move: null },
-    { top: false, bottom: true, left: true, right: true, move: null },
-    { top: false, bottom: true, left: true, right: false, move: null },
-    { top: false, bottom: true, left: false, right: true, move: null },
-    { top: false, bottom: true, left: true, right: false, move: null },
-    { top: true, bottom: false, left: false, right: true, move: 'down' },
-    { top: false, bottom: false, left: true, right: true, move: 'down' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
+    { top: false, bottom: false, left: true, right: false, icon: 'arrow-down' },
+    { top: true, bottom: true, left: false, right: true, icon: null },
+    { top: false, bottom: true, left: true, right: true, icon: null },
+    { top: false, bottom: true, left: true, right: false, icon: null },
+    { top: false, bottom: true, left: false, right: true, icon: null },
+    { top: false, bottom: true, left: true, right: false, icon: null },
+    { top: true, bottom: false, left: false, right: true, icon: 'arrow-down' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
   ],
   [
-    { top: false, bottom: false, left: true, right: true, move: 'up' },
-    { top: false, bottom: true, left: true, right: false, move: 'up' },
-    { top: true, bottom: true, left: false, right: false, move: 'right' },
-    { top: true, bottom: true, left: false, right: false, move: 'left' },
-    { top: true, bottom: false, left: false, right: false, move: null },
-    { top: true, bottom: true, left: false, right: false, move: 'right' },
-    { top: true, bottom: false, left: false, right: false, move: 'left' },
-    { top: false, bottom: true, left: false, right: true, move: 'up' },
-    { top: false, bottom: false, left: true, right: true, move: 'up' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-up' },
+    { top: false, bottom: true, left: true, right: false, icon: 'arrow-up' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
+    { top: true, bottom: false, left: false, right: false, icon: null },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
+    { top: true, bottom: false, left: false, right: false, icon: 'arrow-left' },
+    { top: false, bottom: true, left: false, right: true, icon: 'arrow-up' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-up' },
   ],
   [
-    { top: false, bottom: false, left: true, right: false, move: null },
-    { top: true, bottom: false, left: false, right: true, move: null },
-    { top: true, bottom: false, left: true, right: false, move: 'right' },
-    { top: true, bottom: false, left: false, right: true, move: 'left' },
-    { top: false, bottom: true, left: true, right: true, move: null },
-    { top: true, bottom: true, left: true, right: false, move: 'right' },
-    { top: false, bottom: true, left: false, right: true, move: 'left' },
-    { top: true, bottom: true, left: true, right: false, move: null },
-    { top: false, bottom: false, left: false, right: true, move: null },
+    { top: false, bottom: false, left: true, right: false, icon: null },
+    { top: true, bottom: false, left: false, right: true, icon: null },
+    { top: true, bottom: false, left: true, right: false, icon: 'arrow-right' },
+    { top: true, bottom: false, left: false, right: true, icon: 'arrow-left' },
+    { top: false, bottom: true, left: true, right: true, icon: null },
+    { top: true, bottom: true, left: true, right: false, icon: 'arrow-right' },
+    { top: false, bottom: true, left: false, right: true, icon: 'arrow-left' },
+    { top: true, bottom: true, left: true, right: false, icon: null },
+    { top: false, bottom: false, left: false, right: true, icon: null },
   ],
   [
-    { top: false, bottom: true, left: true, right: true, move: null },
-    { top: false, bottom: true, left: true, right: false, move: null },
-    { top: false, bottom: true, left: false, right: true, move: null },
-    { top: false, bottom: true, left: true, right: false, move: null },
-    { top: true, bottom: false, left: false, right: true, move: null },
-    { top: true, bottom: true, left: true, right: false, move: 'right' },
-    { top: true, bottom: true, left: false, right: false, move: 'left' },
-    { top: true, bottom: true, left: false, right: false, move: null },
-    { top: false, bottom: true, left: false, right: true, move: null },
+    { top: false, bottom: true, left: true, right: true, icon: null },
+    { top: false, bottom: true, left: true, right: false, icon: null },
+    { top: false, bottom: true, left: false, right: true, icon: null },
+    { top: false, bottom: true, left: true, right: false, icon: null },
+    { top: true, bottom: false, left: false, right: true, icon: 'gem' },
+    { top: true, bottom: true, left: true, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
+    { top: true, bottom: true, left: false, right: false, icon: null },
+    { top: false, bottom: true, left: false, right: true, icon: null },
   ],
 ];
 
@@ -115,7 +117,7 @@ class Puzzle6 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      position: [0, 0],
+      position: [0, 4],
     };
 
     this.move = this.move.bind(this);
@@ -123,6 +125,7 @@ class Puzzle6 extends React.Component {
     this.calculateAdjacent = this.calculateAdjacent.bind(this);
     this.adjacentKey = this.adjacentKey.bind(this);
     this.isAdjacent = this.isAdjacent.bind(this);
+    this.finishPuzzle = this.finishPuzzle.bind(this);
   }
 
   move(x, y) {
@@ -137,23 +140,33 @@ class Puzzle6 extends React.Component {
     return adjacentCells[this.adjacentKey(x1, y1)].includes(this.adjacentKey(x2, y2));
   }
 
+  finishPuzzle() {
+    const { send } = this.props;
+    send('submit', { puzzle: '6', answer: '' });
+  }
+
   renderCell(x, y, adjacent) {
     const options = maze[x][y];
     const onClick = () => {
-      switch (options.move) {
-      case 'up':
+      switch (options.icon) {
+      case 'arrow-up':
         this.move(x - 1, y); break;
-      case 'down':
+      case 'arrow-down':
         this.move(x + 1, y); break;
-      case 'left':
+      case 'arrow-left':
         this.move(x, y - 1); break;
-      case 'right':
+      case 'arrow-right':
         this.move(x, y + 1); break;
+      case 'gem':
+        if (adjacent) {
+          this.finishPuzzle();
+        }
       }
     };
+    const showIcon = adjacent || ['star', 'gem'].includes(options.icon);
     return (
       <Cell {...options}>
-        { options.move && adjacent && <Arrow move={options.move} onClick={onClick} /> }
+        { options.icon && showIcon && <Arrow icon={options.icon} onClick={onClick} /> }
       </Cell>
     );
   }
