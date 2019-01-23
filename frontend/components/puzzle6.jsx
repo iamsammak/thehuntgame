@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const border = '2px solid black';
+const START_ICON = 'star';
+const END_ICON = 'gem';
 
 const Container = styled.div`
 `;
@@ -24,10 +26,10 @@ const Cell = styled.div`
   ${props => {
     switch (props.icon) {
     case 'arrow-up':
-    case 'star':
+    case START_ICON:
       return 'align-items: flex-start; justify-content: center';
     case 'arrow-down':
-    case 'gem':
+    case END_ICON:
       return 'align-items: flex-end; justify-content: center';
     case 'arrow-left':
       return 'align-items: center; justify-content: flex-start;';
@@ -41,7 +43,7 @@ const Arrow = styled(FontAwesomeIcon).attrs(props => ({
   icon: props.icon,
 }))`
   font-size: 32px;
-  cursor: ${props => props.icon === 'star' ? 'auto' : 'pointer'};
+  cursor: ${props => props.icon === START_ICON ? 'auto' : 'pointer'};
 `;
 
 const maze = [
@@ -50,7 +52,7 @@ const maze = [
     { top: true, bottom: true, left: false, right: false, icon: null },
     { top: true, bottom: false, left: false, right: true, icon: null },
     { top: true, bottom: false, left: true, right: false, icon: null },
-    { top: false, bottom: true, left: false, right: false, icon: 'star' },
+    { top: false, bottom: true, left: false, right: false, icon: START_ICON },
     { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
     { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
     { top: true, bottom: false, left: false, right: true, icon: null },
@@ -105,7 +107,7 @@ const maze = [
     { top: false, bottom: true, left: true, right: false, icon: null },
     { top: false, bottom: true, left: false, right: true, icon: null },
     { top: false, bottom: true, left: true, right: false, icon: null },
-    { top: true, bottom: false, left: false, right: true, icon: 'gem' },
+    { top: true, bottom: false, left: false, right: true, icon: END_ICON },
     { top: true, bottom: true, left: true, right: false, icon: 'arrow-right' },
     { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
     { top: true, bottom: true, left: false, right: false, icon: null },
@@ -157,13 +159,13 @@ class Puzzle6 extends React.Component {
         this.move(x, y - 1); break;
       case 'arrow-right':
         this.move(x, y + 1); break;
-      case 'gem':
+      case END_ICON:
         if (adjacent) {
           this.finishPuzzle();
         }
       }
     };
-    const showIcon = adjacent || ['star', 'gem'].includes(options.icon);
+    const showIcon = adjacent || [START_ICON, END_ICON].includes(options.icon);
     return (
       <Cell {...options}>
         { options.icon && showIcon && <Arrow icon={options.icon} onClick={onClick} /> }
