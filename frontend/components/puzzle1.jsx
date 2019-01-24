@@ -37,8 +37,8 @@ class Puzzle1 extends React.Component {
     return (
       <div>
         <PuzzleHeader title="Puzzle One" />
-        <div id="cipher-container">
-          { cipher }
+        <div>
+          {cipher}
         </div>
         <p>
           <AnswerAwareInput
