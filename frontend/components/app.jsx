@@ -8,12 +8,14 @@ import Nav from './nav';
 
 import Home from './home';
 import Main from './main';
-import Puzzle from './puzzle';
-import Puzzle1 from './puzzle1';
-import Puzzle2 from './puzzle2';
-import Puzzle3 from './puzzle3';
-import Puzzle4 from './puzzle4';
-import Puzzle5 from './puzzle5';
+import Person0 from './person0';
+import Person1 from './person1';
+import Person2 from './person2';
+import Person3 from './person3';
+import Person4 from './person4';
+import Person5 from './person5';
+import Person6 from './person6';
+import Person7 from './person7';
 
 class App extends React.Component {
   constructor(props) {
@@ -69,11 +71,14 @@ class App extends React.Component {
           <Route exact path="/" render={() => <Redirect to="/home" />} />
           <Route path="/home" render={() => <Home {...this.state} />} />
           <Route path="/main" render={() => <Main {...this.state} />} />
-          <Route path="/puzzle1" render={() => <Puzzle {...this.state} component={Puzzle1} />} />
-          <Route path="/puzzle2" render={() => <Puzzle {...this.state} component={Puzzle2} />} />
-          <Route path="/puzzle3" render={() => <Puzzle {...this.state} component={Puzzle3} />} />
-          <Route path="/puzzle4" render={() => <Puzzle {...this.state} component={Puzzle4} />} />
-          <Route path="/puzzle5" render={() => <Puzzle {...this.state} component={Puzzle5} />} />
+          <Route path="/person0" render={() => <Person0 {...this.state} />} />
+          <Route path="/person1" render={() => <Person1 {...this.state} />} />
+          <Route path="/person2" render={() => <Person2 {...this.state} />} />
+          <Route path="/person3" render={() => <Person3 {...this.state} />} />
+          <Route path="/person4" render={() => <Person4 {...this.state} />} />
+          <Route path="/person5" render={() => <Person5 {...this.state} />} />
+          <Route path="/person6" render={() => <Person6 {...this.state} />} />
+          <Route path="/person7" render={() => <Person7 {...this.state} />} />
         </div>
         <hr />
         <h5>Testing Below</h5>

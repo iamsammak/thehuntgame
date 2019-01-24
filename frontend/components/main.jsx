@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { green, red, xsSpacing } from '../constants';
+import { xsSpacing } from '../constants';
 import WelcomeHeader from './welcomeHeader';
 
-const tableSize = 200;
-const lockSize = 20;
-const middleLockSize = 30;
+const tableSize = 300;
+const lockSize = 40;
+const middleLockSize = 60;
 
 const Table = styled.div`
   position: relative;
@@ -16,30 +15,29 @@ const Table = styled.div`
   height: ${tableSize}px;
 `;
 
-const LockContainer = styled.div`
+const PersonContainer = styled.div`
   padding: ${xsSpacing}px;
 `;
 
-const Lock = styled(FontAwesomeIcon).attrs(props => ({
-  icon: props.open ? 'unlock' : 'lock',
+const Person = styled.img.attrs(props => ({
+  src: props.src,
 }))`
-  font-size: ${lockSize}px;
-  transform: rotate(${props => -props.rotate}deg);
-  color: ${props => (props.open ? green : red)};
+  height: ${lockSize}px;
+  width: ${lockSize}px;
+  border-radius: ${lockSize / 2}px;
+  transform: rotate(${props => (props.rotate ? -props.rotate : 0)}deg);
 `;
 
-const MiddleLock = styled(FontAwesomeIcon).attrs(props => ({
-  icon: props.open ? 'unlock' : 'lock',
-}))`
-  font-size: ${middleLockSize}px;
-  color: ${red};
+const MiddlePerson = styled(Person)`
+  height: ${middleLockSize}px;
+  width: ${middleLockSize}px;
+  border-radius: ${middleLockSize / 2}px;
 `;
 
 const MiddleLink = styled(Link)`
   position: absolute;
   top: ${(tableSize / 2) - (middleLockSize / 2) - (xsSpacing / 2)}px;
   left: ${(tableSize / 2) - (middleLockSize / 2) - (xsSpacing / 2)}px;
-  pointer-events: ${props => (props.allOpened ? 'auto' : 'none')};
 `;
 
 const Container = styled.div`
@@ -60,29 +58,23 @@ const Content = styled.div`
 `;
 
 const Line = styled.div`
-  border: 1px solid ${props => (props.open ? green : red)};
+  border: 1px solid black;
   width: ${(tableSize / 2) - lockSize - (xsSpacing * 2) - (middleLockSize / 2) - (xsSpacing * 2)}px;
   pointer-events: none;
 `;
 
 export default class Main extends React.Component {
   render() {
-    const { gameState } = this.props;
-
     const items = [
-      { to: "/puzzle1", key: 1, open: gameState[1] && gameState[1].solved },
-      { to: "/puzzle2", key: 2, open: gameState[2] && gameState[2].solved },
-      { to: "/puzzle3", key: 3, open: gameState[3] && gameState[3].solved },
-      { to: "/puzzle4", key: 4, open: gameState[4] && gameState[4].solved },
-      { to: "/puzzle5", key: 5, open: gameState[5] && gameState[5].solved },
-      { to: "/puzzle6", key: 6, open: gameState[6] && gameState[6].solved },
-      { to: "/puzzle7", key: 7, open: gameState[7] && gameState[7].solved },
-      { to: "/puzzle8", key: 8, open: gameState[8] && gameState[8].solved },
-      { to: "/puzzle9", key: 9, open: gameState[9] && gameState[9].solved },
-      { to: "/puzzle10", key: 10, open: gameState[10] && gameState[10].solved },
+      { to: "/person1", key: 1, src: 'images/placeholder.jpg' },
+      { to: "/person2", key: 2, src: 'images/placeholder.jpg' },
+      { to: "/person3", key: 3, src: 'images/placeholder.jpg' },
+      { to: "/person4", key: 4, src: 'images/placeholder.jpg' },
+      { to: "/person5", key: 5, src: 'images/placeholder.jpg' },
+      { to: "/person6", key: 6, src: 'images/placeholder.jpg' },
+      { to: "/person7", key: 7, src: 'images/placeholder.jpg' },
     ];
-
-    const allOpened = items.every(i => i.open);
+    const middlePerson = <MiddlePerson src='images/placeholder.jpg' />;
 
     return (
       <div>
@@ -94,21 +86,21 @@ export default class Main extends React.Component {
               return (
                 <Container key={item.key} rotation={rotation}>
                   <Content>
-                    <Line open={item.open} />
+                    <Line />
                     <Link to={item.to}>
-                      <LockContainer>
-                        <Lock open={item.open} rotate={rotation} />
-                      </LockContainer>
+                      <PersonContainer>
+                        <Person src={item.src} rotate={rotation} />
+                      </PersonContainer>
                     </Link>
                   </Content>
                 </Container>
               );
             })
           }
-          <MiddleLink to={"/main"} allOpened={allOpened}>
-            <LockContainer>
-              <MiddleLock />
-            </LockContainer>
+          <MiddleLink to={"/person0"}>
+            <PersonContainer>
+              {middlePerson}
+            </PersonContainer>
           </MiddleLink>
         </Table>
       </div>
