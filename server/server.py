@@ -32,8 +32,10 @@ ANSWERS = {
 PUZZLE5_CHOICES = ['poo', 'glass-cheers', 'angry', 'horse', 'anchor', 'carrot', 'cloud-rain', 'glasses', 'seedling', 'chess-pawn', 'cookie-bite', 'gas-pump', 'infinity', 'ghost', 'dice-five', 'gem', 'puzzle-piece', 'toilet', 'pencil-alt', 'moon']
 PUZZLE5_COLORS = [ '#000000', '#009933', '#ff4d4d', '#bb54c9']
 
-def send_game_state(table):
-  sio.emit('game_state_update', GAME_STATE[table], room=table)
+def send_game_state(table=None, sid=None):
+  if sid:
+    table = CLIENTS[sid]
+  sio.emit('game_state_update', GAME_STATE[table], room=(sid or table))
 
 ### Only for development use ###
 @flask_app.route('/')
@@ -88,7 +90,7 @@ def join(sid, data):
   else:
     # this is the first person to join this table
     GAME_STATE[table] = INITIAL_GAME_STATE_FOR_TABLE.copy()
-  send_game_state(sid)
+  send_game_state(sid=sid)
   print GAME_STATE
 
 @sio.on('submit')
@@ -101,7 +103,7 @@ def submit(sid, data):
   if correct:
     table = CLIENTS[sid]
     GAME_STATE[table][int(puzzle)]['solved'] = True
-    send_game_state(table)
+    send_game_state(table=table)
 
   response = {
     'correct': correct,
@@ -151,7 +153,7 @@ def puzzle5_join(sid, data):
       # Claim the index by setting it in segments
       segments[sid] = index
   sio.emit('puzzle5_join_response', { 'index': index }, room=sid)
-  send_game_state(table)
+  send_game_state(table=table)
 
 @sio.on('puzzle5_toggle')
 def puzzle5_toggle(sid, data):
@@ -164,7 +166,7 @@ def puzzle5_toggle(sid, data):
     if current_color in PUZZLE5_COLORS:
       new_color = PUZZLE5_COLORS[(PUZZLE5_COLORS.index(current_color) + 1) % len(PUZZLE5_COLORS)]
       puzzle5['switches'][index][1] = new_color
-      send_game_state(table)
+      send_game_state(table=table)
     else:
       pass
       # TODO: wat.
