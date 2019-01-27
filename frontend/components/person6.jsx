@@ -16,6 +16,8 @@ class Person6 extends React.Component {
       body = <Puzzle5Clue src="images/puzzle5_clue3.jpg" />;
     } else if (stage === 6) {
       body = <Puzzle6 send={send} />;
+    } else if (stage === 7) {
+      body = <EmptyBody />;
     }
 
     return (
