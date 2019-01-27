@@ -7,7 +7,7 @@ class Puzzle5 extends React.Component {
   render() {
     return (
       <div>
-        <Puzzle5Clue src="images/puzzle5_clue1.jpg" />
+        <Puzzle5Clue clue="clue0" />
         <Submit {...this.props} />
       </div>
     );

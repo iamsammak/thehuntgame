@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Text } from '../wrappers';
 
 const Clue = styled.img.attrs(props => ({
   src: props.src,
@@ -10,10 +9,25 @@ const Clue = styled.img.attrs(props => ({
 
 class Puzzle5Clue extends React.Component {
   render() {
-    const { src } = this.props;
+    const { clue } = this.props;
+
+    let src = "";
+    switch (clue) {
+    case "clue0":
+      src = "images/puzzle5_clue1.jpg"; break;
+    case "clue1":
+      src = "images/puzzle5_clue2.jpg"; break;
+    case "clue2":
+      src = "images/puzzle5_clue3.jpg"; break;
+    case "clue3":
+      src = "images/puzzle5_clue4.jpg"; break;
+    case "clue4":
+      src = "images/puzzle5_clue5.jpg"; break;
+    }
+
     return (
       <div>
-        <Text>I found this piece of paper earlier. It looks like there are other parts to it. Do you know what it means?</Text>
+        I found this piece of paper earlier. It looks like there are other parts to it. Do you know what it means?
         <Clue src={src} />
       </div>
     );

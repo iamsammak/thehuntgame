@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Text } from '../wrappers';
-
 class Puzzle7Clue extends React.Component {
   render() {
     const { clue } = this.props;
@@ -22,7 +20,7 @@ class Puzzle7Clue extends React.Component {
 
     return (
       <div>
-        <Text>{clueText}</Text>
+        {clueText}
       </div>
     );
   }

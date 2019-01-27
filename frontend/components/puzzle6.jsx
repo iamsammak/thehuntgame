@@ -43,7 +43,7 @@ const Arrow = styled(FontAwesomeIcon).attrs(props => ({
   icon: props.icon,
 }))`
   font-size: 32px;
-  cursor: ${props => props.icon === START_ICON ? 'auto' : 'pointer'};
+  cursor: ${props => (props.icon === START_ICON ? 'auto' : 'pointer')};
 `;
 
 const maze = [

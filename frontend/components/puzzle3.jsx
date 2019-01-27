@@ -1,6 +1,7 @@
 import React from 'react';
-import PuzzleHeader from './puzzleHeader';
+
 import { AnswerAwareDiv } from './puzzle.jsx';
+import { KeypadContainer, Button } from './buttonContants';
 
 // Answer: [5,4,3,2,1]
 
@@ -55,7 +56,6 @@ class Puzzle3 extends React.Component {
     const { combo } = this.state;
     return (
       <div>
-        <PuzzleHeader title="Puzzle Three" />
         <div className="riddle">
           <p>Some riddle pertaining to the pictures below</p>
           <p>make the correct selections are you&apos;ll best this foe</p>
@@ -71,20 +71,20 @@ class Puzzle3 extends React.Component {
             })
           }
         </div>
-        <div className="image-keypad-container">
-          <button id="keypad-1" className="keypad-image" onClick={this.handleClick(1)}>1</button>
-          <button id="keypad-2" className="keypad-image" onClick={this.handleClick(2)}>2</button>
-          <button id="keypad-3" className="keypad-image" onClick={this.handleClick(3)}>3</button>
-          <button id="keypad-4" className="keypad-image" onClick={this.handleClick(4)}>4</button>
-          <button id="keypad-5" className="keypad-image" onClick={this.handleClick(5)}>5</button>
-          <button id="keypad-6" className="keypad-image" onClick={this.handleClick(6)}>6</button>
-          <button id="keypad-7" className="keypad-image" onClick={this.handleClick(7)}>7</button>
-          <button id="keypad-8" className="keypad-image" onClick={this.handleClick(8)}>8</button>
-          <button id="keypad-9" className="keypad-image" onClick={this.handleClick(9)}>9</button>
-          <button id="keypad-Clear" className="keypad-image"onClick={this.handleClear}>clear</button>
-          <button id="keypad-0" className="keypad-image"onClick={this.handleClick(0)}>0</button>
-          <button id="keypad-Enter" className="keypad-image" onClick={this.submitAnswer}>Enter</button>
-        </div>
+        <KeypadContainer>
+          <Button onClick={this.handleClick(1)}>1</Button>
+          <Button onClick={this.handleClick(2)}>2</Button>
+          <Button onClick={this.handleClick(3)}>3</Button>
+          <Button onClick={this.handleClick(4)}>4</Button>
+          <Button onClick={this.handleClick(5)}>5</Button>
+          <Button onClick={this.handleClick(6)}>6</Button>
+          <Button onClick={this.handleClick(7)}>7</Button>
+          <Button onClick={this.handleClick(8)}>8</Button>
+          <Button onClick={this.handleClick(9)}>9</Button>
+          <Button onClick={this.handleClear}>clear</Button>
+          <Button onClick={this.handleClick(0)}>0</Button>
+          <Button onClick={this.submitAnswer}>Enter</Button>
+        </KeypadContainer>
       </div>
     );
   }

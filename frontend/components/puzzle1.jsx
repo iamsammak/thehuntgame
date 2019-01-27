@@ -1,7 +1,6 @@
 import React from 'react';
-import { AnswerAwareInput } from './puzzle.jsx';
 
-import PuzzleHeader from './puzzleHeader';
+import { AnswerAwareInput } from './puzzle.jsx';
 
 // Answer: getaway (caesar ciphered)
 class Puzzle1 extends React.Component {
@@ -23,6 +22,7 @@ class Puzzle1 extends React.Component {
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
+
   submitAnswer() {
     var userinput = this.state.value.toLowerCase();
     this.props.send('submit', { puzzle: '1', answer: userinput });
@@ -31,12 +31,12 @@ class Puzzle1 extends React.Component {
   cipherPing() {
     this.props.send('cipher_ping', {});
   }
+
   render() {
     const { value, cipher } = this.state;
     const { correct } = this.props;
     return (
       <div>
-        <PuzzleHeader title="Puzzle One" />
         <div>
           {cipher}
         </div>

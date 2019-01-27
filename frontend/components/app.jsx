@@ -1,11 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import io from 'socket.io-client';
 import { Route, Redirect } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
-
-import Nav from './nav';
 
 import Home from './home';
 import Main from './main';
@@ -17,6 +15,13 @@ import Person4 from './person4';
 import Person5 from './person5';
 import Person6 from './person6';
 import Person7 from './person7';
+
+const GlobalStyles = createGlobalStyle`
+  * {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 300;
+  }
+`;
 
 const AppContainer = styled.div`
   max-width: 400px;
@@ -74,6 +79,7 @@ class App extends React.Component {
   render() {
     return (
       <AppContainer>
+        <GlobalStyles />
         <div>
           <Route exact path="/" render={() => <Redirect to="/home" />} />
           <Route path="/home" render={() => <Home {...this.state} />} />
@@ -87,9 +93,6 @@ class App extends React.Component {
           <Route path="/person6" render={() => <Person6 {...this.state} />} />
           <Route path="/person7" render={() => <Person7 {...this.state} />} />
         </div>
-        <hr />
-        <h5>Testing Below</h5>
-        <Nav />
         <ToastContainer
           position={toast.POSITION.TOP_RIGHT}
           autoClose={2000}
