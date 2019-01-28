@@ -3,6 +3,7 @@ import React from 'react';
 import { getCurrentStage } from '../helpers';
 import EmptyBody from './emptyBody';
 import PersonHeader from './personHeader';
+import Puzzle7Clue from './puzzle7Clue';
 
 class Person4 extends React.Component {
   render() {
@@ -12,6 +13,8 @@ class Person4 extends React.Component {
     let body = <EmptyBody />;
     if (stage === 5) {
       body = <EmptyBody />;
+    } else if (stage === 7) {
+      body = <Puzzle7Clue clue="clue3" />;
     }
 
     return (

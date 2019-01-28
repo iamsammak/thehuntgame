@@ -32,7 +32,7 @@ ANSWERS = {
   4: [False, False, True, True, False, False, False, False, True],
   5: '',
   6: '',
-  7: '',
+  7: [False, True, True, False, False, True, True, False, False, True],
   8: '',
 }
 

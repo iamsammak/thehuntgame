@@ -7,6 +7,7 @@ const flipperBottomShadow = 'rgba(0, 0, 0, 0.5)';
 const switchContainerColor = 'rgba(200, 200, 200, 0.9)';
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -14,6 +15,14 @@ const Container = styled.div`
   height: 90px;
   width: 50px;
   border: 2px solid ${switchContainerColor};
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.05);
+  pointer-events: none;
 `;
 
 const Screw = styled.div`
@@ -32,15 +41,15 @@ const FlipperContainer = styled.div`
 
 const FlipperShadow = styled.div`
   position: absolute;
-  ${props => (props.on ? 'top: 0;' : 'bottom: 0;')}
+  ${props => (props.on ? 'bottom: 0;' : 'top: 0;')}
   background-color: ${flipperShadow};
-  height: ${props => (props.on ? 1 : 2)}px;
+  height: ${props => (props.on ? 2 : 1)}px;
   width: 100%;
 `;
 
 const FlipperTop = styled.div`
   box-sizing: border-box;
-  background-color: ${props => (props.on ? flipperAccent : 'white')};
+  background-color: ${props => (props.on ? 'white' : flipperAccent)};
   height: 20px;
   width: 100%;
 `;
@@ -49,12 +58,12 @@ const FlipperBottom = styled.div`
   box-sizing: border-box;
   height: 20px;
   width: 100%;
-  background-color: ${props => (props.on ? 'white' : flipperAccent)};
+  background-color: ${props => (props.on ? flipperAccent : 'white')};
 `;
 
 const BottomFlipperShadow = styled.div`
   position: absolute;
-  z-index: 1;
+  z-index: -1;
   transform: rotate(5deg) scale(0.9365) skew(10deg) translateX(1px) translateY(2px);
   bottom: 0;
   height: 20px;
@@ -63,31 +72,20 @@ const BottomFlipperShadow = styled.div`
 `;
 
 class Switch extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      on: true,
-    };
-    this.toggleSwitch = this.toggleSwitch.bind(this);
-  }
-
-  toggleSwitch() {
-    this.setState(state => { return { on: !state.on }; });
-  }
-
   render() {
-    const { on } = this.state;
+    const { on, onToggleSwitch } = this.props;
 
     return (
       <Container>
         <Screw />
         <FlipperContainer>
           <FlipperShadow on={on} />
-          <FlipperTop on={on} onClick={this.toggleSwitch} />
-          <FlipperBottom on={on} onClick={this.toggleSwitch} />
-          {!on && <BottomFlipperShadow />}
+          <FlipperTop on={on} onClick={onToggleSwitch} />
+          <FlipperBottom on={on} onClick={onToggleSwitch} />
+          {on && <BottomFlipperShadow />}
         </FlipperContainer>
         <Screw />
+        {!on && <Overlay />}
       </Container>
     );
   }
