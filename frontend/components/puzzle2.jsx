@@ -1,6 +1,7 @@
 import React from 'react';
+
 import { AnswerAwareInput } from './puzzle.jsx';
-import PuzzleHeader from './puzzleHeader';
+
 // Answer: See o double yo
 
 class Puzzle2 extends React.Component {
@@ -21,13 +22,11 @@ class Puzzle2 extends React.Component {
     this.setState({ value: event.target.value });
   }
 
-
   render() {
     const { value } = this.state;
     const { correct } = this.props;
     return (
       <div>
-        <PuzzleHeader title="Puzzle Two" />
         <p>Can you write cow in 13 letters?</p>
         <p>
           <AnswerAwareInput

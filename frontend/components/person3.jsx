@@ -13,7 +13,7 @@ class Person3 extends React.Component {
 
     let body = <EmptyBody />;
     if (stage === 5) {
-      body = <Puzzle5Clue src="images/puzzle5_clue4.jpg" />;
+      body = <Puzzle5Clue clue="clue3" />;
     } else if (stage === 7) {
       body = <Puzzle7Clue clue="clue2" />;
     }
