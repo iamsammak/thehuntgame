@@ -8,15 +8,13 @@ class Person0 extends React.Component {
   render() {
     const { gameState } = this.props;
     const stage = getCurrentStage(gameState);
+    const name = 'Person0';
 
-    let body = <EmptyBody />;
-    if (stage === 5) {
-      body = <EmptyBody />;
-    }
+    let body = <EmptyBody name={name} />;
 
     return (
       <div>
-        <PersonHeader name="Person0" src="images/placeholder.jpg" />
+        <PersonHeader name={name} />
         {body}
       </div>
     );

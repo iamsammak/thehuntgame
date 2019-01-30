@@ -11,8 +11,9 @@ class Person5 extends React.Component {
   render() {
     const { gameState } = this.props;
     const stage = getCurrentStage(gameState);
+    const name = 'Person5';
 
-    let body = <EmptyBody />;
+    let body = <EmptyBody name={name} />;
     if (stage === 5) {
       body = <Puzzle {...this.props} component={Puzzle5} />;
     } else if (stage === 7) {
@@ -21,7 +22,7 @@ class Person5 extends React.Component {
 
     return (
       <div>
-        <PersonHeader name="Person5" src="images/placeholder.jpg" />
+        <PersonHeader name={name} />
         {body}
       </div>
     );

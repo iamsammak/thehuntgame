@@ -10,19 +10,18 @@ class Person6 extends React.Component {
   render() {
     const { gameState, send } = this.props;
     const stage = getCurrentStage(gameState);
+    const name = 'Person6';
 
-    let body = <EmptyBody />;
+    let body = <EmptyBody name={name} />;
     if (stage === 5) {
       body = <Puzzle5Clue clue="clue2" />;
     } else if (stage === 6) {
       body = <Puzzle6 send={send} />;
-    } else if (stage === 7) {
-      body = <EmptyBody />;
     }
 
     return (
       <div>
-        <PersonHeader name="Person6" src="images/placeholder.jpg" />
+        <PersonHeader name={name} />
         {body}
       </div>
     );
