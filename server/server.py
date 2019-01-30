@@ -102,15 +102,15 @@ def submit(sid, data):
   # TODO: error gracefully if no puzzle or answer
   correct = answer == ANSWERS.get(int(puzzle))
 
-  if correct:
-    table = CLIENTS[sid]
-    GAME_STATE[table][int(puzzle)]['solved'] = True
-    send_game_state(table=table)
-
   response = {
     'correct': correct,
   }
   sio.emit('submit_response', response, room=sid)
+
+  if correct:
+    table = CLIENTS[sid]
+    GAME_STATE[table][int(puzzle)]['solved'] = True
+    send_game_state(table=table)
 
 @sio.on('disconnect')
 def disconnect(sid):
