@@ -17,6 +17,16 @@ export const Button = styled.button`
   background-color: ${props => (props.click ? '#1995AD' : '#A1D6E2')};
 `;
 
+export const SubmitButton = styled(Button)`
+  width: 150px;
+  background-color: ${props => (props.click ? '#9d0e3d' : '#ff654d')};
+`
+
+export const ClearButton = styled(Button)`
+  width: 150px;
+  background-color: #d2a494;
+`
+
 export class ButtonContainer extends React.Component {
   constructor(props) {
     super(props);
