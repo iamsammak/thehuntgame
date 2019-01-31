@@ -35,6 +35,7 @@
     "globals": {
         "document": false,
         "setTimeout": false,
+        "setInterval": false,
         "SOCKET_URL": false
     }
 }

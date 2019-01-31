@@ -78,7 +78,7 @@ export default class Main extends React.Component {
 
     return (
       <div>
-        <WelcomeHeader />
+        <WelcomeHeader {...this.props} />
         <Table>
           {
             items.map((item, index) => {
