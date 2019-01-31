@@ -2,8 +2,11 @@ import React from 'react';
 
 import PuzzleHeader from './puzzleHeader';
 
-import {
-  KeypadContainer, Button } from './buttonContants';
+import { KeypadContainer, Button,
+  SubmitButton, ClearButton } from './buttonContants';
+import { getCurrentStage } from '../helpers';
+
+// Answer 3, 4, 9
 
 class Puzzle4 extends React.Component {
   constructor(props) {
@@ -14,6 +17,7 @@ class Puzzle4 extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.clearValue = this.clearValue.bind(this);
+    this.submitAnswer = this.submitAnswer.bind(this);
   }
 
   handleClick(idx) {
@@ -22,8 +26,6 @@ class Puzzle4 extends React.Component {
         let value = state.value;
         value[idx] = !value[idx];
         return ({ value : value });
-      }, () => {
-        this.props.send('submit', { puzzle: '4', answer: this.state.value });
       });
     };
   }
@@ -34,16 +36,27 @@ class Puzzle4 extends React.Component {
     });
   }
 
+  submitAnswer() {
+    const answer = this.state.value;
+    const gameState = this.props.gameState;
+    const stage = getCurrentStage(gameState);
+
+    if (stage === 4) {
+      this.props.send('submit', { puzzle: '4', answer: answer });
+    }
+
+    this.clearValue();
+  }
+
 
   render() {
-    let name = "Sam";
 
     return (
       <div>
         <PuzzleHeader title="Puzzle Four" />
         <div className="riddle">
           <p>Some riddle pertaining to the pictures below</p>
-          <p>make the correct selections are you&apos;ll best this foe</p>
+          <p>make the correct selections and you&apos;ll best this foe</p>
         </div>
         <br/>
         <KeypadContainer>
@@ -58,7 +71,8 @@ class Puzzle4 extends React.Component {
           <Button click={this.state.value[7]} onClick={this.handleClick(7)} >8</Button>
           <Button click={this.state.value[8]} onClick={this.handleClick(8)} >9</Button>
 
-          <Button onClick={this.clearValue} >Clear</Button>
+          <ClearButton onClick={this.clearValue} >Clear</ClearButton>
+          <SubmitButton onClick={this.submitAnswer} >Enter</SubmitButton>
         </KeypadContainer>
       </div>
     );
