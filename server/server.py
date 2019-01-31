@@ -80,6 +80,21 @@ def admin():
 def connect(sid, environ):
   print("connect ", sid)
 
+@sio.on('admin_ping')
+def adminconnect(sid, environ):
+  print('admin_ping was triggered')
+  tabledata = {}
+  print(tabledata)
+  for client in CLIENTS:
+    tablenumber = CLIENTS[client]
+    if CLIENTS[client] not in tabledata:
+      tabledata[tablenumber] = [[GAME_STATE[tablenumber],[client]]]
+    else:
+      tabledata[tablenumber][0][1].append(client)
+#  gamedata = {'game_sate': GAME_STATE, 'clients': CLIENTS}
+  sio.emit('admin_return', tabledata)
+
+
 @sio.on('cipher_ping')
 def cipherconnect(sid, environ):
   table = int(CLIENTS[sid])
