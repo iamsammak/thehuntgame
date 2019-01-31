@@ -2,8 +2,10 @@ import React from 'react';
 
 import PuzzleHeader from './puzzleHeader';
 
-import {
-  KeypadContainer, Button } from './buttonContants';
+import { KeypadContainer, Button } from './buttonContants';
+import getCurrentStage from '../helpers';
+
+// Answer 3, 4, 9
 
 class Puzzle4 extends React.Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class Puzzle4 extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.clearValue = this.clearValue.bind(this);
+    this.submitAnswer = this.submitAnswer.bind(this);
   }
 
   handleClick(idx) {
@@ -22,8 +25,6 @@ class Puzzle4 extends React.Component {
         let value = state.value;
         value[idx] = !value[idx];
         return ({ value : value });
-      }, () => {
-        this.props.send('submit', { puzzle: '4', answer: this.state.value });
       });
     };
   }
@@ -34,9 +35,20 @@ class Puzzle4 extends React.Component {
     });
   }
 
+  submitAnswer() {
+    const answer = this.state.value;
+    const gameState = this.props.gameState;
+    let stage = getCurrentStage(gameState);
+
+    if (stage === 4) {
+      this.props.send('submit', { puzzle: '4', answer: answer });
+    }
+
+    this.clearValue();
+  }
+
 
   render() {
-    let name = "Sam";
 
     return (
       <div>
@@ -59,6 +71,7 @@ class Puzzle4 extends React.Component {
           <Button click={this.state.value[8]} onClick={this.handleClick(8)} >9</Button>
 
           <Button onClick={this.clearValue} >Clear</Button>
+          <Button onClick={this.submitAnswer} >Enter</Button>
         </KeypadContainer>
       </div>
     );
