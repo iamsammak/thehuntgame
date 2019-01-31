@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { black } from '../constants';
+import { PEOPLE } from '../helpers';
 
 const Header = styled.div`
   margin-top: 4em;
@@ -42,7 +43,9 @@ const Profile = styled.img.attrs(props => ({
 
 class PersonHeader extends React.Component {
   render() {
-    const { name, src } = this.props;
+    const { name } = this.props;
+    const src = PEOPLE[name].src;
+
     return (
       <Header>
         <TitleContainer>
