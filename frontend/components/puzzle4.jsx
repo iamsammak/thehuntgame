@@ -4,7 +4,7 @@ import PuzzleHeader from './puzzleHeader';
 
 import { KeypadContainer, Button,
   SubmitButton, ClearButton } from './buttonContants';
-import getCurrentStage from '../helpers';
+import { getCurrentStage } from '../helpers';
 
 // Answer 3, 4, 9
 
