@@ -39,7 +39,7 @@ class Puzzle4 extends React.Component {
   submitAnswer() {
     const answer = this.state.value;
     const gameState = this.props.gameState;
-    let stage = getCurrentStage(gameState);
+    const stage = getCurrentStage(gameState);
 
     if (stage === 4) {
       this.props.send('submit', { puzzle: '4', answer: answer });
