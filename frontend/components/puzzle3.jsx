@@ -3,9 +3,8 @@ import React from 'react';
 import { AnswerAwareDiv } from './puzzle.jsx';
 import { KeypadContainer, Button } from './buttonContants';
 
-// Answer: [5,4,3,2,1]
-
 const initial_combo = ['','','','',''];
+
 class Puzzle3 extends React.Component {
   constructor(props) {
     super(props);
@@ -20,8 +19,8 @@ class Puzzle3 extends React.Component {
 
   handleClick(input) {
     return () => {
-      var tempArray = this.state.combo;
-      var flag = 'full';
+      const { combo: tempArray } = this.state;
+      let flag = 'full';
       for (var i = 0; i <= tempArray.length; i++) {
         if (tempArray[i] === '') {
           this.setState(state => {
@@ -43,17 +42,22 @@ class Puzzle3 extends React.Component {
   }
 
   submitAnswer() {
-    var userinput = this.state.combo;
-    this.props.send('submit', { puzzle: '3', answer: userinput });
+    const { send } = this.props;
+
+    const { combo: userinput } = this.state;
+    send('submit', { puzzle: '3', answer: userinput });
   }
 
   handleClear() {
+    const { reset } = this.props;
+
     this.setState({ combo:initial_combo });
-    this.props.reset();
+    reset();
   }
 
   render() {
     const { combo } = this.state;
+
     return (
       <div>
         <div className="riddle">

@@ -61,7 +61,7 @@ export default class Puzzle extends React.Component {
 
   submitResponseHandler(data) {
     this.setState({ correct: data.correct });
-  };
+  }
 
   resetCorrect() {
     this.setState({ correct : null });

@@ -24,10 +24,7 @@ class WelcomeHeader extends React.Component {
   render() {
     const { gameState } = this.props;
 
-    let start_time;
-    if (gameState) {
-      start_time = gameState.start_time;
-    }
+    const { start_time } = gameState || {};
 
     return (
       <Header>

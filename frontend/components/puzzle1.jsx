@@ -2,7 +2,6 @@ import React from 'react';
 
 import { AnswerAwareInput } from './puzzle.jsx';
 
-// Answer: getaway (caesar ciphered)
 class Puzzle1 extends React.Component {
   constructor(props) {
     super(props);
@@ -24,12 +23,16 @@ class Puzzle1 extends React.Component {
   }
 
   submitAnswer() {
+    const { send } = this.props;
+
     var userinput = this.state.value.toLowerCase();
-    this.props.send('submit', { puzzle: '1', answer: userinput });
+    send('submit', { puzzle: '1', answer: userinput });
   }
 
   cipherPing() {
-    this.props.send('cipher_ping', {});
+    const { send } = this.props;
+
+    send('cipher_ping', {});
   }
 
   render() {
