@@ -1,32 +1,19 @@
 import React from 'react';
 
-import { AnswerAwareInput } from './puzzle.jsx';
+import Submit from './submit';
 
 class Puzzle1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "",
       cipher: "",
     };
-    this.handleChange = this.handleChange.bind(this);
 
     const { socket } = props;
     socket.on('cipher_return', (data) => {
       this.setState({ cipher: data });
     });
     this.cipherPing();
-  }
-
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
-
-  submitAnswer() {
-    const { send } = this.props;
-
-    var userinput = this.state.value.toLowerCase();
-    send('submit', { puzzle: '1', answer: userinput });
   }
 
   cipherPing() {
@@ -43,19 +30,7 @@ class Puzzle1 extends React.Component {
         <div>
           {cipher}
         </div>
-        <p>
-          <AnswerAwareInput
-            type="text"
-            autocomplete="off"
-            placeholder="Type here"
-            correct={ correct }
-            value= { value }
-            onChange={this.handleChange}
-          />
-        </p>
-        <div>
-          <button type="submit" onClick={() =>this.submitAnswer()}>submit</button>
-        </div>
+        <Submit {...this.props} puzzleNumber={1} />
       </div>
     );
   }

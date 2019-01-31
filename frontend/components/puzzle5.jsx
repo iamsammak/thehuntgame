@@ -8,7 +8,7 @@ class Puzzle5 extends React.Component {
     return (
       <div>
         <Puzzle5Clue clue="clue0" />
-        <Submit {...this.props} />
+        <Submit {...this.props} puzzleNumber={5} />
       </div>
     );
   }
