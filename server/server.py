@@ -73,7 +73,10 @@ def static_files(path):
 
 @flask_app.route('/admin')
 def admin():
-  return jsonify({ 'game_state': GAME_STATE, 'clients': CLIENTS })
+  root_dir = os.getcwd()
+  return send_from_directory(os.path.join(root_dir, 'frontend'), 'huntadmin.html')
+
+# return jsonify({ 'game_state': GAME_STATE, 'clients': CLIENTS })
 ### Only for development use ###
 
 @sio.on('connect')
@@ -84,15 +87,23 @@ def connect(sid, environ):
 def adminconnect(sid, environ):
   print('admin_ping was triggered')
   tabledata = {}
-  print(tabledata)
+  tabledata2 = {}
   for client in CLIENTS:
     tablenumber = CLIENTS[client]
     if CLIENTS[client] not in tabledata:
-      tabledata[tablenumber] = [[GAME_STATE[tablenumber],[client]]]
+      tabledata[tablenumber] = [client]
     else:
-      tabledata[tablenumber][0][1].append(client)
+      tabledata[tablenumber].append(client)
+  for client in CLIENTS:
+    tablenumber = CLIENTS[client]
+    if CLIENTS[client] not in tabledata2:
+      tabledata2[tablenumber] = [GAME_STATE, [client]]
+    else:
+      tabledata2[tablenumber][1].append(client)
+
 #  gamedata = {'game_sate': GAME_STATE, 'clients': CLIENTS}
-  sio.emit('admin_return', tabledata)
+  datatosend = {'tabledata' : tabledata,'gamestate' : GAME_STATE, 'finaltest':tabledata2} 
+  sio.emit('admin_return', datatosend)
 
 
 @sio.on('cipher_ping')
