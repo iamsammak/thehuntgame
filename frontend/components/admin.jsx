@@ -8,7 +8,7 @@ class Admin extends React.Component {
     socket.on('admin_return', (data) => {
       var dataArray = []
 
-      this.setState({gamestate : data['gamestate'], tabledata : data['tabledata'], finaltest: data['finaltest']});
+      this.setState({gamestate : data['gamestate'], tabledata : data['tabledata']});
     console.log('i heard an answer')
     console.log(this.state)
     });
@@ -16,11 +16,7 @@ class Admin extends React.Component {
       socket:socket,
       tabledata : ['initialvalue'],
       gamestate : {},
-      info: [['hello']],
-      test: ['im the test'],
-      entrytest:['initial entry test'],
-      finaltest: ['initial final test']
-
+      info: [['Hello! Welcome to the Admin Page. Press the button to see the progress!']],
     };
     this.adminPing();
   }
@@ -31,103 +27,59 @@ class Admin extends React.Component {
     console.log('i made a ping')
   }
 
-  renderTableinfo() {
-    var infotest = this.state.info
-    var testarray = infotest[0]
-    console.log(testarray)
-    var maptest = testarray.map((element) => <li> {element}</li>);
-    return (
-      <ul>{maptest} </ul>
-    );
-    };
-
-  testerfunction() {
-    const { finaltest } = this.state
+  renderAdminfunction() {
+    const { tabledata } = this.state
     console.log('testerfunction here')
-    var holygrail = {}
-    let gamestatemap
-    let clientmap
-    for (var table in finaltest) {
-      var tabledata = finaltest[table]
-      console.log(tabledata)
-//data is being overwritten. need to store it somewhere after writing
-      gamestatemap = Object.entries(tabledata[0]).map(elements => {
-        console.log(elements)
-        const puzzledata = Object.entries(elements)
-        console.log(puzzledata)
-        var puzzle = puzzledata[0][0]
-        var puzzlesolved = Object.values(puzzledata[1][1])
-        console.log('here is a puzzle')
-      return (
-        <div>
-          <li key={puzzle}>puzzle {puzzle} is solved? {puzzlesolved.toString()}</li>
+    let tableelements
+    tableelements = Object.entries(tabledata).map(elements => {
+      var table = elements[0]
+      console.log(table)
+      var clientlist = this.renderClients(table);
+      var tablegamestate = this.renderPuzzle(table);
+       return (
+        <div key={table}>
+          <h1>{table}</h1>
+          <p>Participants: {clientlist} </p>
+          <p>Status: {tablegamestate} </p>
         </div>
       );
-
     })
-      clientmap = tabledata[1].map(clients => {
-          return (
-            <li>{clients} </li>
-          )
-    });
-   holygrail[table] = [clientmap,gamestatemap] 
-  }
-    this.setState({info:holygrail[2][0], test:holygrail[2][1]})
-    };
+     this.setState({info:tableelements})
+}
 
-
-  testerfunction2() {
+  renderClients(table) {
     const { tabledata } = this.state
-    var beam = Object.keys(tabledata)
-    console.log('testerfunction2 here')
-    let newteststate
-    newteststate = Object.values(tabledata).map(clients => {
-      for (var stuff in clients) {
-        console.log(stuff)
-        console.log(clients[stuff])
+    const clientelements = Object.entries(tabledata[table]).map((elements,i) => {
+      var clients = elements[1]
       return (
-        <p> {clients} </p>
-      );}
-
-})
-    this.setState({info:newteststate})
-    };
-
-
-  testerfunction3() {
-    const { gamestate } = this.state
-    console.log('testerfunction3 here')
-    let newteststate
-    for (var key in gamestate) {
-      newteststate = Object.entries(gamestate[key]).map(elements => {
-        console.log(elements)
-        const thing = Object.values(elements[1])
-        const puzzlenumber = elements[0]
-        console.log(puzzlenumber)
-      return (
-        <p key={puzzlenumber}>puzzle {puzzlenumber.toString()} is solved? {thing.toString()}</p>
-      );
-
-    })
+          <li key={i}>{clients}</li>
+        )
+      });
+    return clientelements
   }
-    this.setState({entrytest:newteststate})
-    };
 
-// doesnt work because im passing dict. Need to change dict into array and  map each item in array out to component
+ renderPuzzle(table) {
+    const { gamestate } = this.state
+    const puzzleelements = Object.entries(gamestate[table]).map(elements => {
+      var puzzle = elements[0]
+      var solved = elements[1]['solved']
+      console.log(solved)
+      return (
+          <li key={puzzle}>puzzle {puzzle} is solved? {solved.toString()}</li>
+      )
+    });
+    return puzzleelements
+  }
+
   render() {  
-    console.log('now i render')
+    const { info } = this.state;
     console.log(this.state)
-    const { tabledata,info, test, entrytest } = this.state;
      return(
       <div>
-       <button type = "submit" onClick ={() =>this.testerfunction()}> im a button </button>
-       <button type = "submit" onClick ={() =>this.testerfunction2()}> im a second button </button>
-      <button type = "submit" onClick ={() =>this.testerfunction3()}> im a third button </button>
-        <ul>
+       <button type = "submit" onClick ={() =>this.renderAdminfunction()}> Press Me! </button>
+        <div>
           {info}
-        </ul>
-        <div> {test} </div>
-        <div> {entrytest} </div>
+        </div>
     </div>
     );
   }

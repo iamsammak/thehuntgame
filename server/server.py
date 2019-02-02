@@ -85,24 +85,14 @@ def connect(sid, environ):
 
 @sio.on('admin_ping')
 def adminconnect(sid, environ):
-  print('admin_ping was triggered')
   tabledata = {}
-  tabledata2 = {}
   for client in CLIENTS:
     tablenumber = CLIENTS[client]
     if CLIENTS[client] not in tabledata:
       tabledata[tablenumber] = [client]
     else:
       tabledata[tablenumber].append(client)
-  for client in CLIENTS:
-    tablenumber = CLIENTS[client]
-    if CLIENTS[client] not in tabledata2:
-      tabledata2[tablenumber] = [GAME_STATE, [client]]
-    else:
-      tabledata2[tablenumber][1].append(client)
-
-#  gamedata = {'game_sate': GAME_STATE, 'clients': CLIENTS}
-  datatosend = {'tabledata' : tabledata,'gamestate' : GAME_STATE, 'finaltest':tabledata2} 
+  datatosend = {'tabledata' : tabledata,'gamestate' : GAME_STATE} 
   sio.emit('admin_return', datatosend)
 
 
@@ -152,7 +142,6 @@ def submit(sid, data):
     'correct': correct,
   }
   sio.emit('submit_response', response, room=sid)
-
   if correct:
     table = CLIENTS[sid]
     GAME_STATE[table][int(puzzle)]['solved'] = True
