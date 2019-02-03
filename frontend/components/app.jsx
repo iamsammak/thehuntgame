@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import io from 'socket.io-client';
+import { withRouter } from 'react-router';
 import { Route, Redirect } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
@@ -15,6 +16,7 @@ import Person4 from './person4';
 import Person5 from './person5';
 import Person6 from './person6';
 import Person7 from './person7';
+import Finish from './finish';
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -28,6 +30,10 @@ const AppContainer = styled.div`
   min-width: 400px;
   text-align: center;
 `;
+
+const REDIRECTS = {
+  'FINISH': '/finish',
+}
 
 class App extends React.Component {
   constructor(props) {
@@ -50,6 +56,13 @@ class App extends React.Component {
       toast('Someone has left your table!', {
         type: 'error',
       });
+    });
+
+    socket.on('redirect', (data) => {
+      const { history } = this.props;
+      if (REDIRECTS[data]) {
+        history.push(REDIRECTS[data]);
+      }
     });
 
     this.state = {
@@ -84,6 +97,7 @@ class App extends React.Component {
           <Route exact path="/" render={() => <Redirect to="/home" />} />
           <Route path="/home" render={() => <Home {...this.state} />} />
           <Route path="/main" render={() => <Main {...this.state} />} />
+          <Route path="/finish" render={() => <Finish {...this.state} />} />
           <Route path="/person0" render={() => <Person0 {...this.state} />} />
           <Route path="/person1" render={() => <Person1 {...this.state} />} />
           <Route path="/person2" render={() => <Person2 {...this.state} />} />
@@ -104,4 +118,4 @@ class App extends React.Component {
   }
 }
 
-export default withCookies(App);
+export default withCookies(withRouter(App));
