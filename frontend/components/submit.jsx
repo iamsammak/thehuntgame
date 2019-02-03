@@ -18,13 +18,14 @@ class Submit extends React.Component {
   }
 
   submitAnswer() {
-    const { send } = this.props;
+    const { send, puzzleNumber } = this.props;
     const { value } = this.state;
-    send("submit", { answer: value });
+
+    send("submit", { puzzle: puzzleNumber, answer: value });
   }
 
-  handleChange(value) {
-    this.setState({ value: value });
+  handleChange(event) {
+    this.setState({ value: event.target.value });
   }
 
   render() {
