@@ -5,6 +5,7 @@ import socketio
 import eventlet
 import eventlet.wsgi
 import random
+from datetime import datetime
 from string import ascii_lowercase as alphabet
 from flask import Flask, render_template, jsonify, request, send_from_directory
 
@@ -92,6 +93,7 @@ def join(sid, data):
   else:
     # this is the first person to join this table
     GAME_STATE[table] = INITIAL_GAME_STATE_FOR_TABLE.copy()
+    GAME_STATE[table]['start_time'] = datetime.now().isoformat()
   send_game_state(sid=sid)
   print GAME_STATE
 
