@@ -1,18 +1,13 @@
 import React from 'react';
 
-import PuzzleHeader from './puzzleHeader';
-
-import { KeypadContainer, Button,
-  SubmitButton, ClearButton } from './buttonContants';
+import { KeypadContainer, Button, SubmitButton, ClearButton } from './buttonContants';
 import { getCurrentStage } from '../helpers';
-
-// Answer 3, 4, 9
 
 class Puzzle4 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: [false, false, false, false, false, false, false, false, false]
+      value: [false, false, false, false, false, false, false, false, false],
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -23,7 +18,7 @@ class Puzzle4 extends React.Component {
   handleClick(idx) {
     return () => {
       this.setState(state => {
-        let value = state.value;
+        const { value } = state;
         value[idx] = !value[idx];
         return ({ value : value });
       });
@@ -32,35 +27,31 @@ class Puzzle4 extends React.Component {
 
   clearValue() {
     this.setState({
-      value: [false, false, false, false, false, false, false, false, false]
+      value: [false, false, false, false, false, false, false, false, false],
     });
   }
 
   submitAnswer() {
-    const answer = this.state.value;
-    const gameState = this.props.gameState;
+    const { value: answer } = this.state;
+    const { gameState, send } = this.props;
     const stage = getCurrentStage(gameState);
 
     if (stage === 4) {
-      this.props.send('submit', { puzzle: '4', answer: answer });
+      send('submit', { puzzle: '4', answer: answer });
     }
 
     this.clearValue();
   }
 
-
   render() {
-
     return (
       <div>
-        <PuzzleHeader title="Puzzle Four" />
-        <div className="riddle">
+        <div>
           <p>Some riddle pertaining to the pictures below</p>
           <p>make the correct selections and you&apos;ll best this foe</p>
         </div>
         <br/>
         <KeypadContainer>
-
           <Button click={this.state.value[0]} onClick={this.handleClick(0)} >1</Button>
           <Button click={this.state.value[1]} onClick={this.handleClick(1)} >2</Button>
           <Button click={this.state.value[2]} onClick={this.handleClick(2)} >3</Button>

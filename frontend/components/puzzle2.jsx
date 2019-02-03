@@ -2,20 +2,20 @@ import React from 'react';
 
 import { AnswerAwareInput } from './puzzle.jsx';
 
-// Answer: See o double yo
-
 class Puzzle2 extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
-      value : ''
+      value : '',
     };
   }
 
   submitAnswer() {
+    const { send } = this.props;
+
     var userinput = this.state.value.toLowerCase();
-    this.props.send('submit', { puzzle: '2', answer: userinput });
+    send('submit', { puzzle: '2', answer: userinput });
   }
 
   handleChange(event) {
@@ -25,6 +25,7 @@ class Puzzle2 extends React.Component {
   render() {
     const { value } = this.state;
     const { correct } = this.props;
+
     return (
       <div>
         <p>Can you write cow in 13 letters?</p>
@@ -33,8 +34,8 @@ class Puzzle2 extends React.Component {
             type="text"
             autocomplete="off"
             placeholder="Type here"
-            correct={ correct }
-            value= { value }
+            correct={correct}
+            value={value}
             onChange={this.handleChange}
           />
         </p>

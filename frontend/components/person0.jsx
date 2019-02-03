@@ -11,6 +11,9 @@ class Person0 extends React.Component {
     const name = 'Person0';
 
     let body = <EmptyBody name={name} />;
+    if (stage === 5) {
+      body = <div>Try talking to other members of the bridal party. I think they have some more information.</div>;
+    }
 
     return (
       <div>
