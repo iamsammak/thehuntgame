@@ -35,3 +35,18 @@ export const PEOPLE = {
   "Person6": { src: "images/placeholder.jpg", gender: "male" },
   "Person7": { src: "images/placeholder.jpg", gender: "female" },
 };
+
+function pad(n) {
+  if (n < 10) {
+    return '0' + n;
+  }
+  return n.toString();
+}
+
+export function formatElapsedTime(elapsed) {
+  const ms = Math.round(((elapsed % 1000) / 101) * 10);
+  const sec = Math.floor((elapsed / 1000)) % 60;
+  const min = Math.floor((elapsed / 1000 / 60)) % 60;
+  const hrs = Math.floor((elapsed / 1000 / 60 / 60)) % 24;
+  return `${pad(hrs)}:${pad(min)}:${pad(sec)}:${pad(ms)}`;
+}
