@@ -12,7 +12,7 @@ class Person1 extends React.Component {
   render() {
     const { gameState } = this.props;
     const stage = getCurrentStage(gameState);
-    const name = 'Person1';
+    const name = 'Tim';
 
     let body = <EmptyBody name={name} />;
     if (stage < 4 && gameState[1] && !gameState[1].solved) {
