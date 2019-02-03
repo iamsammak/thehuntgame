@@ -13,6 +13,7 @@ const Table = styled.div`
   position: relative;
   width: ${tableSize}px;
   height: ${tableSize}px;
+  margin: auto;
 `;
 
 const PersonContainer = styled.div`
