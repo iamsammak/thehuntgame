@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { black } from '../constants';
+import { black, smSpacing } from '../constants';
 import { PEOPLE } from '../helpers';
 
 const Header = styled.div`
@@ -16,9 +16,10 @@ const TitleContainer = styled.div`
   align-items: center;
 `;
 
-const BackIconContainer = styled.div`
+const BackIconLink = styled(Link)`
   display: flex;
   align-items: center;
+  padding: ${smSpacing};
 `;
 
 const BackIcon = styled(FontAwesomeIcon).attrs({
@@ -30,7 +31,7 @@ const BackIcon = styled(FontAwesomeIcon).attrs({
 `;
 
 const NameContainer = styled.div`
-  font-size: 1em;
+  font-size: 1.5em;
 `;
 
 const Profile = styled.img.attrs(props => ({
@@ -49,11 +50,9 @@ class PersonHeader extends React.Component {
     return (
       <Header>
         <TitleContainer>
-          <BackIconContainer>
-            <Link to="/main">
-              <BackIcon />
-            </Link>
-          </BackIconContainer>
+          <BackIconLink to="/main">
+            <BackIcon />
+          </BackIconLink>
           <NameContainer>{name}</NameContainer>
           <Profile src={src} />
         </TitleContainer>
