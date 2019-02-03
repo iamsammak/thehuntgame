@@ -15,6 +15,10 @@ export const Button = styled.button`
   color: white;
   font-size: 30px;
   background-color: ${props => (props.click ? '#1995AD' : '#A1D6E2')};
+
+  &:focus {
+    outline: 0;
+  }
 `;
 
 export const SubmitButton = styled(Button)`

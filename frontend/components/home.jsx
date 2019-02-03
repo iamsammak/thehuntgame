@@ -76,6 +76,10 @@ class Home extends React.Component {
     const {tens, ones} = this.state;
     const tableNumber = (tens * 10) + ones;
 
+    if (tableNumber === 0) {
+      return;
+    }
+
     const { cookies } = this.props;
     cookies.set("table", tableNumber);
   }
