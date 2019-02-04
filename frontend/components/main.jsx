@@ -66,13 +66,13 @@ const Line = styled.div`
 export default class Main extends React.Component {
   render() {
     const items = [
-      { to: "/person1", key: 1, src: 'images/placeholder.jpg' },
-      { to: "/person2", key: 2, src: 'images/placeholder.jpg' },
-      { to: "/person3", key: 3, src: 'images/placeholder.jpg' },
-      { to: "/person4", key: 4, src: 'images/placeholder.jpg' },
-      { to: "/person5", key: 5, src: 'images/placeholder.jpg' },
-      { to: "/person6", key: 6, src: 'images/placeholder.jpg' },
-      { to: "/person7", key: 7, src: 'images/placeholder.jpg' },
+      { to: "/tim", key: 1, src: 'images/placeholder.jpg' },
+      { to: "/jay", key: 2, src: 'images/placeholder.jpg' },
+      { to: "/ryan", key: 3, src: 'images/placeholder.jpg' },
+      { to: "/kristi", key: 4, src: 'images/placeholder.jpg' },
+      { to: "/erica", key: 5, src: 'images/placeholder.jpg' },
+      { to: "/maryann", key: 6, src: 'images/placeholder.jpg' },
+      { to: "/helena", key: 7, src: 'images/placeholder.jpg' },
     ];
     const middlePerson = <MiddlePerson src='images/placeholder.jpg' />;
 
@@ -97,7 +97,7 @@ export default class Main extends React.Component {
               );
             })
           }
-          <MiddleLink to={"/person0"}>
+          <MiddleLink to={"/matt"}>
             <PersonContainer>
               {middlePerson}
             </PersonContainer>

@@ -98,14 +98,14 @@ class App extends React.Component {
           <Route path="/home" render={() => <Home {...this.state} />} />
           <Route path="/main" render={() => <Main {...this.state} />} />
           <Route path="/finish" render={() => <Finish {...this.state} />} />
-          <Route path="/person0" render={() => <Person0 {...this.state} />} />
-          <Route path="/person1" render={() => <Person1 {...this.state} />} />
-          <Route path="/person2" render={() => <Person2 {...this.state} />} />
-          <Route path="/person3" render={() => <Person3 {...this.state} />} />
-          <Route path="/person4" render={() => <Person4 {...this.state} />} />
-          <Route path="/person5" render={() => <Person5 {...this.state} />} />
-          <Route path="/person6" render={() => <Person6 {...this.state} />} />
-          <Route path="/person7" render={() => <Person7 {...this.state} />} />
+          <Route path="/matt" render={() => <Person0 {...this.state} />} />
+          <Route path="/tim" render={() => <Person1 {...this.state} />} />
+          <Route path="/jay" render={() => <Person2 {...this.state} />} />
+          <Route path="/ryan" render={() => <Person3 {...this.state} />} />
+          <Route path="/kristi" render={() => <Person4 {...this.state} />} />
+          <Route path="/erica" render={() => <Person5 {...this.state} />} />
+          <Route path="/maryann" render={() => <Person6 {...this.state} />} />
+          <Route path="/helena" render={() => <Person7 {...this.state} />} />
         </div>
         <ToastContainer
           position={toast.POSITION.TOP_RIGHT}

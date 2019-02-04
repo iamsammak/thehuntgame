@@ -10,7 +10,7 @@ class Person6 extends React.Component {
   render() {
     const { gameState, send } = this.props;
     const stage = getCurrentStage(gameState);
-    const name = 'Person6';
+    const name = 'MaryAnn';
 
     let body = <EmptyBody name={name} />;
     if (stage === 5) {

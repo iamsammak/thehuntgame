@@ -8,7 +8,7 @@ class Person0 extends React.Component {
   render() {
     const { gameState } = this.props;
     const stage = getCurrentStage(gameState);
-    const name = 'Person0';
+    const name = 'Matt';
 
     let body = <EmptyBody name={name} />;
     if (stage === 5) {

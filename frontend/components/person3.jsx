@@ -13,7 +13,7 @@ class Person3 extends React.Component {
   render() {
     const { gameState } = this.props;
     const stage = getCurrentStage(gameState);
-    const name = 'Person3';
+    const name = 'Ryan';
 
     let body = <EmptyBody name={name} />;
     if (stage < 4 && gameState[3] && !gameState[3].solved) {
