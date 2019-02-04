@@ -207,6 +207,14 @@ class Puzzle8 extends React.Component {
           }
         }
 
+        if (maze[x][y].includes('finish')) {
+          // Give them some time to realize they finished.
+          setTimeout(() => {
+            const { send } = this.props;
+            send('submit', { puzzle: 8, answer: '' });
+          }, 1500);
+        }
+
         return {
           position,
           deviate,

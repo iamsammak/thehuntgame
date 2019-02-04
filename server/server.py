@@ -38,10 +38,17 @@ ANSWERS = {
   8: '',
 }
 
+def game_complete(table):
+  state = GAME_STATE[table]
+  return all([puzzle['solved'] for key, puzzle in state.items() if isinstance(puzzle, dict)])
+
 def send_game_state(table=None, sid=None):
   if sid:
     table = CLIENTS[sid]
   sio.emit('game_state_update', GAME_STATE[table], room=(sid or table))
+
+def send_redirect(table, redirect_code):
+  sio.emit('redirect', redirect_code, room=table)
 
 ### Only for development use ###
 @flask_app.route('/')
@@ -114,6 +121,11 @@ def submit(sid, data):
     table = CLIENTS[sid]
     GAME_STATE[table][int(puzzle)]['solved'] = True
     send_game_state(table=table)
+
+  if game_complete(table):
+    GAME_STATE[table]['end_time'] = datetime.now().isoformat()
+    send_game_state(table=table)
+    send_redirect(table, 'FINISH')
 
 @sio.on('disconnect')
 def disconnect(sid):
