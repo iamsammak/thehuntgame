@@ -7,6 +7,7 @@ import eventlet.wsgi
 import random
 from copy import deepcopy
 from datetime import datetime
+from collections import defaultdict
 from string import ascii_lowercase as alphabet
 from flask import Flask, render_template, jsonify, request, send_from_directory
 
@@ -85,15 +86,13 @@ def connect(sid, environ):
 
 @sio.on('admin_ping')
 def adminconnect(sid, environ):
-  tabledata = {}
+  table_data = defaultdict(list)
+
   for client in CLIENTS:
     tablenumber = CLIENTS[client]
-    if CLIENTS[client] not in tabledata:
-      tabledata[tablenumber] = [client]
-    else:
-      tabledata[tablenumber].append(client)
-  datatosend = {'tabledata' : tabledata,'gamestate' : GAME_STATE} 
-  sio.emit('admin_return', datatosend)
+    table_data[tablenumber].append(client)
+  data_to_send = {'tableData' : table_data,'gameState' : GAME_STATE
+  sio.emit('admin_return', data_to_send)
 
 
 @sio.on('cipher_ping')

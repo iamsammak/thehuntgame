@@ -8,14 +8,14 @@ class Admin extends React.Component {
     socket.on('admin_return', (data) => {
       var dataArray = []
 
-      this.setState({gamestate : data['gamestate'], tabledata : data['tabledata']});
+      this.setState({gameState : data['gameState'], tableData : data['tableData']});
     console.log('i heard an answer')
     console.log(this.state)
     });
     this.state = {
       socket:socket,
-      tabledata : ['initialvalue'],
-      gamestate : {},
+      tableData : [['initialValue']],
+      gameState : [''],
       info: [['Hello! Welcome to the Admin Page. Press the button to see the progress!']],
     };
     this.adminPing();
@@ -27,40 +27,23 @@ class Admin extends React.Component {
     console.log('i made a ping')
   }
 
-  renderAdminfunction() {
-    const { tabledata } = this.state
-    console.log('testerfunction here')
-    let tableelements
-    tableelements = Object.entries(tabledata).map(elements => {
-      var table = elements[0]
-      console.log(table)
-      var clientlist = this.renderClients(table);
-      var tablegamestate = this.renderPuzzle(table);
-       return (
-        <div key={table}>
-          <h1>{table}</h1>
-          <p>Participants: {clientlist} </p>
-          <p>Status: {tablegamestate} </p>
-        </div>
-      );
-    })
-     this.setState({info:tableelements})
-}
-
+  startGame() {
+    console.log('this will be the start game button')
+  }
   renderClients(table) {
-    const { tabledata } = this.state
-    const clientelements = Object.entries(tabledata[table]).map((elements,i) => {
+    const { tableData } = this.state
+    const clientElements = Object.entries(tableData[table]).map((elements,i) => {
       var clients = elements[1]
       return (
           <li key={i}>{clients}</li>
         )
       });
-    return clientelements
+    return clientElements
   }
 
  renderPuzzle(table) {
-    const { gamestate } = this.state
-    const puzzleelements = Object.entries(gamestate[table]).map(elements => {
+    const { gameState } = this.state
+    const puzzleElements = Object.entries(gameState[table]).map(elements => {
       var puzzle = elements[0]
       var solved = elements[1]['solved']
       console.log(solved)
@@ -68,17 +51,31 @@ class Admin extends React.Component {
           <li key={puzzle}>puzzle {puzzle} is solved? {solved.toString()}</li>
       )
     });
-    return puzzleelements
+    return puzzleElements
   }
 
   render() {  
-    const { info } = this.state;
-    console.log(this.state)
+ 
+    const { tableData } = this.state
+    const tableElements = Object.entries(tableData).map(elements => {
+      var table = elements[0]
+      console.log(table)
+      var clientList = this.renderClients(table);
+      var tableGamestate = this.renderPuzzle(table);
+       return (
+        <div key={table}>
+          <h1>{table}</h1>
+          <p>Participants: {clientList} </p>
+          <p>Status: {tableGamestate} </p>
+        </div>
+      );
+    })
+
      return(
       <div>
-       <button type = "submit" onClick ={() =>this.renderAdminfunction()}> Press Me! </button>
+       <button type = "submit" onClick ={() =>this.startGame()}> Press Me! </button>
         <div>
-          {info}
+          { tableElements }
         </div>
     </div>
     );
