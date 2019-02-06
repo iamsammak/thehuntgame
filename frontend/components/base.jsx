@@ -1,15 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { PEOPLE } from '../helpers';
+import { Narration } from '../wrappers';
 
 const Container = styled.div`
   margin-top: 1em;
-`;
-
-const SmallItalics = styled.div`
-  font-style: italic;
-  font-size: 0.8em;
 `;
 
 class Base extends React.Component {
@@ -24,7 +19,7 @@ class Base extends React.Component {
     case "Tim":
       base = (
         <div>
-          <SmallItalics>Tim is pacing back and forth in the foyer.</SmallItalics>
+          <Narration>Tim is pacing back and forth in the foyer.</Narration>
           <br />
           Hmm, where could it be?
         </div>
@@ -33,30 +28,31 @@ class Base extends React.Component {
     case "Jay":
       base = (
         <div>
-          <SmallItalics>You can't seem to find Jay...until you exit the country club and see him outside.</SmallItalics>
-          <br />
-          Did I drop it somewhere here? I can't see anything without light...
+          <Narration>You can&apos;t seem to find Jay...until you exit the country club and see him outside.</Narration>
+          <p>
+            Did I drop it somewhere here? I can&apos;t see anything without light...
+          </p>
         </div>
       );
       break;
     case "Ryan":
       base = (
         <div>
-          <SmallItalics>Ryan is wandering from table to table.</SmallItalics>
+          <Narration>Ryan is wandering from table to table.</Narration>
         </div>
       );
       break;
     case "Kristi":
       base = (
         <div>
-          <SmallItalics>Kristi is at the welcome table to make sure no one steals the wedding gifts.</SmallItalics>
+          <Narration>Kristi is at the welcome table to make sure no one steals the wedding gifts.</Narration>
         </div>
       );
       break;
     case "Erica":
       base = (
         <div>
-          <SmallItalics>Erica seems concerned around the tea favor table.</SmallItalics>
+          <Narration>Erica seems concerned around the tea favor table.</Narration>
           <br />
           Let me think...I was setting up these bowls and then filling them with tea. What did I do next? All I can remember is what Chris kept saying about his tea favor idea...
         </div>
@@ -64,12 +60,12 @@ class Base extends React.Component {
       break;
     case "MaryAnn":
       base = (
-        <SmallItalics>You find MaryAnn around the cornhole games.</SmallItalics>
+        <Narration>You find MaryAnn around the cornhole games.</Narration>
       );
       break;
     case "Helena":
       base = (
-        <SmallItalics>Helena is looking through some boxes on the side of the room.</SmallItalics>
+        <Narration>Helena is looking through some boxes on the side of the room.</Narration>
       );
       break;
     }

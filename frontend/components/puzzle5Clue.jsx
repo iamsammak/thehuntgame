@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { Narration } from '../wrappers';
+
 const Clue = styled.img.attrs(props => ({
   src: props.src,
 }))`
@@ -27,7 +29,7 @@ class Puzzle5Clue extends React.Component {
 
     return (
       <div>
-        I found this piece of paper earlier. It looks like there are other parts to it. Do you know what it means?
+        <Narration>Helena shows you her piece of paper.</Narration>
         <Clue src={src} />
       </div>
     );

@@ -4,7 +4,7 @@ import { getCurrentStage } from '../helpers';
 import Base from './base';
 import PersonHeader from './personHeader';
 import Puzzle from './puzzle';
-import Puzzle4 from './puzzle4';
+import Puzzle2 from './puzzle2';
 import Puzzle7Clue from './puzzle7Clue';
 
 class Person4 extends React.Component {
@@ -14,8 +14,8 @@ class Person4 extends React.Component {
     const showBase = true;
 
     let body;
-    if (stage <= 4) {
-      body = <Puzzle {...this.props} component={Puzzle4} />;
+    if (stage == 2) {
+      body = <Puzzle {...this.props} component={Puzzle2} />;
     } else if (stage === 7) {
       body = <Puzzle7Clue clue="clue3" />;
     }
@@ -24,6 +24,7 @@ class Person4 extends React.Component {
       <div>
         <PersonHeader name={name} />
         {showBase && <Base name={name} />}
+        <br />
         {body}
       </div>
     );

@@ -1,6 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
 
+import { isSolved } from '../helpers';
 import Submit from './submit';
+
+const CipherContainer = styled.div`
+  font-family: monospace;
+  font-size: 2em;
+  letter-spacing: 5px;
+`;
 
 class Puzzle1 extends React.Component {
   constructor(props) {
@@ -23,14 +31,28 @@ class Puzzle1 extends React.Component {
   }
 
   render() {
-    const { value, cipher } = this.state;
-    const { correct } = this.props;
+    const { cipher } = this.state;
+    const { gameState } = this.props;
+    const solved = isSolved(gameState, 1);
+
     return (
       <div>
-        <div>
+        <p>
+Thanks so much for helping us find the key! I had it with me when I was setting up these tables, but I must have misplaced it when I was grabbing all these letters for each table. If I could only remember what these letters meant for your table, then maybe I could remember where I placed the keys. Do you know what these letters mean?
+        </p>
+        <CipherContainer>
           {cipher}
-        </div>
-        <Submit {...this.props} puzzleNumber={1} />
+        </CipherContainer>
+        <p>
+          <Submit {...this.props} puzzleNumber={1} disabled={solved} />
+        </p>
+        {
+          solved && (
+            <p>
+              Ah, that&apos;s right! That&apos;s why we had these letters for your table. I remember that I finished setting up all the tables and then gave it to Matt. He has a personal safe that Chris gave him, so it might be in there.
+            </p>
+          )
+        }
       </div>
     );
   }

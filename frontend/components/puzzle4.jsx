@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Narration } from '../wrappers';
+import { isSolved } from '../helpers';
 import { KeypadContainer, Button, SubmitButton, ClearButton } from './buttonContants';
 import { getCurrentStage } from '../helpers';
 
@@ -44,13 +46,15 @@ class Puzzle4 extends React.Component {
   }
 
   render() {
+    const { gameState } = this.props;
+    const solved = isSolved(gameState, 4);
+
     return (
       <div>
-        <div>
-          <p>Some riddle pertaining to the pictures below</p>
-          <p>make the correct selections and you&apos;ll best this foe</p>
-        </div>
-        <br/>
+        <Narration>Matt lugs in a safe and is fiddling with the keypad.</Narration>
+        <p>
+          Chris gave me this safe, so maybe we had put it in here. Only thing is that I don&apos;t remember the code to unlock it.
+        </p>
         <KeypadContainer>
           <Button click={this.state.value[0]} onClick={this.handleClick(0)} >1</Button>
           <Button click={this.state.value[1]} onClick={this.handleClick(1)} >2</Button>
@@ -65,6 +69,13 @@ class Puzzle4 extends React.Component {
           <ClearButton onClick={this.clearValue} >Clear</ClearButton>
           <SubmitButton onClick={this.submitAnswer} >Enter</SubmitButton>
         </KeypadContainer>
+        {
+          solved && (
+            <p>
+              There we go...oh. Doesn&apos;t look like we put the key here. Where else could it be then?
+            </p>
+          )
+        }
       </div>
     );
   }

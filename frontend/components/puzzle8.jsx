@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { Narration } from '../wrappers';
 import { smSpacing } from '../constants';
 
 const MazeContainer = styled.div`
@@ -248,15 +249,21 @@ class Puzzle8 extends React.Component {
 
   render() {
     return (
-      <MazeContainer>
-        <Arrow direction="up" disabled={this.hasProp('up')} onClick={this.move('up')} />
-        <MiddleContainer>
-          <Arrow direction="left" disabled={this.hasProp('left')} onClick={this.move('left')} />
-          {this.renderCell()}
-          <Arrow direction="right" disabled={this.hasProp('right')} onClick={this.move('right')} />
-        </MiddleContainer>
-        <Arrow direction="down" disabled={this.hasProp('down')} onClick={this.move('down')} />
-      </MazeContainer>
+      <div>
+        <Narration>You find Jay outside and hand him the flashlight.</Narration>
+        <p>
+          Ah, thanks for the flashlight! Help me retrace my steps and see if I dropped it anywhere. I was carrying in decorations for the sweetheart table from my car...
+        </p>
+        <MazeContainer>
+          <Arrow direction="up" disabled={this.hasProp('up')} onClick={this.move('up')} />
+          <MiddleContainer>
+            <Arrow direction="left" disabled={this.hasProp('left')} onClick={this.move('left')} />
+            {this.renderCell()}
+            <Arrow direction="right" disabled={this.hasProp('right')} onClick={this.move('right')} />
+          </MiddleContainer>
+          <Arrow direction="down" disabled={this.hasProp('down')} onClick={this.move('down')} />
+        </MazeContainer>
+      </div>
     );
   }
 }

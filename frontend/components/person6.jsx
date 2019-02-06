@@ -3,6 +3,7 @@ import React from 'react';
 import { getCurrentStage } from '../helpers';
 import Base from './base';
 import PersonHeader from './personHeader';
+import Puzzle from './puzzle';
 import Puzzle5Clue from './puzzle5Clue';
 import Puzzle6 from './puzzle6';
 
@@ -16,13 +17,14 @@ class Person6 extends React.Component {
     if (stage === 5) {
       body = <Puzzle5Clue clue="clue2" />;
     } else if (stage === 6) {
-      body = <Puzzle6 send={send} />;
+      body = <Puzzle {...this.props} component={Puzzle6} />;
     }
 
     return (
       <div>
         <PersonHeader name={name} />
         {showBase && <Base name={name} />}
+        <br />
         {body}
       </div>
     );
