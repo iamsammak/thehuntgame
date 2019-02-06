@@ -2,9 +2,25 @@ import React from 'react';
 import { withCookies } from 'react-cookie';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import WelcomeHeader from './welcomeHeader';
 import { Button, SubmitButton } from './buttonContants';
+
+const Table = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+`;
+
+const NumContainer = styled.div`
+  height: 50%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d6928b;
+`;
 
 const TableButton = styled(Button)`
   height: 300px;
@@ -35,6 +51,24 @@ const EnterButton = styled(SubmitButton)`
   background-color: #d6928b;
 `;
 
+const UpIcon = styled(FontAwesomeIcon).attrs({
+  icon: 'chevron-up',
+})`
+  height: 25%;
+  font-size: 0.25em;
+  color: white;
+  padding: 0 2em;
+`;
+
+const DownIcon = styled(FontAwesomeIcon).attrs({
+  icon: 'chevron-down',
+})`
+  height: 25%;
+  font-size: 0.25em;
+  color: white;
+  padding: 0 2em;
+`;
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -43,40 +77,37 @@ class Home extends React.Component {
       ones: 0
     };
 
-    this.addTens = this.addTens.bind(this);
-    this.addOnes = this.addOnes.bind(this);
+    this.calcTens = this.calcTens.bind(this);
+    this.calcOnes = this.calcOnes.bind(this);
     this.setTable = this.setTable.bind(this);
   }
 
-  addTens() {
-    let {tens} = this.state;
 
-    if (tens === 2) {
-      tens = 0;
-    } else {
-      tens = tens + 1;
-    }
-
-    this.setState({tens: tens});
+  calcOnes(num) {
+    return () => {
+      this.setState(state => {
+        let { ones } = this.state;
+        ones = (ones + num + 10) % 10;
+        return ({ ones: ones });
+      });
+    };
   }
 
-  addOnes() {
-    let {ones} = this.state;
-
-    if (ones === 9) {
-      ones = 0;
-    } else {
-      ones = ones + 1;
-    }
-
-    this.setState({ones: ones});
+  calcTens(num) {
+    return () => {
+      this.setState(state => {
+        let { tens } = state;
+        tens = (tens + num + 3) % 3;
+        return ({ tens : tens });
+      });
+    };
   }
 
   setTable() {
     const {tens, ones} = this.state;
     const tableNumber = (tens * 10) + ones;
 
-    if (tableNumber === 0) {
+    if (tableNumber === 0 || tableNumber === 26) {
       return;
     }
 
@@ -100,11 +131,19 @@ class Home extends React.Component {
       <div>
         <WelcomeHeader />
         <h2>Click to your Table Number</h2>
-        <div id="table">
-          <TensButton onClick={this.addTens}>{tens}</TensButton>
-          <OnesButton onClick={this.addOnes}>{ones}</OnesButton>
+        <Table>
+          <TensButton>
+            <UpIcon onClick={this.calcTens(1)}></UpIcon>
+            <NumContainer>{tens}</NumContainer>
+            <DownIcon onClick={this.calcTens(-1)}></DownIcon>
+          </TensButton>
+          <OnesButton>
+            <UpIcon onClick={this.calcOnes(1)}></UpIcon>
+            <NumContainer>{ones}</NumContainer>
+            <DownIcon onClick={this.calcOnes(-1)}></DownIcon>
+          </OnesButton>
           <EnterButton onClick={this.setTable}>Enter</EnterButton>
-        </div>
+        </Table>
       </div>
     );
   }
