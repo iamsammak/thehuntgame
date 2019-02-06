@@ -116,8 +116,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const {tens} = this.state;
-    const {ones} = this.state;
+    const { tens, ones } = this.state;
 
     const { cookies, join } = this.props;
     const table = cookies.get("table");
