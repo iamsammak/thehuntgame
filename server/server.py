@@ -18,14 +18,14 @@ CLIENTS = {}
 # { table number -> { puzzle number -> { solved } } }
 GAME_STATE = {}
 INITIAL_GAME_STATE_FOR_TABLE = {
-  1: {'solved': False},
-  2: {'solved': False},
-  3: {'solved': False},
-  4: {'solved': False},
-  5: {'solved': False},
-  6: {'solved': False},
-  7: {'solved': False},
-  8: {'solved': False},
+  1: {'solved': False, 'started': False},
+  2: {'solved': False, 'started': False},
+  3: {'solved': False, 'started': False},
+  4: {'solved': False, 'started': True},
+  5: {'solved': False, 'started': False},
+  6: {'solved': False, 'started': False},
+  7: {'solved': False, 'started': False},
+  8: {'solved': False, 'started': False},
 }
 ANSWERS = {
   1: 'getaway',
@@ -36,6 +36,15 @@ ANSWERS = {
   6: '',
   7: [False, True, True, False, False, True, True, False, False, True],
   8: '',
+}
+START_CRITERIA = {
+  1: 'Ryan',
+  2: 'Kristi',
+  3: 'Erica',
+  5: 'Helena',
+  6: 'MaryAnn',
+  7: 'Ryan',
+  8: 'Jay',
 }
 
 def game_complete(table):
@@ -126,6 +135,19 @@ def submit(sid, data):
     GAME_STATE[table]['end_time'] = datetime.now().isoformat()
     send_game_state(table=table)
     send_redirect(table, 'FINISH')
+
+@sio.on('person_visit')
+def person_visit(sid, data):
+  print("person_visit", sid, data)
+  table = CLIENTS[sid]
+  game_state = GAME_STATE[table]
+  name = data['name']
+
+  for puzzle in game_state:
+    if START_CRITERIA.get(puzzle) == name and not game_state[puzzle]['solved'] and not game_state[puzzle]['started']:
+      game_state[puzzle]['started'] = True
+      send_game_state(table=table)
+      return
 
 @sio.on('disconnect')
 def disconnect(sid):

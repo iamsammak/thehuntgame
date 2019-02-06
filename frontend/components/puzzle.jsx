@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import styled, { css, keyframes } from 'styled-components';
 
 // style component for incorrect answers
@@ -70,10 +69,6 @@ export default class Puzzle extends React.Component {
   render() {
     const { component: Component } = this.props;
     const { correct } = this.state;
-    if (correct === true) {
-      return <Redirect to="/main" />;
-    } else {
-      return <Component correct={correct} reset={this.resetCorrect} {...this.props} />;
-    }
+    return <Component correct={correct} reset={this.resetCorrect} {...this.props} />;
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getCurrentStage } from '../helpers';
-import EmptyBody from './emptyBody';
+import Base from './base';
 import PersonHeader from './personHeader';
 import Puzzle from './puzzle';
 import Puzzle5 from './puzzle5';
@@ -9,11 +9,11 @@ import Puzzle7Clue from './puzzle7Clue';
 
 class Person5 extends React.Component {
   render() {
-    const { gameState } = this.props;
+    const { gameState, name } = this.props;
     const stage = getCurrentStage(gameState);
-    const name = 'Erica';
+    const showBase = true;
 
-    let body = <EmptyBody name={name} />;
+    let body;
     if (stage === 5) {
       body = <Puzzle {...this.props} component={Puzzle5} />;
     } else if (stage === 7) {
@@ -23,6 +23,7 @@ class Person5 extends React.Component {
     return (
       <div>
         <PersonHeader name={name} />
+        {showBase && <Base name={name} />}
         {body}
       </div>
     );
