@@ -1,19 +1,28 @@
 import React from 'react';
-import { render } from 'react-dom';
 import io from 'socket.io-client';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
+library.add(fas);
+
+
+const CheckIcon = styled(FontAwesomeIcon).attrs( props => ({
+  icon: props.solved ? 'check' : 'times',
+}))`
+  color: ${props => (props.solved ? 'green' : 'red')};
+`;
 class Admin extends React.Component {
   constructor(props) {
     super(props);
     const socket = io(SOCKET_URL);
     socket.on('admin_return', (data) => {
-      var dataArray = []
-
-      this.setState({gameState : data['gameState'], tableData : data['tableData']});
-    console.log('i heard an answer')
-    console.log(this.state)
+      this.setState({ gameState : data['gameState'], tableData : data['tableData'] });
     });
     this.state = {
       socket:socket,
+      solved:false,
       tableData : [['initialValue']],
       gameState : [''],
       info: [['Hello! Welcome to the Admin Page. Press the button to see the progress!']],
@@ -22,62 +31,59 @@ class Admin extends React.Component {
   }
 
   adminPing() {
-    const { socket } = this.state
-    socket.emit('admin_ping', {})
-    console.log('i made a ping')
+    const { socket } = this.state;
+    socket.emit('admin_ping', {});
   }
 
   startGame() {
-    console.log('this will be the start game button')
+    console.log('this will be the start game button');
   }
   renderClients(table) {
-    const { tableData } = this.state
+    const { tableData } = this.state;
     const clientElements = Object.entries(tableData[table]).map((elements,i) => {
-      var clients = elements[1]
+      var clients = elements[1];
       return (
-          <li key={i}>{clients}</li>
-        )
-      });
-    return clientElements
-  }
-
- renderPuzzle(table) {
-    const { gameState } = this.state
-    const puzzleElements = Object.entries(gameState[table]).map(elements => {
-      var puzzle = elements[0]
-      var solved = elements[1]['solved']
-      console.log(solved)
-      return (
-          <li key={puzzle}>puzzle {puzzle} is solved? {solved.toString()}</li>
-      )
+        <li key={i}>{clients}</li>
+      );
     });
-    return puzzleElements
+    return clientElements;
   }
 
-  render() {  
- 
-    const { tableData } = this.state
+  renderPuzzle(table) {
+    const { gameState } = this.state;
+    const puzzleElements = Object.entries(gameState[table]).map(elements => {
+      var puzzle = elements[0];
+      var solved = elements[1]['solved'];
+      return (
+        <li key={puzzle}>puzzle {puzzle}: <CheckIcon solved={solved}></CheckIcon></li>
+      );
+    });
+    return puzzleElements;
+  }
+
+  render() {
+    const { tableData } = this.state;
     const tableElements = Object.entries(tableData).map(elements => {
-      var table = elements[0]
-      console.log(table)
+      var table = elements[0];
       var clientList = this.renderClients(table);
       var tableGamestate = this.renderPuzzle(table);
-       return (
+      return (
         <div key={table}>
           <h1>{table}</h1>
           <p>Participants: {clientList} </p>
           <p>Status: {tableGamestate} </p>
+
         </div>
       );
-    })
+    });
 
-     return(
+    return (
       <div>
-       <button type = "submit" onClick ={() =>this.startGame()}> Press Me! </button>
+        <button type = "submit" onClick ={() =>this.startGame()}> Press Me! </button>
         <div>
           { tableElements }
         </div>
-    </div>
+      </div>
     );
   }
 }
