@@ -33,7 +33,7 @@ const AppContainer = styled.div`
 
 const REDIRECTS = {
   'FINISH': '/finish',
-};
+}
 
 class App extends React.Component {
   constructor(props) {

@@ -45,19 +45,19 @@ const OnesContainer = styled(Container)`
 const UpIcon = styled(FontAwesomeIcon).attrs({
   icon: 'chevron-up',
 })`
-height: 25%;
-font-size: 0.25em;
-color: white;
-padding: 0 2em;
+  height: 25%;
+  font-size: 0.25em;
+  color: white;
+  padding: 0 2em;
 `;
 
 const DownIcon = styled(FontAwesomeIcon).attrs({
   icon: 'chevron-down',
 })`
-height: 25%;
-font-size: 0.25em;
-color: white;
-padding: 0 2em;
+  height: 25%;
+  font-size: 0.25em;
+  color: white;
+  padding: 0 2em;
 `;
 
 const EnterButton = styled(SubmitButton)`
