@@ -90,7 +90,7 @@ def adminconnect(sid, environ):
   for client in CLIENTS:
     tablenumber = CLIENTS[client]
     table_data[tablenumber].append(client)
-  data_to_send = {'tableData' : table_data,'gameState' : GAME_STATE
+  data_to_send = {'tableData' : table_data,'gameState' : GAME_STATE}
   sio.emit('admin_return', data_to_send)
 
 
