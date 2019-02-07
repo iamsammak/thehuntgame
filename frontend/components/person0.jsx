@@ -5,6 +5,8 @@ import Base from './base';
 import Hint from './hint';
 import Puzzle from './puzzle';
 import Puzzle4 from './puzzle4';
+import Puzzle5Clue from './puzzle5Clue';
+import Puzzle7Clue from './puzzle7Clue';
 import PersonHeader from './personHeader';
 
 class Person0 extends React.Component {
@@ -32,7 +34,9 @@ class Person0 extends React.Component {
     } else if (stage > 1 && stage <= 4) {
       body = <Puzzle {...this.props} component={Puzzle4} />;
     } else if (stage === 5) {
-      body = <div>Try talking to other members of the bridal party. I think they have some more information.</div>;
+      body = <Puzzle5Clue clue="clue0" />;
+    } else if (stage === 7) {
+      body = <Puzzle7Clue clue="clue0" />;
     }
 
     return (
