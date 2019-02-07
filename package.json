@@ -5,7 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint \"frontend/**/**.jsx\"",
+    "lint": "eslint ./frontend --ext .jsx --ext .js",
+    "lint-fix": "eslint ./frontend --ext .jsx --ext .js --fix",
     "webpack": "webpack --mode=development --watch",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production"
