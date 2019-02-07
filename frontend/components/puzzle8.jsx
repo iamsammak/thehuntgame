@@ -165,6 +165,7 @@ class Puzzle8 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: false,
       position: [7, 8],
       deviated: false,
       checkpoint: [7, 8],
@@ -177,7 +178,7 @@ class Puzzle8 extends React.Component {
   move(direction) {
     return () => {
       this.setState((state) => {
-        let { position, deviate, checkpoint } = state;
+        let { error, position, deviate, checkpoint } = state;
         switch (direction) {
         case 'up':
           position = [position[0] - 1, position[1]]; break;
@@ -202,6 +203,10 @@ class Puzzle8 extends React.Component {
             // Player has deviated, reset them to last checkpoint
             position = checkpoint;
             deviate = false;
+            error = true;
+            setTimeout(() => {
+              this.setState({ error: false });
+            }, 2000);
           } else {
             // Player reached checkpoint without deviating, set new checkpoint
             checkpoint = position;
@@ -217,6 +222,7 @@ class Puzzle8 extends React.Component {
         }
 
         return {
+          error,
           position,
           deviate,
           checkpoint,
@@ -248,6 +254,7 @@ class Puzzle8 extends React.Component {
   }
 
   render() {
+    const { error } = this.state;
     return (
       <div>
         <Narration>You find Jay outside and hand him the flashlight.</Narration>
@@ -263,6 +270,13 @@ class Puzzle8 extends React.Component {
           </MiddleContainer>
           <Arrow direction="down" disabled={this.hasProp('down')} onClick={this.move('down')} />
         </MazeContainer>
+        {
+          error && (
+            <p>
+              No, no...that's not where I went. Let's try again.
+            </p>
+          )
+        }
       </div>
     );
   }

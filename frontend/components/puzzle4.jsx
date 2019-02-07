@@ -10,6 +10,7 @@ class Puzzle4 extends React.Component {
     super(props);
     this.state = {
       value: [false, false, false, false, false, false, false, false, false],
+      error: false,
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -40,6 +41,11 @@ class Puzzle4 extends React.Component {
 
     if (stage === 4) {
       send('submit', { puzzle: '4', answer: answer });
+    } else {
+      this.setState({ error: true });
+      setTimeout(() => {
+        this.setState({ error: false });
+      }, 2000);
     }
 
     this.clearValue();
@@ -47,6 +53,7 @@ class Puzzle4 extends React.Component {
 
   render() {
     const { gameState } = this.props;
+    const { error } = this.state;
     const solved = isSolved(gameState, 4);
 
     return (
@@ -73,6 +80,13 @@ class Puzzle4 extends React.Component {
           solved && (
             <p>
               There we go...oh. Doesn&apos;t look like we put the key here. Where else could it be then?
+            </p>
+          )
+        }
+        {
+          error && (
+            <p>
+              Are you sure about that?
             </p>
           )
         }
