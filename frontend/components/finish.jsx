@@ -3,9 +3,13 @@ import styled from 'styled-components';
 
 import { getCurrentStage, formatElapsedTime } from '../helpers';
 
+const Congrats = styled.p`
+  font-size: 2em;
+`;
+
 const Time = styled.div`
   font-family: monospace;
-  font-size: 4em;
+  font-size: 3em;
 `;
 
 class Finish extends React.Component {
@@ -19,6 +23,7 @@ class Finish extends React.Component {
       return (
         <div>
           Hm...it doesn&apos;t look like you&apos;ve finished the game yet.
+          <br />
           <a href="/main">Continue</a>
         </div>
       );
@@ -26,7 +31,14 @@ class Finish extends React.Component {
 
     return (
       <div>
-        Congrats! Your finishing time is:
+        <p>
+          Turns out the key was with the bride and groom at their sweetheart table all along. How anticlimactic, right?
+        </p>
+        <Congrats>CONGRATULATIONS!</Congrats>
+        <p>
+          Show them this screen and take a celebratory picture with them!
+        </p>
+        Your finishing time is:
         <Time>
           {formatElapsedTime(elapsed)}
         </Time>
