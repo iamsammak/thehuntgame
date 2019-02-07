@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import Home from './home';
 import Main from './main';
+import Person from './person';
 import Person0 from './person0';
 import Person1 from './person1';
 import Person2 from './person2';
@@ -98,14 +99,14 @@ class App extends React.Component {
           <Route path="/home" render={() => <Home {...this.state} />} />
           <Route path="/main" render={() => <Main {...this.state} />} />
           <Route path="/finish" render={() => <Finish {...this.state} />} />
-          <Route path="/matt" render={() => <Person0 {...this.state} />} />
-          <Route path="/tim" render={() => <Person1 {...this.state} />} />
-          <Route path="/jay" render={() => <Person2 {...this.state} />} />
-          <Route path="/ryan" render={() => <Person3 {...this.state} />} />
-          <Route path="/kristi" render={() => <Person4 {...this.state} />} />
-          <Route path="/erica" render={() => <Person5 {...this.state} />} />
-          <Route path="/maryann" render={() => <Person6 {...this.state} />} />
-          <Route path="/helena" render={() => <Person7 {...this.state} />} />
+          <Route path="/matt" render={() => <Person {...this.state} component={Person0} name="Matt" />} />
+          <Route path="/tim" render={() => <Person {...this.state} component={Person1} name="Tim" />} />
+          <Route path="/jay" render={() => <Person {...this.state} component={Person2} name="Jay" />} />
+          <Route path="/ryan" render={() => <Person {...this.state} component={Person3} name="Ryan" />} />
+          <Route path="/kristi" render={() => <Person {...this.state} component={Person4} name="Kristi" />} />
+          <Route path="/erica" render={() => <Person {...this.state} component={Person5} name="Erica" />} />
+          <Route path="/maryann" render={() => <Person {...this.state} component={Person6} name="MaryAnn" />} />
+          <Route path="/helena" render={() => <Person {...this.state} component={Person7} name="Helena" />} />
         </div>
         <ToastContainer
           position={toast.POSITION.TOP_RIGHT}

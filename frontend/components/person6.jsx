@@ -1,18 +1,18 @@
 import React from 'react';
 
 import { getCurrentStage } from '../helpers';
-import EmptyBody from './emptyBody';
+import Base from './base';
 import PersonHeader from './personHeader';
 import Puzzle5Clue from './puzzle5Clue';
 import Puzzle6 from './puzzle6';
 
 class Person6 extends React.Component {
   render() {
-    const { gameState, send } = this.props;
+    const { gameState, name } = this.props;
     const stage = getCurrentStage(gameState);
-    const name = 'MaryAnn';
+    const showBase = true;
 
-    let body = <EmptyBody name={name} />;
+    let body;
     if (stage === 5) {
       body = <Puzzle5Clue clue="clue2" />;
     } else if (stage === 6) {
@@ -22,6 +22,7 @@ class Person6 extends React.Component {
     return (
       <div>
         <PersonHeader name={name} />
+        {showBase && <Base name={name} />}
         {body}
       </div>
     );
