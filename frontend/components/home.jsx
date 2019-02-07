@@ -104,7 +104,7 @@ class Home extends React.Component {
   }
 
   setTable() {
-    const {tens, ones} = this.state;
+    const { tens, ones } = this.state;
     const tableNumber = (tens * 10) + ones;
 
     if (tableNumber === 0 || tableNumber === 26) {
