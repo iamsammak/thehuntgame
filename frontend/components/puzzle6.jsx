@@ -1,14 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { isSolved } from '../helpers';
 
 const border = '2px solid black';
 const START_ICON = 'star';
 const END_ICON = 'gem';
-
-const Container = styled.div`
-`;
 
 const Row = styled.div`
   display: flex;
@@ -216,6 +214,8 @@ class Puzzle6 extends React.Component {
 
   render() {
     const { position } = this.state;
+    const { gameState } = this.props;
+    const solved = isSolved(gameState, 6);
 
     const [currentX, currentY] = position;
     const anchorX = Math.floor(currentX / 3) * 3;
@@ -223,27 +223,39 @@ class Puzzle6 extends React.Component {
     const adjacentCells = this.calculateAdjacent(anchorX, anchorY);
 
     return (
-      <Container>
+      <div>
+        <p>
+          Maybe we should check the basement. I think I saw Ryan headed that way, but he hasn&apos;t come back in a while.
+        </p>
+        <div>
+          {
+            [...Array(3).keys()].map((i) => {
+              return (
+                <Row key={i}>
+                  {
+                    [...Array(3).keys()].map((j) => {
+                      const x = anchorX + i;
+                      const y = anchorY + j;
+                      return (
+                        <div key={j}>
+                          {this.renderCell(x, y, this.isAdjacent(x, y, currentX, currentY, adjacentCells))}
+                        </div>
+                      );
+                    })
+                  }
+                </Row>
+              );
+            })
+          }
+        </div>
         {
-          [...Array(3).keys()].map((i) => {
-            return (
-              <Row key={i}>
-                {
-                  [...Array(3).keys()].map((j) => {
-                    const x = anchorX + i;
-                    const y = anchorY + j;
-                    return (
-                      <div key={j}>
-                        {this.renderCell(x, y, this.isAdjacent(x, y, currentX, currentY, adjacentCells))}
-                      </div>
-                    );
-                  })
-                }
-              </Row>
-            );
-          })
+          solved && (
+            <p>
+              Ryan, there you are! What kind of crazy basement maze was that?
+            </p>
+          )
         }
-      </Container>
+      </div>
     );
   }
 }

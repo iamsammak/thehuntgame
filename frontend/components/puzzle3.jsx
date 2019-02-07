@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { isSolved } from '../helpers';
 import { AnswerAwareDiv } from './puzzle.jsx';
 import { KeypadContainer, Button } from './buttonContants';
 
@@ -51,19 +52,20 @@ class Puzzle3 extends React.Component {
   handleClear() {
     const { reset } = this.props;
 
-    this.setState({ combo:initial_combo });
+    this.setState({ combo: initial_combo });
     reset();
   }
 
   render() {
     const { combo } = this.state;
+    const { gameState } = this.props;
+    const solved = isSolved(gameState, 3);
 
     return (
       <div>
-        <div className="riddle">
-          <p>Some riddle pertaining to the pictures below</p>
-          <p>make the correct selections are you&apos;ll best this foe</p>
-        </div>
+        <p>
+          He kept talking about how his tea favor idea needs to be CAPITALIZED. It would be the FIRST idea of its kind where guests can choose from EACH of the tea components.
+        </p>
         <div>
           {
             combo.map((pw, i) => {
@@ -76,19 +78,26 @@ class Puzzle3 extends React.Component {
           }
         </div>
         <KeypadContainer>
-          <Button onClick={this.handleClick(1)}>1</Button>
-          <Button onClick={this.handleClick(2)}>2</Button>
-          <Button onClick={this.handleClick(3)}>3</Button>
-          <Button onClick={this.handleClick(4)}>4</Button>
-          <Button onClick={this.handleClick(5)}>5</Button>
-          <Button onClick={this.handleClick(6)}>6</Button>
-          <Button onClick={this.handleClick(7)}>7</Button>
-          <Button onClick={this.handleClick(8)}>8</Button>
-          <Button onClick={this.handleClick(9)}>9</Button>
-          <Button onClick={this.handleClear}>clear</Button>
-          <Button onClick={this.handleClick(0)}>0</Button>
-          <Button onClick={this.submitAnswer}>Enter</Button>
+          <Button disabled={solved} onClick={this.handleClick(1)}>1</Button>
+          <Button disabled={solved} onClick={this.handleClick(2)}>2</Button>
+          <Button disabled={solved} onClick={this.handleClick(3)}>3</Button>
+          <Button disabled={solved} onClick={this.handleClick(4)}>4</Button>
+          <Button disabled={solved} onClick={this.handleClick(5)}>5</Button>
+          <Button disabled={solved} onClick={this.handleClick(6)}>6</Button>
+          <Button disabled={solved} onClick={this.handleClick(7)}>7</Button>
+          <Button disabled={solved} onClick={this.handleClick(8)}>8</Button>
+          <Button disabled={solved} onClick={this.handleClick(9)}>9</Button>
+          <Button disabled={solved} onClick={this.handleClear}>clear</Button>
+          <Button disabled={solved} onClick={this.handleClick(0)}>0</Button>
+          <Button disabled={solved} onClick={this.submitAnswer}>Enter</Button>
         </KeypadContainer>
+        {
+          solved && (
+            <p>
+              Ah, that&apos;s right. Everything&apos;s in order here, but it doesn&apos;t look like the key is here.
+            </p>
+          )
+        }
       </div>
     );
   }

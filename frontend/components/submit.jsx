@@ -29,11 +29,11 @@ class Submit extends React.Component {
   }
 
   render() {
-    const { correct } = this.props;
+    const { correct, disabled } = this.props;
     const { value } = this.state;
 
     return (
-      <div>
+      <span>
         <AnswerAwareInput
           type="text"
           autocomplete="off"
@@ -41,9 +41,10 @@ class Submit extends React.Component {
           correct={correct}
           value={value}
           onChange={this.handleChange}
+          disabled={disabled}
         />
-        <button type="submit" onClick={this.submitAnswer}>submit</button>
-      </div>
+        <button type="submit" onClick={this.submitAnswer} disabled={disabled}>submit</button>
+      </span>
     );
   }
 }

@@ -26,3 +26,8 @@ export const XlSpacing = styled.div`
   height: ${xlSpacing};
 `;
 
+export const Narration = styled.div`
+  font-style: italic;
+  font-size: 0.8em;
+`;
+

@@ -21,7 +21,7 @@ INITIAL_GAME_STATE_FOR_TABLE = {
   1: {'solved': False, 'started': False},
   2: {'solved': False, 'started': False},
   3: {'solved': False, 'started': False},
-  4: {'solved': False, 'started': True},
+  4: {'solved': False, 'started': False},
   5: {'solved': False, 'started': False},
   6: {'solved': False, 'started': False},
   7: {'solved': False, 'started': False},
@@ -41,6 +41,7 @@ START_CRITERIA = {
   1: 'Ryan',
   2: 'Kristi',
   3: 'Erica',
+  4: 'Tim',
   5: 'Helena',
   6: 'MaryAnn',
   7: 'Ryan',
@@ -144,10 +145,11 @@ def person_visit(sid, data):
   name = data['name']
 
   for puzzle in game_state:
-    if START_CRITERIA.get(puzzle) == name and not game_state[puzzle]['solved'] and not game_state[puzzle]['started']:
-      game_state[puzzle]['started'] = True
-      send_game_state(table=table)
-      return
+    if START_CRITERIA.get(puzzle) == name and not game_state[puzzle]['started'] and not game_state[puzzle]['solved']:
+      if puzzle == 1 or game_state[puzzle - 1]['solved']:
+        game_state[puzzle]['started'] = True
+        send_game_state(table=table)
+        return
 
 @sio.on('disconnect')
 def disconnect(sid):

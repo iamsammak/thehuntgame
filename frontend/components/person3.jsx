@@ -4,9 +4,9 @@ import { getCurrentStage } from '../helpers';
 import Base from './base';
 import PersonHeader from './personHeader';
 import Puzzle from './puzzle';
-import Puzzle3 from './puzzle3';
+import Puzzle1 from './puzzle1';
 import Puzzle5Clue from './puzzle5Clue';
-import Puzzle7Clue from './puzzle7Clue';
+import Puzzle7 from './puzzle7';
 import Puzzle8 from './puzzle8';
 
 class Person3 extends React.Component {
@@ -16,12 +16,12 @@ class Person3 extends React.Component {
     const showBase = true;
 
     let body;
-    if (stage < 4 && gameState[3] && !gameState[3].solved) {
-      body = <Puzzle {...this.props} component={Puzzle3} />;
+    if (stage === 1) {
+      body = <Puzzle {...this.props} component={Puzzle1} />;
     } else if (stage === 5) {
       body = <Puzzle5Clue clue="clue3" />;
     } else if (stage === 7) {
-      body = <Puzzle7Clue clue="clue2" />;
+      body = <Puzzle {...this.props} component={Puzzle7} />;
     } else if (stage === 8) {
       body = <Puzzle {...this.props} component={Puzzle8} />;
     }
@@ -30,6 +30,7 @@ class Person3 extends React.Component {
       <div>
         <PersonHeader name={name} />
         {showBase && <Base name={name} />}
+        <br />
         {body}
       </div>
     );

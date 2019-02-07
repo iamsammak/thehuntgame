@@ -18,7 +18,7 @@ class Finish extends React.Component {
     if (stage != 9) {
       return (
         <div>
-          Hm...it doesn't look like you've finished the game yet.
+          Hm...it doesn&apos;t look like you&apos;ve finished the game yet.
           <a href="/main">Continue</a>
         </div>
       );

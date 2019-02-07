@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { Narration } from '../wrappers';
+import { isSolved } from '../helpers';
 import { smSpacing } from '../constants';
 import Switch from './switch';
 
@@ -46,6 +48,8 @@ class Puzzle7 extends React.Component {
 
   render() {
     const { switchState } = this.state;
+    const { gameState } = this.props;
+    const solved = isSolved(gameState, 7);
 
     const chunkSize = 5;
     const startIndices = [];
@@ -55,6 +59,10 @@ class Puzzle7 extends React.Component {
 
     return (
       <div>
+        <Narration>You find Ryan at a panel with ten switches.</Narration>
+        <p>
+          The venue manager told us to open this panel in case of emergency. Given that it&apos;s almost time for their getaway and we still don&apos;t have the key, I think this is an emergency. Only thing is that the manager told each of us how to open it, but we each only have part of the code. Can you figure this out?
+        </p>
         {
           startIndices.map((i) => {
             return (
@@ -72,6 +80,16 @@ class Puzzle7 extends React.Component {
         <SubmitButton onClick={this.handleSubmit}>
           Connect
         </SubmitButton>
+        {
+          solved && (
+            <div>
+              <p>
+                Finally! Let&apos;s see what&apos;s in here...A flashlight? All that for a flashlight?! Unbelievable...
+              </p>
+              <Narration>You found a flashlight.</Narration>
+            </div>
+          )
+        }
       </div>
     );
   }
