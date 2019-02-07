@@ -77,7 +77,6 @@ def admin():
   root_dir = os.getcwd()
   return send_from_directory(os.path.join(root_dir, 'frontend'), 'huntadmin.html')
 
-# return jsonify({ 'game_state': GAME_STATE, 'clients': CLIENTS })
 ### Only for development use ###
 
 @sio.on('connect')

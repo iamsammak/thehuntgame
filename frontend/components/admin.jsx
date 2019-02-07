@@ -13,6 +13,7 @@ const CheckIcon = styled(FontAwesomeIcon).attrs( props => ({
 }))`
   color: ${props => (props.solved ? 'green' : 'red')};
 `;
+
 class Admin extends React.Component {
   constructor(props) {
     super(props);
@@ -23,9 +24,8 @@ class Admin extends React.Component {
     this.state = {
       socket:socket,
       solved:false,
-      tableData : [['initialValue']],
+      tableData : [],
       gameState : [''],
-      info: [['Hello! Welcome to the Admin Page. Press the button to see the progress!']],
     };
     this.adminPing();
   }
@@ -38,6 +38,7 @@ class Admin extends React.Component {
   startGame() {
     console.log('this will be the start game button');
   }
+
   renderClients(table) {
     const { tableData } = this.state;
     const clientElements = Object.entries(tableData[table]).map((elements,i) => {
@@ -55,7 +56,7 @@ class Admin extends React.Component {
       var puzzle = elements[0];
       var solved = elements[1]['solved'];
       return (
-        <li key={puzzle}>puzzle {puzzle}: <CheckIcon solved={solved}></CheckIcon></li>
+        <li key={puzzle}>puzzle {puzzle}: <CheckIcon solved={solved}/></li>
       );
     });
     return puzzleElements;
@@ -66,12 +67,12 @@ class Admin extends React.Component {
     const tableElements = Object.entries(tableData).map(elements => {
       var table = elements[0];
       var clientList = this.renderClients(table);
-      var tableGamestate = this.renderPuzzle(table);
+      var tableGameState = this.renderPuzzle(table);
       return (
         <div key={table}>
           <h1>{table}</h1>
           <p>Participants: {clientList} </p>
-          <p>Status: {tableGamestate} </p>
+          <p>Status: {tableGameState} </p>
 
         </div>
       );
