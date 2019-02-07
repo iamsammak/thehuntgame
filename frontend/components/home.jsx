@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import WelcomeHeader from './welcomeHeader';
-import { Button, SubmitButton } from './buttonContants';
+import { SubmitButton } from './buttonContants';
 
 const Table = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const Table = styled.div`
   justify-content: center;
 `;
 
-const NumContainer = styled.div`
+const TableNumber = styled.div`
   height: 50%;
   width: 100%;
   display: flex;
@@ -22,24 +22,42 @@ const NumContainer = styled.div`
   color: #d6928b;
 `;
 
-const TableButton = styled(Button)`
+const Container = styled.div`
   height: 300px;
   width: 150px;
   font-size: 100px;
 `;
 
-const TensButton = styled(TableButton)`
+const TensContainer = styled(Container)`
   border-width: 1px 0 0 1px;
   margin: 5px 0 0 5px;
   border-radius: 25px 0 0 0;
   background-color: #f8dfca;
 `;
 
-const OnesButton = styled(TableButton)`
+const OnesContainer = styled(Container)`
   border-width: 1px 1px 0 0;
   margin: 5px 5px 0 0;
   border-radius: 0 25px 0 0;
   background-color: #bcd7cf;
+`;
+
+const UpIcon = styled(FontAwesomeIcon).attrs({
+  icon: 'chevron-up',
+})`
+height: 25%;
+font-size: 0.25em;
+color: white;
+padding: 0 2em;
+`;
+
+const DownIcon = styled(FontAwesomeIcon).attrs({
+  icon: 'chevron-down',
+})`
+height: 25%;
+font-size: 0.25em;
+color: white;
+padding: 0 2em;
 `;
 
 const EnterButton = styled(SubmitButton)`
@@ -49,24 +67,6 @@ const EnterButton = styled(SubmitButton)`
   border-top: 0;
   margin-top: 0;
   background-color: #d6928b;
-`;
-
-const UpIcon = styled(FontAwesomeIcon).attrs({
-  icon: 'chevron-up',
-})`
-  height: 25%;
-  font-size: 0.25em;
-  color: white;
-  padding: 0 2em;
-`;
-
-const DownIcon = styled(FontAwesomeIcon).attrs({
-  icon: 'chevron-down',
-})`
-  height: 25%;
-  font-size: 0.25em;
-  color: white;
-  padding: 0 2em;
 `;
 
 class Home extends React.Component {
@@ -131,16 +131,16 @@ class Home extends React.Component {
         <WelcomeHeader />
         <h2>Click to your Table Number</h2>
         <Table>
-          <TensButton>
+          <TensContainer>
             <UpIcon onClick={this.calcTens(1)}></UpIcon>
-            <NumContainer>{tens}</NumContainer>
+            <TableNumber>{tens}</TableNumber>
             <DownIcon onClick={this.calcTens(-1)}></DownIcon>
-          </TensButton>
-          <OnesButton>
+          </TensContainer>
+          <OnesContainer>
             <UpIcon onClick={this.calcOnes(1)}></UpIcon>
-            <NumContainer>{ones}</NumContainer>
+            <TableNumber>{ones}</TableNumber>
             <DownIcon onClick={this.calcOnes(-1)}></DownIcon>
-          </OnesButton>
+          </OnesContainer>
           <EnterButton onClick={this.setTable}>Enter</EnterButton>
         </Table>
       </div>
