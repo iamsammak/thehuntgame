@@ -2,6 +2,7 @@ import React from 'react';
 
 import { getCurrentStage } from '../helpers';
 import Base from './base';
+import Hint from './hint';
 import Puzzle from './puzzle';
 import Puzzle4 from './puzzle4';
 import PersonHeader from './personHeader';
@@ -11,6 +12,7 @@ class Person0 extends React.Component {
     const { gameState, name } = this.props;
     const stage = getCurrentStage(gameState);
     const showBase = true;
+    const hint = <Hint hint={stage} />;
 
     let body;
     if (stage === 1) {
@@ -37,6 +39,7 @@ class Person0 extends React.Component {
       <div>
         <PersonHeader name={name} />
         {showBase && <Base name={name} />}
+        {hint}
         <br />
         {body}
       </div>
