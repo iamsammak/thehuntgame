@@ -38,7 +38,7 @@ class Puzzle1 extends React.Component {
     return (
       <div>
         <p>
-Thanks so much for helping us find the key! I had it with me when I was setting up these tables, but I must have misplaced it when I was grabbing all these letters for each table. If I could only remember what these letters meant for your table, then maybe I could remember where I placed the keys. Do you know what these letters mean?
+          Thanks so much for helping us find the key! I had it with me when I was setting up these tables, but I must have misplaced it when I was grabbing all these letters for each table. If I could only remember what these letters meant for your table, then maybe I could remember where I placed the keys. Do you know what these letters mean?
         </p>
         <CipherContainer>
           {cipher}
