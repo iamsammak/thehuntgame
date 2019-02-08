@@ -7,7 +7,6 @@ import Puzzle from './puzzle';
 import Puzzle1 from './puzzle1';
 import Puzzle5Clue from './puzzle5Clue';
 import Puzzle7 from './puzzle7';
-import Puzzle8 from './puzzle8';
 
 class Person3 extends React.Component {
   render() {
@@ -22,8 +21,6 @@ class Person3 extends React.Component {
       body = <Puzzle5Clue clue="clue3" />;
     } else if (stage === 7) {
       body = <Puzzle {...this.props} component={Puzzle7} />;
-    } else if (stage === 8) {
-      body = <Puzzle {...this.props} component={Puzzle8} />;
     }
 
     return (
