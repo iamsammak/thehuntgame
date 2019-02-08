@@ -7,6 +7,7 @@ import eventlet.wsgi
 import random
 from copy import deepcopy
 from datetime import datetime
+from collections import defaultdict
 from string import ascii_lowercase as alphabet
 from flask import Flask, render_template, jsonify, request, send_from_directory
 
@@ -73,12 +74,25 @@ def static_files(path):
 
 @flask_app.route('/admin')
 def admin():
-  return jsonify({ 'game_state': GAME_STATE, 'clients': CLIENTS })
+  root_dir = os.getcwd()
+  return send_from_directory(os.path.join(root_dir, 'frontend'), 'huntadmin.html')
+
 ### Only for development use ###
 
 @sio.on('connect')
 def connect(sid, environ):
   print("connect ", sid)
+
+@sio.on('admin_ping')
+def adminconnect(sid, environ):
+  table_data = defaultdict(list)
+
+  for client in CLIENTS:
+    tablenumber = CLIENTS[client]
+    table_data[tablenumber].append(client)
+  data_to_send = {'tableData' : table_data,'gameState' : GAME_STATE}
+  sio.emit('admin_return', data_to_send)
+
 
 @sio.on('cipher_ping')
 def cipherconnect(sid, environ):
@@ -126,7 +140,6 @@ def submit(sid, data):
     'correct': correct,
   }
   sio.emit('submit_response', response, room=sid)
-
   if correct:
     table = CLIENTS[sid]
     GAME_STATE[table][int(puzzle)]['solved'] = True

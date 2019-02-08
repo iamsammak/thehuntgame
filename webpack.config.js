@@ -10,10 +10,13 @@ module.exports = (env, argv) => {
 
   return {
     context: __dirname,
-    entry: "./frontend/thehunt.jsx",
+    entry: {
+      hunt: "./frontend/thehunt.jsx",
+      admin: "./frontend/huntadmin.jsx"
+    },
     output: {
       path: path.resolve(__dirname),
-      filename: "./frontend/bundle.js"
+      filename: "./frontend/[name]-bundle.js"
     },
     module: {
       rules: [
