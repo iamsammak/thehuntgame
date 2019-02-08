@@ -14,6 +14,8 @@ from flask import Flask, render_template, jsonify, request, send_from_directory
 sio = socketio.Server()
 flask_app = Flask(__name__)
 
+GAME_STARTED = False
+
 # { sid -> table number }
 CLIENTS = {}
 # { table number -> { puzzle number -> { solved } } }
@@ -84,15 +86,38 @@ def connect(sid, environ):
   print("connect ", sid)
 
 @sio.on('admin_ping')
-def adminconnect(sid, environ):
-  table_data = defaultdict(list)
+def adminconnect(sid, data):
+  print('admin ping was triggered', data['trigger'])
+  trigger = data['trigger']
+  if trigger == 'load':
+    table_data = defaultdict(list)
 
-  for client in CLIENTS:
-    tablenumber = CLIENTS[client]
-    table_data[tablenumber].append(client)
-  data_to_send = {'tableData' : table_data,'gameState' : GAME_STATE}
-  sio.emit('admin_return', data_to_send)
+    for client in CLIENTS:
+      tablenumber = CLIENTS[client]
+      table_data[tablenumber].append(client)
+      data_to_send = {'tableData' : table_data,'gameState' : GAME_STATE, 'gameStarted': GAME_STARTED}
+      sio.emit('admin_return', data_to_send)
+  elif trigger == 'start_game':
+    global GAME_STARTED
+    print('Game has been started: ', GAME_STARTED)
+    GAME_STARTED = True
+    print('Game has been started: ', GAME_STARTED) 
+    data_to_send = {'gameStarted': GAME_STARTED}
+    sio.emit('gameStarted', data_to_send)
+  elif trigger == 'stop_game':
+    global GAME_STARTED
+    print('Game has been started: ', GAME_STARTED)
+    GAME_STARTED = False
+    print('Game has been started: ', GAME_STARTED) 
+    data_to_send = {'gameStarted': GAME_STARTED}
+    sio.emit('gameStarted', data_to_send)
 
+
+
+@sio.on('game_start_ping')
+def game_start(sid, data):
+  data_to_send = {'gameStarted': GAME_STARTED}
+  sio.emit('start_ping', data_to_send)
 
 @sio.on('cipher_ping')
 def cipherconnect(sid, environ):

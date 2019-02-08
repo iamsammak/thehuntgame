@@ -19,24 +19,32 @@ class Admin extends React.Component {
     super(props);
     const socket = io(SOCKET_URL);
     socket.on('admin_return', (data) => {
-      this.setState({ gameState : data['gameState'], tableData : data['tableData'] });
+      this.setState({ gameState : data['gameState'], tableData : data['tableData'], gameStarted: data['gameStarted'] });
     });
-    this.state = {
+     socket.on('gameStarted', (data) => {
+      this.setState({ gameStarted: data['gameStarted'] });
+    });
+   this.state = {
       socket:socket,
       solved:false,
       tableData : [],
       gameState : [''],
+      gameStarted: false
     };
-    this.adminPing();
+    this.adminPing('load');
   }
 
-  adminPing() {
+  adminPing(trigger) {
     const { socket } = this.state;
-    socket.emit('admin_ping', {});
+    socket.emit('admin_ping', {'trigger':trigger});
   }
 
   startGame() {
-    console.log('this will be the start game button');
+    this.adminPing('start_game')
+  }
+
+  stopGame() {
+    this.adminPing('stop_game')
   }
 
   renderClients(table) {
@@ -63,7 +71,12 @@ class Admin extends React.Component {
   }
 
   render() {
-    const { tableData } = this.state;
+    const { tableData, gameStarted } = this.state;
+    if (gameStarted === false) {
+      var message = "You have not started the game yet"
+  } else {
+    var message = "Game has been started"
+  }
     const tableElements = Object.entries(tableData).map(elements => {
       var table = elements[0];
       var clientList = this.renderClients(table);
@@ -81,6 +94,8 @@ class Admin extends React.Component {
     return (
       <div>
         <button type = "submit" onClick ={() =>this.startGame()}> Press Me! </button>
+        <button type = "submit" onClick ={() =>this.stopGame()}> Press Me to Stop Game! </button>
+       <p>{message}</p>
         <div>
           { tableElements }
         </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { withCookies } from 'react-cookie';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+import io from 'socket.io-client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import WelcomeHeader from './welcomeHeader';
@@ -72,11 +73,17 @@ const DownIcon = styled(FontAwesomeIcon).attrs({
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    const socket = io(SOCKET_URL)
+    socket.on('start_ping', (data) => { this.setState({ gameStarted: data['gameStarted']});
+    });
     this.state = {
+      socket:socket,
       tens: 0,
-      ones: 0
+      ones: 0,
+      gameStarted: false
     };
 
+    this.gameStartPing();
     this.calcTens = this.calcTens.bind(this);
     this.calcOnes = this.calcOnes.bind(this);
     this.setTable = this.setTable.bind(this);
@@ -104,23 +111,34 @@ class Home extends React.Component {
   }
 
   setTable() {
-    const {tens, ones} = this.state;
+    const {tens, ones, gameStarted} = this.state;
     const tableNumber = (tens * 10) + ones;
-
+    if (gameStarted === false) {
+      var errorMessage = 'Game has not started'
+    } else {
     if (tableNumber === 0 || tableNumber === 26) {
       return;
+      }
+      const { cookies } = this.props;
+      cookies.set("table", tableNumber);
     }
+  }
 
-    const { cookies } = this.props;
-    cookies.set("table", tableNumber);
+  gameStartPing() {
+    console.log('here is the start ping')
+    const { socket } = this.state;
+    socket.emit('game_start_ping', {});
   }
 
   render() {
-    const { tens, ones } = this.state;
+    const { tens, ones, gameStarted } = this.state;
 
     const { cookies, join } = this.props;
     const table = cookies.get("table");
-
+    console.log(gameStarted)
+    if (gameStarted === false) {
+      var message = 'Game has not started'
+  }
     if (table) {
       join(table);
       return <Redirect to="/main" />;
@@ -143,6 +161,7 @@ class Home extends React.Component {
           </OnesButton>
           <EnterButton onClick={this.setTable}>Enter</EnterButton>
         </Table>
+        <p>{message}</p>
       </div>
     );
   }
