@@ -91,12 +91,15 @@ def adminconnect(sid, data):
   trigger = data['trigger']
   if trigger == 'load':
     table_data = defaultdict(list)
+    puzzle_data = defaultdict(list)
 
-    for client in CLIENTS:
-      tablenumber = CLIENTS[client]
-      table_data[tablenumber].append(client)
-      data_to_send = {'tableData' : table_data,'gameState' : GAME_STATE, 'gameStarted': GAME_STARTED}
-      sio.emit('admin_return', data_to_send)
+    for table in GAME_STATE:
+      data = GAME_STATE[table]
+      for puzzle in data:
+        puzzle_data[puzzle].append({table: data[puzzle]})
+
+    data_to_send = {'puzzleData' : puzzle_data, 'gameStarted': GAME_STARTED}
+    sio.emit('admin_return', data_to_send)
   elif trigger == 'start_game':
     global GAME_STARTED
     print('Game has been started: ', GAME_STARTED)

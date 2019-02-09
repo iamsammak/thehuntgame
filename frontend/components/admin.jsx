@@ -19,16 +19,14 @@ class Admin extends React.Component {
     super(props);
     const socket = io(SOCKET_URL);
     socket.on('admin_return', (data) => {
-      this.setState({ gameState : data['gameState'], tableData : data['tableData'], gameStarted: data['gameStarted'] });
+      this.setState({ puzzleData: data['puzzleData'],  gameStarted: data['gameStarted'] });
     });
      socket.on('gameStarted', (data) => {
       this.setState({ gameStarted: data['gameStarted'] });
     });
    this.state = {
       socket:socket,
-      solved:false,
-      tableData : [],
-      gameState : [''],
+      puzzleData:[],
       gameStarted: false
     };
     this.adminPing('load');
@@ -47,48 +45,53 @@ class Admin extends React.Component {
     this.adminPing('stop_game')
   }
 
-  renderClients(table) {
-    const { tableData } = this.state;
-    const clientElements = Object.entries(tableData[table]).map((elements,i) => {
-      var clients = elements[1];
+  renderPuzzle(puzzle) {
+    const { puzzleData } = this.state;
+    var solvedCounter = 0
+    var tableCounter = puzzleData[puzzle].length
+    const clientElements = Object.values(puzzleData[puzzle]).map((elements,i) => {
+      var innerElements = Object.entries(elements)
+      var table = innerElements[0][0]
+      var started = elements[table]['started']
+      var solved = elements[table]['solved']
+      if (solved === true) {
+        solvedCounter += 1
+      }
       return (
-        <li key={i}>{clients}</li>
+        <li key={i}>table: {table} --> started: <CheckIcon solved={started}/>, solved: <CheckIcon solved={solved}/></li>
       );
     });
-    return clientElements;
-  }
-
-  renderPuzzle(table) {
-    const { gameState } = this.state;
-    const puzzleElements = Object.entries(gameState[table]).map(elements => {
-      var puzzle = elements[0];
-      var solved = elements[1]['solved'];
-      return (
-        <li key={puzzle}>puzzle {puzzle}: <CheckIcon solved={solved}/></li>
-      );
-    });
-    return puzzleElements;
+    return [clientElements, solvedCounter, tableCounter];
   }
 
   render() {
-    const { tableData, gameStarted } = this.state;
+    const { tableData, gameStarted, puzzleData } = this.state;
     if (gameStarted === false) {
       var message = "You have not started the game yet"
   } else {
     var message = "Game has been started"
   }
-    const tableElements = Object.entries(tableData).map(elements => {
-      var table = elements[0];
-      var clientList = this.renderClients(table);
-      var tableGameState = this.renderPuzzle(table);
+    const tableElements = Object.entries(puzzleData).map(elements => {
+      var puzzle = elements[0];
+      if (puzzle === 'start_time') {
+         return 
+
+      } else {
+      var puzzleRendered = this.renderPuzzle(puzzle);
+      var clientList = puzzleRendered[0]
+      var solvedCounter = puzzleRendered[1]
+      var tableCounter = puzzleRendered[2]
       return (
-        <div key={table}>
-          <h1>{table}</h1>
-          <p>Participants: {clientList} </p>
-          <p>Status: {tableGameState} </p>
+        <div key={puzzle}>
+          <h1>Puzzle  {puzzle}:</h1>
+          <div>
+            <p>Number of Tables Solved: {solvedCounter}/{tableCounter}</p>
+            <p>{clientList} </p>
+          </div>
 
         </div>
       );
+      }
     });
 
     return (
