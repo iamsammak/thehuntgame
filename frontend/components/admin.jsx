@@ -19,12 +19,12 @@ class Admin extends React.Component {
     super(props);
     const socket = io(SOCKET_URL);
     socket.on('admin_return', (data) => {
-      this.setState({ puzzleData: data['puzzleData'],  gameStarted: data['gameStarted'] });
+      this.setState({ puzzleData: data['puzzleData'], gameStarted: data['gameStarted'] });
     });
-     socket.on('gameStarted', (data) => {
+    socket.on('gameStarted', (data) => {
       this.setState({ gameStarted: data['gameStarted'] });
     });
-   this.state = {
+    this.state = {
       socket:socket,
       puzzleData:[],
       gameStarted: false
@@ -34,30 +34,29 @@ class Admin extends React.Component {
 
   adminPing(trigger) {
     const { socket } = this.state;
-    socket.emit('admin_ping', {'trigger':trigger});
+    socket.emit('admin_ping', { 'trigger':trigger });
   }
 
   startGame() {
-    this.adminPing('start_game')
+    this.adminPing('start_game');
   }
 
   stopGame() {
-    this.adminPing('stop_game')
+    this.adminPing('stop_game');
   }
 
   renderPuzzle(puzzle) {
-    console.log(this.state)
     const { puzzleData } = this.state;
-    var solvedCounter = 0
-    var tableCounter = puzzleData[puzzle].length
+    var solvedCounter = 0;
+    var tableCounter = puzzleData[puzzle].length;
     const clientElements = Object.values(puzzleData[puzzle]).map((elements,i) => {
-      var innerElements = Object.entries(elements)
-      var table = innerElements[0][0]
-      var started = elements[table]['started']
-      var solved = elements[table]['solved']
-      var hintCount = elements[table]['hint_count']
+      var innerElements = Object.entries(elements);
+      var [[table]] = innerElements;
+      var { started } = elements[table];
+      var { solved } = elements[table];
+      var hintCount = elements[table]['hint_count'];
       if (solved === true) {
-        solvedCounter += 1
+        solvedCounter += 1;
       }
       return (
         <li key={i}>table: {table} --> started: <CheckIcon solved={started}/> solved: <CheckIcon solved={solved}/> hint count: {hintCount}</li>
@@ -67,32 +66,31 @@ class Admin extends React.Component {
   }
 
   render() {
-    const { tableData, gameStarted, puzzleData } = this.state;
+    const { gameStarted, puzzleData } = this.state;
+    let message;
     if (gameStarted === false) {
-      var message = "You have not started the game yet"
-  } else {
-    var message = "Game has been started"
-  }
+      message = "You have not started the game yet";
+    } else {
+      message = "Game has been started";
+    }
     const tableElements = Object.entries(puzzleData).map(elements => {
-      var puzzle = elements[0];
+      var [puzzle] = elements;
       if (puzzle === 'start_time') {
-         return 
+        return;
 
       } else {
-      var puzzleRendered = this.renderPuzzle(puzzle);
-      var clientList = puzzleRendered[0]
-      var solvedCounter = puzzleRendered[1]
-      var tableCounter = puzzleRendered[2]
-      return (
-        <div key={puzzle}>
-          <h1>Puzzle  {puzzle}:</h1>
-          <div>
-            <p>Number of Tables Solved: {solvedCounter}/{tableCounter}</p>
-            <p>{clientList} </p>
-          </div>
+        var puzzleRendered = this.renderPuzzle(puzzle);
+        var [clientList, solvedCounter, tableCounter] = puzzleRendered;
+        return (
+          <div key={puzzle}>
+            <h1>Puzzle  {puzzle}:</h1>
+            <div>
+              <p>Number of Tables Solved: {solvedCounter}/{tableCounter}</p>
+              <p>{clientList} </p>
+            </div>
 
-        </div>
-      );
+          </div>
+        );
       }
     });
 
@@ -100,7 +98,7 @@ class Admin extends React.Component {
       <div>
         <button type = "submit" onClick ={() =>this.startGame()}> Press Me! </button>
         <button type = "submit" onClick ={() =>this.stopGame()}> Press Me to Stop Game! </button>
-       <p>{message}</p>
+        <p>{message}</p>
         <div>
           { tableElements }
         </div>

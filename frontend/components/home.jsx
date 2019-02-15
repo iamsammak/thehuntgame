@@ -73,8 +73,8 @@ const DownIcon = styled(FontAwesomeIcon).attrs({
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    const socket = io(SOCKET_URL)
-    socket.on('start_ping', (data) => { this.setState({ gameStarted: data['gameStarted']});
+    const socket = io(SOCKET_URL);
+    socket.on('start_ping', (data) => { this.setState({ gameStarted: data['gameStarted'] });
     });
     this.state = {
       socket:socket,
@@ -92,7 +92,7 @@ class Home extends React.Component {
 
   calcOnes(num) {
     return () => {
-      this.setState(state => {
+      this.setState(() => {
         let { ones } = this.state;
         ones = (ones + num + 10) % 10;
         return ({ ones: ones });
@@ -111,13 +111,13 @@ class Home extends React.Component {
   }
 
   setTable() {
-    const {tens, ones, gameStarted} = this.state;
+    const { tens, ones, gameStarted } = this.state;
     const tableNumber = (tens * 10) + ones;
     if (gameStarted === false) {
-      var errorMessage = 'Game has not started'
+      var errorMessage = 'Game has not started';
     } else {
-    if (tableNumber === 0 || tableNumber === 26) {
-      return;
+      if (tableNumber === 0 || tableNumber === 26) {
+        return;
       }
       const { cookies } = this.props;
       cookies.set("table", tableNumber);
@@ -125,7 +125,6 @@ class Home extends React.Component {
   }
 
   gameStartPing() {
-    console.log('here is the start ping')
     const { socket } = this.state;
     socket.emit('game_start_ping', {});
   }
@@ -135,10 +134,9 @@ class Home extends React.Component {
 
     const { cookies, join } = this.props;
     const table = cookies.get("table");
-    console.log(gameStarted)
     if (gameStarted === false) {
-      var message = 'Game has not started'
-  }
+      var message = 'Game has not started';
+    }
     if (table) {
       join(table);
       return <Redirect to="/main" />;
