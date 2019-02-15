@@ -46,6 +46,7 @@ class Admin extends React.Component {
   }
 
   renderPuzzle(puzzle) {
+    console.log(this.state)
     const { puzzleData } = this.state;
     var solvedCounter = 0
     var tableCounter = puzzleData[puzzle].length
@@ -54,11 +55,12 @@ class Admin extends React.Component {
       var table = innerElements[0][0]
       var started = elements[table]['started']
       var solved = elements[table]['solved']
+      var hintCount = elements[table]['hint_count']
       if (solved === true) {
         solvedCounter += 1
       }
       return (
-        <li key={i}>table: {table} --> started: <CheckIcon solved={started}/>, solved: <CheckIcon solved={solved}/></li>
+        <li key={i}>table: {table} --> started: <CheckIcon solved={started}/> solved: <CheckIcon solved={solved}/> hint count: {hintCount}</li>
       );
     });
     return [clientElements, solvedCounter, tableCounter];

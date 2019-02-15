@@ -21,14 +21,14 @@ CLIENTS = {}
 # { table number -> { puzzle number -> { solved } } }
 GAME_STATE = {}
 INITIAL_GAME_STATE_FOR_TABLE = {
-  1: {'solved': False, 'started': False},
-  2: {'solved': False, 'started': False},
-  3: {'solved': False, 'started': False},
-  4: {'solved': False, 'started': False},
-  5: {'solved': False, 'started': False},
-  6: {'solved': False, 'started': False},
-  7: {'solved': False, 'started': False},
-  8: {'solved': False, 'started': False},
+  1: {'solved': False, 'started': False, 'hint_count' : 0},
+  2: {'solved': False, 'started': False, 'hint_count' : 0},
+  3: {'solved': False, 'started': False, 'hint_count' : 0},
+  4: {'solved': False, 'started': False, 'hint_count' : 0},
+  5: {'solved': False, 'started': False, 'hint_count' : 0},
+  6: {'solved': False, 'started': False, 'hint_count' : 0},
+  7: {'solved': False, 'started': False, 'hint_count' : 0},
+  8: {'solved': False, 'started': False, 'hint_count' : 0},
 }
 ANSWERS = {
   1: 'getaway',
@@ -84,6 +84,14 @@ def admin():
 @sio.on('connect')
 def connect(sid, environ):
   print("connect ", sid)
+
+@sio.on('hint_ping')
+def handle_hint(sid, data):
+  puzzle = data['puzzle']
+  table = CLIENTS[sid]
+  old_hint_count = GAME_STATE[table][puzzle]['hint_count']
+  new_hint_count = old_hint_count + 1
+  GAME_STATE[table][puzzle]['hint_count'] = new_hint_count
 
 @sio.on('admin_ping')
 def adminconnect(sid, data):

@@ -11,10 +11,10 @@ import PersonHeader from './personHeader';
 
 class Person0 extends React.Component {
   render() {
-    const { gameState, name } = this.props;
+    const { gameState, name, socket } = this.props;
     const stage = getCurrentStage(gameState);
     const showBase = true;
-    const hint = <Hint hint={stage} />;
+    const hint = <Hint hint={stage} socket={socket} />;
 
     let body;
     if (stage === 1) {

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import io from 'socket.io-client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { smSpacing, lgSpacing } from '../constants';
@@ -32,6 +33,7 @@ const TextContainer = styled.div`
 class Hint extends React.Component {
   constructor(props) {
     super(props);
+    const { socket } = props
     this.showHint = this.showHint.bind(this);
     this.hideHint = this.hideHint.bind(this);
     this.setRef = this.setRef.bind(this);
@@ -61,7 +63,10 @@ class Hint extends React.Component {
   }
 
   showHint() {
+    const { socket, hint } = this.props
+    console.log(socket)
     this.setState({ show: true });
+    socket.emit('hint_ping', {'puzzle' : hint})
   }
 
   hideHint() {
