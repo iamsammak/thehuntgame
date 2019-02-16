@@ -1,13 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Narration } from '../wrappers';
 import { isSolved } from '../helpers';
-
-const Button = styled.button`
-  ${props => props.selected && 'border-style: inset;'}
-`;
 
 const INITIAL_ANSWERS = [null, null, null];
 

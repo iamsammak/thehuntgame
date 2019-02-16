@@ -108,7 +108,7 @@ class PuzzleA extends React.Component {
         {
           correct === false &&
             <p>
-              That doesn't seem right...
+              That doesn&apos;t seem right...
             </p>
         }
         {
