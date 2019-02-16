@@ -54,7 +54,7 @@ class Puzzle4 extends React.Component {
   render() {
     const { gameState } = this.props;
     const { error } = this.state;
-    const solved = isSolved(gameState, 4);
+    const solved = isSolved(gameState, '4');
 
     return (
       <div>

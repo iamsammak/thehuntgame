@@ -33,7 +33,7 @@ class Puzzle1 extends React.Component {
   render() {
     const { cipher } = this.state;
     const { gameState } = this.props;
-    const solved = isSolved(gameState, 1);
+    const solved = isSolved(gameState, '1');
 
     return (
       <div>
@@ -44,7 +44,7 @@ class Puzzle1 extends React.Component {
           {cipher}
         </CipherContainer>
         <p>
-          <Submit {...this.props} puzzleNumber={1} disabled={solved} />
+          <Submit {...this.props} puzzleNumber={'1'} disabled={solved} />
         </p>
         {
           solved && (

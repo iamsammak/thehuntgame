@@ -3,28 +3,28 @@ export function isSolved(gameState, puzzle) {
 }
 
 export function getCurrentStage(gameState) {
-  if (isSolved(gameState, 8)) {
+  if (isSolved(gameState, '8')) {
     return 9;
-  } else if (isSolved(gameState, 7) && gameState[8].started) {
+  } else if (isSolved(gameState, '7') && gameState['8'].started) {
     return 8;
-  } else if (isSolved(gameState, 6) && gameState[7].started) {
+  } else if (isSolved(gameState, '6') && gameState['7'].started) {
     return 7;
-  } else if (isSolved(gameState, 5) && gameState[6].started) {
+  } else if (isSolved(gameState, '5') && gameState['6'].started) {
     return 6;
-  } else if (isSolved(gameState, 4) && gameState[5].started) {
+  } else if (isSolved(gameState, '4') && gameState['5'].started) {
     return 5;
   } else if (
-    isSolved(gameState, 3) &&
-    isSolved(gameState, 2) &&
-    isSolved(gameState, 1) &&
-    gameState[4] && gameState[4].started
+    isSolved(gameState, '3') &&
+    isSolved(gameState, '2') &&
+    isSolved(gameState, '1') &&
+    gameState['4'] && gameState['4'].started
   ) {
     return 4;
-  } else if (isSolved(gameState, 2) && gameState[3].started) {
+  } else if (isSolved(gameState, '2') && gameState['3'].started) {
     return 3;
-  } else if (isSolved(gameState, 1) && gameState[2].started) {
+  } else if (isSolved(gameState, '1') && gameState['2'].started) {
     return 2;
-  } else if (gameState[1] && gameState[1].started) {
+  } else if (gameState['1'] && gameState['1'].started) {
     return 1;
   }
   return 0;

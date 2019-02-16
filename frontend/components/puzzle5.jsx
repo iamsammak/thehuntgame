@@ -7,7 +7,7 @@ import Puzzle5Clue from './puzzle5Clue';
 class Puzzle5 extends React.Component {
   render() {
     const { gameState } = this.props;
-    const solved = isSolved(gameState, 5);
+    const solved = isSolved(gameState, '5');
 
     return (
       <div>
@@ -16,7 +16,7 @@ class Puzzle5 extends React.Component {
         </p>
         <Puzzle5Clue clue="clue0" />
         <p>
-          <Submit {...this.props} puzzleNumber={5} />
+          <Submit {...this.props} puzzleNumber={'5'} />
         </p>
         {
           solved && (
