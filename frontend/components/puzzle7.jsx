@@ -49,7 +49,7 @@ class Puzzle7 extends React.Component {
   render() {
     const { switchState } = this.state;
     const { gameState } = this.props;
-    const solved = isSolved(gameState, 7);
+    const solved = isSolved(gameState, '7');
 
     const chunkSize = 5;
     const startIndices = [];

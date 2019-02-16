@@ -215,7 +215,7 @@ class Puzzle6 extends React.Component {
   render() {
     const { position } = this.state;
     const { gameState } = this.props;
-    const solved = isSolved(gameState, 6);
+    const solved = isSolved(gameState, '6');
 
     const [currentX, currentY] = position;
     const anchorX = Math.floor(currentX / 3) * 3;
