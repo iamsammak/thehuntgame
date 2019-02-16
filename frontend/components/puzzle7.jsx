@@ -77,7 +77,7 @@ class Puzzle7 extends React.Component {
             );
           })
         }
-        <SubmitButton onClick={this.handleSubmit}>
+        <SubmitButton onClick={this.handleSubmit} disabled={solved}>
           Connect
         </SubmitButton>
         {
