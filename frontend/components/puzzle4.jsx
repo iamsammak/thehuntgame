@@ -55,6 +55,7 @@ class Puzzle4 extends React.Component {
     const { gameState } = this.props;
     const { error } = this.state;
     const solved = isSolved(gameState, '4');
+    const puzzleBSolved = isSolved(gameState, 'B');
 
     return (
       <div>
@@ -62,13 +63,19 @@ class Puzzle4 extends React.Component {
         <p>
           Chris gave me this safe, so maybe we had put it in here. Only thing is that I don&apos;t remember the code to unlock it.
         </p>
+        {
+          puzzleBSolved &&
+            <p>
+              Ah, you found my magnet. It&apos;s supposed to help us unlock this safe. Let&apos;s see...yup--it looks like the magnet disabled one of the buttons.
+            </p>
+        }
         <KeypadContainer>
           <Button click={this.state.value[0]} onClick={this.handleClick(0)} >1</Button>
           <Button click={this.state.value[1]} onClick={this.handleClick(1)} >2</Button>
           <Button click={this.state.value[2]} onClick={this.handleClick(2)} >3</Button>
           <Button click={this.state.value[3]} onClick={this.handleClick(3)} >4</Button>
           <Button click={this.state.value[4]} onClick={this.handleClick(4)} >5</Button>
-          <Button click={this.state.value[5]} onClick={this.handleClick(5)} >6</Button>
+          <Button click={this.state.value[5]} onClick={this.handleClick(5)} disabled={puzzleBSolved}>6</Button>
           <Button click={this.state.value[6]} onClick={this.handleClick(6)} >7</Button>
           <Button click={this.state.value[7]} onClick={this.handleClick(7)} >8</Button>
           <Button click={this.state.value[8]} onClick={this.handleClick(8)} >9</Button>
