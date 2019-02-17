@@ -92,7 +92,7 @@ def connect(sid, environ):
 
 @sio.on('hint_shown')
 def handle_hint(sid, data):
-  puzzle = data['puzzle']
+  puzzle = str(data['puzzle'])
   table = CLIENTS[sid]
   GAME_STATE[table][puzzle]['hint_count'] += 1
 

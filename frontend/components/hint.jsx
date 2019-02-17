@@ -84,23 +84,26 @@ class Hint extends React.Component {
     case 8: hintText = "Jay probably would've taken the shortest path possible from his car to the sweetheart table."; break;
     }
 
-    return (
-      <div ref={this.setRef}>
-        <button onClick={this.showHint}>
-          Need a hint?
-        </button>
-        {
-          show && (
-            <HintContainer>
-              <Close onClick={this.hideHint} />
-              <TextContainer>
-                {hintText}
-              </TextContainer>
-            </HintContainer>
-          )
-        }
-      </div>
-    );
+    if (hintText) {
+      return (
+        <div ref={this.setRef}>
+          <button onClick={this.showHint}>
+            Need a hint?
+          </button>
+          {
+            show && (
+              <HintContainer>
+                <Close onClick={this.hideHint} />
+                <TextContainer>
+                  {hintText}
+                </TextContainer>
+              </HintContainer>
+            )
+          }
+        </div>
+      );
+    }
+    return null;
   }
 }
 

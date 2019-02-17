@@ -14,7 +14,7 @@ class Person0 extends React.Component {
     const { gameState, name, socket } = this.props;
     const stage = getCurrentStage(gameState);
     const showBase = true;
-    const hint = <Hint hint={stage} socket={socket} />;
+    const hint = <Hint hint={stage.toString()} socket={socket} />;
 
     let body;
     if (stage === 1) {
