@@ -72,7 +72,7 @@ const EnterButton = styled(SubmitButton)`
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    const socket = props;
+    const { socket } = props;
     socket.on('game_started', (data) => { this.setState({ gameStarted: data['gameStarted'] });
     });
     this.state = {
@@ -119,7 +119,7 @@ class Home extends React.Component {
   }
 
   gameStartPing() {
-    const { socket } = this.state;
+    const { socket } = this.props;
     socket.emit('game_started', {});
   }
 

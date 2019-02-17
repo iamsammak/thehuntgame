@@ -50,8 +50,9 @@ class Admin extends React.Component {
     var [table, info] = tableDataEntry;
     var { started, solved, hintCount } = info;
     return (
-      <li key={table}>table: {table} --> started: <CheckIcon solved={started}/> solved: <CheckIcon solved={solved}/> hint count: {hintCount}</li>
-
+      <li key={table}>
+        table: {table} --&gt; started: <CheckIcon solved={started}/> solved: <CheckIcon solved={solved}/> hint count: {hintCount}
+      </li>
     );
   }
 
