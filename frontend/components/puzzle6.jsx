@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { isSolved } from '../helpers';
 
 const border = '2px solid black';
+const START_POSITION = [0, 4];
+const END_POSITION = [4, 3];
 const START_ICON = 'star';
 const END_ICON = 'gem';
 
@@ -135,7 +137,7 @@ class Puzzle6 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      position: [0, 4],
+      position: START_POSITION,
     };
 
     this.move = this.move.bind(this);
@@ -235,7 +237,7 @@ class Puzzle6 extends React.Component {
     const { gameState } = this.props;
     const solved = isSolved(gameState, '6');
 
-    const [currentX, currentY] = position;
+    const [currentX, currentY] = solved ? END_POSITION : position;
     const anchorX = Math.floor(currentX / 3) * 3;
     const anchorY = Math.floor(currentY / 3) * 3;
     const adjacentCells = this.calculateAdjacent(anchorX, anchorY);
