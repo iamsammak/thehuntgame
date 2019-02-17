@@ -36,7 +36,7 @@ ANSWERS = {
   '1': 'getaway',
   '2': 'see o double you',
   '3': [5,4,3,2,1],
-  '4': [False, False, True, True, False, False, False, False, True],
+  '4': [False, False, True, True, False, False, False, False, True, False],
   '5': '',
   '6': '',
   '7': [False, True, True, False, False, True, True, False, False, True],
