@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { Narration } from '../wrappers';
 import { isSolved } from '../helpers';
 
 const Button = styled.button`
@@ -90,21 +91,26 @@ class PuzzleA extends React.Component {
         <p>
           Did you know that Chris and his dad pretty much made the cornhole boards themselves? He wants me to jot down some of the details for future reference. Can you help me out?
         </p>
-        <p>
-          Question 1 placeholder?
-        </p>
-        {question1Icons.map(this.renderIconOptions(0))}
-        <p>
-          Question 2 placeholder?
-        </p>
-        {question2Text.map(this.renderTextOptions(1))}
-        <p>
-          Question 3 placeholder?
-        </p>
-        {question3Text.map(this.renderTextOptions(2))}
-        <p>
-          <button onClick={this.handleSubmit}>Submit</button>
-        </p>
+        {
+          !solved &&
+            <div>
+              <p>
+                Question 1 placeholder?
+              </p>
+              {question1Icons.map(this.renderIconOptions(0))}
+              <p>
+                Question 2 placeholder?
+              </p>
+              {question2Text.map(this.renderTextOptions(1))}
+              <p>
+                Question 3 placeholder?
+              </p>
+              {question3Text.map(this.renderTextOptions(2))}
+              <p>
+                <button onClick={this.handleSubmit}>Submit</button>
+              </p>
+            </div>
+        }
         {
           correct === false &&
             <p>
@@ -113,9 +119,12 @@ class PuzzleA extends React.Component {
         }
         {
           solved &&
-            <p>
-              Awesome, thanks! Chris told me something about a Caesar cipher too. Not sure what that has to do with anything though.
-            </p>
+            <div>
+              <Narration>You got all the details right!</Narration>
+              <p>
+                Awesome, thanks! Chris told me something about a Caesar cipher too. Not sure what that has to do with anything though.
+              </p>
+            </div>
         }
       </div>
     );
