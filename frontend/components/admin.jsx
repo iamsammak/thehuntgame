@@ -21,71 +21,78 @@ class Admin extends React.Component {
   constructor(props) {
     super(props);
     const socket = io(SOCKET_URL);
-    socket.on('admin_return', (data) => {
-      this.setState({ gameState : data['gameState'], tableData : data['tableData'] });
+    socket.on('admin_data', (data) => {
+      this.setState({ puzzleData: data['puzzleData'], tableData : data['tableData'], gameStarted: data['gameStarted'] });
+    });
+    socket.on('game_started', (data) => {
+      this.setState({ gameStarted: data['gameStarted'] });
     });
     this.state = {
       socket:socket,
-      solved:false,
-      tableData : [],
-      gameState : [''],
+      puzzleData:[],
+      gameStarted: false
     };
-    this.adminPing();
+    this.adminPing('load');
+    this.renderTable = this.renderTable.bind(this);
+    this.renderPuzzle = this.renderPuzzle.bind(this);
   }
 
-  adminPing() {
+  adminPing(trigger) {
     const { socket } = this.state;
-    socket.emit('admin_ping', {});
+    socket.emit('load_admin_data', { 'trigger':trigger });
   }
 
   startGame() {
-    console.log('this will be the start game button');
+    this.adminPing('start_game');
   }
 
-  renderClients(table) {
-    const { tableData } = this.state;
-    const clientElements = Object.entries(tableData[table]).map((elements,i) => {
-      var clients = elements[1];
-      return (
-        <li key={i}>{clients}</li>
-      );
-    });
-    return clientElements;
+  renderTable(tableDataEntry) {
+    var [table, info] = tableDataEntry;
+    var { started, solved, hintCount } = info;
+    return (
+      <li key={table}>table: {table} --> started: <CheckIcon solved={started}/> solved: <CheckIcon solved={solved}/> hint count: {hintCount}</li>
+
+    );
   }
 
-  renderPuzzle(table) {
-    const { gameState } = this.state;
-    const puzzleElements = Object.entries(gameState[table]).map(elements => {
-      var puzzle = elements[0];
-      var solved = elements[1]['solved'];
+  renderPuzzle(data) {
+    var [puzzle, tableData] = data;
+    var solvedCounter = 0;
+    var tableCounter = Object.keys(tableData).length;
+    for (var table in tableData) {
+      var { solved } = tableData[table];
+      if (solved === true) {
+        solvedCounter += 1;
+      }
+    }
+    if (puzzle === 'start_time') {
+      return;
+    } else {
       return (
-        <li key={puzzle}>puzzle {puzzle}: <CheckIcon solved={solved}/></li>
+        <div key={puzzle}>
+          <h1>Puzzle {puzzle}: </h1>
+          <p>Number of Tables Solved: {solvedCounter}/{tableCounter}</p>
+          {Object.entries(tableData).map(this.renderTable)}
+        </div>
       );
-    });
-    return puzzleElements;
+    }
   }
 
   render() {
-    const { tableData } = this.state;
-    const tableElements = Object.entries(tableData).map(elements => {
-      var table = elements[0];
-      var clientList = this.renderClients(table);
-      var tableGameState = this.renderPuzzle(table);
-      return (
-        <div key={table}>
-          <h1>{table}</h1>
-          <p>Participants: {clientList} </p>
-          <p>Status: {tableGameState} </p>
-
-        </div>
-      );
-    });
-
+    const { gameStarted, puzzleData } = this.state;
+    let message;
+    if (gameStarted === false) {
+      message = "You have not started the game yet";
+    } else {
+      message = "Game has been started";
+    }
     return (
       <div>
         <button type = "submit" onClick ={() =>this.startGame()}> Press Me! </button>
+        <button type = "submit" onClick ={() =>this.stopGame()}> Press Me to Stop Game! </button>
+        <p>{message}</p>
         <div>
-          { tableElements }
+          {Object.entries(puzzleData).map(this.renderPuzzle)}
         </div>
       </div>
     );

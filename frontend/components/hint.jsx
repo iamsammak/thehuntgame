@@ -61,7 +61,9 @@ class Hint extends React.Component {
   }
 
   showHint() {
+    const { socket, hint } = this.props;
     this.setState({ show: true });
+    socket.emit('hint_shown', { 'puzzle' : hint });
   }
 
   hideHint() {

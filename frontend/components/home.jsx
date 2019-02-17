@@ -72,11 +72,16 @@ const EnterButton = styled(SubmitButton)`
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    const socket = props;
+    socket.on('game_started', (data) => { this.setState({ gameStarted: data['gameStarted'] });
+    });
     this.state = {
       tens: 0,
-      ones: 0
+      ones: 0,
+      gameStarted: false
     };
 
+    this.gameStartPing();
     this.calcTens = this.calcTens.bind(this);
     this.calcOnes = this.calcOnes.bind(this);
     this.setTable = this.setTable.bind(this);
@@ -104,23 +109,27 @@ class Home extends React.Component {
   }
 
   setTable() {
-    const { tens, ones } = this.state;
+    const { tens, ones, gameStarted } = this.state;
     const tableNumber = (tens * 10) + ones;
-
-    if (tableNumber === 0 || tableNumber === 26) {
+    if (tableNumber === 0 || tableNumber === 26 || gameStarted === false) {
       return;
     }
-
     const { cookies } = this.props;
     cookies.set("table", tableNumber);
   }
 
-  render() {
-    const { tens, ones } = this.state;
+  gameStartPing() {
+    const { socket } = this.state;
+    socket.emit('game_started', {});
+  }
 
+  render() {
+    const { tens, ones, gameStarted } = this.state;
     const { cookies, join } = this.props;
     const table = cookies.get("table");
-
+    if (gameStarted === false) {
+      var message = 'Game has not started';
+    }
     if (table) {
       join(table);
       return <Redirect to="/main" />;
@@ -143,6 +152,7 @@ class Home extends React.Component {
           </OnesContainer>
           <EnterButton onClick={this.setTable}>Enter</EnterButton>
         </Table>
+        <p>{message}</p>
       </div>
     );
   }

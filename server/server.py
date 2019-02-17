@@ -14,21 +14,23 @@ from flask import Flask, render_template, jsonify, request, send_from_directory
 sio = socketio.Server()
 flask_app = Flask(__name__)
 
+GAME_STARTED = False
+
 # { sid: str -> table number: int }
 CLIENTS = {}
 # { table number: int -> { puzzle number: str -> { solved: str -> bool } } }
 GAME_STATE = {}
 INITIAL_GAME_STATE_FOR_TABLE = {
+  '1': {'solved': False, 'started': False, 'hint_count' : 0},
+  '2': {'solved': False, 'started': False, 'hint_count' : 0},
+  '3': {'solved': False, 'started': False, 'hint_count' : 0},
+  '4': {'solved': False, 'started': False, 'hint_count' : 0},
+  '5': {'solved': False, 'started': False, 'hint_count' : 0},
+  '6': {'solved': False, 'started': False, 'hint_count' : 0},
+  '7': {'solved': False, 'started': False, 'hint_count' : 0},
+  '8': {'solved': False, 'started': False, 'hint_count' : 0},
   'A': {'solved': False},
   'B': {'solved': False},
-  '1': {'solved': False, 'started': False},
-  '2': {'solved': False, 'started': False},
-  '3': {'solved': False, 'started': False},
-  '4': {'solved': False, 'started': False},
-  '5': {'solved': False, 'started': False},
-  '6': {'solved': False, 'started': False},
-  '7': {'solved': False, 'started': False},
-  '8': {'solved': False, 'started': False},
 }
 ANSWERS = {
   'A': [0, 1, 2],
@@ -88,16 +90,49 @@ def admin():
 def connect(sid, environ):
   print("connect ", sid)
 
-@sio.on('admin_ping')
-def adminconnect(sid, environ):
-  table_data = defaultdict(list)
+@sio.on('hint_shown')
+def handle_hint(sid, data):
+  puzzle = data['puzzle']
+  table = CLIENTS[sid]
+  GAME_STATE[table][puzzle]['hint_count'] += 1
 
-  for client in CLIENTS:
-    tablenumber = CLIENTS[client]
-    table_data[tablenumber].append(client)
-  data_to_send = {'tableData': table_data, 'gameState': GAME_STATE}
-  sio.emit('admin_return', data_to_send)
+@sio.on('load_admin_data')
+def adminconnect(sid, data):
+  print('admin ping was triggered', data['trigger'])
+  trigger = data['trigger']
+  if trigger == 'load':
+    table_data = defaultdict(list)
+    puzzle_data = defaultdict(dict)
 
+    for table in GAME_STATE:
+      data = GAME_STATE[table]
+      print(table)
+      print(data)
+      for puzzle in data:
+        info = data[puzzle]
+        puzzle_data[puzzle][table] = info
+
+    data_to_send = {'puzzleData' : puzzle_data, 'gameStarted': GAME_STARTED}
+    sio.emit('admin_data', data_to_send)
+  elif trigger == 'start_game':
+    global GAME_STARTED
+    print('Game has been started: ', GAME_STARTED)
+    GAME_STARTED = True
+    print('Game has been started: ', GAME_STARTED) 
+    data_to_send = {'gameStarted': GAME_STARTED}
+    sio.emit('game_started', data_to_send)
+  elif trigger == 'stop_game':
+    global GAME_STARTED
+    print('Game has been started: ', GAME_STARTED)
+    GAME_STARTED = False
+    print('Game has been started: ', GAME_STARTED) 
+    data_to_send = {'gameStarted': GAME_STARTED}
+    sio.emit('game_started', data_to_send)
+
+@sio.on('game_started')
+def game_start(sid, data):
+  data_to_send = {'gameStarted': GAME_STARTED}
+  sio.emit('game_started', data_to_send)
 
 @sio.on('cipher_ping')
 def cipherconnect(sid, environ):
