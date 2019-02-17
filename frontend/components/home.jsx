@@ -2,7 +2,6 @@ import React from 'react';
 import { withCookies } from 'react-cookie';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import io from 'socket.io-client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import WelcomeHeader from './welcomeHeader';
@@ -73,11 +72,10 @@ const EnterButton = styled(SubmitButton)`
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    const socket = io(SOCKET_URL);
+    const socket = props;
     socket.on('game_started', (data) => { this.setState({ gameStarted: data['gameStarted'] });
     });
     this.state = {
-      socket:socket,
       tens: 0,
       ones: 0,
       gameStarted: false
@@ -127,7 +125,6 @@ class Home extends React.Component {
 
   render() {
     const { tens, ones, gameStarted } = this.state;
-
     const { cookies, join } = this.props;
     const table = cookies.get("table");
     if (gameStarted === false) {

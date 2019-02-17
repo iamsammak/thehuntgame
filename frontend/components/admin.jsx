@@ -33,8 +33,8 @@ class Admin extends React.Component {
       gameStarted: false
     };
     this.adminPing('load');
-    this.renderTable = this.renderTable.bind(this)
-    this.renderPuzzle = this.renderPuzzle.bind(this)
+    this.renderTable = this.renderTable.bind(this);
+    this.renderPuzzle = this.renderPuzzle.bind(this);
   }
 
   adminPing(trigger) {
@@ -47,8 +47,8 @@ class Admin extends React.Component {
   }
 
   renderTable(tableDataEntry) {
-    var [table, info] = tableDataEntry
-    var {started, solved, hintCount} = info
+    var [table, info] = tableDataEntry;
+    var { started, solved, hintCount } = info;
     return (
       <li key={table}>table: {table} --> started: <CheckIcon solved={started}/> solved: <CheckIcon solved={solved}/> hint count: {hintCount}</li>
 
@@ -56,26 +56,26 @@ class Admin extends React.Component {
   }
 
   renderPuzzle(data) {
-    var [puzzle, tableData] = data
+    var [puzzle, tableData] = data;
     var solvedCounter = 0;
-    var tableCounter = Object.keys(tableData).length 
+    var tableCounter = Object.keys(tableData).length;
     for (var table in tableData) {
-      var { solved } = tableData[table]
-      if (solved ===true) {
-        solvedCounter += 1
-      };
+      var { solved } = tableData[table];
+      if (solved === true) {
+        solvedCounter += 1;
+      }
     }
     if (puzzle === 'start_time') {
-       return;
+      return;
     } else {
-    return (
-      <div key={puzzle}>
-        <h1>Puzzle {puzzle}: </h1>
-        <p>Number of Tables Solved: {solvedCounter}/{tableCounter}</p>
-        {Object.entries(tableData).map(this.renderTable)}
-      </div>
+      return (
+        <div key={puzzle}>
+          <h1>Puzzle {puzzle}: </h1>
+          <p>Number of Tables Solved: {solvedCounter}/{tableCounter}</p>
+          {Object.entries(tableData).map(this.renderTable)}
+        </div>
       );
-    };
+    }
   }
 
   render() {
