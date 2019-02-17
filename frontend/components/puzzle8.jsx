@@ -273,7 +273,7 @@ class Puzzle8 extends React.Component {
         {
           error && (
             <p>
-              No, no...that's not where I went. Let's try again.
+              No, no...that&apos;s not where I went. Let&apos;s try again.
             </p>
           )
         }

@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { gray, lightBlue, darkBlue } from '../constants';
+
 export const KeypadContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -14,8 +16,14 @@ export const Button = styled.button`
   width: 100px;
   color: white;
   font-size: 30px;
-  background-color: ${props => (props.click ? '#1995AD' : '#A1D6E2')};
-
+  background-color: ${props => {
+    if (props.disabled) {
+      return gray;
+    } else if (props.click) {
+      return darkBlue;
+    }
+    return lightBlue;
+  }};
   &:focus {
     outline: 0;
   }

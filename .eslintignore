@@ -1,5 +1,8 @@
+
 bundle.js*
 hunt-bundle.js
 hunt-bundle.js.map
 admin-bundle.js
 admin-bundle.js.map
+frontend/*bundle.js*
+

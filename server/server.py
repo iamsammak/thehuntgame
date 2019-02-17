@@ -16,44 +16,49 @@ flask_app = Flask(__name__)
 
 GAME_STARTED = False
 
-# { sid -> table number }
+# { sid: str -> table number: int }
 CLIENTS = {}
-# { table number -> { puzzle number -> { solved } } }
+# { table number: int -> { puzzle number: str -> { solved: str -> bool } } }
 GAME_STATE = {}
 INITIAL_GAME_STATE_FOR_TABLE = {
-  1: {'solved': False, 'started': False, 'hint_count' : 0},
-  2: {'solved': False, 'started': False, 'hint_count' : 0},
-  3: {'solved': False, 'started': False, 'hint_count' : 0},
-  4: {'solved': False, 'started': False, 'hint_count' : 0},
-  5: {'solved': False, 'started': False, 'hint_count' : 0},
-  6: {'solved': False, 'started': False, 'hint_count' : 0},
-  7: {'solved': False, 'started': False, 'hint_count' : 0},
-  8: {'solved': False, 'started': False, 'hint_count' : 0},
+  '1': {'solved': False, 'started': False, 'hint_count' : 0},
+  '2': {'solved': False, 'started': False, 'hint_count' : 0},
+  '3': {'solved': False, 'started': False, 'hint_count' : 0},
+  '4': {'solved': False, 'started': False, 'hint_count' : 0},
+  '5': {'solved': False, 'started': False, 'hint_count' : 0},
+  '6': {'solved': False, 'started': False, 'hint_count' : 0},
+  '7': {'solved': False, 'started': False, 'hint_count' : 0},
+  '8': {'solved': False, 'started': False, 'hint_count' : 0},
+  'A': {'solved': False},
+  'B': {'solved': False},
 }
 ANSWERS = {
-  1: 'getaway',
-  2: 'see o double you',
-  3: [5,4,3,2,1],
-  4: [False, False, True, True, False, False, False, False, True],
-  5: '',
-  6: '',
-  7: [False, True, True, False, False, True, True, False, False, True],
-  8: '',
+  'A': [0, 1, 2],
+  'B': [0, 1, 2],
+  '1': 'getaway',
+  '2': 'see o double you',
+  '3': [5,4,3,2,1],
+  '4': [False, False, True, True, False, False, False, False, True],
+  '5': '',
+  '6': '',
+  '7': [False, True, True, False, False, True, True, False, False, True],
+  '8': '',
 }
 START_CRITERIA = {
-  1: 'Ryan',
-  2: 'Kristi',
-  3: 'Erica',
-  4: 'Tim',
-  5: 'Helena',
-  6: 'MaryAnn',
-  7: 'Ryan',
-  8: 'Jay',
+  '1': 'Ryan',
+  '2': 'Kristi',
+  '3': 'Erica',
+  '4': 'Tim',
+  '5': 'Helena',
+  '6': 'MaryAnn',
+  '7': 'Ryan',
+  '8': 'Jay',
 }
 
 def game_complete(table):
   state = GAME_STATE[table]
-  return all([puzzle['solved'] for key, puzzle in state.items() if isinstance(puzzle, dict)])
+  required = ['1', '2', '3', '4', '5', '6', '7', '8'];
+  return all([state[puzzle]['solved'] for puzzle in required])
 
 def send_game_state(table=None, sid=None):
   if sid:
@@ -131,9 +136,9 @@ def game_start(sid, data):
 
 @sio.on('cipher_ping')
 def cipherconnect(sid, environ):
-  table = int(CLIENTS[sid])
-  message = ANSWERS[1]
-  cipher = encrypt(message,table)
+  table = CLIENTS[sid]
+  message = ANSWERS['1']
+  cipher = encrypt(message, table)
   sio.emit('cipher_return', cipher)
 
 def encrypt(message, shift):
@@ -151,7 +156,7 @@ def encrypt(message, shift):
 @sio.on('join')
 def join(sid, data):
   print("join", data, sid)
-  table = data['table']
+  table = int(data['table'])
   CLIENTS[sid] = table
   sio.enter_room(sid, table)
   if table in GAME_STATE:
@@ -169,7 +174,7 @@ def submit(sid, data):
   print("answer", sid, data)
   puzzle, answer = [data.get(key) for key in ['puzzle', 'answer']]
   # TODO: error gracefully if no puzzle or answer
-  correct = answer == ANSWERS.get(int(puzzle))
+  correct = answer == ANSWERS.get(str(puzzle))
 
   response = {
     'correct': correct,
@@ -177,13 +182,13 @@ def submit(sid, data):
   sio.emit('submit_response', response, room=sid)
   if correct:
     table = CLIENTS[sid]
-    GAME_STATE[table][int(puzzle)]['solved'] = True
+    GAME_STATE[table][str(puzzle)]['solved'] = True
     send_game_state(table=table)
 
-  if game_complete(table):
-    GAME_STATE[table]['end_time'] = datetime.now().isoformat()
-    send_game_state(table=table)
-    send_redirect(table, 'FINISH')
+    if game_complete(table):
+      GAME_STATE[table]['end_time'] = datetime.now().isoformat()
+      send_game_state(table=table)
+      send_redirect(table, 'FINISH')
 
 @sio.on('person_visit')
 def person_visit(sid, data):
@@ -194,7 +199,7 @@ def person_visit(sid, data):
 
   for puzzle in game_state:
     if START_CRITERIA.get(puzzle) == name and not game_state[puzzle]['started'] and not game_state[puzzle]['solved']:
-      if puzzle == 1 or game_state[puzzle - 1]['solved']:
+      if puzzle == '1' or game_state[str(int(puzzle) - 1)]['solved']:
         game_state[puzzle]['started'] = True
         send_game_state(table=table)
         return

@@ -59,7 +59,7 @@ class Puzzle3 extends React.Component {
   render() {
     const { combo } = this.state;
     const { gameState } = this.props;
-    const solved = isSolved(gameState, 3);
+    const solved = isSolved(gameState, '3');
 
     return (
       <div>

@@ -8,6 +8,24 @@ const border = '2px solid black';
 const START_ICON = 'star';
 const END_ICON = 'gem';
 
+const MazeContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Maze = styled.div`
+  position: relative;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+`;
+
 const Row = styled.div`
   display: flex;
 `;
@@ -215,7 +233,7 @@ class Puzzle6 extends React.Component {
   render() {
     const { position } = this.state;
     const { gameState } = this.props;
-    const solved = isSolved(gameState, 6);
+    const solved = isSolved(gameState, '6');
 
     const [currentX, currentY] = position;
     const anchorX = Math.floor(currentX / 3) * 3;
@@ -227,27 +245,30 @@ class Puzzle6 extends React.Component {
         <p>
           Maybe we should check the basement. I think I saw Ryan headed that way, but he hasn&apos;t come back in a while.
         </p>
-        <div>
-          {
-            [...Array(3).keys()].map((i) => {
-              return (
-                <Row key={i}>
-                  {
-                    [...Array(3).keys()].map((j) => {
-                      const x = anchorX + i;
-                      const y = anchorY + j;
-                      return (
-                        <div key={j}>
-                          {this.renderCell(x, y, this.isAdjacent(x, y, currentX, currentY, adjacentCells))}
-                        </div>
-                      );
-                    })
-                  }
-                </Row>
-              );
-            })
-          }
-        </div>
+        <MazeContainer>
+          <Maze>
+            {solved && <Overlay />}
+            {
+              [...Array(3).keys()].map((i) => {
+                return (
+                  <Row key={i}>
+                    {
+                      [...Array(3).keys()].map((j) => {
+                        const x = anchorX + i;
+                        const y = anchorY + j;
+                        return (
+                          <div key={j}>
+                            {this.renderCell(x, y, this.isAdjacent(x, y, currentX, currentY, adjacentCells))}
+                          </div>
+                        );
+                      })
+                    }
+                  </Row>
+                );
+              })
+            }
+          </Maze>
+        </MazeContainer>
         {
           solved && (
             <p>
