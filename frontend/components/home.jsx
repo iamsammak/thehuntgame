@@ -74,7 +74,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     const socket = io(SOCKET_URL);
-    socket.on('start_ping', (data) => { this.setState({ gameStarted: data['gameStarted'] });
+    socket.on('game_started', (data) => { this.setState({ gameStarted: data['gameStarted'] });
     });
     this.state = {
       socket:socket,
@@ -92,7 +92,7 @@ class Home extends React.Component {
 
   calcOnes(num) {
     return () => {
-      this.setState(() => {
+      this.setState(state => {
         let { ones } = this.state;
         ones = (ones + num + 10) % 10;
         return ({ ones: ones });
@@ -113,20 +113,16 @@ class Home extends React.Component {
   setTable() {
     const { tens, ones, gameStarted } = this.state;
     const tableNumber = (tens * 10) + ones;
-    if (gameStarted === false) {
-      var errorMessage = 'Game has not started';
-    } else {
-      if (tableNumber === 0 || tableNumber === 26) {
-        return;
-      }
-      const { cookies } = this.props;
-      cookies.set("table", tableNumber);
+    if (tableNumber === 0 || tableNumber === 26 || gameStarted === false) {
+      return;
     }
+    const { cookies } = this.props;
+    cookies.set("table", tableNumber);
   }
 
   gameStartPing() {
     const { socket } = this.state;
-    socket.emit('game_start_ping', {});
+    socket.emit('game_started', {});
   }
 
   render() {

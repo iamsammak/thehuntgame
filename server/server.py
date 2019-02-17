@@ -85,50 +85,49 @@ def admin():
 def connect(sid, environ):
   print("connect ", sid)
 
-@sio.on('hint_ping')
+@sio.on('hint_shown')
 def handle_hint(sid, data):
   puzzle = data['puzzle']
   table = CLIENTS[sid]
-  old_hint_count = GAME_STATE[table][puzzle]['hint_count']
-  new_hint_count = old_hint_count + 1
-  GAME_STATE[table][puzzle]['hint_count'] = new_hint_count
+  GAME_STATE[table][puzzle]['hint_count'] += 1
 
-@sio.on('admin_ping')
+@sio.on('load_admin_data')
 def adminconnect(sid, data):
   print('admin ping was triggered', data['trigger'])
   trigger = data['trigger']
   if trigger == 'load':
     table_data = defaultdict(list)
-    puzzle_data = defaultdict(list)
+    puzzle_data = defaultdict(dict)
 
     for table in GAME_STATE:
       data = GAME_STATE[table]
+      print(table)
+      print(data)
       for puzzle in data:
-        puzzle_data[puzzle].append({table: data[puzzle]})
+        info = data[puzzle]
+        puzzle_data[puzzle][table] = info
 
     data_to_send = {'puzzleData' : puzzle_data, 'gameStarted': GAME_STARTED}
-    sio.emit('admin_return', data_to_send)
+    sio.emit('admin_data', data_to_send)
   elif trigger == 'start_game':
     global GAME_STARTED
     print('Game has been started: ', GAME_STARTED)
     GAME_STARTED = True
     print('Game has been started: ', GAME_STARTED) 
     data_to_send = {'gameStarted': GAME_STARTED}
-    sio.emit('gameStarted', data_to_send)
+    sio.emit('game_started', data_to_send)
   elif trigger == 'stop_game':
     global GAME_STARTED
     print('Game has been started: ', GAME_STARTED)
     GAME_STARTED = False
     print('Game has been started: ', GAME_STARTED) 
     data_to_send = {'gameStarted': GAME_STARTED}
-    sio.emit('gameStarted', data_to_send)
+    sio.emit('game_started', data_to_send)
 
-
-
-@sio.on('game_start_ping')
+@sio.on('game_started')
 def game_start(sid, data):
   data_to_send = {'gameStarted': GAME_STARTED}
-  sio.emit('start_ping', data_to_send)
+  sio.emit('game_started', data_to_send)
 
 @sio.on('cipher_ping')
 def cipherconnect(sid, environ):
