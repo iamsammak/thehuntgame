@@ -9,8 +9,8 @@ import { getCurrentStage } from '../helpers';
 const SafeImage = styled.img.attrs(props => ({
   src: props.src,
 }))`
-  height: 90px;
-  width: 80px;
+  height: 75px;
+  width: 65px;
 `;
 
 class Puzzle4 extends React.Component {
