@@ -6,7 +6,7 @@ import Puzzle5Clue from './puzzle5Clue';
 
 class Puzzle5 extends React.Component {
   render() {
-    const { gameState } = this.props;
+    const { gameState, name } = this.props;
     const solved = isSolved(gameState, '5');
 
     return (
@@ -14,7 +14,7 @@ class Puzzle5 extends React.Component {
         <p>
           Earlier this morning, Chris gave us a piece of paper and said to hold onto it. We had the smart idea of tearing it apart and splitting up the pieces among us...maybe that piece of paper has something to do with the key.
         </p>
-        <Puzzle5Clue clue="clue0" />
+        <Puzzle5Clue clue="clue0" name={name} />
         <p>
           <Submit {...this.props} puzzleNumber={'5'} disabled={solved} />
         </p>

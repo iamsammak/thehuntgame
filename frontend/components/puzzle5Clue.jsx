@@ -3,15 +3,13 @@ import styled from 'styled-components';
 
 import { Narration } from '../wrappers';
 
-const Clue = styled.img.attrs(props => ({
-  src: props.src,
-}))`
+const Clue = styled.img`
   width: 100%;
 `;
 
 class Puzzle5Clue extends React.Component {
   render() {
-    const { clue } = this.props;
+    const { clue, name } = this.props;
 
     let src = "";
     switch (clue) {
@@ -29,7 +27,7 @@ class Puzzle5Clue extends React.Component {
 
     return (
       <div>
-        <Narration>Helena shows you her piece of paper.</Narration>
+        <Narration>{name} shows you her piece of paper.</Narration>
         <Clue src={src} />
       </div>
     );
