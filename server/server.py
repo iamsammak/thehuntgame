@@ -165,7 +165,7 @@ def join(sid, data):
   else:
     # this is the first person to join this table
     GAME_STATE[table] = deepcopy(INITIAL_GAME_STATE_FOR_TABLE)
-    GAME_STATE[table]['start_time'] = datetime.now().isoformat()
+    GAME_STATE[table]['start_time'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
   send_game_state(sid=sid)
   print GAME_STATE
 

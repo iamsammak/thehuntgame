@@ -43,7 +43,7 @@ export const PEOPLE = {
 
 function pad(n) {
   if (n < 10) {
-    return '0' + n;
+    return `0${n}`;
   }
   return n.toString();
 }
