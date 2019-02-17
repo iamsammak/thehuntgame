@@ -30,12 +30,12 @@ export const Button = styled.button`
 `;
 
 export const SubmitButton = styled(Button)`
-  width: 150px;
+  width: 100px;
   background-color: ${props => (props.click ? '#9d0e3d' : '#ff654d')};
 `;
 
 export const ClearButton = styled(Button)`
-  width: 150px;
+  width: 100px;
   background-color: #d2a494;
 `;
 

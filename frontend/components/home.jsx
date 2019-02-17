@@ -91,7 +91,7 @@ class Home extends React.Component {
   calcOnes(num) {
     return () => {
       this.setState(state => {
-        let { ones } = this.state;
+        let { ones } = state;
         ones = (ones + num + 10) % 10;
         return ({ ones: ones });
       });
