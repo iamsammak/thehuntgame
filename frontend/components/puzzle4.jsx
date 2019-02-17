@@ -6,9 +6,7 @@ import { isSolved } from '../helpers';
 import { KeypadContainer, Button, SubmitButton, ClearButton } from './buttonContants';
 import { getCurrentStage } from '../helpers';
 
-const SafeImage = styled.img.attrs(props => ({
-  src: props.src,
-}))`
+const SafeImage = styled.img`
   height: 75px;
   width: 65px;
 `;
@@ -91,18 +89,18 @@ class Puzzle4 extends React.Component {
             </p>
         }
         <KeypadContainer>
-          <Button click={this.state.value[0]} onClick={this.handleClick(0)} ><SafeImage src={images[0].src} ></SafeImage></Button>
-          <Button click={this.state.value[1]} onClick={this.handleClick(1)} ><SafeImage src={images[1].src} ></SafeImage></Button>
-          <Button click={this.state.value[2]} onClick={this.handleClick(2)} ><SafeImage src={images[2].src} ></SafeImage></Button>
-          <Button click={this.state.value[3]} onClick={this.handleClick(3)} ><SafeImage src={images[3].src} ></SafeImage></Button>
-          <Button click={this.state.value[4]} onClick={this.handleClick(4)} ><SafeImage src={images[4].src} ></SafeImage></Button>
-          <Button click={this.state.value[5]} onClick={this.handleClick(5)} disabled={puzzleBSolved}><SafeImage src={images[5].src} ></SafeImage></Button>
-          <Button click={this.state.value[6]} onClick={this.handleClick(6)} ><SafeImage src={images[6].src} ></SafeImage></Button>
-          <Button click={this.state.value[7]} onClick={this.handleClick(7)} ><SafeImage src={images[7].src} ></SafeImage></Button>
-          <Button click={this.state.value[8]} onClick={this.handleClick(8)} ><SafeImage src={images[8].src} ></SafeImage></Button>
+          <Button click={this.state.value[0]} onClick={this.handleClick(0)} ><SafeImage src={images[0].src} /></Button>
+          <Button click={this.state.value[1]} onClick={this.handleClick(1)} ><SafeImage src={images[1].src} /></Button>
+          <Button click={this.state.value[2]} onClick={this.handleClick(2)} ><SafeImage src={images[2].src} /></Button>
+          <Button click={this.state.value[3]} onClick={this.handleClick(3)} ><SafeImage src={images[3].src} /></Button>
+          <Button click={this.state.value[4]} onClick={this.handleClick(4)} ><SafeImage src={images[4].src} /></Button>
+          <Button click={this.state.value[5]} onClick={this.handleClick(5)} disabled={puzzleBSolved}><SafeImage src={images[5].src} /></Button>
+          <Button click={this.state.value[6]} onClick={this.handleClick(6)} ><SafeImage src={images[6].src} /></Button>
+          <Button click={this.state.value[7]} onClick={this.handleClick(7)} ><SafeImage src={images[7].src} /></Button>
+          <Button click={this.state.value[8]} onClick={this.handleClick(8)} ><SafeImage src={images[8].src} /></Button>
 
           <ClearButton onClick={this.clearValue} >Clear</ClearButton>
-          <Button click={this.state.value[9]} onClick={this.handleClick(9)} ><SafeImage src={images[9].src} ></SafeImage></Button>
+          <Button click={this.state.value[9]} onClick={this.handleClick(9)} ><SafeImage src={images[9].src} /></Button>
           <SubmitButton onClick={this.submitAnswer} >Enter</SubmitButton>
         </KeypadContainer>
         {
