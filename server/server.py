@@ -21,7 +21,7 @@ CLIENTS = {}
 # { table number: int -> { puzzle number: str -> { solved: str -> bool } } }
 GAME_STATE = {}
 INITIAL_GAME_STATE_FOR_TABLE = {
-  '1': {'solved': False, 'started': False, 'hint_count' : 0},
+  '1': {'solved': False, 'started': True, 'hint_count' : 0},
   '2': {'solved': False, 'started': False, 'hint_count' : 0},
   '3': {'solved': False, 'started': False, 'hint_count' : 0},
   '4': {'solved': False, 'started': False, 'hint_count' : 0},
@@ -29,8 +29,8 @@ INITIAL_GAME_STATE_FOR_TABLE = {
   '6': {'solved': False, 'started': False, 'hint_count' : 0},
   '7': {'solved': False, 'started': False, 'hint_count' : 0},
   '8': {'solved': False, 'started': False, 'hint_count' : 0},
-  'A': {'solved': False},
-  'B': {'solved': False},
+  'A': {'solved': False, 'started': True},
+  'B': {'solved': False, 'started': True},
 }
 ANSWERS = {
   'A': [0, 1, 2],
