@@ -67,21 +67,26 @@ class PuzzleB extends React.Component {
         <p>
           Is it here? Is it in this box? Hey, can you help me sort through these boxes and move all the unused stuff to my car? Maybe if we clear out all this stuff, then we can find the key here.
         </p>
-        <p>
-          Question 1 placeholder?
-        </p>
-        {question1Text.map(this.renderTextOptions(0))}
-        <p>
-          Question 2 placeholder?
-        </p>
-        {question2Text.map(this.renderTextOptions(1))}
-        <p>
-          Question 3 placeholder?
-        </p>
-        {question3Text.map(this.renderTextOptions(2))}
-        <p>
-          <button onClick={this.handleSubmit} disabled={solved}>Submit</button>
-        </p>
+        {
+          !solved &&
+            <div>
+              <p>
+                Question 1 placeholder?
+              </p>
+              {question1Text.map(this.renderTextOptions(0))}
+              <p>
+                Question 2 placeholder?
+              </p>
+              {question2Text.map(this.renderTextOptions(1))}
+              <p>
+                Question 3 placeholder?
+              </p>
+              {question3Text.map(this.renderTextOptions(2))}
+              <p>
+                <button onClick={this.handleSubmit} disabled={solved}>Submit</button>
+              </p>
+            </div>
+        }
         {
           correct === false &&
             <p>
@@ -91,6 +96,7 @@ class PuzzleB extends React.Component {
         {
           solved &&
             <div>
+              <Narration>You got all the items right!</Narration>
               <p>
                 Thanks so much for bringing those to the car! Hm? You found a strong magnet in the trunk? Can you hold onto it for now? I think Matt was holding onto it for some reason.
               </p>
