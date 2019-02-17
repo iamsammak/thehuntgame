@@ -158,7 +158,9 @@ def join(sid, data):
   print("join", data, sid)
   table = int(data['table'])
   CLIENTS[sid] = table
+
   sio.enter_room(sid, table)
+
   if table in GAME_STATE:
     # broadcast that someone has joined to everyone except this person
     sio.emit('player_joined', {}, room=table, skip_sid=sid)
@@ -167,6 +169,10 @@ def join(sid, data):
     GAME_STATE[table] = deepcopy(INITIAL_GAME_STATE_FOR_TABLE)
     GAME_STATE[table]['start_time'] = datetime.now().isoformat()
   send_game_state(sid=sid)
+
+  if game_complete(table):
+    send_redirect(table, 'FINISH')
+
   print GAME_STATE
 
 @sio.on('submit')
