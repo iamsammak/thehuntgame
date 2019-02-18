@@ -48,10 +48,11 @@ class Admin extends React.Component {
 
   renderTable(tableDataEntry) {
     var [table, info] = tableDataEntry;
-    var { started, solved, hintCount } = info;
+    var { started, solved, hint_count } = info;
+    console.log(hint_count)
     return (
       <li key={table}>
-        table: {table} --&gt; started: <CheckIcon solved={started}/> solved: <CheckIcon solved={solved}/> hint count: {hintCount}
+        table: {table} --&gt; started: <CheckIcon solved={started}/> solved: <CheckIcon solved={solved}/> hint count: {hint_count}
       </li>
     );
   }
@@ -66,7 +67,7 @@ class Admin extends React.Component {
         solvedCounter += 1;
       }
     }
-    if (puzzle === 'start_time') {
+    if (puzzle === 'start_time' || puzzle === 'end_time') {
       return;
     } else {
       return (
