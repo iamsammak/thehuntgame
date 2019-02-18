@@ -49,7 +49,6 @@ class Admin extends React.Component {
   renderTable(tableDataEntry) {
     var [table, info] = tableDataEntry;
     var { started, solved, hint_count } = info;
-    console.log(hint_count)
     return (
       <li key={table}>
         table: {table} --&gt; started: <CheckIcon solved={started}/> solved: <CheckIcon solved={solved}/> hint count: {hint_count}

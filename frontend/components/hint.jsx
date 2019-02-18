@@ -83,8 +83,6 @@ class Hint extends React.Component {
     case 5: hintText = "The paper looks oddly familiar. Did we take a picture with it at the photobooth?"; break;
     case 8: hintText = "Jay probably would've taken the shortest path possible from his car to the sweetheart table."; break;
     }
-    console.log(hintText)
-    console.log(hint)
     if (hintText != undefined) {
       return (
         <div ref={this.setRef}>
