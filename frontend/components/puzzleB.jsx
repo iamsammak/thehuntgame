@@ -59,7 +59,7 @@ class PuzzleB extends React.Component {
     const solved = isSolved(gameState, 'B');
 
     const question1Text = ["Candle lamp", "Arbor post", "Wine barrel"];
-    const question2Text = ["White ribbons", "Peach flowers", "Yellow napkins"]
+    const question2Text = ["White ribbons", "Peach flowers", "Yellow napkins"];
     const question3Text = ["Party poppers", "Boba straws", "Tea bags"];
 
     return (

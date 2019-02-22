@@ -99,7 +99,7 @@ class PuzzleA extends React.Component {
               </p>
               {question1Icons.map(this.renderIconOptions(0))}
               <p>
-                Which Valspar paint isn't used?
+                Which Valspar paint isn&apos;t used?
               </p>
               {question2Text.map(this.renderTextOptions(1))}
               <p>
