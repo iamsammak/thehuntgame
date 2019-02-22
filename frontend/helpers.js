@@ -37,7 +37,7 @@ export const PEOPLE = {
   "Ryan": { src: "images/placeholder.jpg" },
   "Kristi": { src: "images/placeholder.jpg" },
   "Erica": { src: "images/placeholder.jpg" },
-  "MaryAnn": { src: "images/placeholder.jpg" },
+  "Mary Ann": { src: "images/placeholder.jpg" },
   "Helena": { src: "images/placeholder.jpg" },
 };
 
