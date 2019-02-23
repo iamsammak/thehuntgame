@@ -31,15 +31,14 @@ export function getCurrentStage(gameState) {
 }
 
 export const PEOPLE = {
-  "Matt": { src: "images/placeholder.jpg" },
-  "Tim": { src: "images/placeholder.jpg" },
-  "Jay": { src: "images/placeholder.jpg" },
-  "Ryan": { src: "images/placeholder.jpg" },
-  "Kristi": { src: "images/placeholder.jpg" },
-  "Erica": { src: "images/placeholder.jpg" },
-  "Mary Ann": { src: "images/placeholder.jpg" },
-  "Helena": { src: "images/placeholder.jpg" },
-
+  "Matt": { path: "/matt", src: "images/matt.jpeg", gender: "male" },
+  "Tim": { path: "/tim", src: "images/tim.jpeg", gender: "male" },
+  "Jay": { path: "/jay", src: "images/jay.jpeg", gender: "male" },
+  "Ryan": { path: "/ryan", src: "images/ryan.jpeg", gender: "male" },
+  "Kristi": { path: "/kristi", src: "images/kristi.jpeg", gender: "female" },
+  "Erica": { path: "/erica", src: "images/erica.jpeg", gender: "female" },
+  "Mary Ann": { path: "/maryann", src: "images/maryann.jpeg", gender: "female" },
+  "Helena": { path: "/helena", src: "images/helena.jpeg", gender: "female" },
 };
 
 function pad(n) {

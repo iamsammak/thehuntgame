@@ -20,7 +20,7 @@ class Person7 extends React.Component {
     } else if (stage === 5) {
       body = <Puzzle {...this.props} component={Puzzle5} name={name} />;
     } else if (stage === 7) {
-      body = <Puzzle7Clue clue="clue2" />;
+      body = <Puzzle7Clue name={name} />;
     }
 
     return (

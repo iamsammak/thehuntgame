@@ -1,26 +1,89 @@
 import React from 'react';
+import styled from 'styled-components';
+
+import { PEOPLE } from '../helpers';
+import { Narration } from '../wrappers';
+
+const List = styled.ol`
+  text-align: left;
+`;
 
 class Puzzle7Clue extends React.Component {
   render() {
-    const { clue } = this.props;
+    const { name } = this.props;
 
-    let clueText = '';
-    switch (clue) {
-    case 'clue0':
-      clueText = 'Row 1 Column 1 should be off. Row 2 Column 3 should be off.'; break;
-    case 'clue1':
-      clueText = 'Row 2 Column 5 should be on. Row 2 Column 1 should be on.'; break;
-    case 'clue2':
-      clueText = 'Row 1 Column 5 should be off. Row 1 Column 3 should be on.'; break;
-    case 'clue3':
-      clueText = 'Row 1 Column 2 should be on. Row 2 Column 4 should be off.'; break;
-    case 'clue4':
-      clueText = 'Row 2 Column 2 should be on. Row 1 Column 4 should be off.'; break;
+    let clue = '';
+    switch (name) {
+    case 'Matt':
+      clue = (
+        <List>
+          <li>The switch whose number is in the wedding hashtag should be turned off.</li>
+          <li>Ryan&apos;s first clue should be ignored.</li>
+        </List>
+      );
+      break;
+    case 'Tim':
+      clue = (
+        <List>
+          <li>The sum of all the &apos;on&apos; switch numbers is less than 30. </li>
+          <li>Switch 4 should be on.</li>
+        </List>
+      );
+      break;
+    case 'Jay':
+      clue = (
+        <List>
+          <li>Erica&apos;s first clue should read &apos;left&apos; instead of &apos;right&apos;.</li>
+          <li>The sum of the lowest &apos;on&apos; switch number and the highest &apos;on&apos; switch number is less than 12.</li>
+        </List>
+      );
+      break;
+    case 'Ryan':
+      clue = (
+        <List>
+          <li>Switches 1 and 9 should be off.</li>
+          <li>Kristi&apos;s first clue is incorrect.</li>
+        </List>
+      );
+      break;
+    case 'Kristi':
+      clue = (
+        <List>
+          <li>Matt&apos;s second clue is incorrect.</li>
+          <li>There are more odd numbered switches turned on than even numbered switches turned on.</li>
+        </List>
+      );
+      break;
+    case 'Erica':
+      clue = (
+        <List>
+          <li>The right column has an odd number of switches turned on.</li>
+          <li>If today&apos;s date is an odd number, then switch 6 should be off.</li>
+        </List>
+      );
+      break;
+    case 'Mary Ann':
+      clue = (
+        <List>
+          <li>Tim&apos;s second clue should read &apos;off&apos; instead of &apos;on&apos;.</li>
+          <li>The switch whose number equals the number of bridal party members should be turned on.</li>
+        </List>
+      );
+      break;
+    case 'Helena':
+      clue = (
+        <List>
+          <li>Erica&apos;s second clue should read &apos;switch 7&apos; instead of &apos;switch 6&apos;.</li>
+          <li>The sum of all the &apos;on&apos; switch numbers is more than 20.</li>
+        </List>
+      );
+      break;
     }
 
     return (
       <div>
-        {clueText}
+        <Narration>{name} recalls the instructions given to {PEOPLE[name].gender === 'male' ? 'him' : 'her'}.</Narration>
+        {clue}
       </div>
     );
   }
