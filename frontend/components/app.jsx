@@ -6,6 +6,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 
+import { PEOPLE } from '../helpers';
 import Home from './home';
 import Main from './main';
 import Person from './person';
@@ -99,14 +100,14 @@ class App extends React.Component {
           <Route path="/home" render={() => <Home {...this.state} />} />
           <Route path="/main" render={() => <Main {...this.state} />} />
           <Route path="/finish" render={() => <Finish {...this.state} />} />
-          <Route path="/matt" render={() => <Person {...this.state} component={Person0} name="Matt" />} />
-          <Route path="/tim" render={() => <Person {...this.state} component={Person1} name="Tim" />} />
-          <Route path="/jay" render={() => <Person {...this.state} component={Person2} name="Jay" />} />
-          <Route path="/ryan" render={() => <Person {...this.state} component={Person3} name="Ryan" />} />
-          <Route path="/kristi" render={() => <Person {...this.state} component={Person4} name="Kristi" />} />
-          <Route path="/erica" render={() => <Person {...this.state} component={Person5} name="Erica" />} />
-          <Route path="/maryann" render={() => <Person {...this.state} component={Person6} name="MaryAnn" />} />
-          <Route path="/helena" render={() => <Person {...this.state} component={Person7} name="Helena" />} />
+          <Route path={PEOPLE['Matt'].path} render={() => <Person {...this.state} component={Person0} name="Matt" />} />
+          <Route path={PEOPLE['Tim'].path} render={() => <Person {...this.state} component={Person1} name="Tim" />} />
+          <Route path={PEOPLE['Jay'].path} render={() => <Person {...this.state} component={Person2} name="Jay" />} />
+          <Route path={PEOPLE['Ryan'].path} render={() => <Person {...this.state} component={Person3} name="Ryan" />} />
+          <Route path={PEOPLE['Kristi'].path} render={() => <Person {...this.state} component={Person4} name="Kristi" />} />
+          <Route path={PEOPLE['Erica'].path} render={() => <Person {...this.state} component={Person5} name="Erica" />} />
+          <Route path={PEOPLE['MaryAnn'].path} render={() => <Person {...this.state} component={Person6} name="MaryAnn" />} />
+          <Route path={PEOPLE['Helena'].path} render={() => <Person {...this.state} component={Person7} name="Helena" />} />
         </div>
         <ToastContainer
           position={toast.POSITION.TOP_RIGHT}

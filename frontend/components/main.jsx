@@ -2,12 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { PEOPLE } from '../helpers';
 import { xsSpacing } from '../constants';
 import WelcomeHeader from './welcomeHeader';
 
-const tableSize = 300;
-const lockSize = 40;
-const middleLockSize = 60;
+const tableSize = 350;
+const lockSize = 60;
+const middleLockSize = 80;
 
 const Table = styled.div`
   position: relative;
@@ -67,15 +68,14 @@ const Line = styled.div`
 export default class Main extends React.Component {
   render() {
     const items = [
-      { to: "/tim", key: 1, src: 'images/placeholder.jpg' },
-      { to: "/jay", key: 2, src: 'images/placeholder.jpg' },
-      { to: "/ryan", key: 3, src: 'images/placeholder.jpg' },
-      { to: "/kristi", key: 4, src: 'images/placeholder.jpg' },
-      { to: "/erica", key: 5, src: 'images/placeholder.jpg' },
-      { to: "/maryann", key: 6, src: 'images/placeholder.jpg' },
-      { to: "/helena", key: 7, src: 'images/placeholder.jpg' },
+      { to: PEOPLE['Tim'].path, key: 1, src: PEOPLE['Tim'].src },
+      { to: PEOPLE['Jay'].path, key: 2, src: PEOPLE['Jay'].src },
+      { to: PEOPLE['Ryan'].path, key: 3, src: PEOPLE['Ryan'].src },
+      { to: PEOPLE['Kristi'].path, key: 4, src: PEOPLE['Kristi'].src },
+      { to: PEOPLE['Erica'].path, key: 5, src: PEOPLE['Erica'].src },
+      { to: PEOPLE['MaryAnn'].path, key: 6, src: PEOPLE['MaryAnn'].src },
+      { to: PEOPLE['Helena'].path, key: 7, src: PEOPLE['Helena'].src },
     ];
-    const middlePerson = <MiddlePerson src='images/placeholder.jpg' />;
 
     return (
       <div>
@@ -98,9 +98,9 @@ export default class Main extends React.Component {
               );
             })
           }
-          <MiddleLink to={"/matt"}>
+          <MiddleLink to={PEOPLE['Matt'].path}>
             <PersonContainer>
-              {middlePerson}
+              <MiddlePerson src={PEOPLE['Matt'].src} />
             </PersonContainer>
           </MiddleLink>
         </Table>
