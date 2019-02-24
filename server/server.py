@@ -55,6 +55,9 @@ START_CRITERIA = {
   '8': 'Jay',
 }
 
+def server_now():
+  return datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+
 def game_complete(table):
   state = GAME_STATE[table]
   required = ['1', '2', '3', '4', '5', '6', '7', '8'];
@@ -167,7 +170,7 @@ def join(sid, data):
   else:
     # this is the first person to join this table
     GAME_STATE[table] = deepcopy(INITIAL_GAME_STATE_FOR_TABLE)
-    GAME_STATE[table]['start_time'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+    GAME_STATE[table]['start_time'] = server_now()
   send_game_state(sid=sid)
 
   if game_complete(table):
@@ -186,15 +189,18 @@ def submit(sid, data):
     'correct': correct,
   }
   sio.emit('submit_response', response, room=sid)
+  table = CLIENTS[sid]
   if correct:
-    table = CLIENTS[sid]
     GAME_STATE[table][str(puzzle)]['solved'] = True
     send_game_state(table=table)
 
     if game_complete(table):
-      GAME_STATE[table]['end_time'] = datetime.now().isoformat()
+      GAME_STATE[table]['end_time'] = server_now()
       send_game_state(table=table)
       send_redirect(table, 'FINISH')
+  elif str(puzzle) == '7':
+    GAME_STATE[table][str(puzzle)]['last_attempt'] = server_now()
+    send_game_state(table=table)
 
 @sio.on('person_visit')
 def person_visit(sid, data):

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { xxsSpacing, xsSpacing, smSpacing, mdSpacing, lgSpacing, xlSpacing } from './constants';
+
+import { xxsSpacing, xsSpacing, smSpacing, mdSpacing, lgSpacing, xlSpacing, red } from './constants';
 
 export const XxsSpacing = styled.div`
   width: ${xxsSpacing};
@@ -29,5 +30,6 @@ export const XlSpacing = styled.div`
 export const Narration = styled.div`
   font-style: italic;
   font-size: 0.8em;
+  ${props => props.danger && `color: ${red};`}
 `;
 
