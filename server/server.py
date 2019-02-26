@@ -180,7 +180,7 @@ def submit(sid, data):
   print("answer", sid, data)
   puzzle, answer = [data.get(key) for key in ['puzzle', 'answer']]
   # TODO: error gracefully if no puzzle or answer
-  if type(answer) is list: 
+  if type(answer) is string:
     correct = answer == ANSWERS.get(str(puzzle))
   else:
     correct = answer.lower() == ANSWERS.get(str(puzzle))
