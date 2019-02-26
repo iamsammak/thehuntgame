@@ -60,7 +60,7 @@ class Base extends React.Component {
       break;
     case "Mary Ann":
       base = (
-        <Narration>You find MaryAnn around the cornhole games.</Narration>
+        <Narration>You find Mary Ann around the cornhole games.</Narration>
       );
       break;
     case "Helena":

@@ -72,7 +72,7 @@ export default class Main extends React.Component {
       { to: "/ryan", key: 3, src: 'images/placeholder.jpg' },
       { to: "/kristi", key: 4, src: 'images/placeholder.jpg' },
       { to: "/erica", key: 5, src: 'images/placeholder.jpg' },
-      { to: "/mary ann", key: 6, src: 'images/placeholder.jpg' },
+      { to: "/maryann", key: 6, src: 'images/placeholder.jpg' },
       { to: "/helena", key: 7, src: 'images/placeholder.jpg' },
     ];
     const middlePerson = <MiddlePerson src='images/placeholder.jpg' />;

@@ -1,11 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Narration } from '../wrappers';
 import { isSolved } from '../helpers';
 
+const SafeImage = styled.img`
+  height: 150px;
+  width: 75px;
+  margin-right: auto;
+  margin-left: auto;
+`;
 const Button = styled.button`
+  margin-right: 5px;
   ${props => props.selected && 'border-style: inset;'}
 `;
 
@@ -41,10 +47,9 @@ class PuzzleA extends React.Component {
       return (
         <Button
           key={key}
-          onClick={this.handleOptionClick(question, index)}
           selected={answer === index}
         >
-          <FontAwesomeIcon icon={icon} />
+          <SafeImage src={icon} onClick={this.handleOptionClick(question, index)} />
         </Button>
       );
     };
@@ -82,7 +87,7 @@ class PuzzleA extends React.Component {
     const { correct, gameState } = this.props;
     const solved = isSolved(gameState, 'A');
 
-    const question1Icons = ['chevron-circle-up', 'chevron-circle-down', 'chevron-circle-left', 'chevron-circle-down'];
+    const question1Icons = ['images/cornhole1.jpg', 'images/cornhole2.jpg', 'images/cornhole3.png', 'images/cornhole4.png'];
     const question2Text = ['Ultra White', 'Coral Ridge', 'New Peach'];
     const question3Text = ['3', '4', '5', '6'];
 

@@ -50,7 +50,7 @@ START_CRITERIA = {
   '3': 'Erica',
   '4': 'Tim',
   '5': 'Helena',
-  '6': 'MaryAnn',
+  '6': 'Mary Ann',
   '7': 'Ryan',
   '8': 'Jay',
 }
