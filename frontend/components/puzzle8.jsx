@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Narration } from '../wrappers';
+import { Narration, LgSpacing } from '../wrappers';
 import { smSpacing } from '../constants';
+
+const START_POSITION = [7, 8];
 
 const MazeContainer = styled.div`
   display: flex;
@@ -38,42 +40,41 @@ const Cell = styled.div`
   ${props => (props.left ? 'border-left-width: 3px;' : null)}
   ${props => (props.right ? 'border-right-width: 3px;' : null)}
   ${props => (props.down ? 'border-bottom-width: 3px;' : null)}
-  ${props => (props.deviate ? 'background-color: rgba(0, 0, 0, 0.1);' : null)}
 `;
 
 const maze = [
   [
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    ['right', 'left'],
-    ['up', 'left', 'right', 'deviate'],
-    ['left', 'down'],
-    [],
-  ],
-  [
-    [],
-    [],
-    [],
-    [],
-    ['down'],
-    ['down'],
-    ['right', 'down'],
+    ['right'],
     ['left', 'up', 'deviate'],
-    ['deviate'],
-    ['up', 'right', 'deviate'],
+    ['up', 'deviate'],
+    ['right', 'up', 'deviate'],
+    ['left'],
+    [],
+    ['right'],
+    ['left', 'up', 'deviate'],
+    ['up', 'deviate'],
+    ['right', 'up', 'deviate'],
     ['left'],
   ],
   [
-    [],
+    ['right', 'down'],
+    ['left', 'deviate'],
+    ['deviate'],
+    ['right', 'deviate'],
+    ['left', 'down'],
+    ['down'],
+    ['right', 'down'],
+    ['left', 'deviate'],
+    ['deviate'],
+    ['right', 'deviate'],
+    ['left'],
+  ],
+  [
+    ['left', 'down', 'up', 'finish'],
     [],
     [],
     ['right'],
-    ['up', 'left', 'deviate'],
+    ['left', 'up', 'deviate'],
     ['up', 'deviate'],
     ['up', 'deviate'],
     ['deviate'],
@@ -82,80 +83,80 @@ const maze = [
     ['left'],
   ],
   [
-    [],
-    [],
-    [],
-    ['right'],
+    ['right', 'up'],
     ['left'],
-    ['down'],
+    [],
+    ['right'],
+    ['left', 'down'],
+    [],
     ['down'],
     ['down'],
     ['right'],
-    ['up', 'left'],
+    ['left', 'up'],
     [],
   ],
   [
-    ['down'],
-    ['down'],
-    ['down'],
     ['right', 'down'],
-    ['left', 'right', 'checkpoint'],
-    ['up', 'left', 'down'],
-    ['up', 'down'],
-    ['up', 'right', 'down'],
-    ['left', 'right', 'checkpoint'],
+    ['left', 'down'],
+    ['down'],
+    ['right'],
+    ['right', 'left', 'down', 'up'],
+    ['right', 'left', 'checkpoint'],
+    ['left', 'down', 'up'],
+    ['right', 'up'],
+    ['right', 'left', 'checkpoint'],
     ['left', 'down'],
     ['down'],
   ],
   [
-    ['up', 'left', 'deviate'],
+    ['left', 'up', 'deviate'],
     ['up', 'deviate'],
-    ['up', 'deviate'],
-    ['up', 'right', 'deviate'],
-    ['left', 'down'],
-    ['up', 'down'],
-    ['up'],
-    ['up', 'right', 'deviate'],
+    ['right', 'up', 'deviate'],
+    ['right', 'left', 'checkpoint'],
+    ['left', 'up'],
+    [],
+    ['right', 'up', 'deviate'],
+    ['right', 'left'],
     ['left'],
     ['up', 'deviate'],
-    ['up', 'right', 'deviate'],
+    ['right', 'up', 'deviate'],
   ],
   [
-    ['left', 'down', 'deviate'],
+    ['left', 'deviate'],
+    ['deviate'],
+    ['deviate'],
     [],
-    ['down'],
-    ['down'],
-    ['up', 'down', 'checkpoint'],
-    ['up', 'down'],
+    [],
     [],
     ['right', 'deviate'],
+    ['right', 'left'],
     ['left'],
     ['deviate'],
     ['right', 'deviate'],
   ],
   [
-    ['up', 'right'],
-    ['left', 'right'],
-    ['up', 'left'],
-    ['up'],
-    ['up'],
-    ['up', 'right'],
     ['left', 'deviate'],
+    ['deviate'],
     ['right', 'deviate'],
+    ['left', 'deviate'],
+    ['deviate'],
+    ['deviate'],
+    ['right', 'deviate'],
+    ['right', 'left'],
     ['left', 'down', 'start'],
     ['down', 'deviate'],
     ['right', 'down', 'deviate'],
   ],
   [
-    ['right'],
-    ['left', 'right', 'down', 'finish'],
-    ['left'],
-    [],
-    [],
-    ['right'],
     ['left', 'down', 'deviate'],
+    ['down', 'deviate'],
     ['right', 'down', 'deviate'],
-    ['up', 'left'],
+    ['left', 'down', 'deviate'],
+    ['down', 'deviate'],
+    ['down', 'deviate'],
+    ['right', 'down', 'deviate'],
+    ['left'],
+    ['up'],
     ['up'],
     ['up'],
   ],
@@ -166,11 +167,9 @@ class Puzzle8 extends React.Component {
     super(props);
     this.state = {
       error: false,
-      position: [7, 8],
+      position: START_POSITION,
       deviated: false,
-      checkpoint: [7, 8],
-    };
-    this.hasProp = this.hasProp.bind(this);
+    }; this.hasProp = this.hasProp.bind(this);
     this.renderCell = this.renderCell.bind(this);
     this.move = this.move.bind(this);
   }
@@ -178,7 +177,7 @@ class Puzzle8 extends React.Component {
   move(direction) {
     return () => {
       this.setState((state) => {
-        let { error, position, deviate, checkpoint } = state;
+        let { error, position, deviate } = state;
         switch (direction) {
         case 'up':
           position = [position[0] - 1, position[1]]; break;
@@ -201,15 +200,12 @@ class Puzzle8 extends React.Component {
         if (maze[x][y].includes('checkpoint')) {
           if (deviate) {
             // Player has deviated, reset them to last checkpoint
-            position = checkpoint;
+            position = START_POSITION;
             deviate = false;
             error = true;
             setTimeout(() => {
               this.setState({ error: false });
-            }, 2000);
-          } else {
-            // Player reached checkpoint without deviating, set new checkpoint
-            checkpoint = position;
+            }, 3000);
           }
         }
 
@@ -225,7 +221,6 @@ class Puzzle8 extends React.Component {
           error,
           position,
           deviate,
-          checkpoint,
         };
       });
     };
@@ -247,7 +242,7 @@ class Puzzle8 extends React.Component {
         down={this.hasProp('down')}
         deviate={this.hasProp('deviate')}
       >
-        {this.hasProp('start') && 'Start'}
+        {this.hasProp('start') && <FontAwesomeIcon icon="car-side" size="3x" />}
         {this.hasProp('finish') && 'Finish!'}
       </Cell>
     );
@@ -277,6 +272,7 @@ class Puzzle8 extends React.Component {
             </p>
           )
         }
+        <LgSpacing />
       </div>
     );
   }
