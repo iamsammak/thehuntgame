@@ -5,6 +5,7 @@ import { Narration } from '../wrappers';
 import { isSolved } from '../helpers';
 import { smSpacing } from '../constants';
 import Switch from './switch';
+import Puzzle7Clue from './puzzle7Clue';
 
 const SwitchContainer = styled.div`
   display: flex;
@@ -16,16 +17,62 @@ const SwitchContainer = styled.div`
 const SubmitButton = styled.button`
 `;
 
+const THRESHOLD = 60000; // 1 minute
 const INITIAL_SWITCH_STATE = [false, false, false, false, false, false, false, false, false, false];
 
 class Puzzle7 extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      switchState: INITIAL_SWITCH_STATE,
-    };
     this.onToggleSwitch = this.onToggleSwitch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.lastAttempt = this.lastAttempt.bind(this);
+    this.isWaiting = this.isWaiting.bind(this);
+    this.setWaitingTimeout = this.setWaitingTimeout.bind(this);
+    this.clearWaitingTimeout = this.clearWaitingTimeout.bind(this);
+    const waiting = this.isWaiting(props);
+    this.state = {
+      switchState: INITIAL_SWITCH_STATE,
+      waiting: waiting,
+    };
+    if (waiting) {
+      this.setWaitingTimeout(props);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // Recalculate everything when new props come in
+    const waiting = this.isWaiting(nextProps);
+
+    this.setState({ waiting: waiting });
+    this.clearWaitingTimeout();
+    if (waiting) {
+      this.setWaitingTimeout(nextProps);
+    }
+  }
+
+  componentWillUnmount() {
+    this.clearWaitingTimeout();
+  }
+
+  clearWaitingTimeout() {
+    if (this.waiter) {
+      clearTimeout(this.waiter);
+    }
+  }
+
+  setWaitingTimeout(props) {
+    this.waiter = setTimeout(() => {
+      this.setState({ waiting: false });
+    }, this.lastAttempt(props).valueOf() + THRESHOLD - Date.now());
+  }
+
+  lastAttempt(props) {
+    const { gameState } = props;
+    return (gameState['7'] && gameState['7'].last_attempt && new Date(gameState['7'].last_attempt)) || new Date(0);
+  }
+
+  isWaiting(props) {
+    return Date.now() - this.lastAttempt(props) < THRESHOLD;
   }
 
   onToggleSwitch(index) {
@@ -47,11 +94,11 @@ class Puzzle7 extends React.Component {
   }
 
   render() {
-    const { switchState } = this.state;
-    const { gameState } = this.props;
+    const { switchState, waiting } = this.state;
+    const { gameState, name } = this.props;
     const solved = isSolved(gameState, '7');
 
-    const chunkSize = 5;
+    const chunkSize = 2;
     const startIndices = [];
     for (let i = 0; i < switchState.length; i += chunkSize) {
       startIndices.push(i);
@@ -63,6 +110,7 @@ class Puzzle7 extends React.Component {
         <p>
           The venue manager told us to open this panel in case of emergency. Given that it&apos;s almost time for their getaway and we still don&apos;t have the key, I think this is an emergency. Only thing is that the manager told each of us how to open it, but we each only have part of the code. Can you figure this out?
         </p>
+        <Puzzle7Clue name={name} />
         {
           startIndices.map((i) => {
             return (
@@ -70,14 +118,21 @@ class Puzzle7 extends React.Component {
                 {
                   switchState.slice(i, i + chunkSize).map((ss, index) => {
                     const realIndex = i + index;
-                    return <Switch key={realIndex} on={ss} onToggleSwitch={this.onToggleSwitch(realIndex)} />;
+                    return (
+                      <Switch
+                        key={realIndex}
+                        disabled={waiting}
+                        on={ss}
+                        onToggleSwitch={this.onToggleSwitch(realIndex)}
+                      />
+                    );
                   })
                 }
               </SwitchContainer>
             );
           })
         }
-        <SubmitButton onClick={this.handleSubmit} disabled={solved}>
+        <SubmitButton onClick={this.handleSubmit} disabled={solved || waiting}>
           Connect
         </SubmitButton>
         {
@@ -88,6 +143,13 @@ class Puzzle7 extends React.Component {
               </p>
               <Narration>You found a flashlight.</Narration>
             </div>
+          )
+        }
+        {
+          waiting && (
+            <Narration danger>
+              <p>The panel&apos;s security has been activated, which locks you out! You need to wait a minute before trying again.</p>
+            </Narration>
           )
         }
       </div>
