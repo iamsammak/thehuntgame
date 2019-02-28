@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { isSolved } from '../helpers';
 
 const border = '2px solid black';
-const START_POSITION = [0, 4];
-const END_POSITION = [4, 3];
+const START_POSITION = [0, 5];
+const END_POSITION = [11, 6];
 const START_ICON = 'star';
 const END_ICON = 'gem';
 
@@ -41,20 +41,21 @@ const Cell = styled.div`
   height: 100px;
   width: 100px;
   display: flex;
-  ${props => {
-    switch (props.icon) {
-    case 'arrow-up':
-    case START_ICON:
-      return 'align-items: flex-start; justify-content: center';
-    case 'arrow-down':
-    case END_ICON:
-      return 'align-items: flex-end; justify-content: center';
-    case 'arrow-left':
-      return 'align-items: center; justify-content: flex-start;';
-    case 'arrow-right':
-      return 'align-items: center; justify-content: flex-end;';
-    }
-  }}
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const IconRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Placeholder = styled.div`
+  height: 32px;
+  width: 32px;
 `;
 
 const Arrow = styled(FontAwesomeIcon).attrs(props => ({
@@ -66,67 +67,169 @@ const Arrow = styled(FontAwesomeIcon).attrs(props => ({
 
 const maze = [
   [
-    { top: true, bottom: true, left: true, right: false, icon: null },
-    { top: true, bottom: true, left: false, right: false, icon: null },
-    { top: true, bottom: false, left: false, right: true, icon: null },
     { top: true, bottom: false, left: true, right: false, icon: null },
-    { top: false, bottom: true, left: false, right: false, icon: START_ICON },
+    { top: true, bottom: true, left: false, right: false, icon: null },
     { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
     { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
     { top: true, bottom: false, left: false, right: true, icon: null },
-    { top: true, bottom: false, left: true, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
+    { top: true, bottom: true, left: false, right: false, icon: null },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
+    { top: true, bottom: false, left: false, right: false, icon: 'arrow-left' },
+    { top: true, bottom: true, left: false, right: false, icon: null },
+    { top: true, bottom: false, left: false, right: true, icon: null },
   ],
   [
+    { top: false, bottom: false, left: true, right: true, icon: null },
+    { top: true, bottom: false, left: true, right: false, icon: null },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
+    { top: false, bottom: true, left: false, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: true, icon: null },
     { top: true, bottom: false, left: true, right: false, icon: null },
     { top: true, bottom: false, left: false, right: true, icon: null },
-    { top: false, bottom: true, left: true, right: false, icon: 'arrow-right' },
-    { top: false, bottom: false, left: false, right: false, icon: 'arrow-left' },
-    { top: true, bottom: false, left: false, right: true, icon: null },
     { top: true, bottom: false, left: true, right: false, icon: 'arrow-right' },
-    { top: true, bottom: false, left: false, right: true, icon: 'arrow-left' },
+    { top: false, bottom: true, left: false, right: true, icon: 'arrow-left' },
+    { top: true, bottom: false, left: true, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: true, icon: null },
+  ],
+  [
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
+    { top: true, bottom: true, left: true, right: false, icon: null },
+    { top: true, bottom: true, left: false, right: true, icon: null },
+    { top: true, bottom: false, left: true, right: false, icon: 'arrow-down' },
+    { top: false, bottom: true, left: false, right: true, icon: null },
+    { top: false, bottom: true, left: true, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
+    { top: true, bottom: false, left: true, right: true, icon: 'arrow-down' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
+  ],
+  [
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-up' },
+    { top: false, bottom: false, left: true, right: false, icon: 'arrow-up' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
+    { top: false, bottom: true, left: false, right: true, icon: 'arrow-up' },
+    { top: true, bottom: false, left: true, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
+    { top: false, bottom: false, left: false, right: true, icon: 'arrow-up' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-up' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-up' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-up' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-up' },
+  ],
+  [
+    { top: false, bottom: false, left: true, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: true, icon: null },
+    { top: true, bottom: false, left: true, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
+    { top: true, bottom: false, left: false, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: true, icon: null },
+    { top: true, bottom: false, left: true, right: false, icon: null },
+    { top: false, bottom: true, left: false, right: true, icon: null },
+    { top: false, bottom: true, left: true, right: false, icon: 'arrow-right' },
+    { top: false, bottom: true, left: false, right: true, icon: 'arrow-left' },
     { top: false, bottom: true, left: true, right: false, icon: null },
     { top: false, bottom: false, left: false, right: true, icon: null },
   ],
   [
     { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
+    { top: false, bottom: true, left: true, right: false, icon: null },
+    { top: false, bottom: false, left: false, right: true, icon: 'arrow-down' },
+    { top: true, bottom: false, left: true, right: true, icon: 'arrow-down' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
     { top: false, bottom: false, left: true, right: false, icon: 'arrow-down' },
-    { top: true, bottom: true, left: false, right: true, icon: null },
-    { top: false, bottom: true, left: true, right: true, icon: null },
-    { top: false, bottom: true, left: true, right: false, icon: null },
-    { top: false, bottom: true, left: false, right: true, icon: null },
-    { top: false, bottom: true, left: true, right: false, icon: null },
+    { top: true, bottom: true, left: false, right: false, icon: null },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
     { top: true, bottom: false, left: false, right: true, icon: 'arrow-down' },
     { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
   ],
   [
+    { top: false, bottom: true, left: true, right: false, icon: 'arrow-up' },
+    { top: true, bottom: false, left: false, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-up' },
     { top: false, bottom: false, left: true, right: true, icon: 'arrow-up' },
     { top: false, bottom: true, left: true, right: false, icon: 'arrow-up' },
-    { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
-    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
-    { top: true, bottom: false, left: false, right: false, icon: null },
-    { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
-    { top: true, bottom: false, left: false, right: false, icon: 'arrow-left' },
+    { top: false, bottom: true, left: false, right: true, icon: 'arrow-up' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-up' },
+    { top: true, bottom: true, left: true, right: false, icon: null },
+    { top: true, bottom: false, left: false, right: true, icon: null },
+    { top: true, bottom: false, left: true, right: false, icon: null },
     { top: false, bottom: true, left: false, right: true, icon: 'arrow-up' },
     { top: false, bottom: false, left: true, right: true, icon: 'arrow-up' },
   ],
   [
-    { top: false, bottom: false, left: true, right: false, icon: null },
-    { top: true, bottom: false, left: false, right: true, icon: null },
-    { top: true, bottom: false, left: true, right: false, icon: 'arrow-right' },
-    { top: true, bottom: false, left: false, right: true, icon: 'arrow-left' },
-    { top: false, bottom: true, left: true, right: true, icon: null },
-    { top: true, bottom: true, left: true, right: false, icon: 'arrow-right' },
-    { top: false, bottom: true, left: false, right: true, icon: 'arrow-left' },
     { top: true, bottom: true, left: true, right: false, icon: null },
-    { top: false, bottom: false, left: false, right: true, icon: null },
+    { top: false, bottom: true, left: false, right: true, icon: null },
+    { top: false, bottom: true, left: true, right: false, icon: 'arrow-right' },
+    { top: false, bottom: false, left: false, right: true, icon: 'arrow-left' },
+    { top: true, bottom: false, left: true, right: false, icon: null },
+    { top: true, bottom: true, left: false, right: true, icon: null },
+    { top: false, bottom: true, left: true, right: false, icon: null },
+    { top: true, bottom: false, left: false, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: true, icon: null },
+    { top: true, bottom: false, left: true, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: true, icon: null },
   ],
   [
-    { top: false, bottom: true, left: true, right: true, icon: null },
+    { top: true, bottom: false, left: true, right: false, icon: 'arrow-down' },
+    { top: true, bottom: true, left: false, right: false, icon: null },
+    { top: true, bottom: false, left: false, right: true, icon: 'arrow-down' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
+    { top: true, bottom: true, left: true, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
+    { top: false, bottom: true, left: false, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-down' },
     { top: false, bottom: true, left: true, right: false, icon: null },
     { top: false, bottom: true, left: false, right: true, icon: null },
+  ],
+  [
+    { top: false, bottom: true, left: true, right: false, icon: 'arrow-up' },
+    { top: true, bottom: false, left: false, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-up' },
+    { top: false, bottom: false, left: true, right: false, icon: 'arrow-up' },
+    { top: false, bottom: true, left: false, right: false, icon: 'arrow-up' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
+    { top: true, bottom: true, left: false, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: true, icon: 'arrow-up' },
+    { top: false, bottom: true, left: true, right: false, icon: 'arrow-up' },
+    { top: true, bottom: false, left: false, right: false, icon: null },
+    { top: true, bottom: false, left: false, right: true, icon: null },
+  ],
+  [
+    { top: true, bottom: false, left: true, right: false, icon: null },
+    { top: false, bottom: true, left: false, right: true, icon: null },
+    { top: false, bottom: true, left: true, right: false, icon: 'arrow-right' },
+    { top: false, bottom: true, left: false, right: true, icon: 'arrow-left' },
+    { top: true, bottom: false, left: true, right: true, icon: null },
+    { top: true, bottom: false, left: true, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
+    { top: true, bottom: false, left: false, right: true, icon: null },
+    { top: false, bottom: true, left: true, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
+    { top: false, bottom: true, left: false, right: true, icon: null },
+    { top: false, bottom: false, left: true, right: true, icon: null },
+  ],
+  [
     { top: false, bottom: true, left: true, right: false, icon: null },
-    { top: true, bottom: false, left: false, right: true, icon: END_ICON },
-    { top: true, bottom: true, left: true, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: null },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
+    { top: false, bottom: true, left: false, right: true, icon: null },
+    { top: false, bottom: true, left: true, right: false, icon: 'arrow-right' },
+    { top: true, bottom: false, left: false, right: true, icon: 'arrow-left' },
+    { top: false, bottom: true, left: true, right: false, icon: null },
+    { top: true, bottom: true, left: false, right: false, icon: 'arrow-right' },
     { top: true, bottom: true, left: false, right: false, icon: 'arrow-left' },
     { top: true, bottom: true, left: false, right: false, icon: null },
     { top: false, bottom: true, left: false, right: true, icon: null },
@@ -157,7 +260,7 @@ class Puzzle6 extends React.Component {
   }
 
   isAdjacent(x1, y1, x2, y2, adjacentCells) {
-    return adjacentCells[this.adjacentKey(x1, y1)].includes(this.adjacentKey(x2, y2));
+    return (adjacentCells[this.adjacentKey(x1, y1)] || []).includes(this.adjacentKey(x2, y2));
   }
 
   finishPuzzle() {
@@ -177,16 +280,62 @@ class Puzzle6 extends React.Component {
         this.move(x, y - 1); break;
       case 'arrow-right':
         this.move(x, y + 1); break;
-      case END_ICON:
-        if (adjacent) {
-          this.finishPuzzle();
-        }
       }
     };
-    const showIcon = adjacent || [START_ICON, END_ICON].includes(options.icon);
+    const isStartPosition = x === START_POSITION[0] && y === START_POSITION[1];
+    const isEndPosition = x === END_POSITION[0] && y === END_POSITION[1];
+    let up = <Placeholder />;
+    let left = <Placeholder />;
+    let right = <Placeholder />;
+    let down = <Placeholder />;
+    if (adjacent) {
+      switch (options.icon) {
+      case 'arrow-up':
+        up = <Arrow icon={options.icon} onClick={onClick} />; break;
+      case 'arrow-left':
+        left = <Arrow icon={options.icon} onClick={onClick} />; break;
+      case 'arrow-right':
+        right = <Arrow icon={options.icon} onClick={onClick} />; break;
+      case 'arrow-down':
+        down = <Arrow icon={options.icon} onClick={onClick} />; break;
+      default:
+      }
+    }
+    // Assumptions are being made here about where start and end icons are
+    // and that they don't overlap with any arrows.
+    if (isStartPosition) {
+      up = <Arrow icon={START_ICON} onClick={onClick} />;
+    }
+    if (isEndPosition) {
+      down = (
+        <Arrow
+          icon={END_ICON}
+          onClick={() => {
+            if (adjacent) {
+              this.finishPuzzle();
+            }
+          }}
+        />
+      );
+    }
+     
     return (
       <Cell {...options}>
-        { options.icon && showIcon && <Arrow icon={options.icon} onClick={onClick} /> }
+        <IconRow>
+          <Placeholder />
+          {up}
+          <Placeholder />
+        </IconRow>
+        <IconRow>
+          {left}
+          <Placeholder />
+          {right}
+        </IconRow>
+        <IconRow>
+          <Placeholder />
+          {down}
+          <Placeholder />
+        </IconRow>
       </Cell>
     );
   }

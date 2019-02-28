@@ -12,6 +12,7 @@ export const KeypadContainer = styled.div`
 export const Button = styled.button`
   padding: 5px;
   margin: 5px;
+  border: 0px;
   height: 100px;
   width: 100px;
   color: white;

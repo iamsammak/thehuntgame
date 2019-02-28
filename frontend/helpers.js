@@ -39,6 +39,7 @@ export const PEOPLE = {
   "Erica": { src: "images/placeholder.jpg" },
   "Mary Ann": { src: "images/placeholder.jpg" },
   "Helena": { src: "images/placeholder.jpg" },
+
 };
 
 function pad(n) {

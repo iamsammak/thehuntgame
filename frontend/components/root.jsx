@@ -10,6 +10,7 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons/faArrowUp';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons/faArrowDown';
 import { faStar } from '@fortawesome/free-solid-svg-icons/faStar';
 import { faGem } from '@fortawesome/free-solid-svg-icons/faGem';
+import { faCarSide } from '@fortawesome/free-solid-svg-icons/faCarSide';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp';
@@ -29,6 +30,7 @@ library.add(
   faArrowDown,
   faStar,
   faGem,
+  faCarSide,
   faChevronLeft,
   faChevronRight,
   faChevronUp,

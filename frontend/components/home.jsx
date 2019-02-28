@@ -64,7 +64,6 @@ const EnterButton = styled(SubmitButton)`
   height: 60px;
   width: 300px;
   border-radius: 0 0 25px 25px;
-  border-top: 0;
   margin-top: 0;
   background-color: #d6928b;
 `;
