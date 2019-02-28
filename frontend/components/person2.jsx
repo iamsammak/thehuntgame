@@ -10,23 +10,23 @@ import Puzzle8 from './puzzle8';
 
 class Person2 extends React.Component {
   render() {
-    const { gameState, name } = this.props;
+    const { gameState, personId } = this.props;
     const stage = getCurrentStage(gameState);
     const showBase = true;
 
     let body;
     if (stage === 5) {
-      body = <Puzzle5Clue clue="clue1" name={name} />;
+      body = <Puzzle5Clue clue="clue1" personId={personId} />;
     } else if (stage === 7) {
-      body = <Puzzle7Clue clue="clue1" />;
+      body = <Puzzle7Clue personId={personId} />;
     } else if (stage === 8) {
       body = <Puzzle {...this.props} component={Puzzle8} />;
     }
 
     return (
       <div>
-        <PersonHeader name={name} />
-        {showBase && <Base name={name} />}
+        <PersonHeader personId={personId} />
+        {showBase && <Base personId={personId} />}
         <br />
         {body}
       </div>

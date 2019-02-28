@@ -31,15 +31,14 @@ export function getCurrentStage(gameState) {
 }
 
 export const PEOPLE = {
-  "Matt": { src: "images/placeholder.jpg" },
-  "Tim": { src: "images/placeholder.jpg" },
-  "Jay": { src: "images/placeholder.jpg" },
-  "Ryan": { src: "images/placeholder.jpg" },
-  "Kristi": { src: "images/placeholder.jpg" },
-  "Erica": { src: "images/placeholder.jpg" },
-  "Mary Ann": { src: "images/placeholder.jpg" },
-  "Helena": { src: "images/placeholder.jpg" },
-
+  "matt": { displayName: 'Matt', path: "/matt", src: "images/matt.jpeg", gender: "male" },
+  "tim": { displayName: 'Tim', path: "/tim", src: "images/tim.jpeg", gender: "male" },
+  "jay": { displayName: 'Jay', path: "/jay", src: "images/jay.jpeg", gender: "male" },
+  "ryan": { displayName: 'Ryan', path: "/ryan", src: "images/ryan.jpeg", gender: "male" },
+  "kristi": { displayName: 'Kristi', path: "/kristi", src: "images/kristi.jpeg", gender: "female" },
+  "erica": { displayName: 'Erica', path: "/erica", src: "images/erica.jpeg", gender: "female" },
+  "maryann": { displayName: 'Mary Ann', path: "/maryann", src: "images/maryann.jpeg", gender: "female" },
+  "helena": { displayName: 'Helena', path: "/helena", src: "images/helena.jpeg", gender: "female" },
 };
 
 function pad(n) {

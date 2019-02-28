@@ -2,8 +2,8 @@ import React from 'react';
 
 class Person extends React.Component {
   componentDidMount() {
-    const { send, name } = this.props;
-    send('person_visit', { name: name });
+    const { send, personId } = this.props;
+    send('person_visit', { personId: personId });
   }
 
   render() {

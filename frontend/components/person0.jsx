@@ -11,7 +11,7 @@ import PersonHeader from './personHeader';
 
 class Person0 extends React.Component {
   render() {
-    const { gameState, name, socket } = this.props;
+    const { gameState, personId, socket } = this.props;
     const stage = getCurrentStage(gameState);
     const showBase = true;
     const hint = <Hint hint={stage.toString()} socket={socket} />;
@@ -34,15 +34,15 @@ class Person0 extends React.Component {
     } else if (stage > 1 && stage <= 4) {
       body = <Puzzle {...this.props} component={Puzzle4} />;
     } else if (stage === 5) {
-      body = <Puzzle5Clue clue="clue0" name={name} />;
+      body = <Puzzle5Clue clue="clue0" personId={personId} />;
     } else if (stage === 7) {
-      body = <Puzzle7Clue clue="clue0" />;
+      body = <Puzzle7Clue personId={personId} />;
     }
 
     return (
       <div>
-        <PersonHeader name={name} />
-        {showBase && <Base name={name} />}
+        <PersonHeader personId={personId} />
+        {showBase && <Base personId={personId} />}
         {hint}
         <br />
         {body}

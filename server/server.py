@@ -45,14 +45,14 @@ ANSWERS = {
   '8': '',
 }
 START_CRITERIA = {
-  '1': 'Ryan',
-  '2': 'Kristi',
-  '3': 'Erica',
-  '4': 'Tim',
-  '5': 'Helena',
-  '6': 'Mary Ann',
-  '7': 'Ryan',
-  '8': 'Jay',
+  '1': 'ryan',
+  '2': 'kristi',
+  '3': 'erica',
+  '4': 'tim',
+  '5': 'helena',
+  '6': 'maryann',
+  '7': 'ryan',
+  '8': 'jay',
 }
 
 def server_now():
@@ -211,10 +211,10 @@ def person_visit(sid, data):
   print("person_visit", sid, data)
   table = CLIENTS[sid]
   game_state = GAME_STATE[table]
-  name = data['name']
+  person_id = data['personId']
 
   for puzzle in game_state:
-    if START_CRITERIA.get(puzzle) == name and not game_state[puzzle]['started'] and not game_state[puzzle]['solved']:
+    if START_CRITERIA.get(puzzle) == person_id and not game_state[puzzle]['started'] and not game_state[puzzle]['solved']:
       if puzzle == '1' or game_state[str(int(puzzle) - 1)]['solved']:
         game_state[puzzle]['started'] = True
         send_game_state(table=table)
