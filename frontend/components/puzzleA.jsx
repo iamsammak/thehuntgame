@@ -88,7 +88,7 @@ class PuzzleA extends React.Component {
     const { correct, gameState } = this.props;
     const solved = isSolved(gameState, 'A');
 
-    const question1Images = ['images/cornhole1.jpg', 'images/cornhole2.jpg', 'images/cornhole3.png', 'images/cornhole4.png'];
+    const question1Images = ['images/cornhole1.png', 'images/cornhole2.png', 'images/cornhole3.png', 'images/cornhole4.png'];
     const question2Text = ['Ultra White', 'Coral Ridge', 'New Peach'];
     const question3Text = ['3', '4', '5', '6'];
 
