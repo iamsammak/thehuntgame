@@ -98,33 +98,35 @@ class Puzzle7 extends React.Component {
     const { gameState, personId } = this.props;
     const solved = isSolved(gameState, '7');
 
-    const chunkSize = 2;
-    const startIndices = [];
-    for (let i = 0; i < switchState.length; i += chunkSize) {
-      startIndices.push(i);
-    }
+    const switchLayout = [
+      [0, 5],
+      [1, 6],
+      [2, 7],
+      [3, 8],
+      [4, 9],
+    ];
 
     return (
       <div>
         <Narration>You find Ryan at a panel with ten switches.</Narration>
         <p>
-          The venue manager told us to open this panel in case of emergency. Given that it&apos;s almost time for their getaway and we still don&apos;t have the key, I think this is an emergency. Only thing is that the manager told each of us how to open it, but we each only have part of the code. Can you figure this out?
+          The venue manager told us to open this panel in case of emergency. Given that it&apos;s almost time for their getaway and we still don&apos;t have the key, I think this is an emergency. Only thing is that the manager gave each member of the bridal party one part of the directions for how to open it. Can you help us figure this out?
         </p>
         <Puzzle7Clue personId={personId} />
         {
-          startIndices.map((i) => {
+          switchLayout.map((row, i) => {
             return (
               <SwitchContainer key={i}>
                 {
-                  switchState.slice(i, i + chunkSize).map((ss, index) => {
-                    const realIndex = i + index;
+                  row.map((index) => {
+                    const on = switchState[index];
                     return (
                       <Switch
-                        key={realIndex}
+                        key={index}
                         disabled={waiting}
-                        on={ss}
-                        onToggleSwitch={this.onToggleSwitch(realIndex)}
-                        switchNumber={realIndex}
+                        on={on}
+                        onToggleSwitch={this.onToggleSwitch(index)}
+                        switchNumber={index + 1}
                       />
                     );
                   })

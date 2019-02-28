@@ -6,12 +6,16 @@ const METAL_SILVER = '#C4CACE';
 const RUBBER_RED = '#FF6F75';
 const DARK_RUBBER_RED = '#BA4347';
 
+const noop = () => {};
+
 const handleAnimation = (props) => keyframes`
   from {
     transform: translate(0, 0) rotate(90deg);
+    filter: drop-shadow(5px ${props.on ? 3 : -3}px 3px black);
   }
   to {
     transform: translate(${props.on ? 100 : -100}px, 0) rotate(90deg);
+    filter: drop-shadow(5px ${props.on ? -3 : 3}px 3px black);
   }
 `;
 
@@ -89,6 +93,7 @@ const LeverHandle = styled.div`
       css`${handleAnimation(props)} 0.5s ease-in-out` :
       null;
   }};
+  filter: drop-shadow(5px ${props => (props.switching !== props.on ? -3 : 3)}px 3px black);
 `;
 
 const LeverArm = styled.div`
@@ -102,7 +107,7 @@ const LeverArm = styled.div`
       css`${armAnimation(props)} 0.5s linear` :
       null;
   }};
-
+  filter: drop-shadow(-5px 3px 4px black);
 `;
 
 class Switch extends React.Component {
@@ -124,7 +129,6 @@ class Switch extends React.Component {
   }
 
   render() {
-    // TODO: use disabled
     const {
       disabled,
       on,
@@ -134,7 +138,7 @@ class Switch extends React.Component {
     const { switching } = this.state;
 
     return (
-      <Base onClick={onToggleSwitch}>
+      <Base onClick={disabled ? noop : onToggleSwitch}>
         <Groove />
         <Labels>
           <Off>OFF</Off>
