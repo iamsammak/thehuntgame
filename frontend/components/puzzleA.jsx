@@ -12,8 +12,8 @@ const SafeImage = styled.img`
   margin-left: auto;
 `;
 const Button = styled.button`
-  margin-right: 5px;
-  ${props => props.selected && 'border-style: inset; border-color: #7C9790; border-width: 7px'}
+  margin-right: 2px;
+  ${props => props.selected ? 'border-style: inset; border-color: #7C9790; border-width: 5px' : 'background-color: transparent; border-color: transparent'}
 `;
 
 const INITIAL_ANSWERS = [null, null, null];
