@@ -48,8 +48,9 @@ class PuzzleA extends React.Component {
         <Button
           key={key}
           selected={answer === index}
+          onClick={this.handleOptionClick(question, index)} 
         >
-          <SafeImage src={icon} onClick={this.handleOptionClick(question, index)} />
+          <SafeImage src={icon}/>
         </Button>
       );
     };
@@ -87,7 +88,7 @@ class PuzzleA extends React.Component {
     const { correct, gameState } = this.props;
     const solved = isSolved(gameState, 'A');
 
-    const question1Icons = ['images/cornhole1.jpg', 'images/cornhole2.jpg', 'images/cornhole3.png', 'images/cornhole4.png'];
+    const question1Images = ['images/cornhole1.jpg', 'images/cornhole2.jpg', 'images/cornhole3.png', 'images/cornhole4.png'];
     const question2Text = ['Ultra White', 'Coral Ridge', 'New Peach'];
     const question3Text = ['3', '4', '5', '6'];
 
@@ -102,7 +103,7 @@ class PuzzleA extends React.Component {
               <p>
                 Which of these is the design used for painting the cornhole boards?
               </p>
-              {question1Icons.map(this.renderIconOptions(0))}
+              {question1Images.map(this.renderIconOptions(0))}
               <p>
                 Which Valspar paint isn&apos;t used?
               </p>
