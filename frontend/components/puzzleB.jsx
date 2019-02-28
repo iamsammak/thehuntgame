@@ -58,9 +58,9 @@ class PuzzleB extends React.Component {
     const { correct, gameState } = this.props;
     const solved = isSolved(gameState, 'B');
 
-    const question1Text = ['selection1', 'selection2', 'selection3'];
-    const question2Text = ['selection1', 'selection2', 'selection3'];
-    const question3Text = ['selection1', 'selection2', 'selection3'];
+    const question1Text = ["Candle lamp", "Arbor post", "Wine barrel"];
+    const question2Text = ["White ribbons", "Peach flowers", "Yellow napkins"];
+    const question3Text = ["Party poppers", "Boba straws", "Tea bags"];
 
     return (
       <div>
@@ -71,15 +71,15 @@ class PuzzleB extends React.Component {
           !solved &&
             <div>
               <p>
-                Question 1 placeholder?
+                Which of these items should you take from the ceremony site boxes?
               </p>
               {question1Text.map(this.renderTextOptions(0))}
               <p>
-                Question 2 placeholder?
+                Which of these items should you take from the decoration boxes?
               </p>
               {question2Text.map(this.renderTextOptions(1))}
               <p>
-                Question 3 placeholder?
+                Which of these items should you take from the reception hall boxes?
               </p>
               {question3Text.map(this.renderTextOptions(2))}
               <p>

@@ -33,8 +33,8 @@ INITIAL_GAME_STATE_FOR_TABLE = {
   'B': {'solved': False, 'started': True},
 }
 ANSWERS = {
-  'A': [0, 1, 2],
-  'B': [0, 1, 2],
+  'A': [1, 2, 1],
+  'B': [0, 2, 0], 
   '1': 'getaway',
   '2': 'see o double you',
   '3': [5,4,3,2,1],
@@ -50,7 +50,7 @@ START_CRITERIA = {
   '3': 'Erica',
   '4': 'Tim',
   '5': 'Helena',
-  '6': 'MaryAnn',
+  '6': 'Mary Ann',
   '7': 'Ryan',
   '8': 'Jay',
 }
@@ -183,7 +183,11 @@ def submit(sid, data):
   print("answer", sid, data)
   puzzle, answer = [data.get(key) for key in ['puzzle', 'answer']]
   # TODO: error gracefully if no puzzle or answer
-  correct = answer.lower() == ANSWERS.get(str(puzzle))
+#  if type(answer) is string:
+  if isinstance(answer,str):
+    correct = answer.lower() == ANSWERS.get(str(puzzle))
+  else:
+    correct = answer == ANSWERS.get(str(puzzle))
 
   response = {
     'correct': correct,

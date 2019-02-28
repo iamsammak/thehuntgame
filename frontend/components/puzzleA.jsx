@@ -1,11 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Narration } from '../wrappers';
 import { isSolved } from '../helpers';
 
+const SafeImage = styled.img`
+  height: 150px;
+  width: 75px;
+  margin-right: auto;
+  margin-left: auto;
+`;
 const Button = styled.button`
+  margin-right: 5px;
   ${props => props.selected && 'border-style: inset;'}
 `;
 
@@ -41,10 +47,10 @@ class PuzzleA extends React.Component {
       return (
         <Button
           key={key}
-          onClick={this.handleOptionClick(question, index)}
           selected={answer === index}
+          onClick={this.handleOptionClick(question, index)}
         >
-          <FontAwesomeIcon icon={icon} />
+          <SafeImage src={icon}/>
         </Button>
       );
     };
@@ -82,9 +88,9 @@ class PuzzleA extends React.Component {
     const { correct, gameState } = this.props;
     const solved = isSolved(gameState, 'A');
 
-    const question1Icons = ['chevron-circle-up', 'chevron-circle-down', 'chevron-circle-left', 'chevron-circle-down'];
-    const question2Text = ['selection1', 'selection2', 'selection3'];
-    const question3Text = ['selection1', 'selection2', 'selection3'];
+    const question1Images = ['images/cornhole1.jpg', 'images/cornhole2.jpg', 'images/cornhole3.png', 'images/cornhole4.png'];
+    const question2Text = ['Ultra White', 'Coral Ridge', 'New Peach'];
+    const question3Text = ['3', '4', '5', '6'];
 
     return (
       <div>
@@ -95,15 +101,15 @@ class PuzzleA extends React.Component {
           !solved &&
             <div>
               <p>
-                Question 1 placeholder?
+                Which of these is the design used for painting the cornhole boards?
               </p>
-              {question1Icons.map(this.renderIconOptions(0))}
+              {question1Images.map(this.renderIconOptions(0))}
               <p>
-                Question 2 placeholder?
+                Which Valspar paint isn&apos;t used?
               </p>
               {question2Text.map(this.renderTextOptions(1))}
               <p>
-                Question 3 placeholder?
+                How many cornhole bags does each team play with?
               </p>
               {question3Text.map(this.renderTextOptions(2))}
               <p>

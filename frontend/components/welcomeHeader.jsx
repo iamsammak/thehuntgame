@@ -29,7 +29,7 @@ class WelcomeHeader extends React.Component {
     return (
       <Header>
         <TitleContainer>
-          <Title>Welcome to The Hunt v2</Title>
+          <Title>Chois Escape</Title>
           {
             start_time && (
               <TimerContainer>

@@ -13,7 +13,7 @@ class Puzzle4Clue extends React.Component {
       <div>
         <Narration>You ask Tim about the safe.</Narration>
         <p>
-          Oh, that thing? Chris has a weird way of thinking. It&apos;s almost as weird as his Cantonese, since he&apos;s always pronouncing things incorrectly. All I know is that the code has something to do with Matt&apos;s Chinese name.
+          Oh, that thing? Chris has a weird way of thinking. It&apos;s almost as weird as his Chinese. All I know is that the code has something to do with Matt&apos;s Chinese name.
         </p>
         <Chinese>蔡述聰</Chinese>
       </div>
