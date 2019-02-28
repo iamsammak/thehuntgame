@@ -124,6 +124,7 @@ class Puzzle7 extends React.Component {
                         disabled={waiting}
                         on={ss}
                         onToggleSwitch={this.onToggleSwitch(realIndex)}
+                        switchNumber={realIndex}
                       />
                     );
                   })
