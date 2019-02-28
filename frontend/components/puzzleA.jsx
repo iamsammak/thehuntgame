@@ -48,7 +48,7 @@ class PuzzleA extends React.Component {
         <Button
           key={key}
           selected={answer === index}
-          onClick={this.handleOptionClick(question, index)} 
+          onClick={this.handleOptionClick(question, index)}
         >
           <SafeImage src={icon}/>
         </Button>

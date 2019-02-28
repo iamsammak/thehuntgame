@@ -105,7 +105,7 @@ class App extends React.Component {
           <Route path="/ryan" render={() => <Person {...this.state} component={Person3} name="Ryan" />} />
           <Route path="/kristi" render={() => <Person {...this.state} component={Person4} name="Kristi" />} />
           <Route path="/erica" render={() => <Person {...this.state} component={Person5} name="Erica" />} />
-          <Route path="/maryann" render={() => <Person {...this.state} component={Person6} name="Mary Ann" />} />
+          <Route path="/maryAnn" render={() => <Person {...this.state} component={Person6} name="Mary Ann" />} />
           <Route path="/helena" render={() => <Person {...this.state} component={Person7} name="Helena" />} />
         </div>
         <ToastContainer
