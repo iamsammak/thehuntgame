@@ -5,6 +5,7 @@ import { Narration } from '../wrappers';
 import { isSolved } from '../helpers';
 
 const SafeImage = styled.img`
+  display: inline-flex;
   height: 150px;
   width: 75px;
   margin-right: auto;
@@ -12,7 +13,7 @@ const SafeImage = styled.img`
 `;
 const Button = styled.button`
   margin-right: 5px;
-  ${props => props.selected && 'border-style: inset;'}
+  ${props => props.selected && 'border-style: inset; border-color: #7C9790; border-width: 7px'}
 `;
 
 const INITIAL_ANSWERS = [null, null, null];

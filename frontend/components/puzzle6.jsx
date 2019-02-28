@@ -318,7 +318,7 @@ class Puzzle6 extends React.Component {
         />
       );
     }
-     
+
     return (
       <Cell {...options}>
         <IconRow>
