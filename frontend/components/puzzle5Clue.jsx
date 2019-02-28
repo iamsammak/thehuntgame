@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { PEOPLE } from '../helpers';
 import { Narration } from '../wrappers';
 
 const Clue = styled.img`
@@ -9,7 +10,8 @@ const Clue = styled.img`
 
 class Puzzle5Clue extends React.Component {
   render() {
-    const { clue, name } = this.props;
+    const { clue, personId } = this.props;
+    const { displayName, gender } = PEOPLE[personId];
 
     let src = "";
     switch (clue) {
@@ -27,7 +29,7 @@ class Puzzle5Clue extends React.Component {
 
     return (
       <div>
-        <Narration>{name} shows you her piece of paper.</Narration>
+        <Narration>{displayName} shows you {gender === 'male' ? 'his' : 'her'} piece of paper.</Narration>
         <Clue src={src} />
       </div>
     );

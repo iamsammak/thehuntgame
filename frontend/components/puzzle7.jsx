@@ -95,7 +95,7 @@ class Puzzle7 extends React.Component {
 
   render() {
     const { switchState, waiting } = this.state;
-    const { gameState, name } = this.props;
+    const { gameState, personId } = this.props;
     const solved = isSolved(gameState, '7');
 
     const chunkSize = 2;
@@ -110,7 +110,7 @@ class Puzzle7 extends React.Component {
         <p>
           The venue manager told us to open this panel in case of emergency. Given that it&apos;s almost time for their getaway and we still don&apos;t have the key, I think this is an emergency. Only thing is that the manager told each of us how to open it, but we each only have part of the code. Can you figure this out?
         </p>
-        <Puzzle7Clue name={name} />
+        <Puzzle7Clue personId={personId} />
         {
           startIndices.map((i) => {
             return (

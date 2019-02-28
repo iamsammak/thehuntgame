@@ -10,11 +10,12 @@ const List = styled.ol`
 
 class Puzzle7Clue extends React.Component {
   render() {
-    const { name } = this.props;
+    const { personId } = this.props;
+    const { displayName, gender } = PEOPLE[personId];
 
     let clue = '';
-    switch (name) {
-    case 'Matt':
+    switch (personId) {
+    case 'matt':
       clue = (
         <List>
           <li>The switch whose number is in the wedding hashtag should be turned off.</li>
@@ -22,7 +23,7 @@ class Puzzle7Clue extends React.Component {
         </List>
       );
       break;
-    case 'Tim':
+    case 'tim':
       clue = (
         <List>
           <li>The sum of all the &apos;on&apos; switch numbers is less than 30. </li>
@@ -30,7 +31,7 @@ class Puzzle7Clue extends React.Component {
         </List>
       );
       break;
-    case 'Jay':
+    case 'jay':
       clue = (
         <List>
           <li>Erica&apos;s first clue should read &apos;left&apos; instead of &apos;right&apos;.</li>
@@ -38,7 +39,7 @@ class Puzzle7Clue extends React.Component {
         </List>
       );
       break;
-    case 'Ryan':
+    case 'ryan':
       clue = (
         <List>
           <li>Switches 1 and 9 should be off.</li>
@@ -46,7 +47,7 @@ class Puzzle7Clue extends React.Component {
         </List>
       );
       break;
-    case 'Kristi':
+    case 'kristi':
       clue = (
         <List>
           <li>Matt&apos;s second clue is incorrect.</li>
@@ -54,7 +55,7 @@ class Puzzle7Clue extends React.Component {
         </List>
       );
       break;
-    case 'Erica':
+    case 'erica':
       clue = (
         <List>
           <li>The right column has an odd number of switches turned on.</li>
@@ -62,7 +63,7 @@ class Puzzle7Clue extends React.Component {
         </List>
       );
       break;
-    case 'Mary Ann':
+    case 'maryann':
       clue = (
         <List>
           <li>Tim&apos;s second clue should read &apos;off&apos; instead of &apos;on&apos;.</li>
@@ -70,7 +71,7 @@ class Puzzle7Clue extends React.Component {
         </List>
       );
       break;
-    case 'Helena':
+    case 'helena':
       clue = (
         <List>
           <li>Erica&apos;s second clue should read &apos;switch 7&apos; instead of &apos;switch 6&apos;.</li>
@@ -82,7 +83,7 @@ class Puzzle7Clue extends React.Component {
 
     return (
       <div>
-        <Narration>{name} recalls the instructions given to {PEOPLE[name].gender === 'male' ? 'him' : 'her'}.</Narration>
+        <Narration>{displayName} recalls the instructions given to {gender === 'male' ? 'him' : 'her'}.</Narration>
         {clue}
       </div>
     );

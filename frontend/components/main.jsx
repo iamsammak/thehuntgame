@@ -68,13 +68,13 @@ const Line = styled.div`
 export default class Main extends React.Component {
   render() {
     const items = [
-      { to: PEOPLE['Tim'].path, key: 1, src: PEOPLE['Tim'].src },
-      { to: PEOPLE['Jay'].path, key: 2, src: PEOPLE['Jay'].src },
-      { to: PEOPLE['Ryan'].path, key: 3, src: PEOPLE['Ryan'].src },
-      { to: PEOPLE['Kristi'].path, key: 4, src: PEOPLE['Kristi'].src },
-      { to: PEOPLE['Erica'].path, key: 5, src: PEOPLE['Erica'].src },
-      { to: PEOPLE['MaryAnn'].path, key: 6, src: PEOPLE['MaryAnn'].src },
-      { to: PEOPLE['Helena'].path, key: 7, src: PEOPLE['Helena'].src },
+      { to: PEOPLE['tim'].path, key: 1, src: PEOPLE['tim'].src },
+      { to: PEOPLE['jay'].path, key: 2, src: PEOPLE['jay'].src },
+      { to: PEOPLE['ryan'].path, key: 3, src: PEOPLE['ryan'].src },
+      { to: PEOPLE['kristi'].path, key: 4, src: PEOPLE['kristi'].src },
+      { to: PEOPLE['erica'].path, key: 5, src: PEOPLE['erica'].src },
+      { to: PEOPLE['maryann'].path, key: 6, src: PEOPLE['maryann'].src },
+      { to: PEOPLE['helena'].path, key: 7, src: PEOPLE['helena'].src },
     ];
 
     return (
@@ -98,9 +98,9 @@ export default class Main extends React.Component {
               );
             })
           }
-          <MiddleLink to={PEOPLE['Matt'].path}>
+          <MiddleLink to={PEOPLE['matt'].path}>
             <PersonContainer>
-              <MiddlePerson src={PEOPLE['Matt'].src} />
+              <MiddlePerson src={PEOPLE['matt'].src} />
             </PersonContainer>
           </MiddleLink>
         </Table>

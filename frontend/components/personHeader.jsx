@@ -44,8 +44,8 @@ const Profile = styled.img.attrs(props => ({
 
 class PersonHeader extends React.Component {
   render() {
-    const { name } = this.props;
-    const { src } = PEOPLE[name];
+    const { personId } = this.props;
+    const { displayName, src } = PEOPLE[personId];
 
     return (
       <Header>
@@ -53,7 +53,7 @@ class PersonHeader extends React.Component {
           <BackIconLink to="/main">
             <BackIcon />
           </BackIconLink>
-          <NameContainer>{name}</NameContainer>
+          <NameContainer>{displayName}</NameContainer>
           <Profile src={src} />
         </TitleContainer>
         <hr />

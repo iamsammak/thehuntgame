@@ -9,14 +9,14 @@ const Container = styled.div`
 
 class Base extends React.Component {
   render() {
-    const { name } = this.props;
+    const { personId } = this.props;
 
     let base;
-    switch (name) {
-    case "Matt":
+    switch (personId) {
+    case "matt":
       base = "";
       break;
-    case "Tim":
+    case "tim":
       base = (
         <div>
           <Narration>Tim is pacing back and forth in the foyer.</Narration>
@@ -25,7 +25,7 @@ class Base extends React.Component {
         </div>
       );
       break;
-    case "Jay":
+    case "jay":
       base = (
         <div>
           <Narration>You can&apos;t seem to find Jay...until you exit the country club and see him outside.</Narration>
@@ -35,21 +35,21 @@ class Base extends React.Component {
         </div>
       );
       break;
-    case "Ryan":
+    case "ryan":
       base = (
         <div>
           <Narration>Ryan is wandering from table to table.</Narration>
         </div>
       );
       break;
-    case "Kristi":
+    case "kristi":
       base = (
         <div>
           <Narration>Kristi is at the welcome table to make sure no one steals the wedding gifts.</Narration>
         </div>
       );
       break;
-    case "Erica":
+    case "erica":
       base = (
         <div>
           <Narration>Erica seems concerned around the tea favor table.</Narration>
@@ -58,12 +58,12 @@ class Base extends React.Component {
         </div>
       );
       break;
-    case "Mary Ann":
+    case "maryann":
       base = (
         <Narration>You find Mary Ann around the cornhole games.</Narration>
       );
       break;
-    case "Helena":
+    case "helena":
       base = (
         <Narration>Helena is looking through some boxes on the side of the room.</Narration>
       );

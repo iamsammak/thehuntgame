@@ -100,14 +100,14 @@ class App extends React.Component {
           <Route path="/home" render={() => <Home {...this.state} />} />
           <Route path="/main" render={() => <Main {...this.state} />} />
           <Route path="/finish" render={() => <Finish {...this.state} />} />
-          <Route path={PEOPLE['Matt'].path} render={() => <Person {...this.state} component={Person0} name="Matt" />} />
-          <Route path={PEOPLE['Tim'].path} render={() => <Person {...this.state} component={Person1} name="Tim" />} />
-          <Route path={PEOPLE['Jay'].path} render={() => <Person {...this.state} component={Person2} name="Jay" />} />
-          <Route path={PEOPLE['Ryan'].path} render={() => <Person {...this.state} component={Person3} name="Ryan" />} />
-          <Route path={PEOPLE['Kristi'].path} render={() => <Person {...this.state} component={Person4} name="Kristi" />} />
-          <Route path={PEOPLE['Erica'].path} render={() => <Person {...this.state} component={Person5} name="Erica" />} />
-          <Route path={PEOPLE['MaryAnn'].path} render={() => <Person {...this.state} component={Person6} name="MaryAnn" />} />
-          <Route path={PEOPLE['Helena'].path} render={() => <Person {...this.state} component={Person7} name="Helena" />} />
+          <Route path={PEOPLE['matt'].path} render={() => <Person {...this.state} component={Person0} personId="matt" />} />
+          <Route path={PEOPLE['tim'].path} render={() => <Person {...this.state} component={Person1} personId="tim" />} />
+          <Route path={PEOPLE['jay'].path} render={() => <Person {...this.state} component={Person2} personId="jay" />} />
+          <Route path={PEOPLE['ryan'].path} render={() => <Person {...this.state} component={Person3} personId="ryan" />} />
+          <Route path={PEOPLE['kristi'].path} render={() => <Person {...this.state} component={Person4} personId="kristi" />} />
+          <Route path={PEOPLE['erica'].path} render={() => <Person {...this.state} component={Person5} personId="erica" />} />
+          <Route path={PEOPLE['maryann'].path} render={() => <Person {...this.state} component={Person6} personId="maryann" />} />
+          <Route path={PEOPLE['helena'].path} render={() => <Person {...this.state} component={Person7} personId="helena" />} />
         </div>
         <ToastContainer
           position={toast.POSITION.TOP_RIGHT}
