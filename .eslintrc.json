@@ -44,6 +44,7 @@
         "document": false,
         "setTimeout": false,
         "setInterval": false,
+        "clearTimeout": false,
         "SOCKET_URL": false
     }
 }
