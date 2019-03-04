@@ -14,7 +14,7 @@ class Base extends React.Component {
     let base;
     switch (personId) {
     case "matt":
-      base = "";
+      base = "You find Matt with the groom's family, talking about the lost key.";
       break;
     case "tim":
       base = (
@@ -38,7 +38,7 @@ class Base extends React.Component {
     case "ryan":
       base = (
         <div>
-          <Narration>Ryan is wandering from table to table.</Narration>
+          <Narration>Ryan is looking from one table to the next.</Narration>
         </div>
       );
       break;

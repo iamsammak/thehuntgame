@@ -76,7 +76,7 @@ class Hint extends React.Component {
 
     let hintText;
     switch (hint) {
-    case '1': hintText = "Each table has a unique set of letters. It seems odd that there isn't a table 26 though."; break;
+    case '1': hintText = "These letters don't make any sense like this. What if we move the letters along the alphabet like Ryan had moved?"; break;
     case '2': hintText = "You found a riddle after visiting Kristi? Hmm...if it's not written in ink, then maybe it's white space?"; break;
     case '3': hintText = "Erica's looking for a clue with nine letters? Aren't there nine ingredients, each with their own description?"; break;
     case '4': hintText = "My Chinese name? How in the world does it have anything to do with these icons? Maybe if get the tones all wrong..."; break;

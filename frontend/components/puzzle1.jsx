@@ -38,7 +38,7 @@ class Puzzle1 extends React.Component {
     return (
       <div>
         <p>
-          Thanks so much for helping us find the key! I had it with me when I was setting up these tables, but I must have misplaced it when I was grabbing all these letters for each table. If I could only remember what these letters meant for your table, then maybe I could remember where I placed the keys. Do you know what these letters mean?
+          Thanks so much for helping us find the key! I had it with me when I was setting up these guest tables, but I must have misplaced it when I was grabbing all these letters. It was hard to keep track of everything when I was numbering each guest table. If I could only remember what these letters meant, then maybe I could remember where I placed the keys. Do you know what these letters mean?
         </p>
         <CipherContainer>
           {cipher}
@@ -49,7 +49,7 @@ class Puzzle1 extends React.Component {
         {
           solved && (
             <p>
-              Ah, that&apos;s right! That&apos;s why we had these letters for your table. I remember that I finished setting up all the tables and then gave it to Matt. He has a personal safe that Chris gave him, so it might be in there.
+              Ah, that&apos;s right! That&apos;s why we had these letters. I remember that I finished setting up all the tables and then gave the key to Matt. He has a personal safe that Chris gave him, so it might be in there.
             </p>
           )
         }

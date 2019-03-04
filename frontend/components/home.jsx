@@ -137,7 +137,18 @@ class Home extends React.Component {
     return (
       <div>
         <WelcomeHeader />
-        <h2>Click to your Table Number</h2>
+        <div>
+          <p>
+            We really need your help! With everything going on today, the bridal party somehow lost the key to the getaway car. No one is sure who had it last, so you&apos;ll need to ask around and see if anyone can remember anything.
+          </p>
+          <p>
+            It doesn&apos;t matter which table finds it first--Chris and Christine would love for your table to finish this entire adventure and show them that you found the key!
+          </p>
+          <p>
+            Each of the bridal party members is looking for the key. If you can&apos;t figure out what they&apos;re asking for or how to help them, ask the best man and he can give you a hint (unless you want to finish without using any hints!).
+          </p>
+        </div>
+        <h2>What table are you sitting at?</h2>
         <Table>
           <TensContainer>
             <UpIcon onClick={this.calcTens(1)}></UpIcon>
