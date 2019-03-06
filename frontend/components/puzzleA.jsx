@@ -5,14 +5,16 @@ import { Narration } from '../wrappers';
 import { isSolved } from '../helpers';
 
 const SafeImage = styled.img`
+  display: inline-flex;
   height: 150px;
   width: 75px;
   margin-right: auto;
   margin-left: auto;
 `;
-const Button = styled.button`
+const CornholeDiv = styled.div`
+  display: inline-flex;
   margin-right: 5px;
-  ${props => props.selected && 'border-style: inset;'}
+  ${props => props.selected ? 'border-style: inset; border-color: #7C9790; border-width: 5px' : 'background-color: transparent; border-color: transparent'}
 `;
 
 const INITIAL_ANSWERS = [null, null, null];
@@ -45,13 +47,13 @@ class PuzzleA extends React.Component {
       const answer = answers[question];
       const key = `${question}-${index}`;
       return (
-        <Button
+        <CornholeDiv
           key={key}
           selected={answer === index}
           onClick={this.handleOptionClick(question, index)}
         >
           <SafeImage src={icon}/>
-        </Button>
+        </CornholeDiv>
       );
     };
   }
@@ -79,7 +81,6 @@ class PuzzleA extends React.Component {
   handleSubmit() {
     const { send } = this.props;
     const { answers } = this.state;
-
     send('submit', { puzzle: 'A', answer: answers });
     this.setState({ answers: [...INITIAL_ANSWERS] });
   }
@@ -87,7 +88,6 @@ class PuzzleA extends React.Component {
   render() {
     const { correct, gameState } = this.props;
     const solved = isSolved(gameState, 'A');
-
     const question1Images = ['images/cornhole1.png', 'images/cornhole2.png', 'images/cornhole3.png', 'images/cornhole4.png'];
     const question2Text = ['Ultra White', 'Coral Ridge', 'New Peach'];
     const question3Text = ['3', '4', '5', '6'];
