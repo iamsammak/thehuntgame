@@ -16,15 +16,21 @@ class Puzzle5Clue extends React.Component {
     let src = "";
     switch (clue) {
     case "clue0":
-      src = "images/puzzle5_clue1.jpg"; break;
+      src = "images/puzzle5/clue0.png"; break;
     case "clue1":
-      src = "images/puzzle5_clue2.jpg"; break;
+      src = "images/puzzle5/clue1.png"; break;
     case "clue2":
-      src = "images/puzzle5_clue3.jpg"; break;
+      src = "images/puzzle5/clue2.png"; break;
     case "clue3":
-      src = "images/puzzle5_clue4.jpg"; break;
+      src = "images/puzzle5/clue3.png"; break;
     case "clue4":
-      src = "images/puzzle5_clue5.jpg"; break;
+      src = "images/puzzle5/clue4.png"; break;
+    case "clue5":
+      src = "images/puzzle5/clue5.png"; break;
+    case "clue6":
+      src = "images/puzzle5/clue6.png"; break;
+    case "clue7":
+      src = "images/puzzle5/clue7.png"; break;
     }
 
     return (

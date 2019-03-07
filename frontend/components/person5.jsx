@@ -18,7 +18,7 @@ class Person5 extends React.Component {
     if (stage === 3) {
       body = <Puzzle {...this.props} component={Puzzle3} />;
     } else if (stage === 5) {
-      body = <Puzzle5Clue clue="clue0" personId={personId} />;
+      body = <Puzzle5Clue clue="clue5" personId={personId} />;
     } else if (stage === 7) {
       body = <Puzzle7Clue personId={personId} />;
     }
