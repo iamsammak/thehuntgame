@@ -14,7 +14,11 @@ class Base extends React.Component {
     let base;
     switch (personId) {
     case "matt":
-      base = "You find Matt with the groom's family, talking about the lost key.";
+      base = (
+        <div>
+          <Narration>You find Matt with the groom&apos;s family, talking about the lost key.</Narration>
+        </div>
+      );
       break;
     case "tim":
       base = (
