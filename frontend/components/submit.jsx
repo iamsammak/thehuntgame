@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { AnswerAwareInput } from "./puzzle";
+const AnswerAwareInput = styled.input`
+  border-color: ${props => (props.correct === false ? 'red' : '#f8f8f8t')};
+  text-color: ${props => (props.correct === false ? 'red' : 'black')};
+  outline: none;
+`;
 
 class Submit extends React.Component {
   constructor(props) {
