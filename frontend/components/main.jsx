@@ -83,14 +83,13 @@ export default class Main extends React.Component {
         <Table>
           {
             items.map((item, index) => {
-              const rotation = index * (360 / items.length);
               return (
-                <Container key={item.key} rotation={rotation}>
+                <Container key={item.key} >
                   <Content>
-                    <Line />
+
                     <Link to={item.to}>
                       <PersonContainer>
-                        <Person src={item.src} rotate={rotation} />
+                        <Person src={item.src}  />
                       </PersonContainer>
                     </Link>
                   </Content>
@@ -108,3 +107,46 @@ export default class Main extends React.Component {
     );
   }
 }
+// export default class Main extends React.Component {
+//   render() {
+//     const items = [
+//       { to: PEOPLE['tim'].path, key: 1, src: PEOPLE['tim'].src },
+//       { to: PEOPLE['jay'].path, key: 2, src: PEOPLE['jay'].src },
+//       { to: PEOPLE['ryan'].path, key: 3, src: PEOPLE['ryan'].src },
+//       { to: PEOPLE['kristi'].path, key: 4, src: PEOPLE['kristi'].src },
+//       { to: PEOPLE['erica'].path, key: 5, src: PEOPLE['erica'].src },
+//       { to: PEOPLE['maryann'].path, key: 6, src: PEOPLE['maryann'].src },
+//       { to: PEOPLE['helena'].path, key: 7, src: PEOPLE['helena'].src },
+//     ];
+//
+//     return (
+//       <div>
+//         <WelcomeHeader {...this.props} />
+//         <Table>
+//           {
+//             items.map((item, index) => {
+//               const rotation = index * (360 / items.length);
+//               return (
+//                 <Container key={item.key} rotation={rotation}>
+//                   <Content>
+//                     <Line />
+//                     <Link to={item.to}>
+//                       <PersonContainer>
+//                         <Person src={item.src} rotate={rotation} />
+//                       </PersonContainer>
+//                     </Link>
+//                   </Content>
+//                 </Container>
+//               );
+//             })
+//           }
+//           <MiddleLink to={PEOPLE['matt'].path}>
+//             <PersonContainer>
+//               <MiddlePerson src={PEOPLE['matt'].src} />
+//             </PersonContainer>
+//           </MiddleLink>
+//         </Table>
+//       </div>
+//     );
+//   }
+// }
