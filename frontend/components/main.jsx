@@ -17,6 +17,59 @@ const Table = styled.div`
   margin: auto;
 `;
 
+const SamTable = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: ${tableSize}px;
+  margin: auto;
+`
+
+const SamMiddleTable = styled(SamTable)`
+  justify-content: space-evenly;
+`
+
+const SamContainer = styled.div`
+  height: 150px;
+  width: 100px;
+  border: 1px solid blue;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+`
+
+const Sam = styled.img.attrs(props => ({
+  src: props.src,
+}))`
+  height: 70px;
+  width: 70px;
+  border-radius: 35px;
+`;
+
+const SamPersonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const SamPerson = styled.img.attrs(props => ({
+  src: props.src,
+}))`
+  width: 70px;
+  height: 70px
+  border: 2px solid black;
+  border-radius: 50%;
+`
+
+const SamTitle = styled.div`
+  color: black;
+  font: 14px;
+`
+
 const PersonContainer = styled.div`
   padding: ${xsSpacing}px;
 `;
@@ -103,6 +156,44 @@ export default class Main extends React.Component {
             </PersonContainer>
           </MiddleLink>
         </Table>
+        <SamTable>
+          <SamContainer>
+            <SamPerson src={PEOPLE['matt'].src} />
+            <SamTitle>Matt</SamTitle>
+          </SamContainer>
+          <SamContainer>
+            <SamPerson src={PEOPLE['tim'].src} />
+            <SamTitle>Tim</SamTitle>
+          </SamContainer>
+          <SamContainer>
+            <SamPerson src={PEOPLE['jay'].src} />
+            <SamTitle>Joy</SamTitle>
+          </SamContainer>
+        </SamTable>
+        <SamMiddleTable>
+          <SamContainer>
+            <SamPerson src={PEOPLE['ryan'].src} />
+            <SamTitle>Ryan</SamTitle>
+          </SamContainer>
+          <SamContainer>
+            <SamPerson src={PEOPLE['kristi'].src} />
+            <SamTitle>Kristi</SamTitle>
+          </SamContainer>
+        </SamMiddleTable>
+        <SamTable>
+          <SamContainer>
+            <SamPerson src={PEOPLE['erica'].src} />
+            <SamTitle>Erica</SamTitle>
+          </SamContainer>
+          <SamContainer>
+            <SamPerson src={PEOPLE['maryann'].src} />
+            <SamTitle>Mary Ann</SamTitle>
+          </SamContainer>
+          <SamContainer>
+            <SamPerson src={PEOPLE['helena'].src} />
+            <SamTitle>Helena</SamTitle>
+          </SamContainer>
+        </SamTable>
       </div>
     );
   }
