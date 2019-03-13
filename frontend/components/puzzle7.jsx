@@ -110,7 +110,7 @@ class Puzzle7 extends React.Component {
       <div>
         <Narration>You find Ryan at a panel with ten switches.</Narration>
         <p>
-          The venue manager told us to open this panel in case of emergency. Given that it&apos;s almost time for their getaway and we still don&apos;t have the key, I think this is an emergency. Only thing is that the manager gave each member of the bridal party one part of the directions for how to open it. Can you help us figure this out?
+          The venue manager told us to open this panel in case of an emergency. Given that it&apos;s almost time for their getaway and we still don&apos;t have the key, I think this is an emergency. Only thing is that the manager gave each member of the bridal party one part of the directions for how to open it. Can you help us figure this out?
         </p>
         <Puzzle7Clue personId={personId} />
         {
@@ -123,7 +123,7 @@ class Puzzle7 extends React.Component {
                     return (
                       <Switch
                         key={index}
-                        disabled={waiting}
+                        disabled={waiting || solved}
                         on={on}
                         onToggleSwitch={this.onToggleSwitch(index)}
                         switchNumber={index + 1}

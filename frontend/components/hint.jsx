@@ -79,7 +79,7 @@ class Hint extends React.Component {
     case '1': hintText = "These letters don't make any sense like this. What if we move the letters along the alphabet like Ryan had moved?"; break;
     case '2': hintText = "You found a riddle after visiting Kristi? Hmm...if it's not written in ink, then maybe it's white space?"; break;
     case '3': hintText = "Erica's looking for a clue with nine letters? Aren't there nine ingredients, each with their own description?"; break;
-    case '4': hintText = "My Chinese name? How in the world does it have anything to do with these icons? Maybe if get the tones all wrong..."; break;
+    case '4': hintText = "My Chinese name? Chris keeps on mispronouncing it...but how in the world does it have anything to do with these icons?"; break;
     case '5': hintText = "The paper looks oddly familiar. Did we take a picture with it at the photobooth?"; break;
     case '8': hintText = "Jay probably would've taken the shortest path possible from his car to the sweetheart table."; break;
     }

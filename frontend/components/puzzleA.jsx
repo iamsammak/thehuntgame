@@ -11,10 +11,11 @@ const SafeImage = styled.img`
   margin-right: auto;
   margin-left: auto;
 `;
+
 const CornholeDiv = styled.div`
   display: inline-flex;
   margin-right: 5px;
-  ${props => props.selected ? 'border-style: inset; border-color: #7C9790; border-width: 5px' : 'background-color: transparent; border-color: transparent'}
+  ${props => (props.selected ? 'border-style: inset; border-color: #7C9790; border-width: 5px' : 'background-color: transparent; border-color: transparent')}
 `;
 
 const INITIAL_ANSWERS = [null, null, null];

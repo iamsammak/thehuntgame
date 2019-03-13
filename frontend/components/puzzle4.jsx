@@ -58,7 +58,7 @@ class Puzzle4 extends React.Component {
   }
 
   render() {
-    const { gameState } = this.props;
+    const { correct, gameState } = this.props;
     const { error } = this.state;
     const solved = isSolved(gameState, '4');
     const puzzleBSolved = isSolved(gameState, 'B');
@@ -114,6 +114,13 @@ class Puzzle4 extends React.Component {
           error && (
             <p>
               Are you sure about that?
+            </p>
+          )
+        }
+        {
+          correct === false && (
+            <p>
+              That doesn&apos;t sound right...
             </p>
           )
         }

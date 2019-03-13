@@ -41,7 +41,7 @@ ANSWERS = {
   '4': [False, False, True, True, False, False, False, False, True, False],
   '5': '',
   '6': '',
-  '7': [False, True, True, False, False, True, True, False, False, True],
+  '7': [False, True, True, False, True, False, False, True, True, False],
   '8': '',
 }
 START_CRITERIA = {
