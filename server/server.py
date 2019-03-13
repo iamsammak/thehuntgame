@@ -37,7 +37,7 @@ ANSWERS = {
   'B': [0, 2, 0], 
   '1': 'getaway',
   '2': 'see o double you',
-  '3': [5,4,3,2,1],
+  '3': 'atgpsmjor',
   '4': [False, False, True, True, False, False, False, False, True, False],
   '5': '',
   '6': '',
