@@ -25,7 +25,7 @@ const MiddleTable = styled(Table)`
 const Name = styled.div`
   color: ${juniper};
   font-size: 16px;
-`
+`;
 
 const StyleLink = styled(Link)`
   text-decoration: none;
@@ -77,11 +77,11 @@ export default class Main extends React.Component {
         <WelcomeHeader {...this.props} />
         <Table>
           {
-            firstRow.map((item, index) => {
+            firstRow.map((item) => {
               return (
-                <StyleLink to={item.to}>
-                  <Container key={item.key} >
-                    <Person src={item.src}  />
+                <StyleLink to={item.to} key={item.key}>
+                  <Container>
+                    <Person src={item.src} />
                     <Name>{item.name}</Name>
                   </Container>
                 </StyleLink>
@@ -91,11 +91,11 @@ export default class Main extends React.Component {
         </Table>
         <MiddleTable>
           {
-            secondRow.map((item, index) => {
+            secondRow.map((item) => {
               return (
-                <StyleLink to={item.to}>
-                  <Container key={item.key} >
-                    <Person src={item.src}  />
+                <StyleLink to={item.to} key={item.key}>
+                  <Container>
+                    <Person src={item.src} />
                     <Name>{item.name}</Name>
                   </Container>
                 </StyleLink>
@@ -105,11 +105,11 @@ export default class Main extends React.Component {
         </MiddleTable>
         <Table>
           {
-            thirdRow.map((item, index) => {
+            thirdRow.map((item) => {
               return (
-                <StyleLink to={item.to}>
-                  <Container key={item.key} >
-                    <Person src={item.src}  />
+                <StyleLink to={item.to} key={item.key}>
+                  <Container>
+                    <Person src={item.src} />
                     <Name>{item.name}</Name>
                   </Container>
                 </StyleLink>
