@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { isSolved } from '../helpers';
-import { AnswerAwareDiv } from './puzzle.jsx';
-import { KeypadContainer, Button } from './buttonContants';
+import Submit from './submit';
 
 const initial_combo = ['','','','',''];
 
@@ -66,31 +65,9 @@ class Puzzle3 extends React.Component {
         <p>
           He kept talking about how his tea favor idea needs to be CAPITALIZED. It would be the FIRST idea of its kind where guests can choose from EACH of the tea components.
         </p>
-        <div>
-          {
-            combo.map((pw, i) => {
-              return (
-                <AnswerAwareDiv key={`${i}${pw}`} shake={this.state.shake} correct={this.props.correct}>
-                  {pw}
-                </AnswerAwareDiv>
-              );
-            })
-          }
-        </div>
-        <KeypadContainer>
-          <Button disabled={solved} onClick={this.handleClick(1)}>1</Button>
-          <Button disabled={solved} onClick={this.handleClick(2)}>2</Button>
-          <Button disabled={solved} onClick={this.handleClick(3)}>3</Button>
-          <Button disabled={solved} onClick={this.handleClick(4)}>4</Button>
-          <Button disabled={solved} onClick={this.handleClick(5)}>5</Button>
-          <Button disabled={solved} onClick={this.handleClick(6)}>6</Button>
-          <Button disabled={solved} onClick={this.handleClick(7)}>7</Button>
-          <Button disabled={solved} onClick={this.handleClick(8)}>8</Button>
-          <Button disabled={solved} onClick={this.handleClick(9)}>9</Button>
-          <Button disabled={solved} onClick={this.handleClear}>clear</Button>
-          <Button disabled={solved} onClick={this.handleClick(0)}>0</Button>
-          <Button disabled={solved} onClick={this.submitAnswer}>Enter</Button>
-        </KeypadContainer>
+        <p>
+          <Submit {...this.props} puzzleNumber="3" disabled={solved} />
+        </p>
         {
           solved && (
             <p>

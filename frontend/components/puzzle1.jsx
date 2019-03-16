@@ -44,7 +44,7 @@ class Puzzle1 extends React.Component {
           {cipher}
         </CipherContainer>
         <p>
-          <Submit {...this.props} puzzleNumber={'1'} disabled={solved} />
+          <Submit {...this.props} puzzleNumber="1" disabled={solved} />
         </p>
         {
           solved && (

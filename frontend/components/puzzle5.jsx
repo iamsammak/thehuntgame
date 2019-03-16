@@ -16,7 +16,7 @@ class Puzzle5 extends React.Component {
         </p>
         <Puzzle5Clue clue="clue7" personId={personId} />
         <p>
-          <Submit {...this.props} puzzleNumber={'5'} disabled={solved} />
+          <Submit {...this.props} puzzleNumber="5" disabled={solved} />
         </p>
         {
           solved && (
