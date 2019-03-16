@@ -34,12 +34,12 @@ INITIAL_GAME_STATE_FOR_TABLE = {
 }
 ANSWERS = {
   'A': [1, 2, 1],
-  'B': [0, 2, 0], 
+  'B': [0, 2, 0],
   '1': 'getaway',
-  '2': 'see o double you',
+  '2': 'secret',
   '3': 'atgpsmjor',
   '4': [False, False, True, True, False, False, False, False, True, False],
-  '5': '',
+  '5': 'devotion',
   '6': '',
   '7': [False, True, True, False, True, False, False, True, True, False],
   '8': '',
@@ -121,14 +121,14 @@ def adminconnect(sid, data):
     global GAME_STARTED
     print('Game has been started: ', GAME_STARTED)
     GAME_STARTED = True
-    print('Game has been started: ', GAME_STARTED) 
+    print('Game has been started: ', GAME_STARTED)
     data_to_send = {'gameStarted': GAME_STARTED}
     sio.emit('game_started', data_to_send)
   elif trigger == 'stop_game':
     global GAME_STARTED
     print('Game has been started: ', GAME_STARTED)
     GAME_STARTED = False
-    print('Game has been started: ', GAME_STARTED) 
+    print('Game has been started: ', GAME_STARTED)
     data_to_send = {'gameStarted': GAME_STARTED}
     sio.emit('game_started', data_to_send)
 
