@@ -6,6 +6,9 @@ import { isSolved } from '../helpers';
 import SpeechBubble from './speechBubble';
 
 const border = '2px solid black';
+const borderEdge = '3px solid black';
+const SECTION_WIDTH = 3;
+const SECTION_HEIGHT = 3;
 const START_POSITION = [0, 5];
 const END_POSITION = [11, 6];
 const START_ICON = 'star';
@@ -35,10 +38,10 @@ const Row = styled.div`
 
 const Cell = styled.div`
   box-sizing: border-box;
-  ${props => props.top && `border-top: ${border};`}
-  ${props => props.bottom && `border-bottom: ${border};`}
-  ${props => props.left && `border-left: ${border};`}
-  ${props => props.right && `border-right: ${border};`}
+  ${props => props.top && `border-top: ${props.topEdge ? borderEdge : border};`}
+  ${props => props.bottom && `border-bottom: ${props.bottomEdge ? borderEdge : border};`}
+  ${props => props.left && `border-left: ${props.leftEdge ? borderEdge : border};`}
+  ${props => props.right && `border-right: ${props.rightEdge ? borderEdge : border};`}
   height: 100px;
   width: 100px;
   display: flex;
@@ -270,6 +273,15 @@ class Puzzle6 extends React.Component {
   }
 
   renderCell(x, y, adjacent) {
+    const anchorX = Math.floor(x / SECTION_HEIGHT) * SECTION_HEIGHT;
+    const anchorY = Math.floor(y / SECTION_WIDTH) * SECTION_WIDTH;
+    const edgeOptions = {
+      topEdge: x === anchorX,
+      bottomEdge: x === anchorX + SECTION_HEIGHT - 1,
+      leftEdge: y === anchorY,
+      rightEdge: y === anchorY + SECTION_WIDTH - 1,
+    };
+
     const options = maze[x][y];
     const onClick = () => {
       switch (options.icon) {
@@ -321,7 +333,7 @@ class Puzzle6 extends React.Component {
     }
 
     return (
-      <Cell {...options}>
+      <Cell {...options} {...edgeOptions}>
         <IconRow>
           <Placeholder />
           {up}
@@ -388,8 +400,8 @@ class Puzzle6 extends React.Component {
     const solved = isSolved(gameState, '6');
 
     const [currentX, currentY] = solved ? END_POSITION : position;
-    const anchorX = Math.floor(currentX / 3) * 3;
-    const anchorY = Math.floor(currentY / 3) * 3;
+    const anchorX = Math.floor(currentX / SECTION_HEIGHT) * SECTION_HEIGHT;
+    const anchorY = Math.floor(currentY / SECTION_WIDTH) * SECTION_WIDTH;
     const adjacentCells = this.calculateAdjacent(anchorX, anchorY);
 
     return (
@@ -402,11 +414,11 @@ class Puzzle6 extends React.Component {
           <Maze>
             {solved && <Overlay />}
             {
-              [...Array(3).keys()].map((i) => {
+              [...Array(SECTION_HEIGHT).keys()].map((i) => {
                 return (
                   <Row key={i}>
                     {
-                      [...Array(3).keys()].map((j) => {
+                      [...Array(SECTION_WIDTH).keys()].map((j) => {
                         const x = anchorX + i;
                         const y = anchorY + j;
                         return (
