@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Narration } from '../wrappers';
+import { Narration, SpeechBubbleSpacing } from '../wrappers';
 import { isSolved } from '../helpers';
 import SpeechBubble from './speechBubble';
 
@@ -89,10 +89,13 @@ class PuzzleB extends React.Component {
             </div>
         }
         {
-          correct === false &&
+          correct === false ? (
             <SpeechBubble personId={personId}>
               No, I think we can use some of that.
             </SpeechBubble>
+          ) : (
+            <SpeechBubbleSpacing lines={1} />
+          )
         }
         {
           solved &&

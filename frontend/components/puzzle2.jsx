@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Narration } from '../wrappers';
+import { Narration, SpeechBubbleSpacing } from '../wrappers';
 import { isSolved } from '../helpers';
 import SpeechBubble from './speechBubble';
 import Submit from './submit';
@@ -30,10 +30,12 @@ class Puzzle2 extends React.Component {
           <Submit {...this.props} puzzleNumber="2" disabled={solved} />
         </p>
         {
-          solved && (
+          solved ? (
             <SpeechBubble personId={personId}>
               Thank you again for covering me. I don&apos;t think the key is around here. You should check with the others and ask them.
             </SpeechBubble>
+          ) : (
+            <SpeechBubbleSpacing lines={3} />
           )
         }
       </div>

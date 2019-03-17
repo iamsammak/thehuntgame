@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { isSolved } from '../helpers';
+import { SpeechBubbleSpacing } from '../wrappers';
 import SpeechBubble from './speechBubble';
 
 const border = '2px solid black';
@@ -436,10 +437,12 @@ class Puzzle6 extends React.Component {
         </MazeContainer>
         <br />
         {
-          solved && (
+          solved ? (
             <SpeechBubble personId={personId}>
               Ryan, there you are! What kind of crazy basement maze was that?
             </SpeechBubble>
+          ) : (
+            <SpeechBubbleSpacing lines={2} />
           )
         }
       </div>

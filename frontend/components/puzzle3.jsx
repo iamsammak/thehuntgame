@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { isSolved } from '../helpers';
+import { SpeechBubbleSpacing } from '../wrappers';
 import SpeechBubble from './speechBubble';
 import Submit from './submit';
 
@@ -57,7 +58,6 @@ class Puzzle3 extends React.Component {
   }
 
   render() {
-    const { combo } = this.state;
     const { gameState, personId } = this.props;
     const solved = isSolved(gameState, '3');
 
@@ -70,10 +70,12 @@ class Puzzle3 extends React.Component {
           <Submit {...this.props} puzzleNumber="3" disabled={solved} />
         </p>
         {
-          solved && (
+          solved ? (
             <SpeechBubble personId={personId}>
               Ah, that&apos;s right. Everything&apos;s in order here, but it doesn&apos;t look like the key is here.
             </SpeechBubble>
+          ) : (
+            <SpeechBubbleSpacing lines={2} />
           )
         }
       </div>

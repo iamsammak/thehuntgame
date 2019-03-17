@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { isSolved } from '../helpers';
+import { SpeechBubbleSpacing } from '../wrappers';
 import SpeechBubble from './speechBubble';
 import Submit from './submit';
 import Puzzle5Clue from './puzzle5Clue';
@@ -20,10 +21,12 @@ class Puzzle5 extends React.Component {
           <Submit {...this.props} puzzleNumber="5" disabled={solved} />
         </p>
         {
-          solved && (
+          solved ? (
             <SpeechBubble personId={personId}>
               ...All that for nothing. I guess it&apos;s not mixed in with the photobooth props.
             </SpeechBubble>
+          ) : (
+            <SpeechBubbleSpacing lines={2} />
           )
         }
       </div>

@@ -51,7 +51,6 @@ const SpeechArrow = styled.div`
 class SpeechBubble extends React.Component {
   render() {
     const { children, personId } = this.props;
-    console.log(personId);
 
     return (
       <Container>

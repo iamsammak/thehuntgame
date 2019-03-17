@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Narration } from '../wrappers';
+import { Narration, SpeechBubbleSpacing } from '../wrappers';
 import { isSolved } from '../helpers';
 import SpeechBubble from './speechBubble';
 
@@ -81,7 +81,7 @@ class PuzzleA extends React.Component {
   }
 
   handleSubmit() {
-    const { send, personId } = this.props;
+    const { send } = this.props;
     const { answers } = this.state;
     send('submit', { puzzle: 'A', answer: answers });
     this.setState({ answers: [...INITIAL_ANSWERS] });
@@ -121,10 +121,13 @@ class PuzzleA extends React.Component {
             </div>
         }
         {
-          correct === false &&
+          correct === false ? (
             <SpeechBubble personId={personId}>
               That doesn&apos;t seem right...
             </SpeechBubble>
+          ) : (
+            <SpeechBubbleSpacing lines={1} />
+          )
         }
         {
           solved &&

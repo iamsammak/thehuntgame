@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Narration, LgSpacing } from '../wrappers';
+import { Narration, LgSpacing, SpeechBubbleSpacing } from '../wrappers';
 import { smSpacing } from '../constants';
 import SpeechBubble from './speechBubble';
 
@@ -269,10 +269,12 @@ class Puzzle8 extends React.Component {
           <Arrow direction="down" disabled={this.hasProp('down')} onClick={this.move('down')} />
         </MazeContainer>
         {
-          error && (
+          error ? (
             <SpeechBubble personId={personId}>
               No, no...that&apos;s not where I went. Let&apos;s try again.
             </SpeechBubble>
+          ) : (
+            <SpeechBubbleSpacing lines={1} />
           )
         }
         <LgSpacing />
