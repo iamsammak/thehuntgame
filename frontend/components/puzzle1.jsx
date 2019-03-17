@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { isSolved } from '../helpers';
+import SpeechBubble from './speechBubble';
 import Submit from './submit';
 
-const CipherContainer = styled.div`
+const CipherContainer = styled.p`
   font-family: monospace;
   font-size: 2em;
   letter-spacing: 5px;
@@ -32,14 +33,14 @@ class Puzzle1 extends React.Component {
 
   render() {
     const { cipher } = this.state;
-    const { gameState } = this.props;
+    const { gameState, personId } = this.props;
     const solved = isSolved(gameState, '1');
 
     return (
       <div>
-        <p>
+        <SpeechBubble personId={personId}>
           Thanks so much for helping us find the key! I had it with me when I was setting up these guest tables, but I must have misplaced it when I was grabbing all these letters. It was hard to keep track of everything when I was numbering each guest table. If I could only remember what these letters meant, then maybe I could remember where I placed the keys. Do you know what these letters mean?
-        </p>
+        </SpeechBubble>
         <CipherContainer>
           {cipher}
         </CipherContainer>
@@ -48,9 +49,9 @@ class Puzzle1 extends React.Component {
         </p>
         {
           solved && (
-            <p>
+            <SpeechBubble personId={personId}>
               Ah, that&apos;s right! That&apos;s why we had these letters. I remember that I finished setting up all the tables and then gave the key to Matt. He has a personal safe that Chris gave him, so it might be in there.
-            </p>
+            </SpeechBubble>
           )
         }
       </div>

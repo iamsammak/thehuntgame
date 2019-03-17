@@ -27,7 +27,7 @@ export const XlSpacing = styled.div`
   height: ${xlSpacing};
 `;
 
-export const Narration = styled.div`
+export const Narration = styled.p`
   font-style: italic;
   font-size: 0.8em;
   ${props => props.danger && `color: ${red};`}

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Narration } from '../wrappers';
 import { isSolved } from '../helpers';
+import SpeechBubble from './speechBubble';
 
 const INITIAL_ANSWERS = [null, null, null];
 
@@ -55,7 +56,7 @@ class PuzzleB extends React.Component {
   }
 
   render() {
-    const { correct, gameState } = this.props;
+    const { correct, gameState, personId } = this.props;
     const solved = isSolved(gameState, 'B');
 
     const question1Text = ["Candle lamp", "Arbor post", "Water Pitcher"];
@@ -64,9 +65,9 @@ class PuzzleB extends React.Component {
 
     return (
       <div>
-        <p>
+        <SpeechBubble personId={personId}>
           Is it here? Is it in this box? Hey, can you help me sort through these boxes and move all the unused stuff to my car? Maybe if we clear out all this stuff, then we can find the key here.
-        </p>
+        </SpeechBubble>
         {
           !solved &&
             <div>
@@ -89,17 +90,17 @@ class PuzzleB extends React.Component {
         }
         {
           correct === false &&
-            <p>
+            <SpeechBubble personId={personId}>
               No, I think we can use some of that.
-            </p>
+            </SpeechBubble>
         }
         {
           solved &&
             <div>
               <Narration>You got all the items right!</Narration>
-              <p>
+              <SpeechBubble personId={personId}>
                 Thanks so much for bringing those to the car! Hm? You found a strong magnet in the trunk? Can you hold onto it for now? I think Matt was holding onto it for some reason.
-              </p>
+              </SpeechBubble>
               <Narration>You found a strong magnet.</Narration>
             </div>
         }

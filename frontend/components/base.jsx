@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import SpeechBubble from './speechBubble';
 import { Narration } from '../wrappers';
 
 const Container = styled.div`
@@ -24,8 +25,9 @@ class Base extends React.Component {
       base = (
         <div>
           <Narration>Tim is pacing back and forth in the foyer.</Narration>
-          <br />
-          Hmm, where could it be?
+          <SpeechBubble personId={personId}>
+            Hmm, where could it be?
+          </SpeechBubble>
         </div>
       );
       break;
@@ -33,9 +35,9 @@ class Base extends React.Component {
       base = (
         <div>
           <Narration>You can&apos;t seem to find Jay...until you exit the country club and see him outside.</Narration>
-          <p>
+          <SpeechBubble personId={personId}>
             Did I drop it somewhere here? I can&apos;t see anything without light...
-          </p>
+          </SpeechBubble>
         </div>
       );
       break;
@@ -57,8 +59,9 @@ class Base extends React.Component {
       base = (
         <div>
           <Narration>Erica seems concerned around the tea favor table.</Narration>
-          <br />
-          Let me think...I was setting up these bowls and then filling them with tea. What did I do next? All I can remember is what Chris kept saying about his tea favor idea...
+          <SpeechBubble personId={personId}>
+            Let me think...I was setting up these bowls and then filling them with tea. What did I do next? All I can remember is what Chris kept saying about his tea favor idea...
+          </SpeechBubble>
         </div>
       );
       break;

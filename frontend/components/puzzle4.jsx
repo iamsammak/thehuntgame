@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Narration } from '../wrappers';
-import { isSolved } from '../helpers';
+import { isSolved, getCurrentStage } from '../helpers';
 import { KeypadContainer, Button, SubmitButton, ClearButton } from './buttonContants';
-import { getCurrentStage } from '../helpers';
+import SpeechBubble from './speechBubble';
 
 const SafeImage = styled.img`
   height: 75px;
@@ -58,7 +58,7 @@ class Puzzle4 extends React.Component {
   }
 
   render() {
-    const { correct, gameState } = this.props;
+    const { correct, gameState, personId } = this.props;
     const { error } = this.state;
     const solved = isSolved(gameState, '4');
     const puzzleBSolved = isSolved(gameState, 'B');
@@ -79,14 +79,14 @@ class Puzzle4 extends React.Component {
     return (
       <div>
         <Narration>Matt lugs in a safe and is fiddling with the keypad.</Narration>
-        <p>
+        <SpeechBubble personId={personId}>
           Chris gave me this safe, so maybe we had put it in here. Only thing is that I don&apos;t remember the code to unlock it.
-        </p>
+        </SpeechBubble>
         {
           puzzleBSolved &&
-            <p>
+            <SpeechBubble personId={personId}>
               Ah, you found my magnet. It&apos;s supposed to help us unlock this safe. Let&apos;s see...yup--it looks like the magnet disabled one of the buttons.
-            </p>
+            </SpeechBubble>
         }
         <KeypadContainer>
           <Button click={this.state.value[0]} onClick={this.handleClick(0)} disabled={solved} ><SafeImage src={images[0].src} /></Button>
@@ -105,23 +105,23 @@ class Puzzle4 extends React.Component {
         </KeypadContainer>
         {
           solved && (
-            <p>
+            <SpeechBubble personId={personId}>
               There we go...oh. Doesn&apos;t look like we put the key here. Where else could it be then?
-            </p>
+            </SpeechBubble>
           )
         }
         {
           error && (
-            <p>
+            <SpeechBubble personId={personId}>
               Are you sure about that?
-            </p>
+            </SpeechBubble>
           )
         }
         {
           correct === false && (
-            <p>
+            <SpeechBubble personId={personId}>
               That doesn&apos;t sound right...
-            </p>
+            </SpeechBubble>
           )
         }
       </div>

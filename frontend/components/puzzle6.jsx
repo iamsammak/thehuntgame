@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { isSolved } from '../helpers';
+import SpeechBubble from './speechBubble';
 
 const border = '2px solid black';
 const START_POSITION = [0, 5];
@@ -383,7 +384,7 @@ class Puzzle6 extends React.Component {
 
   render() {
     const { position } = this.state;
-    const { gameState } = this.props;
+    const { gameState, personId } = this.props;
     const solved = isSolved(gameState, '6');
 
     const [currentX, currentY] = solved ? END_POSITION : position;
@@ -393,9 +394,10 @@ class Puzzle6 extends React.Component {
 
     return (
       <div>
-        <p>
+        <SpeechBubble personId={personId}>
           Maybe we should check the basement. I think I saw Ryan headed that way, but he hasn&apos;t come back in a while.
-        </p>
+        </SpeechBubble>
+        <br />
         <MazeContainer>
           <Maze>
             {solved && <Overlay />}
@@ -420,11 +422,12 @@ class Puzzle6 extends React.Component {
             }
           </Maze>
         </MazeContainer>
+        <br />
         {
           solved && (
-            <p>
+            <SpeechBubble personId={personId}>
               Ryan, there you are! What kind of crazy basement maze was that?
-            </p>
+            </SpeechBubble>
           )
         }
       </div>

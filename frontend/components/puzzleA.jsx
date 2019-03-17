@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { Narration } from '../wrappers';
 import { isSolved } from '../helpers';
+import SpeechBubble from './speechBubble';
 
 const SafeImage = styled.img`
   display: inline-flex;
@@ -80,14 +81,14 @@ class PuzzleA extends React.Component {
   }
 
   handleSubmit() {
-    const { send } = this.props;
+    const { send, personId } = this.props;
     const { answers } = this.state;
     send('submit', { puzzle: 'A', answer: answers });
     this.setState({ answers: [...INITIAL_ANSWERS] });
   }
 
   render() {
-    const { correct, gameState } = this.props;
+    const { correct, gameState, personId } = this.props;
     const solved = isSolved(gameState, 'A');
 
     const question1Images = ['images/puzzleA/cornhole1.png', 'images/puzzleA/cornhole2.png', 'images/puzzleA/cornhole3.png', 'images/puzzleA/cornhole4.png'];
@@ -96,9 +97,9 @@ class PuzzleA extends React.Component {
 
     return (
       <div>
-        <p>
+        <SpeechBubble personId={personId}>
           Did you know that Chris and his dad pretty much made the cornhole boards themselves? He wants me to jot down some of the details for future reference. Can you help me out?
-        </p>
+        </SpeechBubble>
         {
           !solved &&
             <div>
@@ -121,17 +122,17 @@ class PuzzleA extends React.Component {
         }
         {
           correct === false &&
-            <p>
+            <SpeechBubble personId={personId}>
               That doesn&apos;t seem right...
-            </p>
+            </SpeechBubble>
         }
         {
           solved &&
             <div>
               <Narration>You got all the details right!</Narration>
-              <p>
+              <SpeechBubble personId={personId}>
                 Awesome, thanks! Chris told me something about a Caesar cipher too. Not sure what that has to do with anything though.
-              </p>
+              </SpeechBubble>
             </div>
         }
       </div>
