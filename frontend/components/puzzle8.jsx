@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Narration, LgSpacing } from '../wrappers';
 import { smSpacing } from '../constants';
+import SpeechBubble from './speechBubble';
 
 const START_POSITION = [7, 8];
 
@@ -249,13 +250,15 @@ class Puzzle8 extends React.Component {
   }
 
   render() {
+    const { personId } = this.props;
     const { error } = this.state;
+
     return (
       <div>
         <Narration>You find Jay outside and hand him the flashlight.</Narration>
-        <p>
+        <SpeechBubble personId={personId}>
           Ah, thanks for the flashlight! Help me retrace my steps and see if I dropped it anywhere. I was carrying in decorations for the sweetheart table from my car...
-        </p>
+        </SpeechBubble>
         <MazeContainer>
           <Arrow direction="up" disabled={this.hasProp('up')} onClick={this.move('up')} />
           <MiddleContainer>
@@ -267,9 +270,9 @@ class Puzzle8 extends React.Component {
         </MazeContainer>
         {
           error && (
-            <p>
+            <SpeechBubble personId={personId}>
               No, no...that&apos;s not where I went. Let&apos;s try again.
-            </p>
+            </SpeechBubble>
           )
         }
         <LgSpacing />

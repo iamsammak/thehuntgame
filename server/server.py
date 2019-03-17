@@ -115,20 +115,15 @@ def adminconnect(sid, data):
         info = data[puzzle]
         puzzle_data[puzzle][table] = info
 
+    global GAME_STARTED
     data_to_send = {'puzzleData' : puzzle_data, 'gameStarted': GAME_STARTED}
     sio.emit('admin_data', data_to_send)
   elif trigger == 'start_game':
-    global GAME_STARTED
-    print('Game has been started: ', GAME_STARTED)
     GAME_STARTED = True
-    print('Game has been started: ', GAME_STARTED)
     data_to_send = {'gameStarted': GAME_STARTED}
     sio.emit('game_started', data_to_send)
   elif trigger == 'stop_game':
-    global GAME_STARTED
-    print('Game has been started: ', GAME_STARTED)
     GAME_STARTED = False
-    print('Game has been started: ', GAME_STARTED)
     data_to_send = {'gameStarted': GAME_STARTED}
     sio.emit('game_started', data_to_send)
 

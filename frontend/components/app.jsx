@@ -6,6 +6,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 
+import { barelyGray } from '../constants';
 import { PEOPLE } from '../helpers';
 import Home from './home';
 import Main from './main';
@@ -24,6 +25,9 @@ const GlobalStyles = createGlobalStyle`
   * {
     font-family: "Quicksand", sans-serif;
     font-weight: 300;
+  }
+  body {
+    background-color: ${barelyGray};
   }
 `;
 

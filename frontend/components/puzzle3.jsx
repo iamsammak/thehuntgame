@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { isSolved } from '../helpers';
+import SpeechBubble from './speechBubble';
 import Submit from './submit';
 
 const initial_combo = ['','','','',''];
@@ -57,22 +58,22 @@ class Puzzle3 extends React.Component {
 
   render() {
     const { combo } = this.state;
-    const { gameState } = this.props;
+    const { gameState, personId } = this.props;
     const solved = isSolved(gameState, '3');
 
     return (
       <div>
-        <p>
+        <SpeechBubble personId={personId}>
           He kept talking about how his tea favor idea needs to be CAPITALIZED. It would be the FIRST idea of its kind where guests can choose from EACH of the tea components.
-        </p>
+        </SpeechBubble>
         <p>
           <Submit {...this.props} puzzleNumber="3" disabled={solved} />
         </p>
         {
           solved && (
-            <p>
+            <SpeechBubble personId={personId}>
               Ah, that&apos;s right. Everything&apos;s in order here, but it doesn&apos;t look like the key is here.
-            </p>
+            </SpeechBubble>
           )
         }
       </div>

@@ -2,18 +2,19 @@ import React from 'react';
 
 import { Narration } from '../wrappers';
 import { isSolved } from '../helpers';
+import SpeechBubble from './speechBubble';
 import Submit from './submit';
 
 class Puzzle2 extends React.Component {
   render() {
-    const { gameState } = this.props;
+    const { gameState, personId } = this.props;
     const solved = isSolved(gameState, '2');
 
     return (
       <div>
-        <p>
+        <SpeechBubble personId={personId}>
           Oh, can you watch over the table for a minute? I&apos;ll be right back--thanks!
-        </p>
+        </SpeechBubble>
         <Narration>You sit down and see a note that reads:</Narration>
         <p>
           Looked right past,
@@ -30,9 +31,9 @@ class Puzzle2 extends React.Component {
         </p>
         {
           solved && (
-            <p>
+            <SpeechBubble personId={personId}>
               Thank you again for covering me. I don&apos;t think the key is around here. You should check with the others and ask them.
-            </p>
+            </SpeechBubble>
           )
         }
       </div>

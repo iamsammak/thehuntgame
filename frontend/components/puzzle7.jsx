@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Narration } from '../wrappers';
 import { isSolved } from '../helpers';
 import { smSpacing } from '../constants';
+import SpeechBubble from './speechBubble';
 import Switch from './switch';
 import Puzzle7Clue from './puzzle7Clue';
 
@@ -109,9 +110,9 @@ class Puzzle7 extends React.Component {
     return (
       <div>
         <Narration>You find Ryan at a panel with ten switches.</Narration>
-        <p>
+        <SpeechBubble personId={personId}>
           The venue manager told us to open this panel in case of an emergency. Given that it&apos;s almost time for their getaway and we still don&apos;t have the key, I think this is an emergency. Only thing is that the manager gave each member of the bridal party one part of the directions for how to open it. Can you help us figure this out?
-        </p>
+        </SpeechBubble>
         <Puzzle7Clue personId={personId} />
         {
           switchLayout.map((row, i) => {
@@ -141,9 +142,9 @@ class Puzzle7 extends React.Component {
         {
           solved && (
             <div>
-              <p>
+              <SpeechBubble personId={personId}>
                 Finally! Let&apos;s see what&apos;s in here...A flashlight? All that for a flashlight?! Unbelievable...
-              </p>
+              </SpeechBubble>
               <Narration>You found a flashlight.</Narration>
             </div>
           )
