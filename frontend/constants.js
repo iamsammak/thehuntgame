@@ -4,6 +4,8 @@ export const black = '#000000';
 export const gray = '#828282';
 export const lightBlue = '#A1D6E2';
 export const darkBlue = '#1995AD';
+
+// these five are the wedding colors //
 export const sidecar = '#F5DDC5';
 export const tamarind = '#331225';
 export const juniper = '#7C9790';

@@ -3,27 +3,20 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PEOPLE } from '../helpers';
-import { sidecar, tamarind, juniper, dustStorm, whiteLilac } from '../constants';
+import { tamarind, whiteLilac } from '../constants';
 import WelcomeHeader from './welcomeHeader';
-
-const tableSize = 350;
-const pictureSize = 70;
 
 const Table = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  width: ${tableSize}px;
+  width: 350px;
   padding: 5px 0;
   margin: auto;
 `;
 
-const MiddleTable = styled(Table)`
-`;
-// justify-content: space-evenly;
-
 const Name = styled.div`
-  color: ${juniper};
+  color: ${tamarind};
   font-size: 16px;
 `;
 
@@ -34,11 +27,10 @@ const StyleLink = styled(Link)`
 const Person = styled.img.attrs(props => ({
   src: props.src,
 }))`
-  width: ${pictureSize}px;
-  height: ${pictureSize}px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
 `;
-// border: 2px solid black;
 
 const Container = styled.div`
   display: flex;
@@ -51,9 +43,24 @@ const Container = styled.div`
   border-radius: 5px;
   margin: 5px;
 `;
-// border: 2px solid ${tamarind};
 
 export default class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.renderPerson = this.renderPerson.bind(this);
+  }
+
+  renderPerson(item) {
+    return (
+      <StyleLink to={item.to} key={item.key}>
+        <Container>
+          <Person src={item.src} />
+          <Name>{item.name}</Name>
+        </Container>
+      </StyleLink>
+    );
+  }
+
   render() {
     const firstRow = [
       { name: PEOPLE['tim'].displayName, to: PEOPLE['tim'].path, key: 1, src: PEOPLE['tim'].src },
@@ -76,46 +83,13 @@ export default class Main extends React.Component {
       <div>
         <WelcomeHeader {...this.props} />
         <Table>
-          {
-            firstRow.map((item) => {
-              return (
-                <StyleLink to={item.to} key={item.key}>
-                  <Container>
-                    <Person src={item.src} />
-                    <Name>{item.name}</Name>
-                  </Container>
-                </StyleLink>
-              );
-            })
-          }
+          {firstRow.map(this.renderPerson)}
         </Table>
-        <MiddleTable>
-          {
-            secondRow.map((item) => {
-              return (
-                <StyleLink to={item.to} key={item.key}>
-                  <Container>
-                    <Person src={item.src} />
-                    <Name>{item.name}</Name>
-                  </Container>
-                </StyleLink>
-              );
-            })
-          }
-        </MiddleTable>
         <Table>
-          {
-            thirdRow.map((item) => {
-              return (
-                <StyleLink to={item.to} key={item.key}>
-                  <Container>
-                    <Person src={item.src} />
-                    <Name>{item.name}</Name>
-                  </Container>
-                </StyleLink>
-              );
-            })
-          }
+          {secondRow.map(this.renderPerson)}
+        </Table>
+        <Table>
+          {thirdRow.map(this.renderPerson)}
         </Table>
       </div>
     );
