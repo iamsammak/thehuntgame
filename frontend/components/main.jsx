@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PEOPLE } from '../helpers';
-import { tamarind, whiteLilac } from '../constants';
+import { juniper, tamarind, whiteLilac } from '../constants';
 import WelcomeHeader from './welcomeHeader';
 
 const Table = styled.div`
@@ -17,7 +17,8 @@ const Table = styled.div`
 
 const Name = styled.div`
   color: ${tamarind};
-  font-size: 16px;
+  font-size: 20px;
+  margin-left: 20px;
 `;
 
 const StyleLink = styled(Link)`
@@ -30,18 +31,24 @@ const Person = styled.img.attrs(props => ({
   width: 70px;
   height: 70px;
   border-radius: 50%;
+  margin: 0 15px;
 `;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
-  height: 130px;
-  width: 100px;
-  background-color: ${whiteLilac}
+  height: 80px;
+  width: 290px;
+  background-color: ${whiteLilac};
   border-radius: 5px;
   margin: 5px;
+  border-left: 10px solid ${whiteLilac};
+`;
+
+const MattContainer = styled(Container)`
+  border-left: 10px solid ${tamarind};
 `;
 
 export default class Main extends React.Component {
@@ -62,20 +69,15 @@ export default class Main extends React.Component {
   }
 
   render() {
-    const firstRow = [
-      { name: PEOPLE['tim'].displayName, to: PEOPLE['tim'].path, key: 1, src: PEOPLE['tim'].src },
-      { name: PEOPLE['jay'].displayName, to: PEOPLE['jay'].path, key: 2, src: PEOPLE['jay'].src },
-      { name: PEOPLE['ryan'].displayName, to: PEOPLE['ryan'].path, key: 3, src: PEOPLE['ryan'].src },
-    ];
+    const special = { name: PEOPLE['matt'].displayName, to: PEOPLE['matt'].path, key: 4, src: PEOPLE['matt'].src };
 
-    const secondRow = [
-      { name: PEOPLE['matt'].displayName, to: PEOPLE['matt'].path, key: 4, src: PEOPLE['matt'].src },
+    const everyone = [
       { name: PEOPLE['kristi'].displayName, to: PEOPLE['kristi'].path, key: 5, src: PEOPLE['kristi'].src },
-    ];
-
-    const thirdRow = [
+      { name: PEOPLE['tim'].displayName, to: PEOPLE['tim'].path, key: 1, src: PEOPLE['tim'].src },
       { name: PEOPLE['erica'].displayName, to: PEOPLE['erica'].path, key: 6, src: PEOPLE['erica'].src },
+      { name: PEOPLE['jay'].displayName, to: PEOPLE['jay'].path, key: 2, src: PEOPLE['jay'].src },
       { name: PEOPLE['maryann'].displayName, to: PEOPLE['maryann'].path, key: 7, src: PEOPLE['maryann'].src },
+      { name: PEOPLE['ryan'].displayName, to: PEOPLE['ryan'].path, key: 3, src: PEOPLE['ryan'].src },
       { name: PEOPLE['helena'].displayName, to: PEOPLE['helena'].path, key: 8, src: PEOPLE['helena'].src },
     ];
 
@@ -83,13 +85,13 @@ export default class Main extends React.Component {
       <div>
         <WelcomeHeader {...this.props} />
         <Table>
-          {firstRow.map(this.renderPerson)}
-        </Table>
-        <Table>
-          {secondRow.map(this.renderPerson)}
-        </Table>
-        <Table>
-          {thirdRow.map(this.renderPerson)}
+          <StyleLink to={special.to} key={special.key}>
+            <MattContainer>
+              <Person src={special.src} />
+              <Name>{special.name}</Name>
+            </MattContainer>
+          </StyleLink>
+          {everyone.map(this.renderPerson)}
         </Table>
       </div>
     );
