@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { PEOPLE } from '../helpers';
-import { juniper, tamarind, whiteLilac } from '../constants';
+import { sidecar, dustStorm, juniper, tamarind, whiteLilac } from '../constants';
 import WelcomeHeader from './welcomeHeader';
 
 const Table = styled.div`
@@ -48,7 +49,27 @@ const Container = styled.div`
 `;
 
 const MattContainer = styled(Container)`
-  border-left: 10px solid ${tamarind};
+  position: relative;
+`;
+
+const Favorite = styled.div`
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  width: 20px;
+  height: 35px;
+  background-color: ${tamarind};
+  clip-path: polygon(100% 0%, 100% 70%, 50% 90%, 50% 90%, 0 70%, 0 0);
+`;
+
+const Star = styled(FontAwesomeIcon).attrs({
+  icon: 'star',
+})`
+  color: ${juniper};
+  font-size: 15px;
+  padding: 5px;
 `;
 
 export default class Main extends React.Component {
@@ -89,6 +110,7 @@ export default class Main extends React.Component {
             <MattContainer>
               <Person src={special.src} />
               <Name>{special.name}</Name>
+              <Favorite><Star /></Favorite>
             </MattContainer>
           </StyleLink>
           {everyone.map(this.renderPerson)}
