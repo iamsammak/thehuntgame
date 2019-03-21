@@ -139,7 +139,11 @@ def index():
 @flask_app.route('/<path:path>')
 def static_files(path):
   root_dir = os.getcwd()
-  return send_from_directory(os.path.join(root_dir, 'frontend'), path)
+  file_path = os.path.join(root_dir, 'frontend', path)
+  if os.path.exists(file_path):
+    return send_from_directory(os.path.join(root_dir, 'frontend'), path)
+  else:
+    return index()
 
 @flask_app.route('/admin')
 def admin():

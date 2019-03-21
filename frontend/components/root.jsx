@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
@@ -48,11 +48,11 @@ const AppContainer = styled.div`
 
 const Root = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <AppContainer>
         <App />
       </AppContainer>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
