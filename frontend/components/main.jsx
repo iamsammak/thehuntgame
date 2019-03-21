@@ -40,6 +40,7 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
   height: 80px;
   width: 290px;
   background-color: ${whiteLilac};
@@ -79,20 +80,25 @@ export default class Main extends React.Component {
   }
 
   renderPerson(item) {
+    let ribbon;
+    if (item.special) {
+      ribbon = <Favorite><Star /></Favorite>
+    }
     return (
       <StyleLink to={item.to} key={item.key}>
         <Container>
           <Person src={item.src} />
           <Name>{item.name}</Name>
+          {ribbon}
         </Container>
       </StyleLink>
     );
   }
 
   render() {
-    const special = { name: PEOPLE['matt'].displayName, to: PEOPLE['matt'].path, key: 4, src: PEOPLE['matt'].src };
 
     const everyone = [
+      { name: PEOPLE['matt'].displayName, to: PEOPLE['matt'].path, key: 4, src: PEOPLE['matt'].src, special: true },
       { name: PEOPLE['kristi'].displayName, to: PEOPLE['kristi'].path, key: 5, src: PEOPLE['kristi'].src },
       { name: PEOPLE['tim'].displayName, to: PEOPLE['tim'].path, key: 1, src: PEOPLE['tim'].src },
       { name: PEOPLE['erica'].displayName, to: PEOPLE['erica'].path, key: 6, src: PEOPLE['erica'].src },
@@ -106,15 +112,6 @@ export default class Main extends React.Component {
       <div>
         <WelcomeHeader {...this.props} />
         <Table>
-          <StyleLink to={special.to} key={special.key}>
-            <MattContainer>
-              <Person src={special.src} />
-              <Name>{special.name}</Name>
-              <Favorite>
-                <Star />
-              </Favorite>
-            </MattContainer>
-          </StyleLink>
           {everyone.map(this.renderPerson)}
         </Table>
       </div>
