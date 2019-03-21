@@ -60,14 +60,14 @@ const Favorite = styled.div`
   right: 20px;
   width: 22px;
   height: 35px;
-  background-color: ${sidecar};
+  background-color: ${tamarind};
   clip-path: polygon(100% 0%, 100% 70%, 50% 90%, 50% 90%, 0 70%, 0 0);
 `;
 
 const Star = styled(FontAwesomeIcon).attrs({
   icon: 'star',
 })`
-  color: ${juniper};
+  color: ${sidecar};
   font-size: 15px;
   padding: 5px;
 `;
@@ -110,7 +110,9 @@ export default class Main extends React.Component {
             <MattContainer>
               <Person src={special.src} />
               <Name>{special.name}</Name>
-              <Favorite><Star /></Favorite>
+              <Favorite>
+                <Star />
+              </Favorite>
             </MattContainer>
           </StyleLink>
           {everyone.map(this.renderPerson)}
