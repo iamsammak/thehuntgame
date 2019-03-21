@@ -84,6 +84,7 @@ export default class Main extends React.Component {
     if (item.special) {
       ribbon = <Favorite><Star /></Favorite>
     }
+    
     return (
       <StyleLink to={item.to} key={item.key}>
         <Container>
