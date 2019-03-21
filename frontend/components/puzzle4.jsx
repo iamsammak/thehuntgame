@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Narration } from '../wrappers';
+import { Narration, SpeechBubbleSpacing } from '../wrappers';
 import { isSolved, getCurrentStage } from '../helpers';
 import { KeypadContainer, Button, SubmitButton, ClearButton } from './buttonContants';
 import SpeechBubble from './speechBubble';
@@ -103,6 +103,7 @@ class Puzzle4 extends React.Component {
           <Button click={this.state.value[9]} onClick={this.handleClick(9)} disabled={solved} ><SafeImage src={images[9].src} /></Button>
           <SubmitButton onClick={this.submitAnswer} >Enter</SubmitButton>
         </KeypadContainer>
+        {!solved && !error && correct !== false && <SpeechBubbleSpacing lines={2} />}
         {
           solved && (
             <SpeechBubble personId={personId}>

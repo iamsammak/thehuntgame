@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Narration } from '../wrappers';
+import { Narration, MdSpacing, SpeechBubbleSpacing } from '../wrappers';
 import { isSolved } from '../helpers';
 import { smSpacing } from '../constants';
 import SpeechBubble from './speechBubble';
@@ -136,24 +136,29 @@ class Puzzle7 extends React.Component {
             );
           })
         }
+        {
+          waiting && (
+            <Narration danger>
+              The panel&apos;s security has been activated, which locks you out! You need to wait a minute before trying again.
+            </Narration>
+          )
+        }
         <SubmitButton onClick={this.handleSubmit} disabled={solved || waiting}>
           Connect
         </SubmitButton>
         {
-          solved && (
+          solved ? (
             <div>
               <SpeechBubble personId={personId}>
                 Finally! Let&apos;s see what&apos;s in here...A flashlight? All that for a flashlight?! Unbelievable...
               </SpeechBubble>
               <Narration>You found a flashlight.</Narration>
             </div>
-          )
-        }
-        {
-          waiting && (
-            <Narration danger>
-              <p>The panel&apos;s security has been activated, which locks you out! You need to wait a minute before trying again.</p>
-            </Narration>
+          ) : (
+            <div>
+              <SpeechBubbleSpacing lines={5} />
+              <MdSpacing />
+            </div>
           )
         }
       </div>

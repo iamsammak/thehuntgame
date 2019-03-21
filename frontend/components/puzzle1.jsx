@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { isSolved } from '../helpers';
+import { SpeechBubbleSpacing } from '../wrappers';
 import SpeechBubble from './speechBubble';
 import Submit from './submit';
 
@@ -48,10 +49,12 @@ class Puzzle1 extends React.Component {
           <Submit {...this.props} puzzleNumber="1" disabled={solved} />
         </p>
         {
-          solved && (
+          solved ? (
             <SpeechBubble personId={personId}>
               Ah, that&apos;s right! That&apos;s why we had these letters. I remember that I finished setting up all the tables and then gave the key to Matt. He has a personal safe that Chris gave him, so it might be in there.
             </SpeechBubble>
+          ) : (
+            <SpeechBubbleSpacing lines={5} />
           )
         }
       </div>
