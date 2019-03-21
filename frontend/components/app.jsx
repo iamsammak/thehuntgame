@@ -32,8 +32,8 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const AppContainer = styled.div`
-  max-width: 400px;
-  min-width: 400px;
+  max-width: 360px;
+  min-width: 360px;
   text-align: center;
 `;
 
