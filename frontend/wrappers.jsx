@@ -38,7 +38,7 @@ export const SpeechBubbleSpacing = styled.div`
 
 export const Narration = styled.p`
   font-style: italic;
-  font-size: 0.8em;
+  font-size: 0.9em;
   ${props => props.danger && `color: ${red};`}
 `;
 

@@ -14,6 +14,7 @@ const HintContainer = styled.div`
   border: 1px solid black;
   background-color: white;
   box-shadow: 3px 5px 10px grey;
+  z-index: 999;
 `;
 
 const Close = styled(FontAwesomeIcon).attrs({
