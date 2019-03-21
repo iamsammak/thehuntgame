@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { PEOPLE } from '../helpers';
-import { sidecar, juniper, tamarind, whiteLilac } from '../constants';
+import { sidecar, tamarind, whiteLilac } from '../constants';
 import WelcomeHeader from './welcomeHeader';
 
 const Table = styled.div`
@@ -49,10 +49,6 @@ const Container = styled.div`
   border-left: 10px solid ${whiteLilac};
 `;
 
-const MattContainer = styled(Container)`
-  position: relative;
-`;
-
 const Favorite = styled.div`
   display: flex;
   justify-content: center;
@@ -82,9 +78,9 @@ export default class Main extends React.Component {
   renderPerson(item) {
     let ribbon;
     if (item.special) {
-      ribbon = <Favorite><Star /></Favorite>
+      ribbon = <Favorite><Star /></Favorite>;
     }
-    
+
     return (
       <StyleLink to={item.to} key={item.key}>
         <Container>
