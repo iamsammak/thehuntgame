@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { PEOPLE } from '../helpers';
-import { sidecar, dustStorm, juniper, tamarind, whiteLilac } from '../constants';
+import { sidecar, juniper, tamarind, whiteLilac } from '../constants';
 import WelcomeHeader from './welcomeHeader';
 
 const Table = styled.div`
@@ -58,9 +58,9 @@ const Favorite = styled.div`
   position: absolute;
   top: 0px;
   right: 20px;
-  width: 20px;
+  width: 22px;
   height: 35px;
-  background-color: ${tamarind};
+  background-color: ${sidecar};
   clip-path: polygon(100% 0%, 100% 70%, 50% 90%, 50% 90%, 0 70%, 0 0);
 `;
 
