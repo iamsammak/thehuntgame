@@ -20,18 +20,7 @@ GAME_STARTED = False
 CLIENTS = {}
 # { table number: int -> { puzzle number: str -> { solved: str -> bool } } }
 GAME_STATE = {}
-INITIAL_GAME_STATE_FOR_TABLE = {
-  '1': {'solved': False, 'started': True, 'hint_count' : 0},
-  '2': {'solved': False, 'started': False, 'hint_count' : 0},
-  '3': {'solved': False, 'started': False, 'hint_count' : 0},
-  '4': {'solved': False, 'started': False, 'hint_count' : 0},
-  '5': {'solved': False, 'started': False, 'hint_count' : 0},
-  '6': {'solved': False, 'started': False, 'hint_count' : 0},
-  '7': {'solved': False, 'started': False, 'hint_count' : 0},
-  '8': {'solved': False, 'started': False, 'hint_count' : 0},
-  'A': {'solved': False, 'started': True},
-  'B': {'solved': False, 'started': True},
-}
+
 ANSWERS = {
   'A': [1, 2, 1],
   'B': [0, 2, 0],
@@ -55,18 +44,88 @@ START_CRITERIA = {
   '8': 'jay',
 }
 
+### Data access ###
+def get_table(sid):
+  return CLIENTS[sid] if sid in CLIENTS else None
+
+def remove_client(sid):
+  if sid in CLIENTS:
+    del CLIENTS[sid]
+
+def set_table(sid, table):
+  CLIENTS[sid] = table
+
+def get_game_state(table):
+  return GAME_STATE[table]
+
+def set_game_state(table, puzzle, key, value):
+  GAME_STATE[table][puzzle][key] = value
+
+# TODO replace more efficient way of doing this
+def initialize_game_state(table):
+  GAME_STATE[table] = {}
+  GAME_STATE[table]['1'] = {}
+  set_game_state(table, '1', 'solved', False);
+  set_game_state(table, '1', 'started', True);
+  set_game_state(table, '1', 'hint_count', 0);
+  GAME_STATE[table]['2'] = {}
+  set_game_state(table, '2', 'solved', False);
+  set_game_state(table, '2', 'started', False);
+  set_game_state(table, '2', 'hint_count', 0);
+  GAME_STATE[table]['3'] = {}
+  set_game_state(table, '3', 'solved', False);
+  set_game_state(table, '3', 'started', False);
+  set_game_state(table, '3', 'hint_count', 0);
+  GAME_STATE[table]['4'] = {}
+  set_game_state(table, '4', 'solved', False);
+  set_game_state(table, '4', 'started', False);
+  set_game_state(table, '4', 'hint_count', 0);
+  GAME_STATE[table]['5'] = {}
+  set_game_state(table, '5', 'solved', False);
+  set_game_state(table, '5', 'started', False);
+  set_game_state(table, '5', 'hint_count', 0);
+  GAME_STATE[table]['6'] = {}
+  set_game_state(table, '6', 'solved', False);
+  set_game_state(table, '6', 'started', False);
+  set_game_state(table, '6', 'hint_count', 0);
+  GAME_STATE[table]['7'] = {}
+  set_game_state(table, '7', 'solved', False);
+  set_game_state(table, '7', 'started', False);
+  set_game_state(table, '7', 'hint_count', 0);
+  GAME_STATE[table]['8'] = {}
+  set_game_state(table, '8', 'solved', False);
+  set_game_state(table, '8', 'started', False);
+  set_game_state(table, '8', 'hint_count', 0);
+  GAME_STATE[table]['A'] = {}
+  set_game_state(table, 'A', 'solved', False);
+  set_game_state(table, 'A', 'started', True);
+  GAME_STATE[table]['B'] = {}
+  set_game_state(table, 'B', 'solved', False);
+  set_game_state(table, 'B', 'started', True);
+
+def get_tables():
+  return GAME_STATE.keys()
+
+def get_table_state(table):
+  return GAME_STATE[table]
+
+def set_table_state(table, key, value):
+  GAME_STATE[table][key] = value
+
+### Data access ###
+
 def server_now():
   return datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
 
 def game_complete(table):
-  state = GAME_STATE[table]
+  state = get_game_state(table)
   required = ['1', '2', '3', '4', '5', '6', '7', '8'];
   return all([state[puzzle]['solved'] for puzzle in required])
 
 def send_game_state(table=None, sid=None):
   if sid:
-    table = CLIENTS[sid]
-  sio.emit('game_state_update', GAME_STATE[table], room=(sid or table))
+    table = get_table(sid)
+  sio.emit('game_state_update', get_game_state(table), room=(sid or table))
 
 def send_redirect(table, redirect_code):
   sio.emit('redirect', redirect_code, room=table)
@@ -98,7 +157,7 @@ def parse_cookies(cookie_string):
 
 @sio.on('connect')
 def connect(sid, environ):
-  print("connect ", sid)
+  print('connect', sid)
   cookie_string = environ.get('HTTP_COOKIE')
   
   if cookie_string:
@@ -107,28 +166,28 @@ def connect(sid, environ):
       # potentially an old client reconnecting, use the new sid in this case
       # sid in cookies is the old sid, replace
       old_sid = cookies['io']
-      CLIENTS[sid] = cookies['table']
-      if old_sid in CLIENTS:
-        del CLIENTS[old_sid]
+      set_table(sid, cookies['table'])
+      remove_client(old_sid)
 
 @sio.on('hint_shown')
 def handle_hint(sid, data):
+  print('hint_shown', sid)
   puzzle = str(data['puzzle'])
-  table = CLIENTS[sid]
-  GAME_STATE[table][puzzle]['hint_count'] += 1
+  table = get_table(sid)
+  # TODO make this robust
+  hint_count = get_game_state(table)[puzzle]['hint_count']
+  set_game_state(table, puzzle, 'hint_count', hint_count + 1)
 
 @sio.on('load_admin_data')
 def adminconnect(sid, data):
-  print('admin ping was triggered', data['trigger'])
+  print('load_admin_data', data['trigger'])
   trigger = data['trigger']
   if trigger == 'load':
     table_data = defaultdict(list)
     puzzle_data = defaultdict(dict)
 
-    for table in GAME_STATE:
-      data = GAME_STATE[table]
-      print(table)
-      print(data)
+    for table in get_tables():
+      data = get_game_state(table)
       for puzzle in data:
         info = data[puzzle]
         puzzle_data[puzzle][table] = info
@@ -147,12 +206,14 @@ def adminconnect(sid, data):
 
 @sio.on('game_started')
 def game_start(sid, data):
+  print('game_started', data)
   data_to_send = {'gameStarted': GAME_STARTED}
   sio.emit('game_started', data_to_send)
 
 @sio.on('cipher_ping')
 def cipherconnect(sid, environ):
-  table = CLIENTS[sid]
+  print('cipher_ping', sid)
+  table = get_table(sid)
   message = ANSWERS['1']
   cipher = encrypt(message, table)
   sio.emit('cipher_return', cipher)
@@ -171,29 +232,27 @@ def encrypt(message, shift):
 
 @sio.on('join')
 def join(sid, data):
-  print("join", data, sid)
+  print('join', sid, data)
   table = int(data['table'])
-  CLIENTS[sid] = table
+  set_table(sid, table)
 
   sio.enter_room(sid, table)
 
-  if table in GAME_STATE:
+  if table in get_tables():
     # broadcast that someone has joined to everyone except this person
     sio.emit('player_joined', {}, room=table, skip_sid=sid)
   else:
     # this is the first person to join this table
-    GAME_STATE[table] = deepcopy(INITIAL_GAME_STATE_FOR_TABLE)
-    GAME_STATE[table]['start_time'] = server_now()
+    initialize_game_state(table)
+    set_table_state(table, 'start_time', server_now())
   send_game_state(sid=sid)
 
   if game_complete(table):
     send_redirect(table, 'FINISH')
 
-  print GAME_STATE
-
 @sio.on('submit')
 def submit(sid, data):
-  print("answer", sid, data)
+  print('submit', sid, data)
   puzzle, answer = [data.get(key) for key in ['puzzle', 'answer']]
   # TODO: error gracefully if no puzzle or answer
   if isinstance(answer, basestring):
@@ -205,24 +264,24 @@ def submit(sid, data):
     'correct': correct,
   }
   sio.emit('submit_response', response, room=sid)
-  table = CLIENTS[sid]
+  table = get_table(sid)
   if correct:
-    GAME_STATE[table][str(puzzle)]['solved'] = True
+    set_game_state(table, str(puzzle), 'solved', True)
     send_game_state(table=table)
 
     if game_complete(table):
-      GAME_STATE[table]['end_time'] = server_now()
+      set_table_state(table, 'end_time', server_now())
       send_game_state(table=table)
       send_redirect(table, 'FINISH')
   elif str(puzzle) == '7':
-    GAME_STATE[table][str(puzzle)]['last_attempt'] = server_now()
+    set_game_state(table, str(puzzle), 'last_attempt', server_now())
     send_game_state(table=table)
 
 @sio.on('person_visit')
 def person_visit(sid, data):
-  print("person_visit", sid, data)
-  table = CLIENTS[sid]
-  game_state = GAME_STATE[table]
+  print('person_visit', sid, data)
+  table = get_table(sid)
+  game_state = get_game_state(table)
   person_id = data['personId']
 
   for puzzle in game_state:
@@ -234,10 +293,11 @@ def person_visit(sid, data):
 
 @sio.on('disconnect')
 def disconnect(sid):
-  print('disconnect ', sid)
-  if sid in CLIENTS:
+  print('disconnect', sid)
+  table = get_table(sid)
+  if table:
     # Delete from our clients
-    table = CLIENTS.pop(sid)
+    remove_client(sid)
 
     # broadcast that someone left
     sio.emit('player_left', {}, room=table)
