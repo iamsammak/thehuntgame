@@ -89,9 +89,27 @@ def admin():
 
 ### Only for development use ###
 
+def parse_cookies(cookie_string):
+  cookies = {}
+  for cookie in cookie_string.split(';'):
+    key, value = cookie.split('=')
+    cookies[key.strip()] = value.strip()
+  return cookies
+
 @sio.on('connect')
 def connect(sid, environ):
   print("connect ", sid)
+  cookie_string = environ.get('HTTP_COOKIE')
+  
+  if cookie_string:
+    cookies = parse_cookies(cookie_string)
+    if 'io' in cookies and 'table' in cookies:
+      # potentially an old client reconnecting, use the new sid in this case
+      # sid in cookies is the old sid, replace
+      old_sid = cookies['io']
+      CLIENTS[sid] = cookies['table']
+      if old_sid in CLIENTS:
+        del CLIENTS[old_sid]
 
 @sio.on('hint_shown')
 def handle_hint(sid, data):
