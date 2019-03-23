@@ -72,7 +72,7 @@ const maze = [
   ],
   [
     ['left', 'down', 'up', 'finish'],
-    [],
+    ['checkpoint'],
     [],
     ['right'],
     ['left', 'up', 'deviate'],
