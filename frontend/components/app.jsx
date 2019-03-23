@@ -96,6 +96,15 @@ class App extends React.Component {
   }
 
   render() {
+    const { cookies, history, location } = this.props;
+    const { pathname } = location;
+    // If at any point we don't have a table cookie, we should kick the user
+    // back out to the home page to re-enter their table and join again
+    const table = cookies.get('table');
+    if (!table && pathname !== '/home') {
+      history.push('/home');
+    }
+
     return (
       <AppContainer>
         <GlobalStyles />
