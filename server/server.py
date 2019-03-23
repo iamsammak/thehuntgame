@@ -219,7 +219,7 @@ def cipherconnect(sid, environ):
   print('cipher_ping', sid)
   table = get_table(sid)
   message = ANSWERS['1']
-  cipher = encrypt(message, table)
+  cipher = encrypt(message, 30)
   sio.emit('cipher_return', cipher)
 
 def encrypt(message, shift):
