@@ -11,7 +11,6 @@ const Table = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  width: 350px;
   padding: 5px 0;
   margin: auto;
 `;
@@ -24,6 +23,7 @@ const Name = styled.div`
 
 const StyleLink = styled(Link)`
   text-decoration: none;
+  width: 80%;
 `;
 
 const Person = styled.img.attrs(props => ({
@@ -42,7 +42,6 @@ const Container = styled.div`
   align-items: center;
   position: relative;
   height: 80px;
-  width: 290px;
   background-color: ${whiteLilac};
   border-radius: 5px;
   margin: 5px;

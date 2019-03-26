@@ -32,8 +32,7 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const AppContainer = styled.div`
-  max-width: 360px;
-  min-width: 360px;
+  width: ${props => Math.min(360, props.width)}px;
   text-align: center;
 `;
 
@@ -106,7 +105,7 @@ class App extends React.Component {
     }
 
     return (
-      <AppContainer>
+      <AppContainer width={window.innerWidth}>
         <GlobalStyles />
         <div>
           <Route exact path="/" render={() => <Redirect to="/home" />} />
