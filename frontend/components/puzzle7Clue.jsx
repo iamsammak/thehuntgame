@@ -67,7 +67,7 @@ class Puzzle7Clue extends React.Component {
       clue = (
         <List>
           <li>Tim&apos;s second clue should read &apos;off&apos; instead of &apos;on&apos;.</li>
-          <li>The switch whose number equals the number of bridal party members should be turned on.</li>
+          <li>The switch whose number equals the number of groomsmen plus bridesmaids should be turned on.</li>
         </List>
       );
       break;
