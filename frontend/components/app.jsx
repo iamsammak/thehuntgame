@@ -4,7 +4,6 @@ import io from 'socket.io-client';
 import { withRouter } from 'react-router';
 import { Route, Redirect } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
-import { ToastContainer, toast } from 'react-toastify';
 
 import { barelyGray } from '../constants';
 import { PEOPLE } from '../helpers';
@@ -50,18 +49,6 @@ class App extends React.Component {
 
     socket.on('game_state_update', (data) => {
       this.setState({ gameState: data });
-    });
-
-    socket.on('player_joined', () => {
-      toast('Someone has joined your table!', {
-        type: 'info',
-      });
-    });
-
-    socket.on('player_left', () => {
-      toast('Someone has left your table!', {
-        type: 'error',
-      });
     });
 
     socket.on('redirect', (data) => {
@@ -122,12 +109,6 @@ class App extends React.Component {
           <Route path={PEOPLE['maryann'].path} render={() => <Person {...this.state} component={Person6} personId="maryann" />} />
           <Route path={PEOPLE['helena'].path} render={() => <Person {...this.state} component={Person7} personId="helena" />} />
         </div>
-        <ToastContainer
-          position={toast.POSITION.TOP_RIGHT}
-          autoClose={2000}
-          hideProgressBar
-          closeOnClick
-        />
       </AppContainer>
     );
   }

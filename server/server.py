@@ -242,10 +242,7 @@ def join(sid, data):
 
   sio.enter_room(sid, table)
 
-  if table in get_tables():
-    # broadcast that someone has joined to everyone except this person
-    sio.emit('player_joined', {}, room=table, skip_sid=sid)
-  else:
+  if table not in get_tables():
     # this is the first person to join this table
     initialize_game_state(table)
     set_table_state(table, 'start_time', server_now())
@@ -302,9 +299,6 @@ def disconnect(sid):
   if table:
     # Delete from our clients
     remove_client(sid)
-
-    # broadcast that someone left
-    sio.emit('player_left', {}, room=table)
 
 if __name__ == '__main__':
   app = socketio.WSGIApp(sio, flask_app)
