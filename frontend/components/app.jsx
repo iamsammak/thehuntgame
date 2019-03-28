@@ -57,6 +57,13 @@ class App extends React.Component {
       }
     });
 
+    socket.on('connect', () => {
+      const table = cookies.get('table');
+      if (table) {
+        this.join(table);
+      }
+    });
+
     this.state = {
       gameState: {},
       socket: socket,
@@ -64,10 +71,6 @@ class App extends React.Component {
       join: this.join.bind(this),
     };
 
-    const table = cookies.get('table');
-    if (table) {
-      this.join(table);
-    }
   }
 
   join(tableNumber) {
