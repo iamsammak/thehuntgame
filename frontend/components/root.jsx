@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, withRouter } from 'react-router-dom';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
@@ -46,12 +46,29 @@ const AppContainer = styled.div`
   justify-content: center;
 `;
 
+class ScrollToTopComponent extends React.Component {
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  render() {
+    return this.props.children;
+  }
+}
+
+const ScrollToTop = withRouter(ScrollToTopComponent);
+
+
 const Root = () => {
   return (
     <BrowserRouter>
-      <AppContainer>
-        <App />
-      </AppContainer>
+      <ScrollToTop>
+        <AppContainer>
+          <App />
+        </AppContainer>
+      </ScrollToTop>
     </BrowserRouter>
   );
 };
