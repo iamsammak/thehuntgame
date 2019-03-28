@@ -41,10 +41,11 @@
         "react/require-render-return": ["error"]
     },
     "globals": {
-        "document": false,
-        "setTimeout": false,
-        "setInterval": false,
         "clearTimeout": false,
-        "SOCKET_URL": false
+        "document": false,
+        "setInterval": false,
+        "setTimeout": false,
+        "SOCKET_URL": false,
+        "window": false
     }
 }

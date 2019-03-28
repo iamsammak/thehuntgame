@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import WelcomeHeader from './welcomeHeader';
-import { SubmitButton } from './buttonContants';
+import { Button } from './buttons';
 
 const Table = styled.div`
   display: flex;
@@ -60,9 +60,11 @@ const DownIcon = styled(FontAwesomeIcon).attrs({
   padding: 0 2em;
 `;
 
-const EnterButton = styled(SubmitButton)`
+const EnterButton = styled(Button)`
   height: 60px;
   width: 300px;
+  color: white;
+  font-size: 30px;
   border-radius: 0 0 25px 25px;
   margin-top: 0;
   background-color: #d6928b;

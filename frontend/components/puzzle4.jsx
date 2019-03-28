@@ -1,14 +1,50 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { gray, lightBlue, darkBlue } from '../constants';
 import { Narration, SpeechBubbleSpacing } from '../wrappers';
 import { isSolved, getCurrentStage } from '../helpers';
-import { KeypadContainer, Button, SubmitButton, ClearButton } from './buttonContants';
+import { Button } from './buttons';
 import SpeechBubble from './speechBubble';
+
+const KeypadContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
 
 const SafeImage = styled.img`
   height: 75px;
   width: 65px;
+`;
+
+const KeypadButton = styled(Button)`
+  height: 88px;
+  width: 88px;
+  background-color: ${props => {
+    if (props.disabled) {
+      return gray;
+    } else if (props.clicked) {
+      return darkBlue;
+    }
+    return lightBlue;
+  }}
+`;
+
+const ClearButton = styled(Button)`
+  height: 88px;
+  width: 88px;
+  color: white;
+  font-size: 30px;
+  background-color: #d2a494;
+`;
+
+const SubmitButton = styled(Button)`
+  color: white;
+  font-size: 30px;
+  height: 88px;
+  width: 88px;
+  background-color: ${props => (props.clicked ? '#9d0e3d' : '#ff654d')};
 `;
 
 class Puzzle4 extends React.Component {
@@ -89,19 +125,19 @@ class Puzzle4 extends React.Component {
             </SpeechBubble>
         }
         <KeypadContainer>
-          <Button click={this.state.value[0]} onClick={this.handleClick(0)} disabled={solved} ><SafeImage src={images[0].src} /></Button>
-          <Button click={this.state.value[1]} onClick={this.handleClick(1)} disabled={solved} ><SafeImage src={images[1].src} /></Button>
-          <Button click={this.state.value[2]} onClick={this.handleClick(2)} disabled={solved} ><SafeImage src={images[2].src} /></Button>
-          <Button click={this.state.value[3]} onClick={this.handleClick(3)} disabled={solved} ><SafeImage src={images[3].src} /></Button>
-          <Button click={this.state.value[4]} onClick={this.handleClick(4)} disabled={solved} ><SafeImage src={images[4].src} /></Button>
-          <Button click={this.state.value[5]} onClick={this.handleClick(5)} disabled={puzzleBSolved || solved}><SafeImage src={images[5].src} /></Button>
-          <Button click={this.state.value[6]} onClick={this.handleClick(6)} disabled={solved} ><SafeImage src={images[6].src} /></Button>
-          <Button click={this.state.value[7]} onClick={this.handleClick(7)} disabled={solved} ><SafeImage src={images[7].src} /></Button>
-          <Button click={this.state.value[8]} onClick={this.handleClick(8)} disabled={solved} ><SafeImage src={images[8].src} /></Button>
+          <KeypadButton clicked={this.state.value[0]} onClick={this.handleClick(0)} disabled={solved}><SafeImage src={images[0].src} /></KeypadButton>
+          <KeypadButton clicked={this.state.value[1]} onClick={this.handleClick(1)} disabled={solved}><SafeImage src={images[1].src} /></KeypadButton>
+          <KeypadButton clicked={this.state.value[2]} onClick={this.handleClick(2)} disabled={solved}><SafeImage src={images[2].src} /></KeypadButton>
+          <KeypadButton clicked={this.state.value[3]} onClick={this.handleClick(3)} disabled={solved}><SafeImage src={images[3].src} /></KeypadButton>
+          <KeypadButton clicked={this.state.value[4]} onClick={this.handleClick(4)} disabled={solved}><SafeImage src={images[4].src} /></KeypadButton>
+          <KeypadButton clicked={this.state.value[5]} onClick={this.handleClick(5)} disabled={puzzleBSolved || solved}><SafeImage src={images[5].src} /></KeypadButton>
+          <KeypadButton clicked={this.state.value[6]} onClick={this.handleClick(6)} disabled={solved}><SafeImage src={images[6].src} /></KeypadButton>
+          <KeypadButton clicked={this.state.value[7]} onClick={this.handleClick(7)} disabled={solved}><SafeImage src={images[7].src} /></KeypadButton>
+          <KeypadButton clicked={this.state.value[8]} onClick={this.handleClick(8)} disabled={solved}><SafeImage src={images[8].src} /></KeypadButton>
 
-          <ClearButton onClick={this.clearValue} >Clear</ClearButton>
-          <Button click={this.state.value[9]} onClick={this.handleClick(9)} disabled={solved} ><SafeImage src={images[9].src} /></Button>
-          <SubmitButton onClick={this.submitAnswer} >Enter</SubmitButton>
+          <ClearButton onClick={this.clearValue}>Clear</ClearButton>
+          <KeypadButton clicked={this.state.value[9]} onClick={this.handleClick(9)} disabled={solved} ><SafeImage src={images[9].src} /></KeypadButton>
+          <SubmitButton onClick={this.submitAnswer}>Enter</SubmitButton>
         </KeypadContainer>
         {!solved && !error && correct !== false && <SpeechBubbleSpacing lines={2} />}
         {
