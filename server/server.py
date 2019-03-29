@@ -26,7 +26,7 @@ ANSWERS = {
   'B': [0, 2, 0],
   '1': 'getaway',
   '2': 'secret',
-  '3': 'atgpsmjor',
+  '3': 'honeymoon',
   '4': [False, False, True, True, False, False, False, False, True, False],
   '5': 'devotion',
   '6': '',
