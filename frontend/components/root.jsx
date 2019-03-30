@@ -19,6 +19,7 @@ import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons/faChevron
 import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons/faChevronCircleRight';
 import { faChevronCircleUp } from '@fortawesome/free-solid-svg-icons/faChevronCircleUp';
 import { faChevronCircleDown } from '@fortawesome/free-solid-svg-icons/faChevronCircleDown';
+import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
 
 import App from './app';
 
@@ -39,6 +40,7 @@ library.add(
   faChevronCircleRight,
   faChevronCircleUp,
   faChevronCircleDown,
+  faHeart,
 );
 
 const AppContainer = styled.div`
