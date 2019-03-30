@@ -162,16 +162,6 @@ def parse_cookies(cookie_string):
 @sio.on('connect')
 def connect(sid, environ):
   print('connect', sid)
-  cookie_string = environ.get('HTTP_COOKIE')
-  
-  if cookie_string:
-    cookies = parse_cookies(cookie_string)
-    if 'io' in cookies and 'table' in cookies:
-      # potentially an old client reconnecting, use the new sid in this case
-      # sid in cookies is the old sid, replace
-      old_sid = cookies['io']
-      set_table(sid, cookies['table'])
-      remove_client(old_sid)
 
 @sio.on('hint_shown')
 def handle_hint(sid, data):
