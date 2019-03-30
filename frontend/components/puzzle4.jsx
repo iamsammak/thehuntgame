@@ -18,6 +18,10 @@ const SafeImage = styled.img`
   width: 65px;
 `;
 
+const Character = styled.div`
+  font-size: 2em;
+`;
+
 const KeypadButton = styled(Button)`
   height: 88px;
   width: 88px;
@@ -58,6 +62,7 @@ class Puzzle4 extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.clearValue = this.clearValue.bind(this);
     this.submitAnswer = this.submitAnswer.bind(this);
+    this.renderButton = this.renderButton.bind(this);
   }
 
   handleClick(idx) {
@@ -93,9 +98,9 @@ class Puzzle4 extends React.Component {
     this.clearValue();
   }
 
-  render() {
-    const { correct, gameState, personId } = this.props;
-    const { error } = this.state;
+  renderButton(index) {
+    const { value } = this.state;
+    const { gameState } = this.props;
     const solved = isSolved(gameState, '4');
     const puzzleBSolved = isSolved(gameState, 'B');
 
@@ -111,6 +116,40 @@ class Puzzle4 extends React.Component {
       { src: 'images/puzzle4/green_onion.png' },
       { src: 'images/puzzle4/flower.png' },
     ];
+    const characters = [
+      '水',
+      '狗',
+      '菜',
+      '熟',
+      '火',
+      '樹',
+      '魚',
+      '橙',
+      '蔥',
+      '花',
+    ];
+
+    return (
+      <KeypadButton
+        clicked={value[index]}
+        onClick={this.handleClick(index)}
+        disabled={solved}
+        key={index}
+      >
+        {
+          puzzleBSolved ?
+            <Character>{characters[index]}</Character> :
+            <SafeImage src={images[index].src} />
+        }
+      </KeypadButton>
+    );
+  }
+
+  render() {
+    const { correct, gameState, personId } = this.props;
+    const { error } = this.state;
+    const solved = isSolved(gameState, '4');
+    const puzzleBSolved = isSolved(gameState, 'B');
 
     return (
       <div>
@@ -121,22 +160,13 @@ class Puzzle4 extends React.Component {
         {
           puzzleBSolved &&
             <SpeechBubble personId={personId}>
-              Ah, you found my magnet. It&apos;s supposed to help us unlock this safe. Let&apos;s see...yup--it looks like the magnet disabled one of the buttons.
+              Ah, you found my magnet. It&apos;s supposed to help us unlock this safe. Let&apos;s see...looks like it converts the pictures into Chinese characters. Interesting...
             </SpeechBubble>
         }
         <KeypadContainer>
-          <KeypadButton clicked={this.state.value[0]} onClick={this.handleClick(0)} disabled={solved}><SafeImage src={images[0].src} /></KeypadButton>
-          <KeypadButton clicked={this.state.value[1]} onClick={this.handleClick(1)} disabled={solved}><SafeImage src={images[1].src} /></KeypadButton>
-          <KeypadButton clicked={this.state.value[2]} onClick={this.handleClick(2)} disabled={solved}><SafeImage src={images[2].src} /></KeypadButton>
-          <KeypadButton clicked={this.state.value[3]} onClick={this.handleClick(3)} disabled={solved}><SafeImage src={images[3].src} /></KeypadButton>
-          <KeypadButton clicked={this.state.value[4]} onClick={this.handleClick(4)} disabled={solved}><SafeImage src={images[4].src} /></KeypadButton>
-          <KeypadButton clicked={this.state.value[5]} onClick={this.handleClick(5)} disabled={puzzleBSolved || solved}><SafeImage src={images[5].src} /></KeypadButton>
-          <KeypadButton clicked={this.state.value[6]} onClick={this.handleClick(6)} disabled={solved}><SafeImage src={images[6].src} /></KeypadButton>
-          <KeypadButton clicked={this.state.value[7]} onClick={this.handleClick(7)} disabled={solved}><SafeImage src={images[7].src} /></KeypadButton>
-          <KeypadButton clicked={this.state.value[8]} onClick={this.handleClick(8)} disabled={solved}><SafeImage src={images[8].src} /></KeypadButton>
-
+          {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(this.renderButton)}
           <ClearButton onClick={this.clearValue}>Clear</ClearButton>
-          <KeypadButton clicked={this.state.value[9]} onClick={this.handleClick(9)} disabled={solved} ><SafeImage src={images[9].src} /></KeypadButton>
+          {this.renderButton(9)}
           <SubmitButton onClick={this.submitAnswer}>Enter</SubmitButton>
         </KeypadContainer>
         {!solved && !error && correct !== false && <SpeechBubbleSpacing lines={2} />}
