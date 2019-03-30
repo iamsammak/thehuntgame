@@ -98,7 +98,7 @@ class PuzzleA extends React.Component {
     return (
       <div>
         <SpeechBubble personId={personId}>
-          Did you know that Chris and his dad pretty much made the cornhole boards themselves? He wants me to jot down some of the details for future reference. Can you help me out?
+          Did you know that Chris and his dad pretty much made the cornhole boards themselves? Christine loves them and wants me to jot down some of their details for future reference. Can you help me out?
         </SpeechBubble>
         {
           !solved &&
@@ -134,7 +134,7 @@ class PuzzleA extends React.Component {
             <div>
               <Narration>You got all the details right!</Narration>
               <SpeechBubble personId={personId}>
-                Awesome, thanks! Chris told me something about a Caesar cipher too. Not sure what that has to do with anything though.
+                Awesome, thanks! Christine also told me something about a Caesar cipher. Not sure what that has to do with anything though.
               </SpeechBubble>
             </div>
         }
