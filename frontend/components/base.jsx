@@ -60,7 +60,7 @@ class Base extends React.Component {
         <div>
           <Narration>Erica seems concerned around the tea favor table.</Narration>
           <SpeechBubble personId={personId}>
-            Let me think...I was setting up these bowls and then filling them with tea. What did I do next? All I can remember is what Chris kept saying about his tea favor idea...
+            Let me think...I was setting up these bowls and then filling them with tea. What did I do next?
           </SpeechBubble>
         </div>
       );
