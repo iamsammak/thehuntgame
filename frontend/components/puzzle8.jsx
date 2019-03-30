@@ -3,10 +3,15 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Narration, LgSpacing, SpeechBubbleSpacing } from '../wrappers';
-import { smSpacing } from '../constants';
+import { smSpacing, white } from '../constants';
 import SpeechBubble from './speechBubble';
 
 const START_POSITION = [7, 8];
+const ROOM1_COLOR = '#E69288';
+const ROOM2_COLOR = '#FEB68E';
+const ROOM3_COLOR = '#FED797';
+const ROOM4_COLOR = '#999999';
+const ROOM5_COLOR = '#F1CDB0';
 
 const MazeContainer = styled.div`
   display: flex;
@@ -37,6 +42,8 @@ const Cell = styled.div`
   width: 150px;
   box-sizing: border-box;
   border: 1px solid black;
+  background-color: ${props => (props.color ? props.color : white)};
+  opacity: ${props => props.opacity || 1};
   ${props => (props.up ? 'border-top-width: 3px;' : null)}
   ${props => (props.left ? 'border-left-width: 3px;' : null)}
   ${props => (props.right ? 'border-right-width: 3px;' : null)}
@@ -45,121 +52,121 @@ const Cell = styled.div`
 
 const maze = [
   [
-    ['right'],
-    ['left', 'up', 'deviate'],
-    ['up', 'deviate'],
-    ['right', 'up', 'deviate'],
-    ['left'],
-    [],
-    ['right'],
-    ['left', 'up', 'deviate'],
-    ['up', 'deviate'],
-    ['right', 'up', 'deviate'],
-    ['left'],
+    {right: true},
+    {left: true, up: true, deviate: true, color: ROOM5_COLOR},
+    {up: true, deviate: true, color: ROOM5_COLOR},
+    {right: true, up: true, deviate: true, color: ROOM5_COLOR},
+    {left: true},
+    {},
+    {right: true},
+    {left: true, up: true, deviate: true, color: ROOM2_COLOR},
+    {up: true, deviate: true, color: ROOM2_COLOR},
+    {right: true, up: true, deviate: true, color: ROOM2_COLOR},
+    {left: true},
   ],
   [
-    ['right', 'down'],
-    ['left', 'deviate'],
-    ['deviate'],
-    ['right', 'deviate'],
-    ['left', 'down'],
-    ['down'],
-    ['right', 'down'],
-    ['left', 'deviate'],
-    ['deviate'],
-    ['right', 'deviate'],
-    ['left'],
+    {right: true, down: true},
+    {left: true, deviate: true, color: ROOM5_COLOR},
+    {deviate: true, color: ROOM5_COLOR},
+    {right: true, deviate: true, color: ROOM5_COLOR},
+    {left: true, down: true},
+    {down: true},
+    {right: true, down: true},
+    {left: true, deviate: true, color: ROOM2_COLOR},
+    {deviate: true, color: ROOM2_COLOR},
+    {right: true, deviate: true, color: ROOM2_COLOR},
+    {left: true},
   ],
   [
-    ['left', 'down', 'up', 'finish'],
-    ['checkpoint'],
-    [],
-    ['right'],
-    ['left', 'up', 'deviate'],
-    ['up', 'deviate'],
-    ['up', 'deviate'],
-    ['deviate'],
-    ['deviate'],
-    ['right', 'down', 'deviate'],
-    ['left'],
+    {left: true, down: true, up: true, finish: true, color: ROOM5_COLOR},
+    {checkpoint: true, color: ROOM5_COLOR},
+    {color: ROOM5_COLOR},
+    {right: true, color: ROOM5_COLOR},
+    {left: true, up: true, deviate: true, color: ROOM2_COLOR},
+    {up: true, deviate: true, color: ROOM2_COLOR},
+    {up: true, deviate: true, color: ROOM2_COLOR},
+    {deviate: true, color: ROOM2_COLOR},
+    {deviate: true, color: ROOM2_COLOR},
+    {right: true, down: true, deviate: true, color: ROOM2_COLOR},
+    {left: true, color: ROOM2_COLOR},
   ],
   [
-    ['right', 'up'],
-    ['left'],
-    [],
-    ['right'],
-    ['left', 'down'],
-    [],
-    ['down'],
-    ['down'],
-    ['right'],
-    ['left', 'up'],
-    [],
+    {right: true, up: true},
+    {left: true, color: ROOM5_COLOR},
+    {color: ROOM5_COLOR},
+    {right: true, color: ROOM5_COLOR},
+    {left: true, down: true, deviate: true, color: ROOM2_COLOR},
+    {color: ROOM2_COLOR},
+    {down: true, color: ROOM2_COLOR},
+    {down: true, color: ROOM2_COLOR},
+    {right: true, color: ROOM2_COLOR},
+    {left: true, up: true},
+    {},
   ],
   [
-    ['right', 'down'],
-    ['left', 'down'],
-    ['down'],
-    ['right'],
-    ['right', 'left', 'down', 'up'],
-    ['right', 'left', 'checkpoint'],
-    ['left', 'down', 'up'],
-    ['right', 'up'],
-    ['right', 'left', 'checkpoint'],
-    ['left', 'down'],
-    ['down'],
+    {right: true, down: true},
+    {left: true, down: true, color: ROOM5_COLOR},
+    {down: true, color: ROOM5_COLOR},
+    {right: true, checkpoint: true, color: ROOM5_COLOR},
+    {left: true, up: true, color: ROOM3_COLOR},
+    {checkpoint: true, color: ROOM3_COLOR},
+    {right: true, up: true, deviate: true, color: ROOM3_COLOR},
+    {right: true, left: true, up: true},
+    {right: true, left: true, checkpoint: true, color: ROOM1_COLOR},
+    {left: true, down: true},
+    {down: true},
   ],
   [
-    ['left', 'up', 'deviate'],
-    ['up', 'deviate'],
-    ['right', 'up', 'deviate'],
-    ['right', 'left', 'checkpoint'],
-    ['left', 'up'],
-    [],
-    ['right', 'up', 'deviate'],
-    ['right', 'left'],
-    ['left'],
-    ['up', 'deviate'],
-    ['right', 'up', 'deviate'],
+    {left: true, up: true, deviate: true, color: ROOM4_COLOR},
+    {up: true, deviate: true, color: ROOM4_COLOR},
+    {right: true, up: true, deviate: true, color: ROOM4_COLOR},
+    {left: true, color: ROOM3_COLOR},
+    {color: ROOM3_COLOR},
+    {color: ROOM3_COLOR},
+    {right: true, deviate: true, color: ROOM3_COLOR},
+    {right: true, left: true},
+    {left: true, color: ROOM1_COLOR},
+    {up: true, deviate: true, color: ROOM1_COLOR},
+    {right: true, up: true, deviate: true, color: ROOM1_COLOR},
   ],
   [
-    ['left', 'deviate'],
-    ['deviate'],
-    ['deviate'],
-    [],
-    [],
-    [],
-    ['right', 'deviate'],
-    ['right', 'left'],
-    ['left'],
-    ['deviate'],
-    ['right', 'deviate'],
+    {left: true, deviate: true, color: ROOM4_COLOR},
+    {deviate: true, color: ROOM4_COLOR},
+    {deviate: true, color: ROOM4_COLOR},
+    {deviate: true, color: ROOM3_COLOR},
+    {deviate: true, color: ROOM3_COLOR},
+    {deviate: true, color: ROOM3_COLOR},
+    {right: true, deviate: true, color: ROOM3_COLOR},
+    {right: true, left: true},
+    {left: true, color: ROOM1_COLOR},
+    {deviate: true, color: ROOM1_COLOR},
+    {right: true, deviate: true, color: ROOM1_COLOR},
   ],
   [
-    ['left', 'deviate'],
-    ['deviate'],
-    ['right', 'deviate'],
-    ['left', 'deviate'],
-    ['deviate'],
-    ['deviate'],
-    ['right', 'deviate'],
-    ['right', 'left'],
-    ['left', 'down', 'start'],
-    ['down', 'deviate'],
-    ['right', 'down', 'deviate'],
+    {left: true, deviate: true, color: ROOM4_COLOR},
+    {deviate: true, color: ROOM4_COLOR},
+    {right: true, deviate: true, color: ROOM4_COLOR},
+    {left: true, deviate: true, color: ROOM3_COLOR},
+    {deviate: true, color: ROOM3_COLOR},
+    {deviate: true, color: ROOM3_COLOR},
+    {right: true, deviate: true, color: ROOM3_COLOR},
+    {right: true, left: true},
+    {left: true, down: true, start: true, color: ROOM1_COLOR},
+    {down: true, deviate: true, color: ROOM1_COLOR},
+    {right: true, down: true, deviate: true, color: ROOM1_COLOR},
   ],
   [
-    ['left', 'down', 'deviate'],
-    ['down', 'deviate'],
-    ['right', 'down', 'deviate'],
-    ['left', 'down', 'deviate'],
-    ['down', 'deviate'],
-    ['down', 'deviate'],
-    ['right', 'down', 'deviate'],
-    ['left'],
-    ['up'],
-    ['up'],
-    ['up'],
+    {left: true, down: true, deviate: true, color: ROOM4_COLOR},
+    {down: true, deviate: true, color: ROOM4_COLOR},
+    {right: true, down: true, deviate: true, color: ROOM4_COLOR},
+    {left: true, down: true, deviate: true, color: ROOM3_COLOR},
+    {down: true, deviate: true, color: ROOM3_COLOR},
+    {down: true, deviate: true, color: ROOM3_COLOR},
+    {right: true, down: true, deviate: true, color: ROOM3_COLOR},
+    {left: true},
+    {up: true},
+    {up: true},
+    {up: true},
   ],
 ];
 
@@ -193,12 +200,12 @@ class Puzzle8 extends React.Component {
         const [x, y] = position;
 
         // New position has caused player to deviate, set that too
-        if (maze[x][y].includes('deviate')) {
+        if (maze[x][y].deviate) {
           deviate = true;
         }
 
         // Checkpoint is coming up
-        if (maze[x][y].includes('checkpoint')) {
+        if (maze[x][y].checkpoint) {
           if (deviate) {
             // Player has deviated, reset them to last checkpoint
             position = START_POSITION;
@@ -210,7 +217,7 @@ class Puzzle8 extends React.Component {
           }
         }
 
-        if (maze[x][y].includes('finish')) {
+        if (maze[x][y].finish) {
           // Give them some time to realize they finished.
           setTimeout(() => {
             const { send } = this.props;
@@ -231,20 +238,18 @@ class Puzzle8 extends React.Component {
     const { position } = this.state;
     const [x, y] = position;
 
-    return maze[x][y].includes(prop);
+    return !!maze[x][y][prop];
   }
 
   renderCell() {
+    const { position } = this.state;
+    const [x, y] = position;
+    const opacity = (x + y) % 2 === 0 ? 0.9 : 1;
+
     return (
-      <Cell
-        up={this.hasProp('up')}
-        left={this.hasProp('left')}
-        right={this.hasProp('right')}
-        down={this.hasProp('down')}
-        deviate={this.hasProp('deviate')}
-      >
+      <Cell {...maze[x][y]} opacity={opacity}>
         {this.hasProp('start') && <FontAwesomeIcon icon="car-side" size="3x" />}
-        {this.hasProp('finish') && 'Finish!'}
+        {this.hasProp('finish') && <FontAwesomeIcon icon="heart" size="3x" />}
       </Cell>
     );
   }
