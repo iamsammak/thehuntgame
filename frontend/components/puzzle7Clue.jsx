@@ -27,7 +27,7 @@ class Puzzle7Clue extends React.Component {
       clue = (
         <List>
           <li>The sum of all the &apos;on&apos; switch numbers is less than 30. </li>
-          <li>Switch 3 should be on.</li>
+          <li>Switch 4 should be on.</li>
         </List>
       );
       break;
@@ -43,7 +43,7 @@ class Puzzle7Clue extends React.Component {
       clue = (
         <List>
           <li>If today&apos;s date is an even number, then switch 7 should be on.</li>
-          <li>Tim&apos;s second clue should read &apos;4&apos; instead of &apos;3&apos;.</li>
+          <li>Mary Ann&apos;s second clue should read &apos;on&apos; instead of &apos;off&apos;.</li>
         </List>
       );
       break;
@@ -67,7 +67,7 @@ class Puzzle7Clue extends React.Component {
       clue = (
         <List>
           <li>Tim&apos;s second clue should read &apos;off&apos; instead of &apos;on&apos;.</li>
-          <li>The switch whose number equals the number of bridesmaids and groomsmen should be turned on.</li>
+          <li>The switch whose number equals the number of bridesmaids and groomsmen should be turned off. </li>
         </List>
       );
       break;

@@ -82,7 +82,9 @@ class Hint extends React.Component {
     case '3': hintText = "Erica's clue has nine numbers. Aren't there nine ingredients at the tea table? What if you take a letter from each ingredient?"; break;
     case '4': hintText = (
       <div>
-        My Chinese name? Chris keeps on mispronouncing it! He should use an online dictionary like <a href="https://www.cantoneseclass101.com/cantonese-dictionary/">this one</a> to figure out how to pronounce words.
+        My Chinese name? Chris mispronounces it all the time! He should use an online dictionary like <a href="https://www.cantoneseclass101.com/cantonese-dictionary/">this one</a> to figure out how to pronounce words.
+        <a href="https://www.cantoneseclass101.com/cantonese-dictionary/"></a>
+
       </div>
     ); break;
     case '5': hintText = "The paper looks oddly familiar. Did we take a picture with it at the photobooth?"; break;
