@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const AnswerAwareInput = styled.input`
+  // prevents iOS from zooming in on inputs on focus
+  font-size: 100%;
   border-color: ${props => (props.correct === false ? 'red' : '#f8f8f8t')};
   text-color: ${props => (props.correct === false ? 'red' : 'black')};
   outline: none;
