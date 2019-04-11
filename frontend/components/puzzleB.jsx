@@ -102,7 +102,7 @@ class PuzzleB extends React.Component {
             <div>
               <Narration>You got all the items right!</Narration>
               <SpeechBubble personId={personId}>
-                Thanks so much for bringing those to the car! Hm? You found a strong magnet in the trunk? Can you hold onto it for now? I think Matt was holding onto it for some reason.
+                Thanks so much for bringing those to the car! Hm? You found a strong magnet in the trunk? Can you hold onto it for now?
               </SpeechBubble>
               <Narration>You found a strong magnet.</Narration>
             </div>
