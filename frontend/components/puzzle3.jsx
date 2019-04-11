@@ -94,7 +94,7 @@ class Puzzle3 extends React.Component {
         {
           solved ? (
             <SpeechBubble personId={personId}>
-              Ah, I guess they&apos;re looking forward to their honeymoon as much as they are looking forward to starting a tea favor business! Everything&apos;s in order here now, but it doesn&apos;t look like the key is here.
+              I guess they&apos;re looking forward to their honeymoon as much as they&apos;re looking forward to starting a tea favor business! Everything&apos;s in order here now, but it doesn&apos;t look like the key is here.
             </SpeechBubble>
           ) : (
             <SpeechBubbleSpacing lines={2} />
