@@ -3,16 +3,11 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Narration, LgSpacing, SpeechBubbleSpacing } from '../wrappers';
-import { smSpacing, white } from '../constants';
+import { smSpacing, white, barelyGray } from '../constants';
 import SpeechBubble from './speechBubble';
 
 const CELL_SIZE = 150;
 const START_POSITION = [7, 8];
-const ROOM1_COLOR = '#E69288';
-const ROOM2_COLOR = '#FEB68E';
-const ROOM3_COLOR = '#FED797';
-const ROOM4_COLOR = '#999999';
-const ROOM5_COLOR = '#F1CDB0';
 
 const MazeContainer = styled.div`
   display: flex;
@@ -44,8 +39,7 @@ const Cell = styled.div`
   width: ${CELL_SIZE}px;
   box-sizing: border-box;
   border: 1px solid black;
-  background-color: ${props => (props.color ? props.color : white)};
-  opacity: ${props => props.opacity || 1};
+  background-color: ${props => props.color};
   ${props => (props.up ? 'border-top-width: 3px;' : null)}
   ${props => (props.left ? 'border-left-width: 3px;' : null)}
   ${props => (props.right ? 'border-right-width: 3px;' : null)}
@@ -76,116 +70,116 @@ const Door = styled.img.attrs(props => ({
 const maze = [
   [
     { right: true },
-    { left: true, up: true, deviate: true, color: ROOM5_COLOR },
-    { up: true, deviate: true, color: ROOM5_COLOR },
-    { right: true, up: true, deviate: true, color: ROOM5_COLOR },
+    { left: true, up: true, deviate: true },
+    { up: true, deviate: true },
+    { right: true, up: true, deviate: true },
     { left: true },
     {},
     { right: true },
-    { left: true, up: true, deviate: true, color: ROOM2_COLOR },
-    { up: true, deviate: true, color: ROOM2_COLOR },
-    { right: true, up: true, deviate: true, color: ROOM2_COLOR },
+    { left: true, up: true, deviate: true },
+    { up: true, deviate: true },
+    { right: true, up: true, deviate: true },
     { left: true },
   ],
   [
     { right: true, down: true },
-    { left: true, deviate: true, color: ROOM5_COLOR },
-    { deviate: true, color: ROOM5_COLOR },
-    { right: true, deviate: true, color: ROOM5_COLOR },
+    { left: true, deviate: true },
+    { deviate: true },
+    { right: true, deviate: true },
     { left: true, down: true },
     { down: true },
     { right: true, down: true },
-    { left: true, deviate: true, color: ROOM2_COLOR },
-    { deviate: true, color: ROOM2_COLOR },
-    { right: true, deviate: true, color: ROOM2_COLOR },
+    { left: true, deviate: true },
+    { deviate: true },
+    { right: true, deviate: true },
     { left: true },
   ],
   [
-    { left: true, down: true, up: true, finish: true, color: ROOM5_COLOR },
-    { checkpoint: true, color: ROOM5_COLOR },
-    { color: ROOM5_COLOR },
-    { right: true, color: ROOM5_COLOR },
-    { left: true, up: true, deviate: true, door: { open: false, left: true }, color: ROOM2_COLOR },
-    { up: true, deviate: true, color: ROOM2_COLOR },
-    { up: true, deviate: true, color: ROOM2_COLOR },
-    { deviate: true, color: ROOM2_COLOR },
-    { deviate: true, color: ROOM2_COLOR },
-    { right: true, down: true, deviate: true, color: ROOM2_COLOR },
-    { left: true, color: ROOM2_COLOR },
+    { left: true, down: true, up: true, finish: true },
+    { checkpoint: true },
+    {},
+    { right: true },
+    { left: true, up: true, deviate: true, door: { open: false, left: true } },
+    { up: true, deviate: true },
+    { up: true, deviate: true },
+    { deviate: true },
+    { deviate: true },
+    { right: true, down: true, deviate: true },
+    { left: true },
   ],
   [
     { right: true, up: true },
-    { left: true, color: ROOM5_COLOR },
-    { color: ROOM5_COLOR },
-    { right: true, color: ROOM5_COLOR },
-    { left: true, down: true, deviate: true, checkpoint: true, door: { open: false, left: true }, color: ROOM2_COLOR },
-    { color: ROOM2_COLOR },
-    { down: true, color: ROOM2_COLOR },
-    { down: true, color: ROOM2_COLOR },
-    { right: true, door: { open: true, down: true }, color: ROOM2_COLOR },
+    { left: true },
+    {},
+    { right: true },
+    { left: true, down: true, deviate: true, door: { open: false, left: true } },
+    {},
+    { down: true },
+    { down: true },
+    { right: true, checkpoint: true, door: { open: true, down: true } },
     { left: true, up: true },
     {},
   ],
   [
     { right: true, down: true },
-    { left: true, down: true, color: ROOM5_COLOR },
-    { down: true, color: ROOM5_COLOR },
-    { right: true, checkpoint: true, door: { open: true, down: true }, color: ROOM5_COLOR },
-    { left: true, up: true, color: ROOM3_COLOR },
-    { checkpoint: true, door: { open: true, up: true }, color: ROOM3_COLOR },
-    { right: true, up: true, deviate: true, color: ROOM3_COLOR },
+    { left: true, down: true },
+    { down: true },
+    { right: true, checkpoint: true, door: { open: true, down: true } },
+    { left: true, up: true },
+    { checkpoint: true, door: { open: true, up: true } },
+    { right: true, up: true, deviate: true },
     { right: true, left: true, up: true },
-    { right: true, left: true, color: ROOM1_COLOR },
+    { right: true, left: true },
     { left: true, down: true },
     { down: true },
   ],
   [
-    { left: true, up: true, deviate: true, color: ROOM4_COLOR },
-    { up: true, deviate: true, color: ROOM4_COLOR },
-    { right: true, up: true, deviate: true, color: ROOM4_COLOR },
-    { left: true, color: ROOM3_COLOR },
-    { color: ROOM3_COLOR },
-    { color: ROOM3_COLOR },
-    { right: true, deviate: true, color: ROOM3_COLOR },
+    { left: true, up: true, deviate: true },
+    { up: true, deviate: true },
+    { right: true, up: true, deviate: true },
+    { left: true },
+    {},
+    {},
+    { right: true, deviate: true },
     { right: true, left: true },
-    { left: true, color: ROOM1_COLOR },
-    { up: true, deviate: true, color: ROOM1_COLOR },
-    { right: true, up: true, deviate: true, color: ROOM1_COLOR },
+    { left: true },
+    { up: true, deviate: true },
+    { right: true, up: true, deviate: true },
   ],
   [
-    { left: true, deviate: true, color: ROOM4_COLOR },
-    { deviate: true, color: ROOM4_COLOR },
-    { deviate: true, door: { open: true, right: true }, color: ROOM4_COLOR },
-    { deviate: true, color: ROOM3_COLOR },
-    { deviate: true, color: ROOM3_COLOR },
-    { deviate: true, color: ROOM3_COLOR },
-    { right: true, deviate: true, color: ROOM3_COLOR },
+    { left: true, deviate: true },
+    { deviate: true },
+    { deviate: true, door: { open: true, right: true } },
+    { deviate: true },
+    { deviate: true },
+    { deviate: true },
+    { right: true, deviate: true },
     { right: true, left: true },
-    { left: true, color: ROOM1_COLOR },
-    { deviate: true, color: ROOM1_COLOR },
-    { right: true, deviate: true, color: ROOM1_COLOR },
+    { left: true },
+    { deviate: true },
+    { right: true, deviate: true },
   ],
   [
-    { left: true, deviate: true, color: ROOM4_COLOR },
-    { deviate: true, color: ROOM4_COLOR },
-    { right: true, deviate: true, color: ROOM4_COLOR },
-    { left: true, deviate: true, color: ROOM3_COLOR },
-    { deviate: true, color: ROOM3_COLOR },
-    { deviate: true, color: ROOM3_COLOR },
-    { right: true, deviate: true, color: ROOM3_COLOR },
+    { left: true, deviate: true },
+    { deviate: true },
+    { right: true, deviate: true },
+    { left: true, deviate: true },
+    { deviate: true },
+    { deviate: true },
+    { right: true, deviate: true },
     { right: true, left: true },
-    { left: true, down: true, start: true, color: ROOM1_COLOR },
-    { down: true, deviate: true, color: ROOM1_COLOR },
-    { right: true, down: true, deviate: true, color: ROOM1_COLOR },
+    { left: true, down: true, start: true },
+    { down: true, deviate: true },
+    { right: true, down: true, deviate: true },
   ],
   [
-    { left: true, down: true, deviate: true, color: ROOM4_COLOR },
-    { down: true, deviate: true, color: ROOM4_COLOR },
-    { right: true, down: true, deviate: true, color: ROOM4_COLOR },
-    { left: true, down: true, deviate: true, color: ROOM3_COLOR },
-    { down: true, deviate: true, color: ROOM3_COLOR },
-    { down: true, deviate: true, color: ROOM3_COLOR },
-    { right: true, down: true, deviate: true, color: ROOM3_COLOR },
+    { left: true, down: true, deviate: true },
+    { down: true, deviate: true },
+    { right: true, down: true, deviate: true },
+    { left: true, down: true, deviate: true },
+    { down: true, deviate: true },
+    { down: true, deviate: true },
+    { right: true, down: true, deviate: true },
     { left: true },
     { up: true },
     { up: true },
@@ -267,10 +261,13 @@ class Puzzle8 extends React.Component {
   renderCell() {
     const { position } = this.state;
     const [x, y] = position;
-    const opacity = (x + y) % 2 === 0 ? 0.9 : 1;
+    const options =
+      (x + y) % 2 === 0 ?
+        { color: barelyGray } :
+        { color: white };
 
     return (
-      <Cell {...maze[x][y]} opacity={opacity}>
+      <Cell {...maze[x][y]} {...options}>
         {this.hasProp('start') && <FontAwesomeIcon icon="car-side" size="3x" />}
         {this.hasProp('finish') && <FontAwesomeIcon icon="heart" size="3x" />}
         {this.hasProp('door') && <Door {...maze[x][y]['door']} />}
