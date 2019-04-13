@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { PEOPLE } from '../helpers';
-import { sidecar, tamarind, whiteLilac } from '../constants';
+import { tamarind, whiteLilac } from '../constants';
 import WelcomeHeader from './welcomeHeader';
+import { HintIcon } from './hint';
 
 const Table = styled.div`
   display: flex;
@@ -48,24 +48,12 @@ const Container = styled.div`
   border-left: 10px solid ${whiteLilac};
 `;
 
-const Favorite = styled.div`
+const HintContainer = styled.div`
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 0px;
-  right: 20px;
-  width: 22px;
-  height: 35px;
-  background-color: ${tamarind};
-  clip-path: polygon(100% 0%, 100% 70%, 50% 90%, 50% 90%, 0 70%, 0 0);
-`;
-
-const Star = styled(FontAwesomeIcon).attrs({
-  icon: 'star',
-})`
-  color: ${sidecar};
-  font-size: 15px;
-  padding: 5px;
+  bottom: 0.5em;
+  right: 0.5em;
 `;
 
 export default class Main extends React.Component {
@@ -75,26 +63,26 @@ export default class Main extends React.Component {
   }
 
   renderPerson(item) {
-    let ribbon;
-    if (item.special) {
-      ribbon = <Favorite><Star /></Favorite>;
-    }
-
     return (
       <StyleLink to={item.to} key={item.key}>
         <Container>
           <Person src={item.src} />
           <Name>{item.name}</Name>
-          {ribbon}
+          {
+            item.hint && (
+              <HintContainer>
+                <HintIcon />
+              </HintContainer>
+            )
+          }
         </Container>
       </StyleLink>
     );
   }
 
   render() {
-
     const everyone = [
-      { name: PEOPLE['matt'].displayName, to: PEOPLE['matt'].path, key: 4, src: PEOPLE['matt'].src, special: true },
+      { name: PEOPLE['matt'].displayName, to: PEOPLE['matt'].path, key: 4, src: PEOPLE['matt'].src, hint: true },
       { name: PEOPLE['kristi'].displayName, to: PEOPLE['kristi'].path, key: 5, src: PEOPLE['kristi'].src },
       { name: PEOPLE['tim'].displayName, to: PEOPLE['tim'].path, key: 1, src: PEOPLE['tim'].src },
       { name: PEOPLE['erica'].displayName, to: PEOPLE['erica'].path, key: 6, src: PEOPLE['erica'].src },
