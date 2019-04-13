@@ -6,6 +6,7 @@ import { Narration, LgSpacing, SpeechBubbleSpacing } from '../wrappers';
 import { smSpacing, white } from '../constants';
 import SpeechBubble from './speechBubble';
 
+const CELL_SIZE = 150;
 const START_POSITION = [7, 8];
 const ROOM1_COLOR = '#E69288';
 const ROOM2_COLOR = '#FEB68E';
@@ -35,11 +36,12 @@ const Arrow = styled(FontAwesomeIcon).attrs(props => ({
 `;
 
 const Cell = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 150px;
-  width: 150px;
+  height: ${CELL_SIZE}px;
+  width: ${CELL_SIZE}px;
   box-sizing: border-box;
   border: 1px solid black;
   background-color: ${props => (props.color ? props.color : white)};
@@ -48,6 +50,27 @@ const Cell = styled.div`
   ${props => (props.left ? 'border-left-width: 3px;' : null)}
   ${props => (props.right ? 'border-right-width: 3px;' : null)}
   ${props => (props.down ? 'border-bottom-width: 3px;' : null)}
+`;
+
+const Door = styled.img.attrs(props => ({
+  src: props.open ? 'images/openDoor.png' : 'images/closedDoor.png',
+}))`
+  position: absolute;
+  width: ${CELL_SIZE}px;
+  height: ${CELL_SIZE * 0.4}px;
+  // left and right doors need to be moved over by half the width
+  // but adjusted by half the height since they are rotated
+  ${props => {
+    if (props.up) {
+      return 'top: 0; transform: rotate(180deg);';
+    } else if (props.down) {
+      return 'bottom: 0;';
+    } else if (props.left) {
+      return `left: -${(CELL_SIZE / 2) - (CELL_SIZE * 0.4 / 2)}px; transform: rotate(90deg);`;
+    } else if (props.right) {
+      return `right: -${(CELL_SIZE / 2) - (CELL_SIZE * 0.4 / 2)}px; transform: rotate(270deg);`;
+    }
+  }}
 `;
 
 const maze = [
@@ -82,7 +105,7 @@ const maze = [
     { checkpoint: true, color: ROOM5_COLOR },
     { color: ROOM5_COLOR },
     { right: true, color: ROOM5_COLOR },
-    { left: true, up: true, deviate: true, color: ROOM2_COLOR },
+    { left: true, up: true, deviate: true, door: { open: false, left: true }, color: ROOM2_COLOR },
     { up: true, deviate: true, color: ROOM2_COLOR },
     { up: true, deviate: true, color: ROOM2_COLOR },
     { deviate: true, color: ROOM2_COLOR },
@@ -95,11 +118,11 @@ const maze = [
     { left: true, color: ROOM5_COLOR },
     { color: ROOM5_COLOR },
     { right: true, color: ROOM5_COLOR },
-    { left: true, down: true, deviate: true, color: ROOM2_COLOR },
+    { left: true, down: true, deviate: true, checkpoint: true, door: { open: false, left: true }, color: ROOM2_COLOR },
     { color: ROOM2_COLOR },
     { down: true, color: ROOM2_COLOR },
     { down: true, color: ROOM2_COLOR },
-    { right: true, color: ROOM2_COLOR },
+    { right: true, door: { open: true, down: true }, color: ROOM2_COLOR },
     { left: true, up: true },
     {},
   ],
@@ -107,12 +130,12 @@ const maze = [
     { right: true, down: true },
     { left: true, down: true, color: ROOM5_COLOR },
     { down: true, color: ROOM5_COLOR },
-    { right: true, checkpoint: true, color: ROOM5_COLOR },
+    { right: true, checkpoint: true, door: { open: true, down: true }, color: ROOM5_COLOR },
     { left: true, up: true, color: ROOM3_COLOR },
-    { checkpoint: true, color: ROOM3_COLOR },
+    { checkpoint: true, door: { open: true, up: true }, color: ROOM3_COLOR },
     { right: true, up: true, deviate: true, color: ROOM3_COLOR },
     { right: true, left: true, up: true },
-    { right: true, left: true, checkpoint: true, color: ROOM1_COLOR },
+    { right: true, left: true, color: ROOM1_COLOR },
     { left: true, down: true },
     { down: true },
   ],
@@ -132,7 +155,7 @@ const maze = [
   [
     { left: true, deviate: true, color: ROOM4_COLOR },
     { deviate: true, color: ROOM4_COLOR },
-    { deviate: true, color: ROOM4_COLOR },
+    { deviate: true, door: { open: true, right: true }, color: ROOM4_COLOR },
     { deviate: true, color: ROOM3_COLOR },
     { deviate: true, color: ROOM3_COLOR },
     { deviate: true, color: ROOM3_COLOR },
@@ -250,6 +273,7 @@ class Puzzle8 extends React.Component {
       <Cell {...maze[x][y]} opacity={opacity}>
         {this.hasProp('start') && <FontAwesomeIcon icon="car-side" size="3x" />}
         {this.hasProp('finish') && <FontAwesomeIcon icon="heart" size="3x" />}
+        {this.hasProp('door') && <Door {...maze[x][y]['door']} />}
       </Cell>
     );
   }
