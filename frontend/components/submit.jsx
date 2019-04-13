@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { Button } from './buttons';
+import { CenteredRow } from '../wrappers';
+
 const AnswerAwareInput = styled.input`
   // prevents iOS from zooming in on inputs on focus
   font-size: 100%;
@@ -36,7 +39,7 @@ class Submit extends React.Component {
     const { value } = this.state;
 
     return (
-      <span>
+      <CenteredRow>
         <AnswerAwareInput
           type="text"
           autocomplete="off"
@@ -46,8 +49,8 @@ class Submit extends React.Component {
           onChange={this.handleChange}
           disabled={disabled}
         />
-        <button type="submit" onClick={this.submitAnswer} disabled={disabled}>submit</button>
-      </span>
+        <Button type="submit" onClick={this.submitAnswer} disabled={disabled}>Submit</Button>
+      </CenteredRow>
     );
   }
 }

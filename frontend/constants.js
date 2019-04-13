@@ -14,6 +14,8 @@ export const juniper = '#7C9790';
 export const dustStorm = '#E8D7D0';
 export const whiteLilac = '#F6F7FC';
 
+export const darkSidecar = '#BCA996';
+
 export const xxsSpacing = 2;
 export const xsSpacing = 4;
 export const smSpacing = 8;

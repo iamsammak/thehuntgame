@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Narration, SpeechBubbleSpacing } from '../wrappers';
 import { isSolved } from '../helpers';
 import SpeechBubble from './speechBubble';
+import { Button } from './buttons';
+import { CenteredRow } from '../wrappers';
 
 const SafeImage = styled.img`
   display: inline-flex;
@@ -115,9 +117,9 @@ class PuzzleA extends React.Component {
                 How many cornhole bags does each team play with?
               </p>
               {question3Text.map(this.renderTextOptions(2))}
-              <p>
-                <button onClick={this.handleSubmit}>Submit</button>
-              </p>
+              <CenteredRow>
+                <Button onClick={this.handleSubmit}>Submit</Button>
+              </CenteredRow>
             </div>
         }
         {

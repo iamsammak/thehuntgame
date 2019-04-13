@@ -2,22 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { smSpacing, gray, lgSpacing } from '../constants';
-import { XsSpacing } from '../wrappers';
+import { smSpacing, lgSpacing, whiteLilac } from '../constants';
+import { CenteredRow, XsSpacing } from '../wrappers';
+import { Button } from './buttons';
 
 const hintContainerWidth = 250;
 
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const HintIcon = styled(FontAwesomeIcon).attrs({
-  icon: 'question-circle',
-})`
-  color: ${gray};
-`;
+export const HintIcon = props => <FontAwesomeIcon icon="question-circle" {...props} />;
 
 const HintContainer = styled.div`
   position: absolute;
@@ -105,13 +96,15 @@ class Hint extends React.Component {
     if (hintText) {
       return (
         <div ref={this.setRef}>
-          <button onClick={this.showHint}>
-            <Row>
-              <HintIcon />
-              <XsSpacing />
-              Need a hint?
-            </Row>
-          </button>
+          <CenteredRow>
+            <Button onClick={this.showHint}>
+              <CenteredRow>
+                <HintIcon color={whiteLilac} />
+                <XsSpacing />
+                Need a hint?
+              </CenteredRow>
+            </Button>
+          </CenteredRow>
           {
             show && (
               <HintContainer>
