@@ -3,44 +3,46 @@ import styled from 'styled-components';
 import { BrowserRouter, withRouter } from 'react-router-dom';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons/faArrowDown';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons/faArrowRight';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons/faArrowUp';
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons/faArrowDown';
-import { faStar } from '@fortawesome/free-solid-svg-icons/faStar';
-import { faGem } from '@fortawesome/free-solid-svg-icons/faGem';
 import { faCarSide } from '@fortawesome/free-solid-svg-icons/faCarSide';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight';
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
+import { faChevronCircleDown } from '@fortawesome/free-solid-svg-icons/faChevronCircleDown';
 import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons/faChevronCircleLeft';
 import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons/faChevronCircleRight';
 import { faChevronCircleUp } from '@fortawesome/free-solid-svg-icons/faChevronCircleUp';
-import { faChevronCircleDown } from '@fortawesome/free-solid-svg-icons/faChevronCircleDown';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp';
+import { faGem } from '@fortawesome/free-solid-svg-icons/faGem';
 import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCircle';
+import { faStar } from '@fortawesome/free-solid-svg-icons/faStar';
+import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 
 import App from './app';
 
 library.add(
-  faTimes,
+  faArrowDown,
   faArrowLeft,
   faArrowRight,
   faArrowUp,
-  faArrowDown,
-  faStar,
-  faGem,
   faCarSide,
-  faChevronLeft,
-  faChevronRight,
-  faChevronUp,
-  faChevronDown,
+  faChevronCircleDown,
   faChevronCircleLeft,
   faChevronCircleRight,
   faChevronCircleUp,
-  faChevronCircleDown,
+  faChevronDown,
+  faChevronLeft,
+  faChevronRight,
+  faChevronUp,
+  faGem,
   faHeart,
+  faQuestionCircle,
+  faStar,
+  faTimes,
 );
 
 const AppContainer = styled.div`
