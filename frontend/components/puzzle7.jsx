@@ -1,21 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Narration, MdSpacing, SpeechBubbleSpacing } from '../wrappers';
+import { CenteredRow, Narration, MdSpacing, SpeechBubbleSpacing } from '../wrappers';
 import { isSolved } from '../helpers';
 import { smSpacing } from '../constants';
 import SpeechBubble from './speechBubble';
 import Switch from './switch';
 import Puzzle7Clue from './puzzle7Clue';
+import { Button } from './buttons';
 
 const SwitchContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   margin: ${smSpacing}px 0;
-`;
-
-const SubmitButton = styled.button`
 `;
 
 const THRESHOLD = 60000; // 1 minute
@@ -143,9 +141,9 @@ class Puzzle7 extends React.Component {
             </Narration>
           )
         }
-        <SubmitButton onClick={this.handleSubmit} disabled={solved || waiting}>
-          Connect
-        </SubmitButton>
+        <CenteredRow>
+          <Button onClick={this.handleSubmit} disabled={solved || waiting}>Connect</Button>
+        </CenteredRow>
         {
           solved ? (
             <div>

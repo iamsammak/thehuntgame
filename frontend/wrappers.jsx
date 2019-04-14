@@ -42,3 +42,9 @@ export const Narration = styled.p`
   ${props => props.danger && `color: ${red};`}
 `;
 
+export const CenteredRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;

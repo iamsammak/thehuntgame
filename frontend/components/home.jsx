@@ -4,70 +4,52 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { black, dustStorm, juniper, whiteLilac } from '../constants';
 import WelcomeHeader from './welcomeHeader';
 import { Button } from './buttons';
+import { CenteredRow, MdSpacing, XlSpacing } from '../wrappers';
 
-const Table = styled.div`
+const Table = styled(CenteredRow)`
+  border-radius: 5px;
+  border: 1px solid ${dustStorm};
+  background-color: ${whiteLilac};
+  overflow: hidden;
+  height: 300px;
+  width: 300px;
+`;
+
+const NumberContainer = styled.div`
   display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 300px;
+  width: 50px;
 `;
 
 const TableNumber = styled.div`
-  height: 50%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #d6928b;
-`;
-
-const Container = styled.div`
-  height: 300px;
-  width: 150px;
-  font-size: 100px;
-`;
-
-const TensContainer = styled(Container)`
-  border-width: 1px 0 0 1px;
-  margin: 5px 0 0 5px;
-  border-radius: 25px 0 0 0;
-  background-color: #f8dfca;
-`;
-
-const OnesContainer = styled(Container)`
-  border-width: 1px 1px 0 0;
-  margin: 5px 5px 0 0;
-  border-radius: 0 25px 0 0;
-  background-color: #bcd7cf;
+  color: ${black};
+  font-size: 150px;
 `;
 
 const UpIcon = styled(FontAwesomeIcon).attrs({
   icon: 'chevron-up',
 })`
-  height: 25%;
-  font-size: 0.25em;
-  color: white;
-  padding: 0 2em;
+  font-size: 2em;
+  color: ${juniper};
 `;
 
 const DownIcon = styled(FontAwesomeIcon).attrs({
   icon: 'chevron-down',
 })`
-  height: 25%;
-  font-size: 0.25em;
-  color: white;
-  padding: 0 2em;
+  font-size: 2em;
+  color: ${juniper};
 `;
 
 const EnterButton = styled(Button)`
   height: 60px;
   width: 300px;
-  color: white;
   font-size: 30px;
-  border-radius: 0 0 25px 25px;
-  margin-top: 0;
-  background-color: #d6928b;
 `;
 
 class Home extends React.Component {
@@ -151,19 +133,25 @@ class Home extends React.Component {
           </p>
         </div>
         <h2>What table are you sitting at?</h2>
-        <Table>
-          <TensContainer>
-            <UpIcon onClick={this.calcTens(1)}></UpIcon>
-            <TableNumber>{tens}</TableNumber>
-            <DownIcon onClick={this.calcTens(-1)}></DownIcon>
-          </TensContainer>
-          <OnesContainer>
-            <UpIcon onClick={this.calcOnes(1)}></UpIcon>
-            <TableNumber>{ones}</TableNumber>
-            <DownIcon onClick={this.calcOnes(-1)}></DownIcon>
-          </OnesContainer>
+        <CenteredRow>
+          <Table>
+            <NumberContainer>
+              <UpIcon onClick={this.calcTens(1)}></UpIcon>
+              <TableNumber>{tens}</TableNumber>
+              <DownIcon onClick={this.calcTens(-1)}></DownIcon>
+            </NumberContainer>
+            <XlSpacing />
+            <NumberContainer>
+              <UpIcon onClick={this.calcOnes(1)}></UpIcon>
+              <TableNumber>{ones}</TableNumber>
+              <DownIcon onClick={this.calcOnes(-1)}></DownIcon>
+            </NumberContainer>
+          </Table>
+        </CenteredRow>
+        <MdSpacing />
+        <CenteredRow>
           <EnterButton onClick={this.setTable}>Enter</EnterButton>
-        </Table>
+        </CenteredRow>
         <p>{message}</p>
       </div>
     );

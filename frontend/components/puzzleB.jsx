@@ -3,6 +3,8 @@ import React from 'react';
 import { Narration, SpeechBubbleSpacing } from '../wrappers';
 import { isSolved } from '../helpers';
 import SpeechBubble from './speechBubble';
+import { Button } from './buttons';
+import { CenteredRow } from '../wrappers';
 
 const INITIAL_ANSWERS = [null, null, null];
 
@@ -83,9 +85,9 @@ class PuzzleB extends React.Component {
                 Which of these items should you take from the reception hall boxes?
               </p>
               {question3Text.map(this.renderTextOptions(2))}
-              <p>
-                <button onClick={this.handleSubmit} disabled={solved}>Submit</button>
-              </p>
+              <CenteredRow>
+                <Button onClick={this.handleSubmit} disabled={solved}>Submit</Button>
+              </CenteredRow>
             </div>
         }
         {

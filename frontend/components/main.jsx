@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PEOPLE } from '../helpers';
-import { tamarind, whiteLilac } from '../constants';
+import { gray, tamarind, whiteLilac } from '../constants';
 import WelcomeHeader from './welcomeHeader';
 import { HintIcon } from './hint';
 
@@ -71,7 +71,7 @@ export default class Main extends React.Component {
           {
             item.hint && (
               <HintContainer>
-                <HintIcon />
+                <HintIcon color={gray} />
               </HintContainer>
             )
           }

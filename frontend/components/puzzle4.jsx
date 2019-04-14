@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { gray, lightBlue, darkBlue } from '../constants';
+import { red, gray, sidecar, juniper, whiteLilac, darkSidecar } from '../constants';
 import { Narration, SpeechBubbleSpacing } from '../wrappers';
 import { isSolved, getCurrentStage } from '../helpers';
 import { Button } from './buttons';
@@ -29,18 +29,18 @@ const KeypadButton = styled(Button)`
     if (props.disabled) {
       return gray;
     } else if (props.clicked) {
-      return darkBlue;
+      return darkSidecar;
     }
-    return lightBlue;
+    return sidecar;
   }}
 `;
 
 const ClearButton = styled(Button)`
   height: 88px;
   width: 88px;
-  color: white;
+  color: ${red};
   font-size: 30px;
-  background-color: #d2a494;
+  background-color: ${whiteLilac};
 `;
 
 const SubmitButton = styled(Button)`
@@ -48,7 +48,7 @@ const SubmitButton = styled(Button)`
   font-size: 30px;
   height: 88px;
   width: 88px;
-  background-color: ${props => (props.clicked ? '#9d0e3d' : '#ff654d')};
+  background-color: ${juniper};
 `;
 
 class Puzzle4 extends React.Component {
@@ -165,9 +165,9 @@ class Puzzle4 extends React.Component {
         }
         <KeypadContainer>
           {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(this.renderButton)}
-          <ClearButton onClick={this.clearValue}>Clear</ClearButton>
+          <ClearButton onClick={this.clearValue} disabled={solved}>Clear</ClearButton>
           {this.renderButton(9)}
-          <SubmitButton onClick={this.submitAnswer}>Enter</SubmitButton>
+          <SubmitButton onClick={this.submitAnswer} disabled={solved}>Enter</SubmitButton>
         </KeypadContainer>
         {!solved && !error && correct !== false && <SpeechBubbleSpacing lines={2} />}
         {
