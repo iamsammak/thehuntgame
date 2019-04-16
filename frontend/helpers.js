@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function isSolved(gameState, puzzle) {
   return gameState[puzzle] && gameState[puzzle].solved;
 }
@@ -54,4 +56,23 @@ export function formatElapsedTime(elapsed) {
   const min = Math.floor((elapsed / 1000 / 60)) % 60;
   const hrs = Math.floor((elapsed / 1000 / 60 / 60)) % 24;
   return `${pad(hrs)}:${pad(min)}:${pad(sec)}:${pad(ms)}`;
+}
+
+export const HINTS = {
+  1: "These letters don't make any sense like this. What if we move the letters along the alphabet like Ryan had moved?",
+  2: "You found a riddle after visiting Kristi? Hmm...if it's not written in ink, then maybe it's white space?",
+  3: "Erica's clue has nine numbers. Aren't there nine ingredients at the tea table? What if you take a letter from each ingredient?",
+  4: (
+    <div>
+      My Chinese name? Chris mispronounces it all the time! He should use an online dictionary like <a href="https://www.cantoneseclass101.com/cantonese-dictionary/">this one</a> to figure out how to pronounce words.
+    </div>
+  ),
+  5: "The paper looks oddly familiar. Did we take a picture with it at the photobooth?",
+  8: "Jay would've taken the shortest path possible from his car to the sweetheart table. Retrace only his steps and nothing more, otherwise he'll restart from the beginning.",
+};
+
+export function hintAvailable(gameState) {
+  const stage = getCurrentStage(gameState);
+  const stageSolved = isSolved(gameState, stage.toString());
+  return !stageSolved && HINTS[stage] !== undefined;
 }
