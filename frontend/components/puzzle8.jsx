@@ -230,7 +230,7 @@ class Puzzle8 extends React.Component {
             error = true;
             setTimeout(() => {
               this.setState({ error: false });
-            }, 3000);
+            }, 5000);
           }
         }
 

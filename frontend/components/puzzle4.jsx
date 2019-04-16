@@ -92,7 +92,7 @@ class Puzzle4 extends React.Component {
       this.setState({ error: true });
       setTimeout(() => {
         this.setState({ error: false });
-      }, 2000);
+      }, 3000);
     }
 
     this.clearValue();
