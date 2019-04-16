@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { PEOPLE } from '../helpers';
+import { PEOPLE, hintAvailable } from '../helpers';
 import { gray, tamarind, whiteLilac } from '../constants';
 import WelcomeHeader from './welcomeHeader';
 import { HintIcon } from './hint';
@@ -63,13 +63,16 @@ export default class Main extends React.Component {
   }
 
   renderPerson(item) {
+    const { gameState } = this.props;
+    const isHintAvailable = hintAvailable(gameState);
+
     return (
       <StyleLink to={item.to} key={item.key}>
         <Container>
           <Person src={item.src} />
           <Name>{item.name}</Name>
           {
-            item.hint && (
+            item.hint && isHintAvailable && (
               <HintContainer>
                 <HintIcon color={gray} />
               </HintContainer>

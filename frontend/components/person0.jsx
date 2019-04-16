@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isSolved, getCurrentStage } from '../helpers';
+import { isSolved, getCurrentStage, hintAvailable } from '../helpers';
 import Base from './base';
 import Hint from './hint';
 import Puzzle from './puzzle';
@@ -14,7 +14,7 @@ class Person0 extends React.Component {
     const { gameState, personId, socket } = this.props;
     const stage = getCurrentStage(gameState);
     const puzzle1Solved = isSolved(gameState, '1');
-    const stageSolved = isSolved(gameState, stage.toString());
+    const isHintAvailable = hintAvailable(gameState);
     const hint = <Hint hint={stage.toString()} socket={socket} />;
     const showBase = true;
 
@@ -30,7 +30,7 @@ class Person0 extends React.Component {
     return (
       <div>
         <PersonHeader personId={personId} />
-        {!stageSolved && hint}
+        {isHintAvailable && hint}
         {showBase && <Base personId={personId} />}
         <br />
         {body}
