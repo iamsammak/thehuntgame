@@ -177,7 +177,6 @@ def adminconnect(sid, data):
   print('load_admin_data', data['trigger'])
   trigger = data['trigger']
   if trigger == 'load':
-    table_data = defaultdict(list)
     puzzle_data = defaultdict(dict)
 
     for table in get_tables():
