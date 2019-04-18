@@ -21,6 +21,10 @@ import Person7 from './person7';
 import Finish from './finish';
 
 const GlobalStyles = createGlobalStyle`
+  @font-face {
+    font-family: 'Madina Script';
+    src: url('Madina Script.ttf');
+  }
   * {
     font-family: "Quicksand", sans-serif;
     font-weight: 300;

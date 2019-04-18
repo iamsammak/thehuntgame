@@ -29,12 +29,19 @@ const NumberContainer = styled.div`
 
 const TableNumber = styled.div`
   color: ${black};
-  font-size: 150px;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  font-family: 'Madina Script';
+  font-size: 8em;
+  line-height: 1.6em;
 `;
 
 const UpIcon = styled(FontAwesomeIcon).attrs({
   icon: 'chevron-up',
 })`
+  height: 25%;
   font-size: 2em;
   color: ${juniper};
 `;
@@ -42,6 +49,7 @@ const UpIcon = styled(FontAwesomeIcon).attrs({
 const DownIcon = styled(FontAwesomeIcon).attrs({
   icon: 'chevron-down',
 })`
+  height: 25%;
   font-size: 2em;
   color: ${juniper};
 `;
