@@ -1,0 +1,32 @@
+config:
+  target: "http://localhost:8000"
+  phases:
+    - duration: 10
+      arrivalCount: 200
+    - pause: 300
+  environments:
+    development:
+      target: "http://localhost:8000"
+    production:
+      target: "http://christinechris.thinkingalaud.com"
+  processor: "./load_test.js"
+scenarios:
+  - engine: "socketio"
+    flow:
+      - function: "joinTable"
+      - emit:
+          channel: "join"
+          data: { "table": "{{ table }}" }
+      - loop:
+          - function: "updateContext"
+          - function: "genRandomThink"
+          - think: "{{ think }}"
+          - function: "genRandomPerson"
+          - emit:
+              channel: "person_visit"
+              data: { "personId": "{{ person }}" }
+          - function: "genRandomAnswer"
+          - emit:
+              channel: "submit"
+              data: { "puzzle": "{{ puzzle }}", "answer": "{{ answer }}" }
+        count: 50
