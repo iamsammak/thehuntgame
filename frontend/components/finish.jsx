@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { getCurrentStage, formatElapsedTime } from '../helpers';
+import { Narration } from '../wrappers';
 
 const Congrats = styled.p`
   font-size: 2em;
@@ -42,6 +43,11 @@ class Finish extends React.Component {
         <Time>
           {formatElapsedTime(elapsed)}
         </Time>
+        <br />
+        <br />
+        <Narration>
+          Enjoyed this game? Know someone who&apos;s interested in having this at their event? Send your thoughts to <a href="mailto:thinkingalaud@gmail.com">thinkingalaud@gmail.com</a>.
+        </Narration>
       </div>
     );
   }
