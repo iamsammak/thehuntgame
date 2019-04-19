@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withCookies } from 'react-cookie';
 
 import Timer from './timer';
 
@@ -27,6 +28,8 @@ const InfoContainer = styled.div`
 `;
 
 const TableContainer = styled.div`
+  font-family: 'Madina Script';
+  src: url('MadinaScript.ttf')
 `;
 
 const SolvedContainer = styled.div`
@@ -35,31 +38,30 @@ const SolvedContainer = styled.div`
 class WelcomeHeader extends React.Component {
   constructor(props) {
     super(props);
-    this.renderSolved = this.renderSolved.bind(this);
+    this.numSolved = this.numSolved.bind(this);
   }
 
-  renderSolved(gameState) {
+  numSolved(gameState) {
     var solvedCounter = 0;
-    const gameStateValues = Object.values(gameState);
-    for (var entry in gameStateValues) {
-      if (gameStateValues[entry]['solved'] == true) {
-        solvedCounter += 1;
-      }
-    }
+    return Object.values(gameState).reduce((solved, info) => {
+      return info['solved'] ? solved + 1 : solved;
+    }, 0);
     return solvedCounter;
   }
 
   render() {
-    const { gameState } = this.props;
+    const { gameState, cookies } = this.props;
+    console.log(cookies);
     const { start_time, table } = gameState || {};
-    var solved = this.renderSolved(gameState);
+//    const table = cookies.get('table')
+    var solved = this.numSolved(gameState);
     return (
       <Header>
         <TitleContainer>
           <Title>Chois Escape</Title>
         </TitleContainer>
         <InfoContainer>
-          <TableContainer>Table #{table}</TableContainer>
+          <TableContainer>Table {table}</TableContainer>
           <SolvedContainer>Puzzles Solved: {solved}</SolvedContainer>
           {
             start_time && (
