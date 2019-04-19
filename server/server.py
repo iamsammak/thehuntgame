@@ -63,7 +63,7 @@ def set_game_state(table, puzzle, key, value):
 
 # TODO replace more efficient way of doing this
 def initialize_game_state(table):
-  GAME_STATE[table] = {}
+  GAME_STATE[table] = {'table': table}
   GAME_STATE[table]['1'] = {}
   set_game_state(table, '1', 'solved', False);
   set_game_state(table, '1', 'started', True);

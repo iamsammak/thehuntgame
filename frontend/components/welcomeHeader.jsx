@@ -17,19 +17,50 @@ const TitleContainer = styled.div`
 `;
 
 const TimerContainer = styled.div`
-  align-self: flex-end;
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const TableContainer = styled.div`
+`;
+
+const SolvedContainer = styled.div`
 `;
 
 class WelcomeHeader extends React.Component {
+  constructor(props) {
+    super(props);
+    this.renderSolved = this.renderSolved.bind(this);
+  }
+
+  renderSolved(gameState) {
+    var solvedCounter = 0;
+    const gameStateValues = Object.values(gameState);
+    for (var entry in gameStateValues) {
+      if (gameStateValues[entry]['solved'] == true) {
+        solvedCounter += 1;
+      }
+    }
+    return solvedCounter;
+  }
+
   render() {
     const { gameState } = this.props;
-
-    const { start_time } = gameState || {};
-
+    const { start_time, table } = gameState || {};
+    var solved = this.renderSolved(gameState);
     return (
       <Header>
         <TitleContainer>
           <Title>Chois Escape</Title>
+        </TitleContainer>
+        <InfoContainer>
+          <TableContainer>Table #{table}</TableContainer>
+          <SolvedContainer>Puzzles Solved: {solved}</SolvedContainer>
           {
             start_time && (
               <TimerContainer>
@@ -37,7 +68,7 @@ class WelcomeHeader extends React.Component {
               </TimerContainer>
             )
           }
-        </TitleContainer>
+        </InfoContainer>
         <hr />
       </Header>
     );
