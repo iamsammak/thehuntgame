@@ -17,9 +17,7 @@ class Puzzle5 extends React.Component {
           Earlier this morning, Christine gave us a piece of paper and said to hold onto it. We had the smart idea of tearing it apart and splitting up the pieces among us...maybe that piece of paper has something to do with the key.
         </SpeechBubble>
         <Puzzle5Clue clue="clue7" personId={personId} />
-        <p>
-          <Submit {...this.props} puzzleNumber="5" disabled={solved} />
-        </p>
+        <Submit {...this.props} puzzleNumber="5" disabled={solved} />
         {
           solved ? (
             <SpeechBubble personId={personId}>

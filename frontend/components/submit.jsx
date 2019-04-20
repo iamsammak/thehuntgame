@@ -4,6 +4,11 @@ import styled from 'styled-components';
 import { Button } from './buttons';
 import { CenteredRow } from '../wrappers';
 
+const Container = styled.div`
+  margin-top: 1em;
+  margin-bottom: 1em;
+`;
+
 const AnswerAwareInput = styled.input`
   // prevents iOS from zooming in on inputs on focus
   font-size: 100%;
@@ -39,18 +44,20 @@ class Submit extends React.Component {
     const { value } = this.state;
 
     return (
-      <CenteredRow>
-        <AnswerAwareInput
-          type="text"
-          autocomplete="off"
-          placeholder="Type here"
-          correct={correct}
-          value={value}
-          onChange={this.handleChange}
-          disabled={disabled}
-        />
-        <Button type="submit" onClick={this.submitAnswer} disabled={disabled}>Submit</Button>
-      </CenteredRow>
+      <Container>
+        <CenteredRow>
+          <AnswerAwareInput
+            type="text"
+            autocomplete="off"
+            placeholder="Type here"
+            correct={correct}
+            value={value}
+            onChange={this.handleChange}
+            disabled={disabled}
+          />
+          <Button type="submit" onClick={this.submitAnswer} disabled={disabled}>Submit</Button>
+        </CenteredRow>
+      </Container>
     );
   }
 }
