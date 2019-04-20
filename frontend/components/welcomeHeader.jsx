@@ -1,8 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { withCookies } from 'react-cookie';
-
 import Timer from './timer';
+
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPuzzlePiece } from '@fortawesome/free-solid-svg-icons/faPuzzlePiece';
+
+library.add(faPuzzlePiece);
 
 const Header = styled.div`
   margin-top: 2em;
@@ -32,7 +37,7 @@ const TableContainer = styled.div`
   src: url('MadinaScript.ttf')
 `;
 
-const SolvedContainer = styled.div`
+const SolvedIcon = styled(Icon)`
 `;
 
 class WelcomeHeader extends React.Component {
@@ -63,7 +68,7 @@ class WelcomeHeader extends React.Component {
         </TitleContainer>
         <InfoContainer>
           <TableContainer>Table {table}</TableContainer>
-          <SolvedContainer>Puzzles Solved: {solved}</SolvedContainer>
+          <div><SolvedIcon icon="puzzle-piece" /> Solved: {solved}</div>
           {
             start_time && (
               <TimerContainer>

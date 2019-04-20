@@ -21,6 +21,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCircle';
 import { faStar } from '@fortawesome/free-solid-svg-icons/faStar';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
+import { faPuzzlePiece } from '@fortawesome/free-solid-svg-icons/faPuzzlePiece';
 
 import App from './app';
 
@@ -43,6 +44,7 @@ library.add(
   faQuestionCircle,
   faStar,
   faTimes,
+  faPuzzlePiece,
 );
 
 const AppContainer = styled.div`
