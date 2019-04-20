@@ -1,76 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { white } from '../constants';
 import { isSolved } from '../helpers';
 import { SpeechBubbleSpacing } from '../wrappers';
 import SpeechBubble from './speechBubble';
 import Submit from './submit';
 
 const PuzzleContainer = styled.div`
-  border: 1px solid black;
-  background-color: white;
-  padding: 1em 0;
+  background-color: ${white};
+  padding: 1em;
   border-radius: 4px;
   margin: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 const Puzzle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   font-family: monospace;
   font-size: 2em;
 `;
 
-const initial_combo = ['','','','',''];
+const PuzzleIcon = styled(FontAwesomeIcon)`
+  font-size: 0.75em;
+`;
 
 class Puzzle3 extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleClear = this.handleClear.bind(this);
-    this.submitAnswer = this.submitAnswer.bind(this);
-    this.state = {
-      combo: initial_combo,
-      shake: false,
-    };
-  }
-
-  handleClick(input) {
-    return () => {
-      const { combo: tempArray } = this.state;
-      let flag = 'full';
-      for (var i = 0; i <= tempArray.length; i++) {
-        if (tempArray[i] === '') {
-          this.setState(state => {
-            const combo = state.combo.slice();
-            combo.splice(i, 1, input);
-            return { combo };
-          });
-          flag = 'good';
-          break;
-        }
-      }
-      if (flag === 'full') {
-        this.setState({ shake: true });
-        setTimeout(() => {
-          this.setState({ shake: false });
-        }, 500);
-      }
-    };
-  }
-
-  submitAnswer() {
-    const { send } = this.props;
-
-    const { combo: userinput } = this.state;
-    send('submit', { puzzle: '3', answer: userinput });
-  }
-
-  handleClear() {
-    const { reset } = this.props;
-
-    this.setState({ combo: initial_combo });
-    reset();
-  }
-
   render() {
     const { gameState, personId } = this.props;
     const solved = isSolved(gameState, '3');
@@ -82,10 +44,40 @@ class Puzzle3 extends React.Component {
         </SpeechBubble>
         <PuzzleContainer>
           <Puzzle>
-            1 2 3 4 5 6 7 8 9
+            <PuzzleIcon icon="star" />
+            5
           </Puzzle>
           <Puzzle>
-            5 8 3 5 7 5 6 1 2
+            <PuzzleIcon icon="star" />
+            8
+          </Puzzle>
+          <Puzzle>
+            <PuzzleIcon icon="star" />
+            3
+          </Puzzle>
+          <Puzzle>
+            <PuzzleIcon icon="star" />
+            5
+          </Puzzle>
+          <Puzzle>
+            <PuzzleIcon icon="star" />
+            7
+          </Puzzle>
+          <Puzzle>
+            <PuzzleIcon icon="star" />
+            5
+          </Puzzle>
+          <Puzzle>
+            <PuzzleIcon icon="star" />
+            6
+          </Puzzle>
+          <Puzzle>
+            <PuzzleIcon icon="star" />
+            1
+          </Puzzle>
+          <Puzzle>
+            <PuzzleIcon icon="star" />
+            2
           </Puzzle>
         </PuzzleContainer>
         <Submit {...this.props} puzzleNumber="3" disabled={solved} />
