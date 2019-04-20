@@ -129,6 +129,21 @@ class Admin extends React.Component {
   }
 
   renderPuzzleData(data) {
+    const sortedData = Object.entries(data)
+      .filter(this.timeFilter)
+      .sort((a, b) => {
+        let aCode = a[0].charCodeAt(0);
+        // ASCII code for letters is all >= 65
+        if (aCode < 65) {
+          aCode += 127;
+        }
+        // ASCII code for letters is all >= 65
+        let bCode = b[0].charCodeAt(0);
+        if (bCode < 65) {
+          bCode += 127;
+        }
+        return aCode - bCode;
+      });
     const tables = Object.keys(data[Object.keys(data)[0]])
       .map((table) => parseInt(table))
       .sort((a, b) => a - b)
@@ -139,12 +154,12 @@ class Admin extends React.Component {
         <tbody>
           <tr>
             <TableHeaderCell />
-            {Object.entries(data).filter(this.timeFilter).map(this.renderHeaders)}
+            {sortedData.map(this.renderHeaders)}
           </tr>
           <tr>
             <th />
             {
-              Object.entries(data).filter(this.timeFilter).map((_, i) => {
+              sortedData.map((_, i) => {
                 return (
                   <Fragment key={i}>
                     <TableHeaderCell left><Icon icon="eye" /></TableHeaderCell>
