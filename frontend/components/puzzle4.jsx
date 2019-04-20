@@ -169,7 +169,7 @@ class Puzzle4 extends React.Component {
           {this.renderButton(9)}
           <SubmitButton onClick={this.submitAnswer} disabled={solved}>Enter</SubmitButton>
         </KeypadContainer>
-        {!solved && !error && correct !== false && <SpeechBubbleSpacing lines={2} />}
+        {!solved && !error && correct !== false && <SpeechBubbleSpacing lines={1} />}
         {
           solved && (
             <SpeechBubble personId={personId}>
