@@ -43,17 +43,18 @@ class WelcomeHeader extends React.Component {
 
   numSolved(gameState) {
     var solvedCounter = 0;
-    return Object.values(gameState).reduce((solved, info) => {
-      return info['solved'] ? solved + 1 : solved;
-    }, 0);
+    if (gameState) {
+      return Object.values(gameState).reduce((solved, info) => {
+        return info['solved'] ? solved + 1 : solved;
+      }, 0);
+    };
     return solvedCounter;
   }
 
   render() {
     const { gameState, cookies } = this.props;
-    console.log(cookies);
-    const { start_time, table } = gameState || {};
-//    const table = cookies.get('table')
+    const { start_time } = gameState || {};
+    const table = cookies.get('table')
     var solved = this.numSolved(gameState);
     return (
       <Header>
@@ -77,4 +78,4 @@ class WelcomeHeader extends React.Component {
   }
 }
 
-export default WelcomeHeader;
+export default withCookies(WelcomeHeader);
