@@ -8,6 +8,12 @@ const Congrats = styled.p`
   font-size: 2em;
 `;
 
+const Image = styled.img`
+  border-radius: 5px;
+  width: 300px;
+  height: 300px;
+`;
+
 const Time = styled.div`
   font-family: monospace;
   font-size: 3em;
@@ -36,6 +42,7 @@ class Finish extends React.Component {
           Turns out the key was with the bride and groom at their sweetheart table all along. How anticlimactic, right?
         </p>
         <Congrats>CONGRATULATIONS!</Congrats>
+        <Image src="images/christinechris.jpg" />
         <p>
           Show them this screen and take a celebratory picture with them!
         </p>
