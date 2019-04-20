@@ -26,9 +26,7 @@ class Puzzle2 extends React.Component {
           Not written in ink.
         </p>
         <Narration>What in the world is this referring to?</Narration>
-        <p>
-          <Submit {...this.props} puzzleNumber="2" disabled={solved} />
-        </p>
+        <Submit {...this.props} puzzleNumber="2" disabled={solved} />
         {
           solved ? (
             <SpeechBubble personId={personId}>

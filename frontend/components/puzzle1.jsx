@@ -75,9 +75,7 @@ class Puzzle1 extends React.Component {
             })
           }
         </CipherContainer>
-        <p>
-          <Submit {...this.props} puzzleNumber="1" disabled={solved} />
-        </p>
+        <Submit {...this.props} puzzleNumber="1" disabled={solved} />
         {
           solved ? (
             <SpeechBubble personId={personId}>
