@@ -6,10 +6,31 @@ import { SpeechBubbleSpacing } from '../wrappers';
 import SpeechBubble from './speechBubble';
 import Submit from './submit';
 
-const CipherContainer = styled.p`
+const CipherContainer = styled.div`
+  position: relative;
+  width: 100px;
+  height: 100px;
+  // rotating the containers puts the letters outside of the box
+  // so quick fix is to add margin at the bottom to accomodate
+  margin: auto;
+  margin-bottom: 2em;
+`;
+
+const CharContainer = styled.div`
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: rotate(${props => props.rotate}deg);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const Character = styled.div`
+  transform: rotate(${props => -props.rotate}deg);
   font-family: monospace;
   font-size: 2em;
-  letter-spacing: 5px;
 `;
 
 class Puzzle1 extends React.Component {
@@ -43,7 +64,16 @@ class Puzzle1 extends React.Component {
           Thanks so much for helping us find the key! I had it with me when I was setting up these guest tables, but I must have misplaced it when I was grabbing all these letters. It was hard to keep track of everything when I was numbering each guest table. If I could only remember what these letters meant, then maybe I could remember where I placed the keys. Do you know what these letters mean?
         </SpeechBubble>
         <CipherContainer>
-          {cipher}
+          {
+            cipher.split('').map((c, i) => {
+              const rotation = ((i + 1) % cipher.length) * (360 / cipher.length);
+              return (
+                <CharContainer rotate={rotation} key={i}>
+                  <Character rotate={rotation}>{c}</Character>
+                </CharContainer>
+              );
+            })
+          }
         </CipherContainer>
         <p>
           <Submit {...this.props} puzzleNumber="1" disabled={solved} />

@@ -64,17 +64,20 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     const { socket } = props;
-    socket.on('game_started', (data) => { this.setState({ gameStarted: data['gameStarted'] });
+    socket.on('game_started', (data) => {
+      this.setState({ gameStarted: data['gameStarted'] });
     });
     this.state = {
       tens: 0,
       ones: 0,
-      gameStarted: false
+      gameStarted: false,
+      submittedTable: null,
     };
 
     this.gameStartPing();
     this.calcTens = this.calcTens.bind(this);
     this.calcOnes = this.calcOnes.bind(this);
+    this.validTable = this.validTable.bind(this);
     this.setTable = this.setTable.bind(this);
   }
 
@@ -93,16 +96,21 @@ class Home extends React.Component {
     return () => {
       this.setState(state => {
         let { tens } = state;
-        tens = (tens + num + 3) % 3;
+        tens = (tens + num + 4) % 4;
         return ({ tens : tens });
       });
     };
   }
 
+  validTable(table) {
+    return table !== 0 && table <= 31;
+  }
+
   setTable() {
     const { tens, ones, gameStarted } = this.state;
     const tableNumber = (tens * 10) + ones;
-    if (tableNumber === 0 || tableNumber === 26 || gameStarted === false) {
+    this.setState({ submittedTable: tableNumber });
+    if (!this.validTable(tableNumber) || gameStarted === false) {
       return;
     }
     const { cookies } = this.props;
@@ -115,15 +123,20 @@ class Home extends React.Component {
   }
 
   render() {
-    const { tens, ones, gameStarted } = this.state;
+    const { tens, ones, gameStarted, submittedTable } = this.state;
     const { cookies, join } = this.props;
+
     const table = cookies.get("table");
-    if (gameStarted === false) {
-      var message = 'Game has not started';
-    }
     if (table) {
       join(table);
       return <Redirect to="/main" />;
+    }
+
+    let message;
+    if (gameStarted === false) {
+      message = 'Game has not started yet.';
+    } else if (submittedTable !== null && !this.validTable(submittedTable)) {
+      message = 'I don\'t think that table exists...';
     }
 
     return (
