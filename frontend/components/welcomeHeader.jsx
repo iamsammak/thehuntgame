@@ -7,11 +7,14 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPuzzlePiece } from '@fortawesome/free-solid-svg-icons/faPuzzlePiece';
 
-library.add(faPuzzlePiece);
-
 const Header = styled.div`
   margin-top: 2em;
 `;
+
+const Hr = styled.hr`
+  margin-top: 0;
+`;
+
 
 const Title = styled.div`
   font-size: 2em;
@@ -23,21 +26,28 @@ const TitleContainer = styled.div`
 `;
 
 const TimerContainer = styled.div`
+  padding-top: 4px;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 const TableContainer = styled.div`
-  font-family: 'Madina Script';
-  src: url('MadinaScript.ttf')
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 `;
 
-const SolvedIcon = styled(Icon)`
+const TableNumContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-family: 'Madina Script';
+  src: url('MadinaScript.ttf');
+  padding-left: 5px;
 `;
 
 class WelcomeHeader extends React.Component {
@@ -48,7 +58,7 @@ class WelcomeHeader extends React.Component {
 
   numSolved(gameState) {
     var solvedCounter = 0;
-    if (gameState) {
+    if (Object.values(gameState || {})) {
       return Object.values(gameState).reduce((solved, info) => {
         return info['solved'] ? solved + 1 : solved;
       }, 0);
@@ -67,8 +77,8 @@ class WelcomeHeader extends React.Component {
           <Title>Chois Escape</Title>
         </TitleContainer>
         <InfoContainer>
-          <TableContainer>Table {table}</TableContainer>
-          <div><SolvedIcon icon="puzzle-piece" /> Solved: {solved}</div>
+          <TableContainer><div>Table</div><TableNumContainer>{table}</TableNumContainer></TableContainer>
+          <div><Icon icon="puzzle-piece" /> Solved: {solved}</div>
           {
             start_time && (
               <TimerContainer>
@@ -77,7 +87,7 @@ class WelcomeHeader extends React.Component {
             )
           }
         </InfoContainer>
-        <hr />
+        <Hr />
       </Header>
     );
   }

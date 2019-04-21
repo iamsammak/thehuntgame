@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Narration } from '../wrappers';
 
 import { PEOPLE, hintAvailable } from '../helpers';
 import { gray, tamarind, whiteLilac } from '../constants';
@@ -98,6 +99,7 @@ export default class Main extends React.Component {
     return (
       <div>
         <WelcomeHeader {...this.props} />
+        <Narration>Who do you want to talk to?</Narration>
         <Table>
           {everyone.map(this.renderPerson)}
         </Table>
