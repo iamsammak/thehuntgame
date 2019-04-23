@@ -9,6 +9,10 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCi
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons/faThumbsUp';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 
+import { SmSpacing } from '../wrappers';
+import { Button } from './buttons';
+import { green, red, white } from '../constants';
+
 library.add(
   faCheck,
   faEye,
@@ -16,6 +20,18 @@ library.add(
   faThumbsUp,
   faTimes,
 );
+
+const Action = styled.div`
+  margin: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const ActionButton = styled(Button)`
+  color: ${white};
+  background-color: ${props => (props.danger ? red : green)};
+`;
 
 const CheckIcon = styled(Icon)`
   color: ${props => (props.checked ? 'green' : 'red')};
@@ -48,17 +64,22 @@ class Admin extends React.Component {
     socket.on('admin_data', (data) => {
       this.setState({
         puzzleData: data['puzzleData'],
+        answersShown: data['answersShown'],
         gameStarted: data['gameStarted'],
       });
     });
     socket.on('game_started', (data) => {
       this.setState({ gameStarted: data['gameStarted'] });
     });
+    socket.on('answers_shown', (data) => {
+      this.setState({ answersShown: data['answersShown'] });
+    });
 
     this.state = {
       socket: socket,
-      puzzleData: {},
-      gameStarted: false,
+      puzzleData: null,
+      answersShown: null,
+      gameStarted: null,
     };
 
     this.adminPing('load');
@@ -78,7 +99,15 @@ class Admin extends React.Component {
   }
 
   stopGame() {
-    // this.adminPing('stop_game');
+    this.adminPing('stop_game');
+  }
+
+  showAnswers() {
+    this.adminPing('show_answers');
+  }
+
+  hideAnswers() {
+    this.adminPing('hide_answers');
   }
 
   timeFilter(dataEntry) {
@@ -177,19 +206,48 @@ class Admin extends React.Component {
   }
 
   render() {
-    const { gameStarted, puzzleData } = this.state;
+    const { answersShown, gameStarted, puzzleData } = this.state;
 
     return (
       <div>
-        <p>{gameStarted ? 'Game has been started!' : 'Game has not been started!'}</p>
-        <p>
-          <button type="submit" onClick={() => (gameStarted ? this.stopGame() : this.startGame())}>
-            {gameStarted ? 'Stop Game' : 'Start Game'}
-          </button>
-        </p>
-        <br />
+        <Action>
+          {
+            gameStarted === null ?
+              '...' :
+              (
+                <Fragment>
+                  <ActionButton
+                    onClick={() => (gameStarted ? this.stopGame() : this.startGame())}
+                    danger={gameStarted}
+                  >
+                    {gameStarted ? 'Stop Game' : 'Start Game'}
+                  </ActionButton>
+                  <SmSpacing />
+                  Game has {gameStarted ? '' : 'not '}started!
+                </Fragment>
+              )
+          }
+        </Action>
+        <Action>
+          {
+            answersShown === null ?
+              '...' :
+              (
+                <Fragment>
+                  <ActionButton
+                    onClick={() => (answersShown ? this.hideAnswers() : this.showAnswers())}
+                    danger={answersShown}
+                  >
+                    {answersShown ? 'Hide' : 'Reveal'}
+                  </ActionButton>
+                  <SmSpacing />
+                  Answers have {answersShown ? '' : 'not '}been revealed!
+                </Fragment>
+              )
+          }
+        </Action>
         <div>
-          {Object.keys(puzzleData).length > 0 && this.renderPuzzleData(puzzleData)}
+          {puzzleData && Object.keys(puzzleData).length > 0 && this.renderPuzzleData(puzzleData)}
         </div>
       </div>
     );
