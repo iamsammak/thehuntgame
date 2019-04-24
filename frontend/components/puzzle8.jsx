@@ -297,7 +297,7 @@ class Puzzle8 extends React.Component {
         {
           error ? (
             <SpeechBubble personId={personId}>
-              That would take us to the next room, but we walked too much to get there. Let&apos;s try this again.
+              We were heading in the right direction, but we walked too much to get there. Let&apos;s try this again from my car.
             </SpeechBubble>
           ) : (
             <SpeechBubbleSpacing lines={1} />
