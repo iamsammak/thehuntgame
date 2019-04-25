@@ -22,7 +22,7 @@ const TitleContainer = styled.div`
 
 const TimerContainer = styled.div`
   padding-top: 4px;
-  padding-left: 5px
+  padding-left: 5px;
 `;
 
 const InfoContainer = styled.div`
@@ -43,9 +43,8 @@ const TableNumContainer = styled.div`
   display: flex;
   align-items: center;
   font-family: 'Madina Script';
-  src: url('MadinaScript.ttf');
   padding-left: 5px;
-  padding-right: 5px
+  padding-right: 5px;
 `;
 
 class WelcomeHeader extends React.Component {
