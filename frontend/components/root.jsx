@@ -43,7 +43,6 @@ library.add(
   faQuestionCircle,
   faStar,
   faTimes,
-  faPuzzlePiece,
 );
 
 const AppContainer = styled.div`
