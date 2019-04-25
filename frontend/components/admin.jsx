@@ -121,7 +121,7 @@ class Admin extends React.Component {
           Table {table}
         </TableCell>
         {
-          Object.entries(data).filter(this.timeFilter).map((dataEntry, i) => {
+          data.map((dataEntry, i) => {
             const [, tableData] = dataEntry;
             const { started, solved, hint_count } = tableData[table];
             return (
@@ -199,7 +199,7 @@ class Admin extends React.Component {
               })
             }
           </tr>
-          {tables.map((table) => this.renderTable(data, table))}
+          {tables.map((table) => this.renderTable(sortedData, table))}
         </tbody>
       </Table>
     );
