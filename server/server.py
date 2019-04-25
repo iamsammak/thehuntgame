@@ -15,6 +15,7 @@ sio = socketio.Server()
 flask_app = Flask(__name__)
 
 GAME_STARTED = False
+SHOW_ANSWERS = False
 
 # { sid: str -> table number: int }
 CLIENTS = {}
@@ -175,6 +176,8 @@ def handle_hint(sid, data):
 @sio.on('load_admin_data')
 def adminconnect(sid, data):
   print('load_admin_data', data['trigger'])
+  global GAME_STARTED
+  global SHOW_ANSWERS
   trigger = data['trigger']
   if trigger == 'load':
     puzzle_data = defaultdict(dict)
@@ -185,8 +188,11 @@ def adminconnect(sid, data):
         info = data[puzzle]
         puzzle_data[puzzle][table] = info
 
-    global GAME_STARTED
-    data_to_send = {'puzzleData' : puzzle_data, 'gameStarted': GAME_STARTED}
+    data_to_send = {
+      'puzzleData' : puzzle_data,
+      'gameStarted': GAME_STARTED,
+      'answersShown': SHOW_ANSWERS
+    }
     sio.emit('admin_data', data_to_send)
   elif trigger == 'start_game':
     GAME_STARTED = True
@@ -196,6 +202,14 @@ def adminconnect(sid, data):
     GAME_STARTED = False
     data_to_send = {'gameStarted': GAME_STARTED}
     sio.emit('game_started', data_to_send)
+  elif trigger == 'show_answers':
+    SHOW_ANSWERS = True
+    data_to_send = {'answersShown': SHOW_ANSWERS}
+    sio.emit('answers_shown', data_to_send)
+  elif trigger == 'hide_answers':
+    SHOW_ANSWERS = False
+    data_to_send = {'answersShown': SHOW_ANSWERS}
+    sio.emit('answers_shown', data_to_send)
 
 @sio.on('game_started')
 def game_start(sid, data):
