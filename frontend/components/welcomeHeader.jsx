@@ -3,10 +3,6 @@ import styled from 'styled-components';
 import { withCookies } from 'react-cookie';
 import Timer from './timer';
 
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPuzzlePiece } from '@fortawesome/free-solid-svg-icons/faPuzzlePiece';
-
 const Header = styled.div`
   margin-top: 2em;
 `;
@@ -14,7 +10,6 @@ const Header = styled.div`
 const Hr = styled.hr`
   margin-top: 0;
 `;
-
 
 const Title = styled.div`
   font-size: 2em;
@@ -27,13 +22,15 @@ const TitleContainer = styled.div`
 
 const TimerContainer = styled.div`
   padding-top: 4px;
+  padding-left: 5px
 `;
 
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
+  margin-top: 2px;
 `;
 
 const TableContainer = styled.div`
@@ -48,45 +45,34 @@ const TableNumContainer = styled.div`
   font-family: 'Madina Script';
   src: url('MadinaScript.ttf');
   padding-left: 5px;
+  padding-right: 5px
 `;
 
 class WelcomeHeader extends React.Component {
-  constructor(props) {
-    super(props);
-    this.numSolved = this.numSolved.bind(this);
-  }
-
-  numSolved(gameState) {
-    var solvedCounter = 0;
-    if (Object.values(gameState || {})) {
-      return Object.values(gameState).reduce((solved, info) => {
-        return info['solved'] ? solved + 1 : solved;
-      }, 0);
-    };
-    return solvedCounter;
-  }
 
   render() {
     const { gameState, cookies } = this.props;
     const { start_time } = gameState || {};
-    const table = cookies.get('table')
-    var solved = this.numSolved(gameState);
+    const table = cookies.get('table');
     return (
       <Header>
         <TitleContainer>
           <Title>Chois Escape</Title>
         </TitleContainer>
-        <InfoContainer>
-          <TableContainer><div>Table</div><TableNumContainer>{table}</TableNumContainer></TableContainer>
-          <div><Icon icon="puzzle-piece" /> Solved: {solved}</div>
-          {
-            start_time && (
+        {
+          start_time && (
+            <InfoContainer>
+              <TableContainer>
+                <div>Table</div>
+                <TableNumContainer>{table}</TableNumContainer>
+              </TableContainer>
+                  |
               <TimerContainer>
                 <Timer start_time={new Date(start_time)} />
               </TimerContainer>
-            )
-          }
-        </InfoContainer>
+            </InfoContainer>
+          )
+        }
         <Hr />
       </Header>
     );
