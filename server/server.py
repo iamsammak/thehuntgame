@@ -151,6 +151,16 @@ def admin():
   root_dir = os.getcwd()
   return send_from_directory(os.path.join(root_dir, 'frontend'), 'huntadmin.html')
 
+@flask_app.route('/answers')
+@flask_app.route('/answers.html')
+def answers():
+  global SHOW_ANSWERS
+  if SHOW_ANSWERS:
+    root_dir = os.getcwd()
+    return send_from_directory(os.path.join(root_dir, 'frontend'), 'answers.html')
+  else:
+    return 'Answers are not available yet!'
+
 ### Only for development use ###
 
 def parse_cookies(cookie_string):
