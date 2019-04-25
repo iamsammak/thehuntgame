@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { white } from '../constants';
+import { black, blue, green, white } from '../constants';
 import { isSolved } from '../helpers';
 import { SpeechBubbleSpacing } from '../wrappers';
 import SpeechBubble from './speechBubble';
@@ -44,40 +44,40 @@ class Puzzle3 extends React.Component {
         </SpeechBubble>
         <PuzzleContainer>
           <Puzzle>
-            <PuzzleIcon icon="star" />
+            <PuzzleIcon icon="circle" color={green} />
             5
           </Puzzle>
           <Puzzle>
-            <PuzzleIcon icon="star" />
-            8
+            <PuzzleIcon icon="play" color={green} />
+            5
           </Puzzle>
           <Puzzle>
-            <PuzzleIcon icon="star" />
+            <PuzzleIcon icon="circle" color={black} />
             3
           </Puzzle>
           <Puzzle>
-            <PuzzleIcon icon="star" />
-            5
-          </Puzzle>
-          <Puzzle>
-            <PuzzleIcon icon="star" />
+            <PuzzleIcon icon="square" color={green} />
             7
           </Puzzle>
           <Puzzle>
-            <PuzzleIcon icon="star" />
+            <PuzzleIcon icon="square" color={black} />
+            8
+          </Puzzle>
+          <Puzzle>
+            <PuzzleIcon icon="play" color={black} />
             5
           </Puzzle>
           <Puzzle>
-            <PuzzleIcon icon="star" />
-            6
+            <PuzzleIcon icon="play" color={blue} />
+            2
           </Puzzle>
           <Puzzle>
-            <PuzzleIcon icon="star" />
+            <PuzzleIcon icon="square" color={blue} />
             1
           </Puzzle>
           <Puzzle>
-            <PuzzleIcon icon="star" />
-            2
+            <PuzzleIcon icon="circle" color={blue} />
+            6
           </Puzzle>
         </PuzzleContainer>
         <Submit {...this.props} puzzleNumber="3" disabled={solved} />

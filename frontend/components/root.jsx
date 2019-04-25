@@ -16,9 +16,12 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp';
+import { faCircle } from '@fortawesome/free-solid-svg-icons/faCircle';
 import { faGem } from '@fortawesome/free-solid-svg-icons/faGem';
 import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
+import { faPlay } from '@fortawesome/free-solid-svg-icons/faPlay';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCircle';
+import { faSquare } from '@fortawesome/free-solid-svg-icons/faSquare';
 import { faStar } from '@fortawesome/free-solid-svg-icons/faStar';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 
@@ -38,9 +41,12 @@ library.add(
   faChevronLeft,
   faChevronRight,
   faChevronUp,
+  faCircle,
   faGem,
   faHeart,
+  faPlay,
   faQuestionCircle,
+  faSquare,
   faStar,
   faTimes,
 );
