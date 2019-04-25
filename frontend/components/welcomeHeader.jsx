@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { withCookies } from 'react-cookie';
 import Timer from './timer';
 
 const Header = styled.div`
   margin-top: 2em;
+`;
+
+const Hr = styled.hr`
+  margin-top: 0;
 `;
 
 const Title = styled.div`
@@ -17,31 +21,61 @@ const TitleContainer = styled.div`
 `;
 
 const TimerContainer = styled.div`
-  align-self: flex-end;
+  padding-top: 4px;
+  padding-left: 5px;
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 2px;
+`;
+
+const TableContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+`;
+
+const TableNumContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-family: 'Madina Script';
+  padding-left: 5px;
+  padding-right: 5px;
 `;
 
 class WelcomeHeader extends React.Component {
+
   render() {
-    const { gameState } = this.props;
-
+    const { gameState, cookies } = this.props;
     const { start_time } = gameState || {};
-
+    const table = cookies.get('table');
     return (
       <Header>
         <TitleContainer>
           <Title>Chois Escape</Title>
-          {
-            start_time && (
+        </TitleContainer>
+        {
+          start_time && (
+            <InfoContainer>
+              <TableContainer>
+                <div>Table</div>
+                <TableNumContainer>{table}</TableNumContainer>
+              </TableContainer>
+                  |
               <TimerContainer>
                 <Timer start_time={new Date(start_time)} />
               </TimerContainer>
-            )
-          }
-        </TitleContainer>
-        <hr />
+            </InfoContainer>
+          )
+        }
+        <Hr />
       </Header>
     );
   }
 }
 
-export default WelcomeHeader;
+export default withCookies(WelcomeHeader);
