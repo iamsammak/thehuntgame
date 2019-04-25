@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { red, gray, sidecar, juniper, whiteLilac, darkSidecar } from '../constants';
+import { red, gray, tamarind, sidecar, juniper, whiteLilac, darkSidecar } from '../constants';
 import { Narration, SpeechBubbleSpacing } from '../wrappers';
 import { isSolved, getCurrentStage } from '../helpers';
 import { Button } from './buttons';
@@ -19,6 +19,7 @@ const SafeImage = styled.img`
 `;
 
 const Character = styled.div`
+  color: ${tamarind};
   font-size: 2em;
 `;
 
